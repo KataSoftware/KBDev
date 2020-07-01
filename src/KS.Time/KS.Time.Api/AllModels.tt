@@ -1,0 +1,751 @@
+<#@ output  extension="txt" #>
+<#@ template language="C#" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ import namespace="SFS.VSExtension2019.Model" #>
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+<#+ void GenerateAllModels(ModelInfo model)
+{ 
+
+	#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations;
+//using <#= model.Namespace #>.Web.Mvc.Resources;
+using System.Runtime.Serialization;
+//using SFS.Core.Web.Mvc.Models;
+//using SFS.Core.Web.Mvc.Extensions;
+using BO = <#= model.Namespace #>.BusinessObjects;
+//using System.Web.Mvc;
+using SFS.Core.Api.Models;
+//using SFS.Core.Web.Mvc.Resources;
+using SFS.Core.Common.Entities.Metadata;
+using System.Text;
+using Newtonsoft.Json;
+using <#= model.Namespace #>.BusinessObjects;
+<#+
+
+foreach( var entity in model.Entities.Where(p=>p.GenerateCRUD == true) ){
+
+
+	try{
+		entityPluralName = entity.SetName;
+		string folderModelsName = entityPluralName;
+		if (!string.IsNullOrEmpty((string)GetCustomProperty(entity, "RelativeFolder", "String"))){
+			folderModelsName = (string)GetCustomProperty(entity, "RelativeFolder", "String");
+		}
+		 
+	string interfacesModel = "";
+	bool isIntegrable = (bool)GetCustomProperty(entity, "Integrable", "Boolean");
+	if (isIntegrable){
+		interfacesModel = ", SFS.Core.Common.Entities.IMyModel";
+	}
+ #>
+	namespace <#= model.Namespace #>.Api.Models.<#= folderModelsName #> 
+	{
+	public partial class <#=entity.Name#>Model: ModelBase<#= interfacesModel #>{
+
+	  public <#=entity.Name#>Model(BO.<#=entity.Name#> resultObj)
+        {
+
+            Bind(resultObj);
+        }
+#region Tags		
+<#+ foreach(PropertyInfo property in entity.Properties.Where(p=>p.IsNavigationPropertyMany && (bool)GetCustomProperty(p, "UITags", "Boolean") )) { #>		
+	public string Ch<#= property.Name #>Text { get; set; }
+<#+ } #>
+#endregion
+		public <#= entity.Name#>Model()
+        {
+<#+ foreach(PropertyInfo property in entity.Properties.Where(p=>p.Type.ToLower() == "selectitemlist")) { #>		
+            this.<#= property.Name #>List = new List<System.Web.Mvc.SelectListItem>();
+<#+ } #>
+		}
+	<#+ if (entity.Properties.FirstOrDefault(p=>p.IsPrimaryKey) != null ) {
+	
+		 string typeToPrase = "Guid";
+		 if (entity.Properties.FirstOrDefault(p=>p.IsPrimaryKey).Type.ToLower().Contains("int")){
+			 typeToPrase = "int";
+         }
+	#>
+	public override string Id
+        {
+            get
+            {
+                return this.<#= entity.Properties.FirstOrDefault(p=>p.IsPrimaryKey).Name #>.ToString();
+            }
+
+			 set
+            {
+                this.<#= entity.Properties.FirstOrDefault(p=>p.IsPrimaryKey).Name #> = <#= typeToPrase #>.Parse(value);
+            }
+        }
+<#+ } #>			
+<#+ if (!string.IsNullOrEmpty(entity.DefaultProperty)) { #>			
+        public override string ToString()
+        {
+<#+ var _prop	=entity.Properties.Where(p=>p.Name == entity.DefaultProperty).FirstOrDefault();
+	if (_prop.Nullable || _prop.Type.ToLower() == "string") { #>
+			if (this.<#= _prop.Name #> != null)
+<#+ } #>		
+            return this.<#= entity.DefaultProperty #>.ToString();
+<#+ if (_prop.Nullable || _prop.Type.ToLower() == "string") { #>
+			else
+				return "";
+<#+ } #>		
+        }    
+<#+ } #>			
+
+
+<#+ foreach(var prop in entity.Properties.Where(p=> !string.IsNullOrEmpty((string)GetCustomProperty(p, "IsParam", "String")) )){	 #>
+	public Guid  ? <#= prop.Name #>Id { get; set; }
+<#+ } #>
+       
+<#+ foreach(PropertyInfo property in entity.Properties.Where(p=> (bool)GetCustomProperty(p, "IsUniqueFile", "Boolean") == true )) {#>
+		 public string files_<#= property.Name #> { get; set; }
+
+<#+ } #>
+
+<#+	bool defaultFilterable = false;
+	if (GetCustomProperty(entity.Model, "DefaultFilterable", "Object") != null )
+		defaultFilterable = (bool)GetCustomProperty(entity.Model, "DefaultFilterable", "Boolean");
+	if (GetCustomProperty(entity, "DefaultFilterable", "Object") != null )
+		defaultFilterable = (bool)GetCustomProperty(entity, "DefaultFilterable", "Boolean");
+	
+foreach(PropertyInfo property in entity.Properties.FindAll(p=>p.IsNavigationPropertyMany==false && p.Type.ToLower() !="include" && p.Type.ToLower() !="uigroup"   )) {#>	
+<#+ 	
+		if (property.Type == "Time"){
+			property.Type = "TimeSpan";
+        }
+		string type = "";
+		bool filterable = defaultFilterable;
+		if (GetCustomProperty(property, "Filterable", "Object") != null )
+			filterable = (bool)GetCustomProperty(property, "Filterable", "Boolean");
+		
+		if (property.IsPrimaryKey)  {
+			
+				type= property.Type;
+#>
+		[SystemProperty()]		
+		public <#= type #><#=NullableSymbol(property)#> <#=property.Name#>{ get; set; }
+<#+ 	}else{ 
+		
+			type= property.Type;
+#>
+<#+ if (property.VisibleInGrid) { #>
+///[Exportable()]
+<#+ } #>
+<#+ 
+if (!property.Visible || !property.VisibleInForm){ #>
+	[IsVisible(false)]
+<#+}	
+	if (!property.Type.ToLower().Contains("captcha") && IsVisibleProperty(property) && (!property.Nullable || property.UIRequired ) && property.IsNavigationProperty== false && (property.Visible && property.VisibleInForm)) {#>	
+	    [Required()]
+<#+ }else if ((!property.Nullable || property.UIRequired )  && property.PerformanceOption != PerformanceOptions.Fill && property.IsNavigationProperty) { #>
+  		
+<#+ } #>		
+<#+ string safeName = property.Name;
+	
+	if (property.IsNavigationProperty) {
+		string entityFKType ="";
+		safeName = "Fk"+property.Name; 
+		try{ 
+			entityFKType	= entity.NavigationProperties.Find(p=>p.PropertyName == property.Name).EntityType;
+		}catch{
+			throw new Exception(entity.Name);
+		}
+		var entityFKName = entityFKType.Split(char.Parse("."))[entityFKType.Split(char.Parse(".")).Length -1];
+		var entityFK = entity.Model.Entities.Find(p=>p.Name == entityFKName);
+		var keyEntityFK = entityFK.Properties.Find(p=>p.IsPrimaryKey);
+		type = keyEntityFK.Type;
+		string displayText = entityFK.DefaultProperty;
+		if (string.IsNullOrEmpty(displayText))
+			displayText = entityFK.Properties[0].Name;
+			string getAction ="GetByJson";
+		string controllerName = entityFK.SetName; 
+		if (property.PerformanceOption != PerformanceOptions.Fill || (bool)GetCustomProperty(property, "UILookUp", "Boolean")) {
+			
+			if (!string.IsNullOrEmpty((string)GetCustomProperty(property, "UIGetAction", "String"))){
+					getAction= (string)GetCustomProperty(property, "UIGetAction", "String");
+			}
+			if (!string.IsNullOrEmpty((string)GetCustomProperty(property, "UIDisplayText", "String"))){
+					displayText= (string)GetCustomProperty(property, "UIDisplayText", "String");
+			}
+			#>
+<#+			if (!string.IsNullOrEmpty(entityFK.DefaultProperty) && entityFK.Properties.FirstOrDefault(p=>p.IsPrimaryKey) != null )  {#>	
+<#+ 			if (filterable) { #>
+
+<#+ 				if (!string.IsNullOrEmpty((string)GetCustomProperty(property, "ComputedLinq", "String"))){ #>
+				//	[RelationFilterable(DisableFilterableInSubfilter=true, FiltrablePropertyPathName="<#=property.Name#>.<#= entityFK.Properties.FirstOrDefault(p=>p.IsPrimaryKey).Name #>")]		
+			
+<#+					}else{ #> 
+			//[RelationFilterable(DataClassProvider = typeof(Controllers.<#= controllerName #>Controller), GetByKeyMethod="GetByKey", GetAllMethod = "<#= getAction #>", DataPropertyText = "<#= displayText != null ? displayText : entityFK.Properties[0].Name #>", DataPropertyValue = "<#= entityFK.Properties.FirstOrDefault(p=>p.IsPrimaryKey).Name #>", FiltrablePropertyPathName="<#= property.Name #>.<#= entityFK.Properties.FirstOrDefault(p=>p.IsPrimaryKey).Name #>")]	
+
+			//1234
+<#+					}
+				} 
+#>
+<#+ 			if ((bool)GetCustomProperty(property, "UILookUp", "Boolean")) { #>
+	//[LookUp("<#= Model.Namespace #>", "<#= Model.SafeNamespace #>","<#= entityFK.SetName #>", "ListViewGen", "<#= displayText #>", "<#= entityFK.Properties.FirstOrDefault(p=>p.IsPrimaryKey).Name #>")]	
+<#+ 			}else{ #>
+	//[AutoComplete("<#= entityFK.SetName #>", "<#= getAction #>", "filter", "<#= displayText #>", "<#= entityFK.Properties.FirstOrDefault(p=>p.IsPrimaryKey).Name #>")]	
+<#+ 			} 
+				string strIsUniqueFile = "false";
+				if ((bool)GetCustomProperty(property, "IsUniqueFile", "Boolean")){
+					strIsUniqueFile = "true";
+				}
+				if ((bool)GetCustomProperty(property, "IsImage", "Boolean")) {
+
+		 #>
+
+	//TODO: Hacer dinamicos los campos. Ya existe la funcionalidad
+	//[FileData("FileData", "FileName", "FileType", "FileSize", "GuidFile", "<#= entityFK.SetName #>.<#= entityFK.Name#>Model", <#= strIsUniqueFile #>)]
+	<#+		} #>
+<#+ } #>
+		<#+		}else{
+				// performanceoption
+					getAction ="GetAll";	
+					if (!string.IsNullOrEmpty((string)GetCustomProperty(property, "UIGetAction", "String"))){
+							getAction= (string)GetCustomProperty(property, "UIGetAction", "String");
+					}
+					if (!string.IsNullOrEmpty((string)GetCustomProperty(property, "UIDisplayText", "String"))){
+							displayText= (string)GetCustomProperty(property, "UIDisplayText", "String");
+					}
+					// si no es llenado OnDemand entonces se asume que es un combo lleno
+					//string controllerName = entityFK.SetName;  
+	#>
+	//[RelationFilterable(DataClassProvider = typeof(Controllers.<#= controllerName #>Controller), GetByKeyMethod="GetByKey", GetAllMethod = "<#= getAction #>", DataPropertyText = "<#= displayText != null ? displayText : entityFK.Properties[0].Name #>", DataPropertyValue = "<#= entityFK.Properties.FirstOrDefault(p=>p.IsPrimaryKey).Name #>", FiltrablePropertyPathName="<#= property.Name #>.<#= entityFK.Properties.FirstOrDefault(p=>p.IsPrimaryKey).Name #>")]	
+
+<#+ 			}
+			} #>
+<#+ string globalData = (string)GetCustomProperty(property, "GlobalData", "String");
+	string uiTemplate = (string)GetCustomProperty(property, "UITemplate", "String");
+	string regularExpression = (string)GetCustomProperty(property, "RegularExpression", "String");
+	string compareField = (string)GetCustomProperty(property, "UICompareField", "String");
+
+	string remoteVal = (string)GetCustomProperty(property, "RemoteValidationAction", "String");
+if (filterable && property.IsNavigationProperty==false) { #>
+<#+ 	if (!string.IsNullOrEmpty((string)GetCustomProperty(property, "ComputedLinq", "String"))){ #>
+	//[RelationFilterable(DisableFilterableInSubfilter=true)]
+
+<#+		}else{ 
+			if ((String)GetCustomProperty(entity.Model,"AutoCreatedUserProperty", "String") == property.Name || (String)GetCustomProperty(entity.Model,"AutoUpdatedUserProperty", "String") == property.Name) { #>
+//[RelationFilterable(FiltrablePropertyPathName = "<#= property.Name #>", IsExternal =true )]
+//[AutoComplete("SFSdotNetFrameworkSecurity", "secUsers", "FindUsers", "filter", "DisplayName", "GuidUser", true)]	
+
+<#+			}else{ #>
+	//[RelationFilterable()] 
+<#+			}
+		}
+	 } #>
+<#+
+	if (IsSystemProperty(property)){  #>
+	//[SystemProperty()]
+<#+ }#>
+<#+	if ((property.Type=="String" && property.MaxLength == 0) && string.IsNullOrEmpty(uiTemplate))  {#>
+	//[DataType("RichEditorAdvanced")]
+<#+ }else if(!string.IsNullOrEmpty(uiTemplate)){ #>	
+	//[DataType("<#= uiTemplate #>")]
+<#+ }else if(!string.IsNullOrEmpty(globalData) && property.IsNavigationProperty == false){ #>	
+	//[GlobalData( GlobalDataType=GlobalDataTypes.<#= globalData #> )]	
+<#+ }else if (property.Type.ToLower().Contains("binary")){ #> 
+	//[DataType("File")]
+<#+ }else if(property.Type.ToLower().Contains("int")){ #>
+	//[DataType("Integer")]
+<#+ }else if(property.Type.ToLower().Contains("timespan") || property.Type.ToLower().Contains("time")  || property.Type.ToLower().Contains("datetime")) { 
+		string showDate = "true";
+		string showTime = "false";
+		string customMinutes = "null";
+		if (!string.IsNullOrEmpty((string)GetCustomProperty(property, "UIMinutes", "String"))){
+			customMinutes = @""""+ (string)GetCustomProperty(property, "UIMinutes", "String") + @"""";
+		}
+		
+		
+		if (property.Type.ToLower().Contains("timespan")){
+			showDate = "false";
+			showTime = "true";
+		}else if (property.Type.ToLower().Contains("datetime")){
+			showTime ="false";
+			showDate = "true";
+		}
+		if ((bool)GetCustomProperty(property, "UIShowTime", "Boolean")){
+			showTime = "true";
+		}
+		
+	
+	#>
+	//[DateTime(<#= showDate #>, <#= showTime #>, <#= customMinutes #>)]	
+<#+ } #>
+<#+ if (!string.IsNullOrEmpty(regularExpression)) { #>
+	//[RegularExpression(@"<#= regularExpression #>", ErrorMessageResourceName="VAL_FORMAT_ERROR", ErrorMessageResourceType=typeof(GlobalMessages))]
+<#+ } #>
+<#+ if (!string.IsNullOrEmpty(compareField)) { #>
+   //[System.Web.Mvc.Compare("<#= compareField #>"/*, ErrorMessageResourceName = "VAL_<#= property.Name.ToUpper() #>_COMPARE", ErrorMessageResourceType = typeof(<#= entity.Name #>Resources)*/)]
+<#+ } #>
+
+<#+ 
+	PropertyInfo propertyKey = entity.Properties.FirstOrDefault(p=>p.IsPrimaryKey);
+	string _controllerName = entityPluralName;
+	if (!string.IsNullOrEmpty((string)GetCustomProperty(entity, "ControllerName", "String")))
+		{
+			_controllerName =(string)GetCustomProperty(entity, "ControllerName", "String");
+		}
+	if (!string.IsNullOrEmpty(remoteVal)) { #>
+	//[Remote("<#= remoteVal #>", "<#= _controllerName #>", AdditionalFields="Initial<#= property.Name #>,<#= propertyKey.Name #>")]
+<#+ } #>
+	//[LocalizedDisplayName("<#= property.Name.ToUpper() #>"/*, NameResourceType=typeof(<#= entity.Name #>Resources)*/)]
+<#+ if (property.Type.ToLower() == "selectitemlist") { #>
+    public string <#= property.Name #>Value { get; set; }
+	public List<System.Web.Mvc.SelctListItem>  <#= property.Name #>List { get; set; }
+	//[Exportable()]
+	public string  <#= property.Name #>Text { get; set; }
+<#+ }else{ 
+		string nullable_ = NullableSymbol(property);
+		if (property.IsNavigationProperty)
+		{
+			var entityFKType2	= entity.NavigationProperties.Find(p=>p.PropertyName == property.Name).EntityType;
+			var entityFKName2 = entityFKType2.Split(char.Parse("."))[entityFKType2.Split(char.Parse(".")).Length -1];
+			var entityFK2 = entity.Model.Entities.Find(p=>p.Name == entityFKName2);
+			var keyEntityFK2 = entityFK2.Properties.Find(p=>p.IsPrimaryKey);
+			nullable_ = NullableSymbol(keyEntityFK2);
+		}
+			
+		
+	string safeType = type;
+	if (safeType == "Binary")
+		safeType = "Byte[]";
+		
+	if (type.ToLower().Contains("captcha") || type.ToLower().Contains("xml"))
+		safeType = "string";
+	if (type.ToLower().Contains("xml"))
+		WriteLine("[JsonIgnore]"); #>
+	public <#= safeType #>  <#=  nullable_ #> <#=safeName#> { get; set; }
+<#+ } #>
+<#+ 
+	string UpdatedPropertyName = "";
+			if (!string.IsNullOrEmpty((String)GetCustomProperty(entity.Model,"AutoUpdatedDateProperty", "String"))){
+				UpdatedPropertyName = (String)GetCustomProperty(entity.Model,"AutoUpdatedDateProperty", "String");
+			}
+	if (property.Type.ToLower() == "datetime") { #>
+	public string <#= property.Name #>Text {
+        get {
+            if (<#= property.Name #> != null)
+<#+ 		if(!string.IsNullOrEmpty((string)GetCustomProperty(property, "UIFormat", "String"))){	 #>	
+                return ((DateTime)<#= property.Name #>).ToString("<#= (string)GetCustomProperty(property, "UIFormat", "String") #>");
+
+<#+ }else{ 
+			if (property.Name == UpdatedPropertyName){ #>			
+                return ((DateTime)<#= property.Name #>).ToString("s") ;
+<#+			}else{ #>
+				return ((DateTime)<#= property.Name #>).ToShortDateString() ;
+<#+			} 
+	}#>
+            else
+                return String.Empty;
+        }
+				set{
+					if (!string.IsNullOrEmpty(value))
+						this.<#= property.Name #> = Convert.ToDateTime(value);
+    }
+		}
+<#+ }else if(property.Type.ToLower() == "timespan" || property.Type.ToLower() == "time") { #>
+		public string <#= property.Name #>Text {
+        get {
+            if (<#= property.Name #> != null)
+                return new DateTime(((TimeSpan)<#= property.Name #>).Ticks).ToString("hh:mm tt");
+            else
+                return String.Empty;
+        }
+				set{
+				this.<#= property.Name #> = Convert.ToDateTime("12/12/2000 " + value).TimeOfDay;
+    }
+		}
+<#+ }else if((property.Type.ToLower() == "decimal" ||   property.Type.ToLower().Contains("int")) && property.IsNavigationProperty==false) { #>
+	public string _<#= property.Name #>Text = null;
+    public string <#= property.Name #>Text {
+        get {
+			if (string.IsNullOrEmpty( _<#= property.Name #>Text ))
+				{
+<#+ 	if (property.Nullable) {#>	
+            if (<#= property.Name #> != null)
+<#+ 		//Aplicar formato si esta especificado
+			if(!string.IsNullOrEmpty((string)GetCustomProperty(property, "UIFormat", "String"))){	
+			#>
+			
+                return string.Format("<#= (string)GetCustomProperty(property, "UIFormat", "String") #>", <#= property.Name #>);
+<#+ 		}else{ #>
+				return <#= property.Name #>.ToString();
+<#+ 		} #>				
+            else
+                return String.Empty;
+<#+ 	}else{ 
+			//Aplicar formato si esta especificado
+			if(!string.IsNullOrEmpty((string)GetCustomProperty(property, "UIFormat", "String"))){	
+			#>
+                return string.Format("<#= (string)GetCustomProperty(property, "UIFormat", "String") #>", <#= property.Name #>);
+<#+ 		}else{ #>
+				return <#= property.Name #>.ToString();
+<#+ 		}
+		} #>	
+			}else{
+				return _<#= property.Name #>Text ;
+			}			
+        }
+		set{
+			_<#= property.Name #>Text = value;
+		}
+        
+    }
+
+<#+ } else if(property.Type.ToLower() == "boolean" ) { #>
+	public string _<#= property.Name #>Text = null;
+    public string <#= property.Name #>Text {
+        get {
+			if (string.IsNullOrEmpty( _<#= property.Name #>Text ))
+				{
+<#+ 	if (property.Nullable) {#>	
+            if (<#= property.Name #> != null)
+
+				return <#= property.Name #>.ToString();
+				
+            else
+                return String.Empty;
+<#+ 	}else{ #>
+			//Aplicar formato si esta especificado
+				return <#= property.Name #>.ToString();
+<#+ 		
+		} #>	
+			}else{
+				return _<#= property.Name #>Text ;
+			}			
+        }
+		set{
+			_<#= property.Name #>Text = value;
+		}
+        
+    }
+
+<#+ } // Termina condicion int, decimal no nav , boolean
+#>
+	<#+ if (property.IsNavigationProperty) { #>
+	//[LocalizedDisplayName("<#= property.Name.ToUpper() #>"/*, NameResourceType=typeof(<#= entity.Name #>Resources)*/)]
+	//[Exportable()]
+	public string  Fk<#= property.Name #>Text { get; set; }
+   // public string Fk<#= property.Name #>SafeKey { get; set; }
+
+<#+ } #>	
+<#+ } #>
+		
+<#+ }#>
+		
+
+	
+	
+		public void Bind(<#= entity.Name #>Model model){
+            
+<#+ foreach(PropertyInfo property in entity.Properties.Where(p=>p.IsNavigationProperty==false && p.Type.ToLower() !="include" && p.Type.ToLower() !="uigroup" && !p.Type.ToLower().Contains("captcha"))) { #>
+<#+ if (property.Type.ToLower()== "selectitemlist") { #>
+		this.<#= property.Name #>List = model.<#= property.Name #>List;
+this.<#= property.Name #>Value = model.<#= property.Name #>Value;
+
+<#+ 	}else{ #>
+		this.<#= property.Name #> = model.<#= property.Name #>;
+<#+ 	}
+	} #>
+        }
+
+        public BusinessObjects.<#= entity.Name #> GetBusinessObject()
+        {
+            BusinessObjects.<#= entity.Name #> result = new BusinessObjects.<#= entity.Name #>();
+
+
+			       
+<#+ foreach(PropertyInfo property in entity.Properties.Where(p=> (bool)GetCustomProperty(p, "IsUniqueFile", "Boolean") == true )) {#>
+	   result.files_<#= property.Name #> = this.files_<#= property.Name #>;
+<#+ } #>
+
+
+<#+ foreach(PropertyInfo property in entity.Properties.Where(p=>p.IsNavigationPropertyMany==false && p.Type.ToLower() !="include" && p.Type.ToLower() !="uigroup" && !p.Type.ToLower().Contains("captcha"))) { #>
+<#+ 	string Trim = "";
+		if(property.IsNavigationProperty) { 
+			var entityFKType = entity.NavigationProperties.Find(p=>p.PropertyName == property.Name).EntityType;
+			var entityFKName = entityFKType.Split(char.Parse("."))[entityFKType.Split(char.Parse(".")).Length -1];
+			var entityFK = entity.Model.Entities.Find(p=>p.Name == entityFKName);
+			var keysEntityFK = entityFK.Properties.FindAll(p=>p.IsPrimaryKey);
+		
+			var sbKeys = new System.Text.StringBuilder(); 
+			var sbKeysMerge = new System.Text.StringBuilder(); 
+			foreach(PropertyInfo propertyKey in keysEntityFK){
+				if (sbKeys.Length > 0)
+					sbKeys.Append(", ");
+				sbKeys.Append(string.Format("{0}= ({1})this.Fk{2}",propertyKey.Name,propertyKey.Type, property.Name ));
+
+
+				
+			}
+				var navProp = entity.NavigationProperties.Find(p=>p.PropertyName == property.Name);
+				PropertyInfo propertyFK = entity.Properties.FirstOrDefault(p=>p.Name == navProp.PropertyRefName );
+				if (propertyFK != null ){
+					//sbKeysMerge.Append(string.Format("if ({0} != null && this.Fk{1} == null) this.Fk{1} = {0}; ",propertyFK.Name, property.Name ));
+					sbKeysMerge.Append(string.Format("if ({0} != null) this.Fk{1} = {0}; ",propertyFK.Name, property.Name ));
+				}
+	#>
+<#+ 		if (property.Nullable || !IsVisibleProperty(property)) { 
+			#>			
+			if(this.Fk<#= property.Name #> != null || this.<#= propertyFK.Name #> != null){
+<#+ } #>
+<#+ if ((string)GetCustomProperty(property, "GlobalData", "String") == "GlobalUser") { 
+			var  emailProp = entityFK.Properties.FirstOrDefault(p=> p.Name.ToLower() == "email");
+		
+			#>	
+				if (!string.IsNullOrEmpty(this.Fk<#= property.Name #>Text)){
+					if (this.Fk<#= property.Name #>Text.Contains("|")) this.Fk<#= property.Name #>Text = this.Fk<#= property.Name #>Text.Split(char.Parse("|"))[1];
+<#+ if (emailProp != null ){ #>
+					result.<#= property.Name #> = new BusinessObjects.<#= entityFKName #>() { <#= sbKeys.ToString() #>, <#= emailProp.Name #> = this.Fk<#= property.Name #>Text };
+<#+ }else{ #>
+					result.<#= property.Name #> = new BusinessObjects.<#= entityFKName #>() { <#= sbKeys.ToString() #> };
+<#+ } #>				
+				}else{
+					<#= sbKeysMerge.ToString() #>
+					result.<#= property.Name #> = new BusinessObjects.<#= entityFKName #>() { <#= sbKeys.ToString() #> };
+				}
+<#+ 		if (property.Nullable || !IsVisibleProperty(property)) { 
+			#>			
+			}
+<#+ } #>
+		
+<#+ }else{ #>
+			<#= sbKeysMerge.ToString() #>
+			result.<#= property.Name #> = new BusinessObjects.<#= entityFKName #>() { <#= sbKeys.ToString() #> };
+
+<#+ 		if (property.Nullable || !IsVisibleProperty(property)) { 
+			#>			
+			}
+<#+ } #>
+<#+ } #>
+
+
+<#+ 	}else{ #>
+
+<#+ 		// si es tipo fecha
+			if (property.Type.Contains("DateTime")) {#>
+<#+ 			if (!IsVisibleProperty(property) || property.Nullable || (!property.Visible || !property.VisibleInForm)) { #>
+				if(this.<#= property.Name #> != null)
+					if (this.<#= property.Name #> != null)
+<#+ 			} #>
+				result.<#= property.Name #> = (DateTime)this.<#= property.Name #>;		
+<#+ 		}else if(property.Type.Contains("TimeSpan")){ #>
+<#+ 			if (!IsVisibleProperty(property) || property.Nullable || (!property.Visible || !property.VisibleInForm)) { #>
+				if(this.<#= property.Name #> != null)
+					if (this.<#= property.Name #> != null)
+<#+ 			} #>
+				result.<#= property.Name #> = (TimeSpan)this.<#= property.Name #>;		
+<#+ 		}else if(property.Type.ToLower().Contains("xml")){ #>
+					result.<#= property.Name #> = this.<#= property.Name #>;
+			
+			
+<#+ 		}else if(property.Type.Contains("Binary")){ #>
+				if(this.<#= property.Name #> != null)
+					result.<#= property.Name #> = (Byte[])this.<#= property.Name #>;
+			
+<#+			}else if (property.Type.ToLower()== "selectitemlist"){ #>
+		if (this.<#= property.Name #>Value != null )
+				result.<#= property.Name #>Value = this.<#= property.Name #>Value;
+<#+  		}else{ 
+				if (property.Type.ToLower().Contains("string"))
+				{
+					Trim = @".Trim().Replace(""\t"", String.Empty)";
+				}else{
+					Trim = "";
+				}#>
+	if (this.<#= property.Name #> != null )
+				result.<#= property.Name #> = (<#= property.Type #>)this.<#= property.Name #><#= Trim #>;
+<#+ 		}
+		} #>
+				
+<#+ } #>
+
+<#+ foreach(PropertyInfo property in entity.Properties.Where(p=>p.IsNavigationPropertyMany && (bool)GetCustomProperty(p, "UITags", "Boolean") )) { 
+			var entityFKType = entity.NavigationProperties.Find(p=>p.PropertyName == property.Name).EntityType;
+			var entityFKName = entityFKType.Split(char.Parse("."))[entityFKType.Split(char.Parse(".")).Length -1];
+			var entityFK = entity.Model.Entities.Find(p=>p.Name == entityFKName);
+			var keysEntityFK = entityFK.Properties.FindAll(p=>p.IsPrimaryKey);
+			string displayText = entityFK.DefaultProperty;
+			if (string.IsNullOrEmpty(displayText))
+				displayText = entityFK.Properties[0].Name;
+		
+#>
+		if (!string.IsNullOrEmpty(this.Ch<#= property.Name #>Text))
+			{
+				StringBuilder sb<#= property.Name #> = new StringBuilder();
+				foreach (var item in this.Ch<#= property.Name #>Text.Split(char.Parse(",")))
+				{
+					var objChild = new <#= entityFK.Name #>();
+					if (item.Split(char.Parse(":"))[0].StartsWith("00000000"))
+					{
+						objChild.<#= keysEntityFK[0].Name #> = Guid.NewGuid();;
+
+					}
+					else
+					{
+						objChild.<#= keysEntityFK[0].Name #> = Guid.Parse("{" + item.Split(char.Parse(":"))[0] + "}");
+					}
+					objChild.<#= displayText #> = item.Split(char.Parse(":"))[1];
+
+					result.<#= property.Name #>.Add(objChild);
+				}
+      
+
+			}
+<#+ } #>
+
+
+<#+ foreach(var prop in entity.Properties.Where(p=> !string.IsNullOrEmpty((string)GetCustomProperty(p, "IsParam", "String")) )){	 #>
+			if (this.<#= prop.Name #>Id != null )
+				result.<#= prop.Name #>Id = (Guid)this.<#= prop.Name #>Id;
+<#+ } #>
+
+            return result;
+        }
+        public void Bind(BusinessObjects.<#= entity.Name #> businessObject)
+        {
+				this.BusinessObjectObject = businessObject;
+
+
+<#+ foreach(var prop in entity.Properties.Where(p=> !string.IsNullOrEmpty((string)GetCustomProperty(p, "IsParam", "String")) )){	 #>
+			if (businessObject.<#= prop.Name #>Id != null )
+				this.<#= prop.Name #>Id = (Guid)businessObject.<#= prop.Name #>Id;
+<#+ } #>
+<#+ foreach(PropertyInfo property in entity.Properties.Where(p=>p.IsNavigationProperty==false && p.Type.ToLower() !="include" && p.Type.ToLower() !="uigroup" && !p.Type.ToLower().Contains("captcha"))) { #>
+<#+ 	string Trim = "";
+		if (property.Type.Contains("DateTime")) {#>
+<#+ 		if (property.Nullable) { #>
+				if (businessObject.<#= property.Name #> != null )
+<#+ 		} #>
+				this.<#= property.Name #> = (DateTime)businessObject.<#= property.Name #>;
+<#+ 	}else if(property.Type.Contains("TimeSpan")){ #>
+<#+ 		if (property.Nullable) { #>
+				if (businessObject.<#= property.Name #> != null )
+<#+ 		} #>
+				this.<#= property.Name #> = (TimeSpan)businessObject.<#= property.Name #>;
+
+<#+		}else if (property.Type.ToLower() == "selectitemlist") { #>
+		foreach(var prop in businessObject.<#= property.Name #>List){
+			            this.<#= property.Name #>List.Add(new SelectListItem() { Value= prop.Key, Text= prop.Value  } );
+
+		}
+			this.<#= property.Name #>Value = businessObject.<#= property.Name #>Value;
+			this.<#= property.Name #>Text = businessObject.<#= property.Name #>Text;
+<#+		}else if (property.Type.ToLower() == "xml") { #>
+			if (businessObject.<#= property.Name #> != null )
+				this.<#= property.Name #> = businessObject.<#= property.Name #>;
+<#+		}else if (property.Type.ToLower() == "binary") { #>
+			if (businessObject.<#= property.Name #> != null )
+				this.<#= property.Name #> = businessObject.<#= property.Name #>;			
+<#+  	}else{ #>
+<#+ 		if(property.Nullable) {#>				
+	if (businessObject.<#= property.Name #> != null )
+				this.<#= property.Name #> = (<#= property.Type #>)businessObject.<#= property.Name #>;
+<#+ 		}else{
+				
+				if (property.Type.ToLower().Contains("string"))
+				{
+					Trim = @".Trim().Replace(""\t"", String.Empty)";
+				}else{
+					Trim = "";
+				}
+				
+				if (property.Type.ToLower().Contains("string"))
+				{#>
+			this.<#= property.Name #> = businessObject.<#= property.Name #> != null ? businessObject.<#= property.Name #><#= Trim #> : "";
+				
+<#+ 			}else{ #>
+			this.<#= property.Name #> = businessObject.<#= property.Name #><#= Trim #>;
+				
+<#+				}
+} #>
+<#+ 	} #>
+<#+ } #>
+
+<#+ foreach (NavigationPropertyInfo navprop in entity.NavigationProperties.Where(p=>p.Multiplicity != "*") ) { 
+			var entityFKName = navprop.EntityType.Split(char.Parse("."))[navprop.EntityType.Split(char.Parse(".")).Length -1];
+			var entityFK = entity.Model.Entities.Find(p=>p.Name == entityFKName);
+			string propertyName = "";
+			PropertyInfo property =null;
+			var propertyKeyFK = entityFK.Properties.FirstOrDefault(p=>p.IsPrimaryKey);
+			if (!string.IsNullOrEmpty(entityFK.DefaultProperty)){
+				propertyName = entityFK.DefaultProperty;
+				property = entityFK.Properties.FirstOrDefault(p=>p.Name == propertyName);
+				}else{
+				propertyName = entityFK.Properties[0].Name;
+				property = entityFK.Properties[0];
+				}
+	#>
+	        if (businessObject.<#= navprop.Property.Name #> != null){
+	<#+  	string uiFormat = null;
+			if(!string.IsNullOrEmpty((string)GetCustomProperty(property, "UIFormat", "String"))){
+				uiFormat = (string)GetCustomProperty(property, "UIFormat", "String");
+			}
+				
+				if (property.Nullable && !property.IsPrimaryKey) {
+					if (uiFormat != null ){#>
+                	this.Fk<#= navprop.Property.Name  #>Text = businessObject.<#= navprop.Property.Name #>.<#= propertyName #> != null ? string.Format("<#= uiFormat #>", businessObject.<#= navprop.Property.Name #>.<#= propertyName #> ) : "";; 
+
+<#+					}else{ #>
+                	this.Fk<#= navprop.Property.Name  #>Text = businessObject.<#= navprop.Property.Name #>.<#= propertyName #> != null ? businessObject.<#= navprop.Property.Name #>.<#= propertyName #>.ToString() : "";; 
+<#+ 				}
+				}else if (property.IsPrimaryKey && property.Type != "String"){ #>
+                	this.Fk<#= navprop.Property.Name  #>Text = businessObject.<#= navprop.Property.Name #>.<#= propertyName #>.ToString(); 
+<#+ 			}else if (property.Type == "String"){ #>
+                	this.Fk<#= navprop.Property.Name  #>Text = businessObject.<#= navprop.Property.Name #>.<#= propertyName #> != null ? businessObject.<#= navprop.Property.Name #>.<#= propertyName #>.ToString() : "";; 
+										
+<#+ 			}else{
+					if (uiFormat != null ){ #>
+                		this.Fk<#= navprop.Property.Name  #>Text = string.Format("<#= uiFormat #>", businessObject.<#= navprop.Property.Name #>.<#= propertyName #>); 
+
+<#+					}else{  #>
+                		this.Fk<#= navprop.Property.Name  #>Text = businessObject.<#= navprop.Property.Name #>.<#= propertyName #>.ToString(); 
+<#+ 				}
+				} #>										
+				this.Fk<#= navprop.Property.Name  #> = businessObject.<#= navprop.Property.Name #>.<#= propertyKeyFK.Name #>;
+                //this.Fk<#= navprop.Property.Name #>SafeKey  = SFS.Core.Entities.Utils.GetKey(businessObject.<#= navprop.Property.Name #>,"<#= propertyKeyFK.Name #>").Replace("/","-");
+
+			}
+<#+ } #>
+
+<#+ foreach(PropertyInfo property in entity.Properties.Where(p=>p.IsNavigationPropertyMany && (bool)GetCustomProperty(p, "UITags", "Boolean") )) { 
+			var entityFKType = entity.NavigationProperties.Find(p=>p.PropertyName == property.Name).EntityType;
+			var entityFKName = entityFKType.Split(char.Parse("."))[entityFKType.Split(char.Parse(".")).Length -1];
+			var entityFK = entity.Model.Entities.Find(p=>p.Name == entityFKName);
+			var keysEntityFK = entityFK.Properties.FindAll(p=>p.IsPrimaryKey);
+			string displayText = entityFK.DefaultProperty;
+			if (string.IsNullOrEmpty(displayText))
+				displayText = entityFK.Properties[0].Name;
+		
+#>
+			if (businessObject.<#= property.Name #>.Count > 0) {
+                StringBuilder sb<#= property.Name #> = new StringBuilder();
+                foreach (var item in businessObject.<#= property.Name #>)
+                {
+                    if (sb<#= property.Name #>.Length > 0) sb<#= property.Name #>.Append(",");
+                    sb<#= property.Name #>.Append(item.<#= keysEntityFK[0].Name #>.ToString() + ":" + item.<#= displayText #>);
+                }
+                if (sb<#= property.Name #>.Length > 0)
+                    this.Ch<#= property.Name #>Text = sb<#= property.Name #>.ToString(); 
+            }
+<#+ } #>
+           
+        }
+	}
+}
+<#+ 	}catch(Exception ex){
+		throw new Exception(string.Format("El error ocurrio en la entidad {0}",entity.Name),ex);
+	}
+
+	}
+}
+#>

@@ -1,0 +1,49 @@
+<ion-header *ngIf="dialogType == 'form'">
+    <ion-toolbar>
+        <ion-title>{{title}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content no-padding>
+
+    <form [formGroup]="form" *ngIf="dialogType == 'form'">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <formly-form [form]="form" [fields]="fields" [model]="item"></formly-form>
+            </ion-col>
+          </ion-row>
+         
+          
+    
+        </ion-grid>
+      </form>
+    <div class="dialog {{dialogType}}" *ngIf="dialogType != 'form'">
+     
+       
+        <div [innerHTML]="theHtmlString" >
+
+
+        </div>
+        <div class="dialog-buttons" *ngIf="dialogType != 'form' && buttons != null">
+            <ion-button *ngFor="let button of buttons" class="{{ button.CssClass }}"
+                (click)="button.Click(this, button)">
+                {{button.Text}}
+            </ion-button>
+        </div>
+    </div>
+</ion-content>
+
+<ion-footer *ngIf="dialogType == 'form'" class="dialog-buttons" >
+   
+    
+        
+        <ion-button  *ngIf="showCancel == true" (click)="close()" size="default" class=" sfs-button secondary" >
+            Cancelar
+          </ion-button>
+          <ion-button  [disabled]="this.form.invalid == true || disabledButton == true"
+            (click)="submitForm($event)" size="default" class="sfs-button primary">
+            {{primaryButtonText}}
+          </ion-button>
+      
+    
+</ion-footer>

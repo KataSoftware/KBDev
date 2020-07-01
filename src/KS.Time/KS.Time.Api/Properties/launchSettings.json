@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "KS.Time.Api": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

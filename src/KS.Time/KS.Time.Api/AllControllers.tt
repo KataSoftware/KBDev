@@ -1,0 +1,1321 @@
+<#@ output  extension="txt" #>
+<#@ template language="C#" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ assembly name="System.Web.dll" #>
+<#@ import namespace="SFS.VSExtension2019.Model" #>
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #>
+<#@ import namespace="SFS.VSExtension2019.EngTool" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+<#+ void GenerateAllControllers(ModelInfo model)
+{
+	
+	
+#>
+// <Template>
+//   <SolutionTemplate></SolutionTemplate>
+//   <Version>20150126.0020</Version>
+//   <Update>uiModel.ModuleNamespace</Update>
+// </Template>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+//using System.Web.Mvc;
+
+using <#= model.Namespace #>.BR;
+using Newtonsoft.Json; //System.Web.Script.Serialization;
+using <#= model.Namespace #>.Api.Models;
+//using <#= model.Namespace #>.Web.Mvc.Resources;
+using BO = <#= model.Namespace #>.BusinessObjects;
+//using SFS.Core.Web.Mvc.Security;
+using SFS.Core.Web.Mvc;
+//using SFS.Core.Web.Mvc.Models;
+//using SFS.Core.Web.Mvc.Resources;
+//using SFS.Core.Web.Mvc.Controllers;
+//using MvcSiteMapProvider;
+//using System.Web.Routing;
+using System.Collections;
+
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+//using SFS.Core.My;
+using SFS.Core.Entities;
+using SFS.Core.Api;
+using SFS.Core.Api.Models;
+using <#= model.Namespace #>.BusinessObjects;
+using Microsoft.AspNetCore.Mvc;
+using SFS.Core.My;
+
+<#+
+foreach( var entity in model.Entities.Where(p=>p.GenerateCRUD == true) ){
+	System.Text.StringBuilder sbExcludes = new System.Text.StringBuilder();
+	if (entity.Properties.Where(p=>p.Type == "Binary").Count()> 0){
+		sbExcludes.Append(@"[Bind(Exclude = """);
+		int nForExcludes = 0;
+		foreach (var file in entity.Properties.Where(p=>p.Type == "Binary")){
+			if (nForExcludes > 0)
+				sbExcludes.Append(",");	
+			sbExcludes.Append(file.Name);
+			nForExcludes ++;
+		}
+		sbExcludes.Append(@""")]");
+	}
+
+	try{
+		if (string.IsNullOrEmpty(entity.DefaultProperty)){
+				entity.DefaultProperty = entity.Properties[0].Name;
+			}
+		entityPluralName = entity.SetName;
+		entitySingularName = entity.Name;
+		string controllerName = entityPluralName;
+		if (!string.IsNullOrEmpty((string)GetCustomProperty(entity, "ControllerName", "String")))
+		{
+			controllerName =(string)GetCustomProperty(entity, "ControllerName", "String");
+		}
+#>
+namespace <#= entity.Model.Namespace #>.Api.Controllers
+{
+	using <#= entity.Model.Namespace #>.Api.Models.<#= entity.SetName #>;
+
+<#+ 
+		var customControlller = (string)GetCustomProperty(entity.Model, "CustomController", "String");		
+		if (!string.IsNullOrEmpty(customControlller)){
+#>
+	[Area("<#= entity.Model.SafeNamespace #>")]
+    [Route("[area]/[controller]")]
+    [ApiController]
+    public partial class <#= controllerName #>Controller : <#= customControlller #><Models.<#=entity.SetName#>.<#=entity.Name#>Model>
+    {
+	/* [HttpGet()]
+	 [Route("[action]")]
+        public IActionResult Puff(string abc)
+        {
+            return Ok("Hola desde areaaaaa! " + abc );
+        }*/
+
+<#+  
+		}else{
+ #>
+    public partial class <#= controllerName #>Controller : SFS.Core.Web.Mvc.ControllerBase<Models.<#=entity.SetName#>.<#=entity.Name#>Model>
+    {
+<#+ } #>       
+
+
+	#region partial methods
+        ControllerEventArgs<Models.<#= entity.SetName #>.<#= entity.Name #>Model> e = null;
+        partial void OnValidating(object sender, ControllerEventArgs<Models.<#= entity.SetName #>.<#= entity.Name #>Model> e);
+        partial void OnGettingExtraData(object sender, MyEventArgs<UIModel<Models.<#= entity.SetName #>.<#= entity.Name #>Model>> e);
+        partial void OnCreating(object sender, ControllerEventArgs<Models.<#= entity.SetName #>.<#= entity.Name #>Model> e);
+        partial void OnCreated(object sender, ControllerEventArgs<Models.<#= entity.SetName #>.<#= entity.Name #>Model> e);
+        partial void OnEditing(object sender, ControllerEventArgs<Models.<#= entity.SetName #>.<#= entity.Name #>Model> e);
+        partial void OnEdited(object sender, ControllerEventArgs<Models.<#= entity.SetName #>.<#= entity.Name #>Model> e);
+        partial void OnDeleting(object sender, ControllerEventArgs<Models.<#= entity.SetName #>.<#= entity.Name #>Model> e);
+        partial void OnDeleted(object sender, ControllerEventArgs<Models.<#= entity.SetName #>.<#= entity.Name #>Model> e);
+    	partial void OnShowing(object sender, MyEventArgs<UIModel<Models.<#= entity.SetName #>.<#= entity.Name #>Model>> e);
+    	partial void OnUISettings(object sender, MyEventArgs<UIModel<Models.<#= entity.SetName #>.<#= entity.Name #>Model>> e);
+    	partial void OnGettingByKey(object sender, ControllerEventArgs<Models.<#= entity.SetName #>.<#= entity.Name #>Model> e);
+        partial void OnTaken(object sender, ControllerEventArgs<Models.<#= entity.SetName #>.<#= entity.Name #>Model> e);
+       	partial void OnCreateShowing(object sender, ControllerEventArgs<Models.<#= entity.SetName #>.<#= entity.Name #>Model> e);
+		partial void OnEditShowing(object sender, ControllerEventArgs<Models.<#= entity.SetName #>.<#= entity.Name #>Model> e);
+		partial void OnDetailsShowing(object sender, ControllerEventArgs<Models.<#= entity.SetName #>.<#= entity.Name #>Model> e);
+ 		partial void OnActionsCreated(object sender, MyEventArgs<UIModel<Models.<#= entity.SetName #>.<#= entity.Name #>Model >> e);
+		partial void OnCustomActionExecuting(object sender, MyEventArgs<ContextActionModel<Models.<#= entity.SetName #>.<#= entity.Name #>Model>> e);
+		partial void OnCustomActionExecutingBackground(object sender, MyEventArgs<ContextActionModel<Models.<#= entity.SetName #>.<#= entity.Name #>Model>> e);
+        partial void OnDownloading(object sender, MyEventArgs<ContextActionModel<Models.<#= entity.SetName #>.<#= entity.Name #>Model>> e);
+      	partial void OnAuthorization(object sender, object context);
+		 partial void OnFilterShowing(object sender, MyEventArgs<UIModel<Models.<#= entity.SetName #>.<#= entity.Name #>Model >> e);
+         partial void OnSummaryOperationShowing(object sender, MyEventArgs<UIModel<Models.<#= entity.SetName #>.<#= entity.Name #>Model>> e);
+
+        partial void OnExportActionsCreated(object sender, MyEventArgs<UIModel<Models.<#= entity.SetName #>.<#= entity.Name #>Model>> e);
+
+		 [ApiExplorerSettings(IgnoreApi = true)]
+		protected override void OnVirtualFilterShowing(object sender, MyEventArgs<UIModel<<#= entity.Name #>Model>> e)
+        {
+            OnFilterShowing(sender, e);
+        }
+		 [ApiExplorerSettings(IgnoreApi = true)]
+		 protected  override void OnVirtualExportActionsCreated(object sender, MyEventArgs<UIModel<<#= entity.Name #>Model>> e)
+        {
+            OnExportActionsCreated(sender, e);
+        }
+		 [ApiExplorerSettings(IgnoreApi = true)]
+        protected override void OnVirtualDownloading(object sender, MyEventArgs<ContextActionModel<<#= entity.Name #>Model>> e)
+        {
+            OnDownloading(sender, e);
+        }
+		 [ApiExplorerSettings(IgnoreApi = true)]
+        protected override void OnVirtualShowing(object sender, MyEventArgs<UIModel<<#= entity.Name #>Model>> e)
+        {
+            OnShowing(sender, e);
+        }
+		 [ApiExplorerSettings(IgnoreApi = true)]
+		 protected override void OnVirtualUISettings(object sender, MyEventArgs<UIModel<<#= entity.Name #>Model>> e)
+        {
+            OnUISettings(sender, e);
+        }
+
+	#endregion
+	#region API
+	 partial void OnAuthorization(AuthorizationEventArgs e);
+	  [ApiExplorerSettings(IgnoreApi = true)]
+	  protected override bool? OnAuthorizationBase(AuthorizationEventArgs e)
+        {
+			 
+			 this.OnAuthorization(e);
+			 return e.ValidResult;
+        }
+		 [ApiExplorerSettings(IgnoreApi = true)]
+	 protected override ActionResult ApiCreateGen(ApiWrapperCreate<<#= entity.Name #>Model> data, ContextRequest contextRequest)
+        {
+            var result = BR.<#= entity.SetName #>BR.Instance.Create(data.Item.GetBusinessObject(), contextRequest);
+ 
+           if ( data.ReturnType != null)
+            {
+                <#= entity.Name #>Model model = new <#= entity.Name #>Model(result);
+                if (data.ReturnType == "key")
+                {
+
+                    return ResolveApiResponse("success", null, null, model.Id);
+                }else
+                {
+                    return ResolveApiResponse("success", null, null, model);
+                }
+
+            }
+            else
+            {
+                return ResolveApiResponse("success", null, null, null );
+            }
+        }
+        [ApiExplorerSettings(IgnoreApi = true)]
+        protected override ActionResult ApiCreateBulkGen(ApiWrapperCreate<<#= entity.Name #>Model> data, ContextRequest contextRequest)
+        {
+            List<<#= entity.Name #>> items = new  List<<#= entity.Name #>>();
+
+            foreach (var item in data.Items)
+            {
+                items.Add(item.GetBusinessObject());
+            }
+            BR.<#= entity.SetName #>BR.Instance.CreateBulk(items, contextRequest);
+            return ResolveApiResponse("success", null, null, null);
+        }
+		[ApiExplorerSettings(IgnoreApi = true)]
+              protected override ActionResult ApiGetByJson(string filter, int? pageSize, int? page, string orderBy, string orderDir, ContextRequest contextRequest, object[] extraParams)
+        {
+            return GetByJson(filter, pageSize, page, orderBy, orderDir, contextRequest, extraParams);
+        }
+        [ApiExplorerSettings(IgnoreApi = true)]
+	   // [MyAuthorize("r", "<#= entity.Name #>", "<#=entity.Model.SafeNamespace#>", typeof(<#= controllerName #>Controller))]
+		protected ActionResult GetByJson(string filter, int? pageSize, int? page, string orderBy, string orderDir,ContextRequest contextRequest,  object[] extraParams)
+        {
+			if (contextRequest == null || contextRequest.Company == null || contextRequest.User == null )
+            {
+                contextRequest = GetContextRequest();
+            }
+
+			 
+			 if (this.IsRESTRequest == false)
+            {
+                return GetByJsonBase(filter, pageSize, page, orderBy, orderDir, contextRequest, extraParams);
+            }else
+            {
+                try
+                {
+                    return GetByJsonBase(filter, pageSize, page, orderBy, orderDir, contextRequest, extraParams);
+
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { status = "error", reason = "exception", message = ex.ToString() });
+
+                }
+            }
+        }
+       [ApiExplorerSettings(IgnoreApi = true)]
+		 protected override ActionResult ApiGetByCount(string filter, ContextRequest contextRequest)
+        {
+              var result  =  BR.<#= entity.SetName #>BR.Instance.GetCount(filter,  contextRequest);
+
+            return ResolveApiResponse("success", null, null, result);
+        }
+
+		 [ApiExplorerSettings(IgnoreApi = true)]
+        protected override ActionResult ApiGetByKeyJson(string id, ContextRequest contextRequest)
+        {
+            var result = GetByKey(id, contextRequest, true);
+			  UIModel<<#= entity.Name #>Model> uiModel = GetContextModel(UIModelContextTypes.Items, null);
+            uiModel.Items = new List<<#= entity.Name #>Model>();
+            uiModel.Items.Add(result);
+
+
+            Showing(ref uiModel);
+
+            return ResolveApiResponse("success", null, null, uiModel.Items[0]);
+        }
+		 [ApiExplorerSettings(IgnoreApi = true)]
+         protected override ActionResult ApiDeleteGen(List<<#= entity.Name #>Model> models, ContextRequest contextRequest)
+        {
+            List<<#= entity.Name #>> objs = new List<<#= entity.Name #>>();
+            foreach (var model in models)
+            {
+                objs.Add(model.GetBusinessObject());
+            }
+            try
+            {
+                BR.<#= entity.SetName #>BR.Instance.Delete(objs, contextRequest);
+                if (this.IsRESTRequest == true)
+                {
+                    
+					return ResolveApiResponse("success", null, null, null);
+
+                }
+                else
+                {
+                    return Content("ok");
+
+                }
+            }
+            catch (Exception ex)
+            {
+               if (this.IsRESTRequest == true)
+                {
+                    //return Json(new { status = "error", reason = "error", message= ex.ToString() }, JsonRequestBehavior.AllowGet);
+					return ResolveApiResponse("error", "exception", ex.ToString(), null );
+
+                }
+                else
+                {
+                    return Json(ex.ToString());
+
+                }
+            }
+        }
+		 [ApiExplorerSettings(IgnoreApi = true)]
+        protected override ActionResult ApiUpdateGen(List<<#= entity.Name #>Model> models, ContextRequest contextRequest)
+        {
+            List<<#= entity.Name #>> objs = new List<<#= entity.Name #>>();
+            foreach (var model in models)
+            {
+                objs.Add(model.GetBusinessObject());
+            }
+            try
+            {
+			if (contextRequest.CustomQuery.SpecificProperties.Count > 0)
+                {
+                    foreach (var obj in objs)
+                    {
+
+                        BR.<#= entity.SetName #>BR.Instance.UpdateAgile(obj, contextRequest);
+
+                    }
+                }
+                else
+                {
+					foreach (var obj in objs)
+					{
+						BR.<#= entity.SetName #>BR.Instance.Update(obj, contextRequest);
+
+					}
+				}
+				if (this.IsRESTRequest == true)
+                {
+                    //return Json(new { status = "success" }, JsonRequestBehavior.AllowGet);
+					return ResolveApiResponse("success", null, null, null);
+
+                }
+                else
+                {
+                    return Content("ok");
+
+                }
+              
+            }
+            catch (Exception ex)
+            {
+                if (this.IsRESTRequest == true)
+                {
+                    //return Json(new { status = "error", reason = "error", message= ex.ToString() }, JsonRequestBehavior.AllowGet);
+					return ResolveApiResponse("error", "exception", ex.ToString(), null );
+
+                }
+                else
+                {
+                    return Json(ex.ToString());
+
+                }
+            }
+        }
+
+
+	#endregion
+#region Validation methods	
+	    private void Validations(<#= entity.Name #>Model model) { 
+            #region Remote validations
+
+<#+		PropertyInfo _propertyKey = entity.Properties.FirstOrDefault(p=>p.IsPrimaryKey);
+	
+	 foreach (PropertyInfo property in entity.Properties.Where(p=>!string.IsNullOrEmpty((string)GetCustomProperty(p, "RemoteValidationAction", "String")))) { 
+		string methodName = (string)GetCustomProperty(property, "RemoteValidationAction", "String"); #>	
+		bool result<#= methodName #> = true;
+		string message<#= methodName #> = "";
+		On<#= methodName #>(ref result<#= methodName #>, ref message<#= methodName #>, model.<#= property.Name #>, Request.Form["Initial<#= property.Name #>"], Request.Form["<#= _propertyKey.Name #>"]);
+		if (!result<#= methodName #>)
+        	ModelState.AddModelError("<#= property.Name #>", message<#= methodName #>);
+<#+ } #>
+            #endregion
+		}
+
+<#+ foreach (PropertyInfo property in entity.Properties.Where(p=>!string.IsNullOrEmpty((string)GetCustomProperty(p, "RemoteValidationAction", "String")))) { 
+		string methodName = (string)GetCustomProperty(property, "RemoteValidationAction", "String"); #>	
+
+        partial void On<#= methodName #>(ref bool result, ref string message, string candidate, string initialValue, string id);
+        protected ActionResult <#= methodName #>(string <#= property.Name #>, string Initial<#= property.Name #>, string <#= _propertyKey.Name #>)
+        {
+            bool result = true;
+			string message = "";
+            On<#= methodName #>(ref result, ref message, <#= property.Name #>, Initial<#= property.Name #>, <#= _propertyKey.Name #>);
+			if (result)
+            	return Json(result);
+			else
+				return Json(message);
+        }
+<#+ } #>
+#endregion
+<#+ if (!entity.IsCustom && !string.IsNullOrEmpty((string)GetCustomProperty(entity, "UIListFooter", "String"))) {#>
+ [ApiExplorerSettings(IgnoreApi = true)]
+ 		protected ActionResult GetSummaryOperation(string operation, string filter) {
+            <#= entity.Name #>Model result = new <#= entity.Name #>Model();
+
+            var ob = BR.<#= entity.SetName #>BR.Instance.GetSummaryOperation(operation,HttpUtility.UrlDecode(filter), GetContextRequest());
+            if (ob != null) {
+                result.Bind(ob);
+				}
+            var uiModel = new UIModel<<#= entity.Name #>Model>();
+            uiModel.Items.Add(result);
+            MyEventArgs<UIModel<<#= entity.Name #>Model>> me = null;
+            OnSummaryOperationShowing(this, me = new MyEventArgs<UIModel<<#= entity.Name #>Model>>() { UIModel =  uiModel });
+            if (me != null)
+            {
+                result = uiModel.Items[0];
+            }
+            return Json(result) ;
+
+        }
+<#+ } #>
+		[ApiExplorerSettings(IgnoreApi = true)]
+ 		public object Authorization(object context)
+        {
+            OnAuthorization(this,  context );
+            return context ;
+        }
+		[ApiExplorerSettings(IgnoreApi = true)]
+		public List<<#= entity.Name #>Model> GetAll() {
+            <#+ 
+				string _orderBy ="";
+				if (!string.IsNullOrEmpty(entity.DefaultProperty)){
+					var propertyDefault = entity.Properties.Find(p=>p.Name == entity.DefaultProperty);
+					if (propertyDefault != null ){
+						if (string.IsNullOrEmpty((string)GetCustomProperty(propertyDefault, "Computed", "String"))){
+							_orderBy = propertyDefault.Name;
+						}
+					}
+						
+					
+				}
+				if (string.IsNullOrEmpty(_orderBy)){
+					var candidatesOrderBy = entity.Properties.Where(p=>(bool)GetCustomProperty(p, "IsOrderBy", "Boolean")).OrderBy(p=>p.Order);
+					if (candidatesOrderBy.Count() > 0)
+						_orderBy = candidatesOrderBy.ToList()[0].Name;
+					if (candidatesOrderBy.Count() > 1){
+						
+					}
+				}
+				if (string.IsNullOrEmpty(_orderBy)){
+					var candidatesOrderBy = entity.Properties.Where(p=>string.IsNullOrEmpty((string)GetCustomProperty(p, "Computed", "String")));
+					if (candidatesOrderBy.Count() > 0)
+						_orderBy = candidatesOrderBy.ToList()[0].Name;
+				}
+			if (!string.IsNullOrEmpty(_orderBy))  { #>
+			var bos = BR.<#= entity.SetName #>BR.Instance.GetBy("",
+					new SFS.Core.My.ContextRequest()
+					{
+						CustomQuery = new SFS.Core.My.CustomQuery()
+						{
+							OrderBy = "<#=_orderBy #>",
+							SortDirection = SFS.Core.Data.SortDirection.Ascending
+						}
+					});
+            <#+ }else{ #>
+
+			var bos = BR.<#= entity.SetName #>BR.Instance.GetAll();
+			
+			<#+ } #>
+			List<<#= entity.Name #>Model> results = new List<<#= entity.Name #>Model>();
+            <#= entity.Name #>Model model = null;
+            foreach (var bo in bos)
+            {
+                model = new <#= entity.Name #>Model();
+                model.Bind(bo);
+                results.Add(model);
+            }
+            return results;
+
+        }
+      
+
+		List<PropertyDefinition> _properties = null;
+		[ApiExplorerSettings(IgnoreApi = true)]
+		 protected override List<PropertyDefinition> GetProperties(UIModel uiModel,  params string[] specificProperties)
+        { 
+            return GetProperties(uiModel, false, null, specificProperties);
+        }
+		[ApiExplorerSettings(IgnoreApi = true)]
+		protected override List<PropertyDefinition> GetProperties(UIModel uiModel, bool decripted, Guid? id, params string[] specificProperties)
+            {
+
+			bool allProperties = true;    
+                if (specificProperties != null && specificProperties.Length > 0)
+                {
+                    allProperties = false;
+                }
+
+
+			List<CustomProperty> customProperties = new List<CustomProperty>();
+			if (_properties == null)
+                {
+                List<PropertyDefinition> results = new List<PropertyDefinition>();
+
+			string id<#= entity.Name #> = GetRouteDataOrQueryParam("id");
+			if (id<#= entity.Name #> != null)
+			{
+				if (!decripted)
+                {
+					id<#= entity.Name #> = SFS.Core.Entities.Utils.GetPropertyKey(id<#= entity.Name #>.Replace("-","/"), "<#= entity.Properties.FirstOrDefault(p=>p.IsPrimaryKey).Name #>");
+				}else{
+					if (id != null )
+						id<#= entity.Name #> = id.Value.ToString();                
+
+				}
+			}
+
+			bool visibleProperty = true;	
+			 bool conditionalshow =false;
+                if (uiModel.ContextType == UIModelContextTypes.EditForm || uiModel.ContextType == UIModelContextTypes.DisplayForm ||  uiModel.ContextType == UIModelContextTypes.GenericForm )
+                    conditionalshow = true;
+<#+ 		bool 	isvisible =true;
+			bool ismany =false;
+			string link;
+			string UpdatedPropertyName = "";
+			if (!string.IsNullOrEmpty((String)GetCustomProperty(entity.Model,"AutoUpdatedDateProperty", "String"))){
+				UpdatedPropertyName = (String)GetCustomProperty(entity.Model,"AutoUpdatedDateProperty", "String");
+			}
+			string CreatedPropertyName = "";
+			if (!string.IsNullOrEmpty((String)GetCustomProperty(entity.Model,"AutoCreatedDateProperty", "String"))){
+				CreatedPropertyName  = (String)GetCustomProperty(entity.Model,"AutoCreatedDateProperty", "String");
+			}
+			string AutoCreatedUserProperty = "";
+			if (!string.IsNullOrEmpty((String)GetCustomProperty(entity.Model,"AutoCreatedUserProperty", "String"))){
+				AutoCreatedUserProperty  = (String)GetCustomProperty(entity.Model,"AutoCreatedUserProperty", "String");
+			}
+
+			string AutoUpdatedUserProperty = "";
+			if (!string.IsNullOrEmpty((String)GetCustomProperty(entity.Model,"AutoUpdatedUserProperty", "String"))){
+				AutoUpdatedUserProperty  = (String)GetCustomProperty(entity.Model,"AutoUpdatedUserProperty", "String");
+			}
+
+			string CompanyIdProperty = "";
+			if (!string.IsNullOrEmpty((String)GetCustomProperty(entity.Model,"CompanyProperty", "String"))){
+				CompanyIdProperty  = (String)GetCustomProperty(entity.Model,"CompanyProperty", "String");
+			}
+			int order = 100;
+			List<string> localizableFields = new List<string>();
+			List<string> localizableDataFields = new List<string>();
+			string LocalizableDataLanguages = (String)GetCustomProperty(entity.Model,"LocalizableDataLanguages", "String");
+			foreach(var prop in entity.Properties.Where(p=>p.IsLocalizable)){
+
+				if (prop.IsNavigationProperty){
+					foreach (var lang in LocalizableDataLanguages.Split(char.Parse(",")))
+					{
+						var fields = (String)GetCustomProperty(prop,"LocalizableFields", "String");
+						if (!string.IsNullOrEmpty(fields)){
+                            foreach (var fieldPar in fields.Split(char.Parse("|")).Where(p=>p.ToLower().StartsWith(lang.ToLower())))
+                            {
+		 						localizableDataFields.Add(fieldPar.Split(char.Parse(":"))[1] + "_" + fieldPar.Split(char.Parse(":"))[0] + "_" + prop.Name); //secFile1_ES_secFile
+                            }
+                        }
+					}
+				}else{
+					foreach (var lang in LocalizableDataLanguages.Split(char.Parse(",")))
+					{
+						localizableDataFields.Add(prop.Name + "_" + lang);
+					}
+                }
+				
+			}
+			foreach(var item in entity.Properties.Where(p=>( (IsVisibleProperty(p) || ( p.Name == CompanyIdProperty && entity.Name == "secCompany")) ||  p.Name == AutoCreatedUserProperty || p.Name == AutoUpdatedUserProperty  || p.Name == CreatedPropertyName || p.Name ==  UpdatedPropertyName) && p.Name != AutoDeletedProperty && (p.Visible) && !p.Type.ToLower().Contains("xml") && ((p.IsForeignKey == true && p.IsNavigationProperty == false) == false )).OrderBy(p=>p.Order)) { 
+				bool isFKProperty = false;
+				var propRefNav = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyRefName == item.Name);
+				if (propRefNav != null ){
+					isFKProperty = true;	
+				}
+
+				link ="";
+				string relPropertyName = "";
+				if (item.Type== "String" && item.MaxLength ==0){
+					//isvisible = false;
+				
+				}else
+					isvisible=true;
+				if(isvisible){
+					EntityInfo entityRel = null;
+					string propertyNameSort = item.Name;
+					string pathName ="";
+					if (item.IsNavigationProperty)  {
+					
+						var navprop = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyName== item.Name);
+						var entityRelName = navprop.EntityType.Split(char.Parse("."))[navprop.EntityType.Split(char.Parse(".")).Length -1];
+						entityRel = entity.Model.Entities.Find(p=>p.Name == entityRelName);
+						if (!string.IsNullOrEmpty(entityRel.DefaultProperty))
+							propertyNameSort = entityRel.DefaultProperty;
+						else
+							propertyNameSort = entityRel.Properties[0].Name;
+						propertyNameSort = item.Name + "." + propertyNameSort;
+						pathName= entityRel.SetName;
+						// 
+						var relNav = entityRel.NavigationProperties.Where(p=>p.RelationshipName == item.NavigationProperty.RelationshipName && p.ToRole != item.NavigationProperty.ToRole).FirstOrDefault();
+						relPropertyName = relNav.PropertyName;
+						//
+						if (item.IsNavigationPropertyMany){
+							if (item.Type.Substring(item.Type.LastIndexOf(".") + 1) != entity.Name) // solo aplica en que caso de que no se trate de la misma entidad
+								ismany = true;
+							else
+								ismany = false;
+							
+							var propertyKey = entity.Properties.FirstOrDefault(p=>p.IsPrimaryKey);
+							string propertyKeyName = "";
+							if (propertyKey != null)
+								propertyKeyName = propertyKey.Name;
+										System.Text.StringBuilder sbParams = new System.Text.StringBuilder();
+					
+							string startFilter = "";
+							// many to many direct
+							string convertDynStart = "";
+							string convertDynEnd = "";
+							if (propertyKey.Type.ToLower().Contains("guid")){
+								convertDynStart = @"Guid(\""";
+								convertDynEnd = @"\"")";
+							}
+							if (relNav.Multiplicity == "*")
+							{
+								startFilter =  @"+ (new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext)).Encode(""it." + relPropertyName + ".Any(" + propertyKeyName + @" = "  + convertDynStart + @""" + id" + entity.Name +  @" +"""+ convertDynEnd + @") = True"")+ ""&isManyToMany=" + Code.PascalCase(ismany.ToString());
+							}else{
+								startFilter =  @"+ (new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext)).Encode(""it." + relPropertyName + "." + propertyKeyName + @" = "  + convertDynStart + @""" + id" + entity.Name + @" +"""  + convertDynEnd + @""")+ """;
+							}
+							
+							bool pal = (bool)GetCustomProperty(item, "UIExcludeSearch", "Boolean");
+							sbParams.Append(string.Format("pal={0}&", pal.ToString()));
+							bool es= (bool)GetCustomProperty(item, "UIPreventAutoLoad", "Boolean");
+							sbParams.Append(string.Format("es={0}&", es.ToString()));
+							int pag=10;				
+							if ((int?)GetCustomProperty(item, "UIPaging", "Int?") != null){
+								pag =(int)GetCustomProperty(item, "UIPaging", "Int?");
+							}
+							sbParams.Append(string.Format("pag={0}&", pag.ToString()));
+							sbParams.Append("filterlinks=1&");
+							link = @"VirtualPathUtility.ToAbsolute(""~/"") + """ + entity.Model.SafeNamespace + @"/" + entityRel.SetName +"/ListViewGen?overrideModule=\" + GetOverrideApp()  + \"&" + sbParams.ToString() +"idTab=" + item.Name +"&fk=" + relPropertyName + @"&startFilter=""" + startFilter + @"&fkValue="" + id" + entity.Name ;
+						
+							
+						}else{
+							link="";
+							ismany =false;
+						}
+
+					}
+		var property = item;		
+			System.Text.StringBuilder sbExtraField = new System.Text.StringBuilder();
+			System.Text.StringBuilder sbExtraAdditionalData = new System.Text.StringBuilder();
+
+		if (property.Type == "Binary"  || ((bool)GetCustomProperty(item, "IsImage", "Boolean") && property.IsNavigationProperty && !property.IsNavigationPropertyMany )){
+			PropertyInfo propertyFile = null;
+			if (property.Type == "Binary"){
+				propertyFile = property;
+            
+
+				string groupFileName = (string)GetCustomProperty(property,"FileData", "String");
+				if (!string.IsNullOrEmpty(groupFileName)){
+						sbExtraField.AppendLine(string.Format(@"FileDataField = ""{0}""", property.Name));
+					var fileSizeProperty = entity.Properties.FirstOrDefault(p=>(string)GetCustomProperty(p,"FileSize", "String") == groupFileName);
+					if (fileSizeProperty != null ){
+							if (sbExtraField.Length > 0)
+								sbExtraField.Append(", ");
+							sbExtraField.AppendLine(string.Format(@"FileSizeField = ""{0}""", fileSizeProperty.Name));						
+					}
+				
+						var fileTypeProperty = entity.Properties.FirstOrDefault(p=>(string)GetCustomProperty(p,"FileType", "String") == groupFileName);
+						if (fileTypeProperty != null){
+							if (sbExtraField.Length > 0)
+								sbExtraField.Append(", ");
+							sbExtraField.AppendLine(string.Format(@"FileTypeField = ""{0}""", fileTypeProperty.Name));						
+						}
+						var fileNameProperty = entity.Properties.FirstOrDefault(p=>(string)GetCustomProperty(p,"FileName", "String") == groupFileName);
+						if (fileNameProperty != null){
+							if (sbExtraField.Length > 0)
+								sbExtraField.Append(", ");
+							sbExtraField.AppendLine(string.Format(@"FileNameField =  ""{0}""", fileNameProperty.Name));
+						
+						}
+					
+						var fileIdProperty = entity.Properties.FirstOrDefault(p=>p.IsPrimaryKey);
+						if (fileIdProperty != null){
+							if (sbExtraField.Length > 0)
+								sbExtraField.Append(", ");
+							sbExtraField.AppendLine(string.Format(@"FileIdField =  ""{0}""", fileIdProperty.Name));
+							sbExtraField.Append(", ");
+						}
+
+						//--- aditionalData
+					sbExtraAdditionalData.Append(string.Format(@"PropertyId = ""{0}""", property.Entity.Properties.First(p=>p.IsPrimaryKey).Name));
+					sbExtraAdditionalData.Append(", ");
+						sbExtraAdditionalData.Append(string.Format(@"PropertyData = ""{0}""", property.Name));
+							sbExtraAdditionalData.Append(", ");
+						sbExtraAdditionalData.Append(string.Format(@"SafeKey = Model.SafeKey"));
+							sbExtraAdditionalData.Append(", ");
+						sbExtraAdditionalData.Append(string.Format(@"ControllerName = ""{0}""", entity.SetName));
+							sbExtraAdditionalData.Append(", ");
+						sbExtraAdditionalData.Append(string.Format(@"TypeName = ""{0}.{1}""", entity.SetName, entity.Name));
+
+							sbExtraAdditionalData.Append(", ");
+						sbExtraAdditionalData.Append(string.Format(@"Namespace = ""{0}""", entity.Model.Namespace));
+
+					 fileSizeProperty = entity.Properties.FirstOrDefault(p=>(string)GetCustomProperty(p,"FileSize", "String") == groupFileName);
+					if (fileSizeProperty != null ){
+						//if (fileSizeProperty.Name == groupFileName){
+							if (sbExtraAdditionalData.Length > 0)
+								sbExtraAdditionalData.Append(", ");
+							sbExtraAdditionalData.Append(string.Format(@"PropertySize = ""{0}""", fileSizeProperty.Name));
+							sbExtraAdditionalData.Append(", ");
+							sbExtraAdditionalData.Append(string.Format(@"FileSize = Model.{0}", fileSizeProperty.Name));
+						//}
+					}
+				
+						 fileTypeProperty = entity.Properties.FirstOrDefault(p=>(string)GetCustomProperty(p,"FileType", "String") == groupFileName);
+						if (fileTypeProperty != null){
+					//if (fileTypeProperty.Name == groupFileName){
+							if (sbExtraAdditionalData.Length > 0)
+								sbExtraAdditionalData.Append(", ");
+							sbExtraAdditionalData.Append(string.Format(@"PropertyType = ""{0}""", fileTypeProperty.Name));
+						
+					//	}
+						}
+						 fileNameProperty = entity.Properties.FirstOrDefault(p=>(string)GetCustomProperty(p,"FileName", "String") == groupFileName);
+						if (fileNameProperty != null){
+						//if (fileNameProperty.Name == groupFileName){
+							if (sbExtraAdditionalData.Length > 0)
+								sbExtraAdditionalData.Append(", ");
+							sbExtraAdditionalData.Append(string.Format(@"FileName = Model.{0}", fileNameProperty.Name));
+							sbExtraAdditionalData.Append(", ");
+							sbExtraAdditionalData.Append(string.Format(@"PropertyName = ""{0}""", fileNameProperty.Name));
+						}
+
+				
+				}
+
+			}else{
+				var navpropFile = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyName== item.Name);
+				var entityRelNameFile = navpropFile.EntityType.Split(char.Parse("."))[navpropFile.EntityType.Split(char.Parse(".")).Length -1];
+				var entityRelFile = entity.Model.Entities.Find(p=>p.Name == entityRelNameFile);
+						
+				//propertyFile 
+				sbExtraField.AppendLine(string.Format(@"FileDataField = ""FileData"","));
+				sbExtraField.AppendLine(string.Format(@"FileSizeField = ""FileSize"","));
+				sbExtraField.AppendLine(string.Format(@"FileTypeField = ""FileType"","));
+				sbExtraField.AppendLine(string.Format(@"FileIdField = ""FileIdField"","));
+				
+				item.CustomProperties.Add(new CustomPropertyInfo () { Name="FileTypeModelName", Value = string.Format(@"{0}.{1}Model", entityRelFile.SetName, entityRelFile.Name) });
+				item.CustomProperties.Add(new CustomPropertyInfo () { Name="FileControllerName", Value = string.Format(@"{0}", entityRelFile.SetName) });
+				
+				
+			}
+		}
+#>
+visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("<#=item.Name#>"))
+{				
+    customProperties = new List<CustomProperty>();
+
+    <#+ foreach (var customProperty in item.CustomProperties )
+        { #>
+    customProperties.Add(new CustomProperty() { Name="<#= customProperty.Name #>", Value=@"<#= System.Web.HttpUtility.HtmlEncode(customProperty.Value) #>" });
+		 
+<#+        } #>
+    <#+ if (item.IsNavigationProperty)
+        {
+			 #>
+			customProperties.Add(new CustomProperty() { Name="Fk", Value=@"<#= relPropertyName #>" });
+			//[RelationFilterable(DisableFilterableInSubfilter=true, FiltrablePropertyPathName="<#=property.Name#>.<#= entityRel.Properties.FirstOrDefault(p=>p.IsPrimaryKey).Name #>")]		
+			customProperties.Add(new CustomProperty() { Name="FiltrablePropertyPathName", Value=@"<#=property.Name#>.<#= entityRel.Properties.FirstOrDefault(p=>p.IsPrimaryKey).Name #>" });
+			customProperties.Add(new CustomProperty() { Name = "BusinessObjectSetName", Value = @"<#=entityRel.SetName#>" });
+			
+<#+ if ((bool)GetCustomProperty(item, "IsImage", "Boolean")) { #>
+			customProperties.Add(new CustomProperty() { Name = "FileEntitySetName", Value = @"<#=entityRel.SetName#>" });
+			customProperties.Add(new CustomProperty() { Name = "FileEntityName", Value = @"<#=entityRel.Name#>" });
+
+<#+ } #>
+<#+		} #>
+
+
+
+<#+		if ((bool)GetCustomProperty(item, "UITags", "Boolean"))
+        {
+			var navprop = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyName== item.Name);
+			var entityRelName = navprop.EntityType.Split(char.Parse("."))[navprop.EntityType.Split(char.Parse(".")).Length -1];
+			var entityRel_1 = entity.Model.Entities.Find(p=>p.Name == entityRelName);
+			 #>
+			customProperties.Add(new CustomProperty() { Name="EntitySetName", Value=@"<#= entityRel_1.SetName #>" });
+		 
+<#+        }
+	int orderThis = order;
+	if (item.Name == UpdatedPropertyName ){
+		orderThis = order + entity.Properties.Count;
+	}
+	if (item.IsNavigationProperty)
+        {
+			var navpropWE = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyName== item.Name);
+		
+			var entityRelNameWE = navpropWE.EntityType.Split(char.Parse("."))[navpropWE.EntityType.Split(char.Parse(".")).Length -1];
+			var entityRelWE = entity.Model.Entities.Find(p=>p.Name == entityRelNameWE);
+			if ((bool)GetCustomProperty(entityRelWE, "Integrable", "Boolean") && (entityRelWE.Name != "secUser" && entityRelWE.Model.Namespace != "SFS.Core.Security")) {
+			 #>
+			customProperties.Add(new CustomProperty() { Name="Integrable", Value="true" });
+		 
+<#+        }
+        }
+ #>
+
+	
+	//<#= entity.NavigationProperties.FirstOrDefault(p=>p.PropertyName== item.Name) != null? entity.NavigationProperties.FirstOrDefault(p=>p.PropertyName== item.Name).RelationshipName : "Null" #>
+		//if (this.Request.QueryString["fk"] != "<#= item.Name #>")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = <#= orderThis #>,
+				<#+ if (sbExtraField.Length > 0)  { #>
+					<#= sbExtraField.ToString() #>
+				<#+ } #>
+				<#+ if (sbExtraAdditionalData.Length > 0)  { #>
+					AditionalViewData = null, /*<#= sbExtraAdditionalData.ToString() #>*/
+				<#+ } #>
+				<#+ if (isFKProperty == true ){ #>
+					IsForeignKey = true,
+
+				<#+  }
+				if ((bool)GetCustomProperty(item, "IsHidden", "Boolean")) { #>
+					//IsHidden = true,	
+<#+ } #>
+<#+ 	if (item.IsNavigationPropertyMany) { #>				
+					//Link = <#= link #>,
+					ModuleKey = "<#= entity.Model.SafeNamespace #>",
+					BusinessObjectKey = "<#= entityRel.Name #>",
+					BusinessObjectSet = "<#= entityRel.SetName #>",
+<#+ 	}else if(item.IsNavigationProperty) { 
+				string getAction ="GetAll";	
+				string getParams ="";
+			
+				if (!string.IsNullOrEmpty((string)GetCustomProperty(item, "UIGetParams", "String"))){
+					getParams = (string)GetCustomProperty(item, "UIGetParams", "String");
+				}else if (!string.IsNullOrEmpty((string)GetCustomProperty(item, "ReusableCatalogKey", "String")) && !string.IsNullOrEmpty((string)GetCustomProperty(entity.Model, "ReusableCatalog", "String"))){
+					getParams = "p => p." + (string)GetCustomProperty(entity.Model, "ReusableCatalog", "String") + ".NameKey == \"" + (string)GetCustomProperty(property, "UIGetParams", "String") + "\"";
+				}
+
+				if (!string.IsNullOrEmpty((string)GetCustomProperty(item, "UIGetAction", "String"))){
+						getAction= (string)GetCustomProperty(item, "UIGetAction", "String");
+				}else if (!string.IsNullOrEmpty((string)GetCustomProperty(item, "ReusableCatalogKey", "String"))){
+					getAction= "GetBy";
+				}
+				var entityFKDefaultColumn = entityRel.DefaultProperty?? entityRel.Properties[0].Name;
+
+				string displayText = entityFKDefaultColumn;
+				var keyEntityFK = entityRel.Properties.Find(p=>p.IsPrimaryKey);
+
+				string displayValue = keyEntityFK.Name;
+			if (!string.IsNullOrEmpty((string)GetCustomProperty(item, "UIDisplayText", "String"))){
+					displayText= (string)GetCustomProperty(item, "UIDisplayText", "String");
+			}
+			if (!string.IsNullOrEmpty((string)GetCustomProperty(item, "UIDisplayValue", "String"))){
+					displayValue= (string)GetCustomProperty(item, "UIDisplayValue", "String");
+			}
+
+	
+	
+	#>				
+					
+					ModuleKey = "<#= entity.Model.SafeNamespace #>",
+				BusinessObjectKey = "<#= entityRel.Name #>",
+					BusinessObjectSet = "<#= entityRel.SetName #>",
+					PropertyNavigationKey = "<#= displayValue #>",
+					PropertyNavigationText = "<#= displayText #>",
+<#+ 
+	if ((bool)GetCustomProperty(item, "UILookUp", "Boolean")){  #>
+					NavigationPropertyType = NavigationPropertyTypes.LookUp,
+<#+ }else{
+		if (property.PerformanceOption == PerformanceOptions.Fill){ #>
+					NavigationPropertyType = NavigationPropertyTypes.SimpleDropDown,
+<#+		}else if(property.PerformanceOption == PerformanceOptions.OnDemand){ #>
+					NavigationPropertyType = NavigationPropertyTypes.Autocomplete,
+<#+		}
+	} #>
+					GetMethodName = "<#= getAction #>",
+					GetMethodParameters = "<#= getParams.Replace("\"",@"\""") #>",
+					GetMethodDisplayText ="<#= displayText #>",
+					GetMethodDisplayValue = "<#= displayValue #>",
+<#+			if (localizableDataFields.Count() > 0)
+			{
+				foreach (var lang in LocalizableDataLanguages.Split(char.Parse(",")))
+				{ 
+					var localizableDataField = localizableDataFields.FirstOrDefault(p=>p.Split(char.Parse("_"))[0] == property.Name && p.Split(char.Parse("_"))[1].ToLower() == lang.ToLower()); //secFile1_ES
+					if (localizableDataField != null ) { #>
+					IsLocalizableDataField = true,
+					LocalizableField = "<#= localizableDataField.Split(char.Parse("_"))[2] #>",
+                    LocalizableLang = "<#= localizableDataField.Split(char.Parse("_"))[1] #>",		
+<#+					}
+		 
+				}
+			} #>
+<#+ 	} #>					
+					CustomProperties = customProperties,
+
+                    PropertyName = "<#= item.Name #>",
+
+					 MaxLength = <#=item.MaxLength #>,
+<#+ if (property.Nullable){  #>
+					 Nullable = true,
+<#+ } else{ #>
+					IsRequired = true ,
+<#+ } #>
+
+<#+ if ((bool)GetCustomProperty(item, "IsImage", "Boolean")){  #>
+					 IsImage = true,
+
+<#+ } #>
+
+<#+ if (property.IsLocalizable){  #>
+					 IsLocalizableField = true,
+<#+ }else{
+		if (localizableDataFields.Count() > 0){
+			var localizableDataField = localizableDataFields.FirstOrDefault(p=>p.ToLower() == property.Name.ToLower());
+			if (localizableDataField != null ) { #>
+					IsLocalizableDataField = true,
+					LocalizableField = "<#= localizableDataField.Split(char.Parse("_"))[0] #>",
+                    LocalizableLang = "<#= localizableDataField.Split(char.Parse("_"))[1] #>",		
+<#+			}
+		}
+	} #>
+<#+ if (!string.IsNullOrEmpty((string)GetCustomProperty(item, "ReusableCatalogKey", "String"))){ #>
+
+					UseMode = "<#= (string)GetCustomProperty(item, "ReusableCatalogKey", "String") #>",
+<#+ }
+		if (item.IsPrimaryKey || (bool)GetCustomProperty(item, "IsHidden", "Boolean")){
+ #>
+					IsHidden = true,
+<#+ }
+if(item.IsPrimaryKey) { #>
+                    SystemProperty =  SystemProperties.Identifier ,
+<#+ }
+if ((bool)GetCustomProperty(item, "UIReadOnly", "Boolean")) {
+#>
+					IsReadOnly = true,
+<#+ } #>
+<#+ if (!string.IsNullOrEmpty((String)GetCustomProperty(property, "UIMask", "String"))){ #>
+					Mask = "<#= (String)GetCustomProperty(property, "UIMask", "String") #>",
+<#+ } #>
+<#+ if (!string.IsNullOrEmpty(entity.DefaultProperty)){
+ #>
+					IsDefaultProperty = <#= (entity.DefaultProperty == item.Name).ToString().ToLower() #>,
+<#+ } 
+	if (!item.IsCustom || (item.IsCustom && !string.IsNullOrEmpty((string)GetCustomProperty(item, "ComputedLinq", "String")))) {  #>
+                    SortBy = "<#= propertyNameSort #>",
+<#+ }
+		if (!string.IsNullOrEmpty((string)GetCustomProperty(item, "UIListFooter", "String"))){ #>
+					Sum = true,
+<#+ } #>					
+<#+ if ((bool)GetCustomProperty(item, "UIMultiline", "Boolean")){ #>
+					IsMultiline = true,
+<#+ } #>	
+<#+ if (item.Name == UpdatedPropertyName ) { #>
+					IsUpdatedDate = true,
+					SystemProperty = SystemProperties.UpdatedDate ,
+	
+<#+ }else if(item.Name == CreatedPropertyName) { #>
+				SystemProperty = SystemProperties.CreatedDate ,
+<#+ }else if(item.Name == AutoCreatedUserProperty) { #>
+				SystemProperty = SystemProperties.CreatedUser,
+<#+ }else if(item.Name == AutoUpdatedUserProperty) { #>
+				SystemProperty = SystemProperties.UpdatedUser,
+<#+  }else if (item.Name == AutoSizeBytesProperty){ #>
+				SystemProperty = SystemProperties.SizeBytes,
+<#+ } #>
+<#+ if ((bool)GetCustomProperty(item, "UITags", "Boolean")){  #>
+					NavigationPropertyType = NavigationPropertyTypes.Tags,
+<#+ } #>
+                    TypeName = "<#= item.Type #>",
+                    IsNavigationProperty = <#= item.IsNavigationProperty.ToString().ToLower() #>,
+					IsNavigationPropertyMany = <#= item.IsNavigationPropertyMany.ToString().ToLower() #>,
+                    PathName = "<#= entity.Model.SafeNamespace #>/<#= pathName #>"
+<#+ if (UpdatedPropertyName == item.Name) { #>
+                    //,PropertyDisplayName = SFS.Core.Web.Mvc.Resources.GlobalMessages.UPDATED
+
+<#+  }else{ #>
+                    /*,PropertyDisplayName = Resources.<#= entity.Name #>Resources.<#= item.Name == "Culture" ? (item.Name + "_").ToUpper() :  item.Name.ToUpper()  #>*/
+<#+ } #>
+                });
+		//	}
+	
+	}
+<#+ 			}
+				order ++;
+		} #>	
+<#+			if ((bool)GetCustomProperty(entity, "Integrable", "Boolean")) { #> 								
+                results.Add(new PropertyDefinition()
+                {
+					IsHidden = true,
+					GetData = true,
+                    Order = <#= order #>,
+                    CustomProperties = customProperties,
+                    PropertyName = "Id",
+                    MaxLength = 0,
+                    Nullable = true,
+                    IsDefaultProperty = false,
+                    SortBy = "Id",
+                    TypeName = "Guid",
+                    IsNavigationProperty = false,
+                    IsNavigationPropertyMany = false,
+                    PathName = "SFSAgroMx/",
+                    PropertyDisplayName = "Id"
+                });
+<#+ } #>				
+
+if (visibleProperty || specificProperties.Contains("GuidActividadEconomica"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        
+<#+ foreach(var prop in entity.Properties.Where(p=> !string.IsNullOrEmpty((string)GetCustomProperty(p, "IsParam", "String")) )){	 #>
+
+				results.Add(new PropertyDefinition()
+                {
+					Order = 100,
+																	
+					CustomProperties = customProperties,
+
+                    PropertyName = "<#= prop.Name #>",
+
+					 MaxLength = 0,
+					IsRequired = false ,
+					IsHidden = false,
+                    
+					IsDefaultProperty = false,
+                    SortBy = "<#= prop.Name #>",
+					
+	
+                    TypeName = "Guid",
+                   
+                });
+	
+	
+<#+ } #>
+	}
+                    _properties = results;
+                    return _properties;
+                }
+                else {
+                    return _properties;
+                }
+            }
+			[ApiExplorerSettings(IgnoreApi = true)]
+		private void Showing(ref UIModel<<#= entity.Name #>Model> uiModel) {
+          	
+			MyEventArgs<UIModel<<#= entity.Name #>Model>> me = new MyEventArgs<UIModel<<#= entity.Name #>Model>>() { UIModel = uiModel };
+			 OnVirtualLayoutSettings(this, me);
+
+            OnShowing(this, me);
+
+			
+			if (this.ContextRequest != null && this.ContextRequest.ApiWrapper != null && this.ContextRequest.ApiWrapper.AllFields == true )
+			{
+				me.UIModel.Properties.ForEach(p=> p.IsHidden = false);
+            }
+            if (me != null)
+            {
+                uiModel = me.UIModel;
+            }
+
+        }
+		[ApiExplorerSettings(IgnoreApi = true)]
+		protected override  UIModel<<#= entity.Name #>Model> GetByForShow(string filter, int? pageSize, int? page, string orderBy, string orderDir, ContextRequest contextRequest, params  object[] extraParams)
+        {
+			if (Request != null )
+				if (!string.IsNullOrEmpty(Request.Query["q"].ToString()))
+					filter = filter + HttpUtility.UrlDecode(Request.Query["q"].ToString());
+ if (contextRequest == null)
+            {
+                contextRequest = new ContextRequest();
+                contextRequest.CurrentContext = SFS.Core.My.Context.CurrentContext;
+            }
+            var bos = BR.<#= entity.SetName #>BR.Instance.GetBy(HttpUtility.UrlDecode(filter), pageSize, page, orderBy, orderDir, GetUseMode(), contextRequest, extraParams);
+			//var bos = BR.<#= entity.SetName #>BR.Instance.GetBy(HttpUtility.UrlDecode(filter), pageSize, page, orderBy, orderDir, GetUseMode(), context, extraParams);
+            <#= entity.Name #>Model model = null;
+            List<<#= entity.Name #>Model> results = new List<<#= entity.Name #>Model>();
+            foreach (var item in bos)
+            {
+                model = new <#= entity.Name #>Model();
+				model.Bind(item);
+				results.Add(model);
+            }
+            //return results;
+			UIModel<<#= entity.Name #>Model> uiModel = GetContextModel(UIModelContextTypes.Items, null);
+            uiModel.Items = results;
+			/*if (Request != null){
+				if (SFS.Core.Web.Utils.GetRouteDataOrQueryParam(Request.RequestContext, "action") == "Download")
+				{
+					uiModel.ContextType = UIModelContextTypes.ExportDownload;
+				}
+			}*/
+            Showing(ref uiModel);
+            return uiModel;
+		}			
+	
+		
+		[ApiExplorerSettings(IgnoreApi = true)]
+		protected override List<<#= entity.Name #>Model> GetBy(string filter, int? pageSize, int? page, string orderBy, string orderDir, ContextRequest contextRequest,  params  object[] extraParams)
+        {
+            var uiModel = GetByForShow(filter, pageSize, page, orderBy, orderDir, contextRequest, extraParams);
+           
+            return uiModel.Items;
+		
+        }
+		
+      
+
+
+
+		[ApiExplorerSettings(IgnoreApi = true)]
+		protected  <#= entity.Name #>Model GetByKey(string id, ContextRequest contextRequest, bool dec)
+        {
+            return GetByKey(id, null, contextRequest, dec);
+        }
+		[ApiExplorerSettings(IgnoreApi = true)]
+        protected <#= entity.Name #>Model GetByKey(string id, string  includes, bool dec)
+        {
+            return GetByKey(id, includes, null, dec);
+        }
+		[ApiExplorerSettings(IgnoreApi = true)]
+        protected <#= entity.Name #>Model GetByKey(string id, string includes, ContextRequest contextRequest, bool dec) {
+		             <#= entity.Name #>Model model = null;
+            ControllerEventArgs<<#= entity.Name #>Model> e = null;
+			string objectKey = id.Replace("-","/");
+             OnGettingByKey(this, e=  new ControllerEventArgs<<#= entity.Name #>Model>() { Id = objectKey  });
+             bool cancel = false;
+             <#= entity.Name #>Model eItem = null;
+             if (e != null)
+             {
+                 cancel = e.Cancel;
+                 eItem = e.Item;
+             }
+			if (cancel == false && eItem == null)
+             {
+<#+ 	System.Text.StringBuilder sbQueryKeys = new System.Text.StringBuilder();
+		foreach(PropertyInfo property in entity.Properties.Where(p=>p.IsPrimaryKey)){ #>
+<#+ 		if (property.Type == "Guid") { #>
+			<#= property.Type #> <#= Code.CamelCase(property.Name) #> = Guid.Empty; //new Guid(SFS.Core.Entities.Utils.GetPropertyKey(objectKey, "<#= property.Name #>"));
+			if (dec)
+                 {
+                     <#= Code.CamelCase(property.Name) #> = new Guid(id);
+                 }
+                 else
+                 {
+                     <#= Code.CamelCase(property.Name) #> = new Guid(SFS.Core.Entities.Utils.GetPropertyKey(objectKey, null));
+                 }
+			
+<#+ 		}else{ #>		
+			<#= property.Type #> <#= Code.CamelCase(property.Name) #> = Convert.To<#= property.Type #>(SFS.Core.Entities.Utils.GetPropertyKey(objectKey, "<#= property.Name #>"));
+<#+ 		} #>
+<#+ 		if (sbQueryKeys.Length > 0) 
+				sbQueryKeys.Append(", ");
+			sbQueryKeys.Append(string.Format("{0}", Code.CamelCase(property.Name)));
+			#>
+<#+ 	} #>            
+				model = new <#= entity.Name #>Model();
+                  if (contextRequest == null)
+                {
+                    contextRequest = GetContextRequest();
+                }
+				var bo = BR.<#= entityPluralName #>BR.Instance.GetByKey(<#= sbQueryKeys.ToString() #>, GetUseMode(), contextRequest,  includes);
+				 if (bo != null)
+                    model.Bind(bo);
+                else
+                    return null;
+			}
+             else {
+                 model = eItem;
+             }
+			model.IsNew = false;
+
+            return model;
+        }
+  
+
+        
+
+			[ApiExplorerSettings(IgnoreApi = true)]
+		protected override UIModel<<#= entity.Name #>Model> GetContextModel(UIModelContextTypes formMode, <#= entity.Name #>Model model)
+        {
+            return GetContextModel(formMode, model, false, null);
+        }
+			[ApiExplorerSettings(IgnoreApi = true)]
+		 private UIModel<<#= entity.Name #>Model> GetContextModel(UIModelContextTypes formMode, <#= entity.Name #>Model model, bool decript, Guid ? id) {
+            UIModel<<#= entity.Name #>Model> me = new UIModel<<#= entity.Name #>Model>(true, "<#= entity.SetName #>");
+			me.UseMode = GetUseMode();
+			me.Controller = this;
+			me.OverrideApp = GetOverrideApp();
+			me.ContextType = formMode ;
+			me.Id = "<#= entity.Name #>";
+			
+            me.ModuleKey = "<#=entity.Model.SafeNamespace#>";
+
+			me.ModuleNamespace = "<#=entity.Model.Namespace#>";
+            me.EntityKey = "<#=entity.Name#>";
+            me.EntitySetName = "<#=entity.SetName#>";
+
+			me.AreaAction = "<#=entity.Model.SafeNamespace#>";
+            me.ControllerAction = "<#=entity.SetName#>";
+<#+ if (!entity.IsCustom && !string.IsNullOrEmpty((string)GetCustomProperty(entity, "UIListFooter", "String"))) { #>
+	         
+		   me.UIListFooter = "<#=(string)GetCustomProperty(entity, "UIListFooter", "String")#>";
+
+<#+ }
+	 if ((bool)GetCustomProperty(entity, "UIHeaderInclude", "Boolean")){ #>           
+		   me.HeaderPartialView = "Header" + me.Id;
+
+<#+ }
+	var firstPropertyKey = entity.Properties.Where(p=>p.IsPrimaryKey ).FirstOrDefault();
+
+#>
+            me.PropertyKeyName = "<#= (firstPropertyKey != null? firstPropertyKey.Name : "")#>";
+
+            me.Properties = GetProperties(me, decript, id);
+<#+		if ((bool)GetCustomProperty(entity,"UIShowAutoSave", "Boolean")) { #>   
+			me.ShowAutoSave = true;
+<#+ } #>
+<#+	if (!string.IsNullOrEmpty((String)GetCustomProperty(entity.Model,"AutoUpdatedDateProperty", "String"))){ 
+		if (entity.Properties.FirstOrDefault(p=> p.Name == (String)GetCustomProperty(entity.Model,"AutoUpdatedDateProperty", "String")) != null) {#>
+
+			me.SortBy = "<#= (String)GetCustomProperty(entity.Model,"AutoUpdatedDateProperty", "String")  #>";
+			me.SortDirection = UIModelSortDirection.DESC;
+
+<#+		}
+    }
+ #> 			
+			 
+         
+            switch (formMode)
+            {
+                case UIModelContextTypes.DisplayForm:
+<#+ if ((bool)GetCustomProperty(entity, "Auditable", "Boolean")) { #> 	
+		me.CustomProperties.Add(new CustomProperty () { Name="Auditable", Value = "true" });
+    //<li class="pull-right history">
+    //    <a href="#tabAuditChangessecUser"  case="history" data-toggle="tab"><i class="icon-time"></i> @GlobalMessages.HISTORY</a>
+	//</li>
+<#+  } #>
+					//me.TitleForm = <#= entity.Name #>Resources.<#= entity.SetName.ToUpper() #>_DETAILS;
+                   // me.ActionButtons.First(p => p.ActionKey == "u").Title = GlobalMessages.MODIFY_DATA;
+					 me.Properties.Where(p=>p.PropertyName  != "Id" && p.IsForeignKey == false).ToList().ForEach(p => p.IsHidden = false);
+
+					 me.Properties.Where(p => (p.SystemProperty != null && p.SystemProperty != SystemProperties.Identifier) ).ToList().ForEach(p=> me.SetHide(p.PropertyName));
+
+<#+					foreach( PropertyInfo property in entity.Properties.Where(p=> (bool)GetCustomProperty(p,"IsHidden", "Boolean"))  ) {
+						//if (!string.IsNullOrEmpty((String)GetCustomProperty(entity.Model,"AutoUpdatedDateProperty", "String"))){ 
+#>
+						me.SetHide("<#= property.Name #>");
+<#+						//}
+					}	 #>
+                    break;
+                case UIModelContextTypes.EditForm:
+				  me.Properties.Where(p=>p.SystemProperty != SystemProperties.Identifier && p.IsForeignKey == false && p.PropertyName != "Id").ToList().ForEach(p => p.IsHidden = false);
+<#+					foreach( PropertyInfo property in entity.Properties.Where(p=> (!string.IsNullOrEmpty((String)GetCustomProperty(p,"Computed", "String")) || !string.IsNullOrEmpty((String)GetCustomProperty(p,"ComputedLinq", "String")))) ) {
+						//if (!string.IsNullOrEmpty((String)GetCustomProperty(entity.Model,"AutoUpdatedDateProperty", "String"))){ 
+#>
+
+						 me.Properties.Find(p => p.PropertyName == "<#= property.Name #>").IsHidden = true;
+<#+						//}
+					}	 #>
+
+					if (model != null)
+                    {
+						
+
+					
+					}
+                    break;
+                case UIModelContextTypes.FilterFields:
+                    break;
+                case UIModelContextTypes.GenericForm:
+                    break;
+                case UIModelContextTypes.Items:
+		//if (Request.QueryString["allFields"] != "1"){
+<#+ string defaultProp = (String)GetCustomProperty(entity.Model,"AutoUpdatedDateProperty", "String");
+	if (!string.IsNullOrEmpty(defaultProp) && !string.IsNullOrEmpty(entity.DefaultProperty )) { 
+
+	    foreach(var propNoDefault in entity.Properties.Where(p=>( ((bool)GetCustomProperty(p,"SimpleListVisibility", "Boolean"))  || p.Name == defaultProp || p.Name ==entity.DefaultProperty) ) ) {#>
+					 if (me.Properties.Find(p => p.PropertyName == "<#= propNoDefault.Name #>") != null){
+						me.Properties.Find(p => p.PropertyName == "<#= propNoDefault.Name #>").IsHidden = false;
+					 }
+					 
+                    
+					
+<#+     }
+	} #>
+
+	<#+  foreach(var propKey in entity.Properties.Where(p=>p.IsPrimaryKey)) { #>
+					 if (me.Properties.Find(p => p.PropertyName == "<#= propKey.Name #>") != null){
+						me.Properties.Find(p => p.PropertyName == "<#= propKey.Name #>").IsHidden = false;
+					 }
+					 
+                    
+					
+<#+     } #>
+
+				
+
+                    break;
+                case UIModelContextTypes.ListForm:
+	
+
+                    break;
+                default:
+                    break;
+            }
+            	this.SetDefaultProperties(me);
+			
+			
+			return me;
+        }
+		
+
+		
+
+		
+
+
+	
+    }
+}
+<#+
+	
+	}catch(Exception ex){
+		throw new Exception(string.Format("El error ocurri� en la entidad {0}",entity.Name),ex);
+	}
+	}
+}
+#>

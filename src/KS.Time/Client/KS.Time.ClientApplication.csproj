@@ -1,0 +1,193 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="All.Client.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>All.Client.txt</LastGenOutput>
+    </None>
+    <None Update="All.Client.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>All.Client.tt</DependentUpon>
+    </None>
+    <None Update="pages-routing.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>pages-routing.tt</DependentUpon>
+    </None>
+    <None Update="utils.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>utils.txt</LastGenOutput>
+    </None>
+    <None Update="utils.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>utils.tt</DependentUpon>
+    </None>
+    <None Update="pages-form-fields.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>pages-form-fields.tt</DependentUpon>
+    </None>
+    <None Update="pages-form-fields.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>pages-form-fields.ts</LastGenOutput>
+    </None>
+    <None Update="pages-form-module.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>pages-form-module.tt</DependentUpon>
+    </None>
+    <None Update="pages-form-module.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>pages-form-module.ts</LastGenOutput>
+    </None>
+    <None Update="pages-form-page-html.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>pages-form-page-html.tt</DependentUpon>
+    </None>
+    <None Update="pages-form-page-html.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>pages-form-page-html.ts</LastGenOutput>
+    </None>
+    <None Update="pages-form-page-scss.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>pages-form-page-scss.tt</DependentUpon>
+    </None>
+    <None Update="pages-form-page-scss.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>pages-form-page-scss.ts</LastGenOutput>
+    </None>
+    <None Update="pages-form-page.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>pages-form-page.tt</DependentUpon>
+    </None>
+    <None Update="pages-form-page.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>pages-form-page.ts</LastGenOutput>
+    </None>
+    <None Update="pages-list-module.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>pages-list-module.tt</DependentUpon>
+    </None>
+    <None Update="pages-list-module.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>pages-list-module.ts</LastGenOutput>
+    </None>
+    <None Update="pages-list-page-html.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>pages-list-page-html.tt</DependentUpon>
+    </None>
+    <None Update="pages-list-page-html.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>pages-list-page-html.ts</LastGenOutput>
+    </None>
+    <None Update="pages-list-page-scss.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>pages-list-page-scss.tt</DependentUpon>
+    </None>
+    <None Update="pages-list-page-scss.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>pages-list-page-scss.ts</LastGenOutput>
+    </None>
+    <None Update="pages-list-page.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>pages-list-page.tt</DependentUpon>
+    </None>
+    <None Update="pages-list-page.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>pages-list-page.ts</LastGenOutput>
+    </None>
+    <None Update="pages-routing.tt">
+      <LastGenOutput>pages-routing.ts</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="SaveOutput.tt">
+      <LastGenOutput>SaveOutput.txt</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="SaveOutput.txt">
+      <DependentUpon>SaveOutput.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SaveOutput.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="SaveOutput.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SaveOutput.txt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Ionic-KSTime\src\app\pages\business\" />
+    <Folder Include="Ionic-KSTime\src\assets\business\" />
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>

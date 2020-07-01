@@ -1,0 +1,3731 @@
+<?xml version="1.0" encoding="UTF-8"?><Db flnm="KS.Time" nm="KS.Time" ver="1.3.4">
+  <VerLbl/>
+  <VerNotes/>
+  <DefTblOpts/>
+  <DocFolder>/Users/emirtrevino/Dev/TeCreemos/src/KS.Time</DocFolder>
+  <Sch Cm="" nm="KS">
+    <Tbl UsSo="1" nm="TdsActividadEconomica">
+      <TblOpts/>
+      <Pk ClNs="GuidActividadEconomica" nm="pkTdsActividadEconomica"/>
+      <Cl au="0" df="" nm="GuidActividadEconomica" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="155" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsBeneficiario">
+      <TblOpts/>
+      <Pk ClNs="GuidBeneficiario" nm="pkTdsBeneficiario"/>
+      <Cl au="0" df="" nm="GuidBeneficiario" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="PrimerNombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="SegundoNombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="PrimerApellido" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="SegundoApellido" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="FechaNacimiento" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Porcentaje" nu="1">
+        <DT arr="0" ds="Decimal" en="" id="3" ln="10" sc="2" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidSolicitud" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BeneficiarioIndex" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="IndiceBeneficiario" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsBeneficiario_TdsSolicitud" prLkCl="GuidSolicitud" upAc="3">
+        <PrTb mn="0" nm="TdsSolicitud" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsBeneficiario" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidSolicitud" prCl="GuidSolicitud"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsCliente">
+      <TblOpts/>
+      <Pk ClNs="GuidCliente" nm="pkTdsCliente"/>
+      <Cl au="0" df="" nm="GuidCliente" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="PrimerNombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="SegundoNombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="PrimerApellido" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="SegundoApellido" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Email" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="FechaNacimiento" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidEstadoCivil" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidGenero" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidPaisNacimiento" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidEstadoNacimiento" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="FormaMigratoria" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="NumeroExtranjero" nu="1">
+        <DT arr="0" ds="NVarChar" en="" id="724" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="RFC" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CURP" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidActividadEconomica" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidOcupacion" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="OcupacionAntiguedad" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="TelefonoTrabajo" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="true" nm="DirTrabajoDifPersonal" nu="0">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidNivelEstudios" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="IngresosMensuales" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="OtrosIngresos" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GastosMensuales" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Dependientes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidClienteEstado" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidTipoIdentificacion" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="TelefonoCelular" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidDestinoCredito" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidMedio" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidSolicitudActual" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident_Thumb" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Domicilio" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Domicilio_Thumb" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident_Rev" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident_Rev_Thumb" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident_Valido" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Domicilio_Valido" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident_Guid" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Domicilio_Guid" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident_Rev_Valido" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident_Rev_Guid" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="DireccionPrincipal_GuidMunicipio" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="DireccionPrincipal_GuidEstado" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidTipoPropiedadDomicilio" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="DireccionPrincipal_GuidColonia" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="DireccionTrabajo_GuidMunicipio" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="DireccionTrabajo_GuidEstado" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="DireccionTrabajo_GuidColonia" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="MambuClienteId" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidMatiData" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UrlFoto" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UltimoPaso" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCredito" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_DireccionPrincipal_Estado" prLkCl="GuidEstado" upAc="3">
+        <PrTb mn="0" nm="TdsEstado" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="DireccionPrincipal_GuidEstado" prCl="GuidEstado"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_DireccionPrincipal_Municipio" prLkCl="GuidMunicipio" upAc="3">
+        <PrTb mn="0" nm="TdsMunicipio" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="DireccionPrincipal_GuidMunicipio" prCl="GuidMunicipio"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_DireccionPrincipalColonia" prLkCl="GuidColonia" upAc="3">
+        <PrTb mn="0" nm="TdsColonia" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="DireccionPrincipal_GuidColonia" prCl="GuidColonia"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_DireccionTrabajo_Colonia" prLkCl="GuidColonia" upAc="3">
+        <PrTb mn="0" nm="TdsColonia" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="DireccionTrabajo_GuidColonia" prCl="GuidColonia"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_DireccionTrabajo_Estado" prLkCl="GuidEstado" upAc="3">
+        <PrTb mn="0" nm="TdsEstado" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="DireccionTrabajo_GuidEstado" prCl="GuidEstado"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_DireccionTrabajo_Municipio" prLkCl="GuidMunicipio" upAc="3">
+        <PrTb mn="0" nm="TdsMunicipio" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="DireccionTrabajo_GuidMunicipio" prCl="GuidMunicipio"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsCliente_TdsDestinoCredito" prLkCl="GuidDestinoCredito" upAc="3">
+        <PrTb mn="0" nm="TdsDestinoCredito" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidDestinoCredito" prCl="GuidDestinoCredito"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsCliente_TdsMatiData" prLkCl="GuidMatiData" upAc="3">
+        <PrTb mn="0" nm="TdsMatiData" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidMatiData" prCl="GuidMatiData"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsCliente_TdsMedio" prLkCl="GuidMedio" upAc="3">
+        <PrTb mn="0" nm="TdsMedio" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidMedio" prCl="GuidMedio"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsCliente_TdsTipoIdentificacion" prLkCl="GuidTipoIdentificacion" upAc="3">
+        <PrTb mn="0" nm="TdsTipoIdentificacion" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidTipoIdentificacion" prCl="GuidTipoIdentificacion"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsCliente_TdsTipoPropiedadDomicilio" prLkCl="GuidTipoPropiedadDomicilio" upAc="3">
+        <PrTb mn="0" nm="TdsTipoPropiedadDomicilio" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidTipoPropiedadDomicilio" prCl="GuidTipoPropiedadDomicilio"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsPerfil_TdsActividadEconomica" prLkCl="GuidActividadEconomica" upAc="3">
+        <PrTb mn="0" nm="TdsActividadEconomica" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidActividadEconomica" prCl="GuidActividadEconomica"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsPerfil_TdsClienteEstado" prLkCl="GuidClienteEstado" upAc="3">
+        <PrTb mn="0" nm="TdsClienteEstado" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidClienteEstado" prCl="GuidClienteEstado"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsPerfil_TdsEstado" prLkCl="GuidEstado" upAc="3">
+        <PrTb mn="0" nm="TdsEstado" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidEstadoNacimiento" prCl="GuidEstado"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsPerfil_TdsEstadoCivil" prLkCl="GuidEstadoCivil" upAc="3">
+        <PrTb mn="0" nm="TdsEstadoCivil" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidEstadoCivil" prCl="GuidEstadoCivil"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsPerfil_TdsGenero" prLkCl="GuidGenero" upAc="3">
+        <PrTb mn="0" nm="TdsGenero" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidGenero" prCl="GuidGenero"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsPerfil_TdsNivelEstudios" prLkCl="GuidNivelEstudios" upAc="3">
+        <PrTb mn="0" nm="TdsNivelEstudios" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidNivelEstudios" prCl="GuidNivelEstudios"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsPerfil_TdsOcupacion" prLkCl="GuidOcupacion" upAc="3">
+        <PrTb mn="0" nm="TdsOcupacion" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidOcupacion" prCl="GuidOcupacion"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsPerfil_TdsPaisNacimiento" prLkCl="GuidPais" upAc="3">
+        <PrTb mn="0" nm="TdsPais" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsCliente" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidPaisNacimiento" prCl="GuidPais"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsClienteEstado">
+      <TblOpts/>
+      <Pk ClNs="GuidClienteEstado" nm="pkTdsClienteEstado"/>
+      <Cl au="0" df="" nm="GuidClienteEstado" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Identificador" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsClienteFile">
+      <TblOpts/>
+      <Pk ClNs="GuidClienteFile" nm="pkTdsClienteFile"/>
+      <Cl au="0" df="" nm="GuidClienteFile" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCliente" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidFile" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidTipoDocumento" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsClienteFile_TdsTipoDocumento" prLkCl="GuidTipoDocumento" upAc="3">
+        <PrTb mn="0" nm="TdsTipoDocumento" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsClienteFile" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidTipoDocumento" prCl="GuidTipoDocumento"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsPerfilFile_TdsFile" prLkCl="GuidFile" upAc="3">
+        <PrTb mn="0" nm="TdsFile" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsClienteFile" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidFile" prCl="GuidFile"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsPerfilFile_TdsPerfil" prLkCl="GuidCliente" upAc="3">
+        <PrTb mn="0" nm="TdsCliente" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsClienteFile" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidCliente" prCl="GuidCliente"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsCodigoPostal">
+      <TblOpts/>
+      <Pk ClNs="GuidCodigoPostal" nm="pkTdsCodigoPostal"/>
+      <Cl au="0" df="" nm="GuidCodigoPostal" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Codigo" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="5" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsColonia">
+      <TblOpts/>
+      <Pk ClNs="GuidColonia" nm="pkTdsColonia"/>
+      <Cl au="0" df="" nm="GuidColonia" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCodigoPostal" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidMunicipio" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsColonia_TdsCodigoPostal" prLkCl="GuidCodigoPostal" upAc="3">
+        <PrTb mn="0" nm="TdsCodigoPostal" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsColonia" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidCodigoPostal" prCl="GuidCodigoPostal"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsColonia_TdsMunicipio" prLkCl="GuidMunicipio" upAc="3">
+        <PrTb mn="0" nm="TdsMunicipio" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsColonia" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidMunicipio" prCl="GuidMunicipio"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsContrato">
+      <TblOpts/>
+      <Pk ClNs="GuidContrato" nm="pkTdsContrato"/>
+      <Cl au="0" df="" nm="GuidContrato" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="TemplateID" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Html" nu="1">
+        <DT arr="0" ds="VarChar(MAX)" en="" id="731" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCredito" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="NombreDocumento" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsContrato_TdsCredito" prLkCl="GuidCredito" upAc="3">
+        <PrTb mn="0" nm="TdsCredito" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsContrato" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidCredito" prCl="GuidCredito"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsCredito">
+      <TblOpts/>
+      <Pk ClNs="GuidCredito" nm="pkTdsCredito"/>
+      <Cl au="0" df="" nm="GuidCredito" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidProducto" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidSolicitud" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="MontoSolicitado" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="MontoOtorgado" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="MontoSeguro" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Folio" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="MambuLoanId" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CodigoFirma" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CodigoFirmaUsuario" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CodigoRetiro" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="16" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CantidadPagos" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="MontoPago" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsCredito_TdsProducto" prLkCl="GuidProducto" upAc="3">
+        <PrTb mn="0" nm="TdsProducto" oe="1" sch="KS" zr="0"/>
+        <CdTb mn="1" nm="TdsCredito" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidProducto" prCl="GuidProducto"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsCredito_TdsSolicitud" prLkCl="GuidSolicitud" upAc="3">
+        <PrTb mn="0" nm="TdsSolicitud" oe="1" sch="KS" zr="0"/>
+        <CdTb mn="1" nm="TdsCredito" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidSolicitud" prCl="GuidSolicitud"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsCreditoEstado">
+      <TblOpts/>
+      <Pk ClNs="GuidCreditoEstado" nm="pkTdsCreditoEstado"/>
+      <Cl au="0" df="" nm="GuidCreditoEstado" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="150" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsDestinoCredito">
+      <TblOpts/>
+      <Pk ClNs="GuidDestinoCredito" nm="pkTdsDestinoCredito"/>
+      <Cl au="0" df="" nm="GuidDestinoCredito" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsDireccion">
+      <TblOpts/>
+      <Pk ClNs="GuidDireccion" nm="pkTdsDireccion"/>
+      <Cl au="0" df="" nm="GuidDireccion" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Calle" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="NumExterior" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="NumInterior" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CP" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="6" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidEstado" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidMunicipio" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidTipoDomicilio" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Antiguedad" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidSucursalCercana" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidSolicitud" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Lat" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Lng" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidColonia" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsDireccion_TdsColonia" prLkCl="GuidColonia" upAc="3">
+        <PrTb mn="0" nm="TdsColonia" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsDireccion" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidColonia" prCl="GuidColonia"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsDireccion_TdsEstadoNacimiento" prLkCl="GuidEstado" upAc="3">
+        <PrTb mn="0" nm="TdsEstado" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsDireccion" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidEstado" prCl="GuidEstado"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsDireccion_TdsMunicipio" prLkCl="GuidMunicipio" upAc="3">
+        <PrTb mn="0" nm="TdsMunicipio" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsDireccion" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidMunicipio" prCl="GuidMunicipio"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsDireccion_TdsSolicitud" prLkCl="GuidSolicitud" upAc="3">
+        <PrTb mn="0" nm="TdsSolicitud" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsDireccion" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidSolicitud" prCl="GuidSolicitud"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsDireccion_TdsSucursal" prLkCl="GuidSucursal" upAc="3">
+        <PrTb mn="0" nm="TdsSucursal" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsDireccion" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidSucursalCercana" prCl="GuidSucursal"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsDireccion_TdsTipoDomicilio" prLkCl="GuidTipoDomicilio" upAc="3">
+        <PrTb mn="0" nm="TdsTipoDomicilio" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsDireccion" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidTipoDomicilio" prCl="GuidTipoDomicilio"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsEmailTemplate">
+      <TblOpts/>
+      <Pk ClNs="GuidEmailTemplate" nm="pkTdsEmailTemplate"/>
+      <Cl au="0" df="" nm="GuidEmailTemplate" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Title" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="TitleKey" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Content" nu="1">
+        <DT arr="0" ds="VarChar(MAX)" en="" id="731" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsEmpresa">
+      <TblOpts/>
+      <Pk ClNs="GuidEmpresa" nm="pkTdsEmpresa"/>
+      <Cl au="0" df="" nm="GuidEmpresa" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsEstado">
+      <TblOpts/>
+      <Pk ClNs="GuidEstado" nm="pkTdsEstado"/>
+      <Cl au="0" df="" nm="GuidEstado" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidPais" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsEstado_TdsPais" prLkCl="GuidPais" upAc="3">
+        <PrTb mn="0" nm="TdsPais" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsEstado" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidPais" prCl="GuidPais"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsEstadoCivil">
+      <TblOpts/>
+      <Pk ClNs="GuidEstadoCivil" nm="pkTdsEstadoCivil"/>
+      <Cl au="0" df="" nm="GuidEstadoCivil" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsFile">
+      <TblOpts/>
+      <Pk ClNs="GuidFile" nm="pkTdsFile"/>
+      <Cl au="0" df="" nm="GuidFile" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="FileName" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="FileData" nu="1">
+        <DT arr="0" ds="VarBinary(MAX)" en="" id="730" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="FileType" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="FileStorage" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="ContainerStorage" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="FileThumbSizes" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="FileSize" nu="1">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsGenero">
+      <TblOpts/>
+      <Pk ClNs="GuidGenero" nm="pkTdsGenero"/>
+      <Cl au="0" df="" nm="GuidGenero" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsMatiData">
+      <TblOpts/>
+      <Pk ClNs="GuidMatiData" nm="pkTdsMatiData"/>
+      <Cl au="0" df="" nm="GuidMatiData" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="VerificationID" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="FullName" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="DateOfBirth" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="DocumentNumber" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="ExpirationDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CURP" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CDE" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="NE" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="6" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Address" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidSolicitud" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UrlPhoto1" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UrlPhoto2" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="VideoUrl" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="SpriteUrl" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="SelfieUrl" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Result" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="ResultBuro" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="ApPaterno" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="ApMaterno" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="JsonResult" nu="1">
+        <DT arr="0" ds="VarChar(MAX)" en="" id="731" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="RFC" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CurrentStep" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsMatiData_TdsSolicitud" prLkCl="GuidSolicitud" upAc="3">
+        <PrTb mn="0" nm="TdsSolicitud" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsMatiData" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidSolicitud" prCl="GuidSolicitud"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsMedio">
+      <TblOpts/>
+      <Pk ClNs="GuidMedio" nm="pkTdsMedio"/>
+      <Cl au="0" df="" nm="GuidMedio" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsMunicipio">
+      <TblOpts/>
+      <Pk ClNs="GuidMunicipio" nm="pkTdsMunicipio"/>
+      <Cl au="0" df="" nm="GuidMunicipio" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidEstado" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsMunicipio_TdsEstado" prLkCl="GuidEstado" upAc="3">
+        <PrTb mn="0" nm="TdsEstado" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsMunicipio" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidEstado" prCl="GuidEstado"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsNivelEstudios">
+      <TblOpts/>
+      <Pk ClNs="GuidNivelEstudios" nm="pkTdsNivelEstudios"/>
+      <Cl au="0" df="" nm="GuidNivelEstudios" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsOcupacion">
+      <TblOpts/>
+      <Pk ClNs="GuidOcupacion" nm="pkTdsOcupacion"/>
+      <Cl au="0" df="" nm="GuidOcupacion" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsPais">
+      <TblOpts/>
+      <Pk ClNs="GuidPais" nm="pkTdsPais"/>
+      <Cl au="0" df="" nm="GuidPais" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsParentesco">
+      <TblOpts/>
+      <Pk ClNs="GuidParentesco" nm="pkTdsParentesco"/>
+      <Cl au="0" df="" nm="GuidParentesco" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsProducto">
+      <TblOpts/>
+      <Pk ClNs="GuidProducto" nm="pkTdsProducto"/>
+      <Cl au="0" df="" nm="GuidProducto" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="155" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="InteresDefault" nu="1">
+        <DT arr="0" ds="Decimal" en="" id="3" ln="10" sc="2" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Minimo" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Maximo" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Incremento" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="Sin IVA" nm="TasaInteres" nu="1">
+        <DT arr="0" ds="Decimal" en="" id="3" ln="10" sc="2" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Seguro" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="DiasPlazo" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="TasaIVA" nu="1">
+        <DT arr="0" ds="Decimal" en="" id="3" ln="10" sc="2" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="TasaAnualInteresSinIVA" nu="1">
+        <DT arr="0" ds="Decimal" en="" id="3" ln="10" sc="2" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsProxyGeoCity">
+      <TblOpts/>
+      <Pk ClNs="GuidCity" nm="pkTdsProxyGeoCity"/>
+      <Cl au="0" df="" nm="GuidCity" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Name" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidState" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidParent" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsProxyGeoCity_TdsProxyGeoCity" prLkCl="GuidCity" upAc="3">
+        <PrTb mn="0" nm="TdsProxyGeoCity" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsProxyGeoCity" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidParent" prCl="GuidCity"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsProxyGeoCity_TdsProxyGeoState" prLkCl="GuidState" upAc="3">
+        <PrTb mn="0" nm="TdsProxyGeoState" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsProxyGeoCity" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidState" prCl="GuidState"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsProxyGeoCountry">
+      <TblOpts/>
+      <Pk ClNs="GuidCountry" nm="pkTdsProxyGeoCountry"/>
+      <Cl au="0" df="" nm="GuidCountry" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Name" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsProxyGeoState">
+      <TblOpts/>
+      <Pk ClNs="GuidState" nm="pkTdsProxyGeoState"/>
+      <Cl au="0" df="" nm="GuidState" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Name" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCountry" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsProxyGeoState_TdsProxyGeoCountry" prLkCl="GuidCountry" upAc="3">
+        <PrTb mn="0" nm="TdsProxyGeoCountry" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsProxyGeoState" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidCountry" prCl="GuidCountry"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsProxyRole">
+      <TblOpts/>
+      <Pk ClNs="GuidRole" nm="pkTdsProxyRole"/>
+      <Cl au="0" df="" nm="GuidRole" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="RoleName" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsProxyUser">
+      <TblOpts/>
+      <Pk ClNs="GuidUser" nm="pkTdsProxyUser"/>
+      <Cl au="0" df="" nm="GuidUser" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="DisplayName" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Username" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Password" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="FirstName" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="200" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="LastName" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidRole" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Email" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsProxyUser_TdsProxyRole" prLkCl="GuidRole" upAc="3">
+        <PrTb mn="0" nm="TdsProxyRole" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsProxyUser" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidRole" prCl="GuidRole"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsReferencia">
+      <TblOpts/>
+      <Pk ClNs="GuidReferencia" nm="pkTdsReferencia"/>
+      <Cl au="0" df="" nm="GuidReferencia" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="NombreCompleto" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Telefono" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="155" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="HorarioContactoInicio" nu="1">
+        <DT arr="0" ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="HorarioContactoFin" nu="1">
+        <DT arr="0" ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidSolicitud" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidParentesco" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="ReferenciaIndex" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsReferencia_TdsParentesco" prLkCl="GuidParentesco" upAc="3">
+        <PrTb mn="0" nm="TdsParentesco" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsReferencia" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidParentesco" prCl="GuidParentesco"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsReferencia_TdsSolicitud" prLkCl="GuidSolicitud" upAc="3">
+        <PrTb mn="0" nm="TdsSolicitud" oe="1" sch="KS" zr="0"/>
+        <CdTb mn="1" nm="TdsReferencia" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidSolicitud" prCl="GuidSolicitud"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsSolicitud">
+      <Cm>Cómo te enteraste ?</Cm>
+      <TblOpts/>
+      <Pk ClNs="GuidSolicitud" nm="pkTdsSolicitud"/>
+      <Cl au="0" df="" nm="GuidSolicitud" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="MontoSolicitado" nu="0">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidUser" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCreditoEstado" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidProducto" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Folio" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="NumeroCelular" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidMedio" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidDestinoCredito" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidEstadoCivil" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidGenero" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidPaisNacimiento" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidEstadoNacimiento" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Perfil_FormaMigratoria" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Perfil_NumeroUnicoExtranjero" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidNivelEstudios" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Perfil_PrimerNombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Perfil_SegundoNombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Perfil_PrimerApellido" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Perfil_SegundoApellido" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Perfil_OcupacionAntiguedad" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Perfil_DirTrabajoDirPersonal" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Perfil_TelefonoTrabajo" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Perfil_Email" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Perfil_FechaNacimiento" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Perfil_CURP" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Perfil_RFC" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidOcupacion" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidActividadEconomica" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidSucursal" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidSolicitudEstado" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCliente" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidTipoIdentificacion" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident_Thumb" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident_Valido" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident_Rev" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident_Rev_Valido" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident_Rev_Thumb" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Domicilio" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Domicilio_Thumb" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="500" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Domicilio_Valido" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident_Guid" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Ident_Rev_Guid" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="File_Domicilio_Guid" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="EngineInstanceId" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="36" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CodigoFirma" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="ResultadoUnyko" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidTipoPropiedadDomicilio" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CodigoFirmaUsuario" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreditoAprobado" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CantidadPagos" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="MontoPago" nu="1">
+        <DT arr="0" ds="Money" en="" id="701" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UtilpoPaso" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidTerminoCondicion" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="TerminoCondicionesTexto" nu="1">
+        <DT arr="0" ds="VarChar(MAX)" en="" id="731" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="TerminoCondicionesAceptado" nu="1">
+        <DT arr="0" ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="TerminoCondicionesFecha" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsCliente" prLkCl="GuidCliente" upAc="3">
+        <PrTb mn="0" nm="TdsCliente" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidCliente" prCl="GuidCliente"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsCreditoEstado" prLkCl="GuidCreditoEstado" upAc="3">
+        <PrTb mn="0" nm="TdsCreditoEstado" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidCreditoEstado" prCl="GuidCreditoEstado"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsDestinoCredito" prLkCl="GuidDestinoCredito" upAc="3">
+        <PrTb mn="0" nm="TdsDestinoCredito" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidDestinoCredito" prCl="GuidDestinoCredito"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsEstadoCivil" prLkCl="GuidEstadoCivil" upAc="3">
+        <PrTb mn="0" nm="TdsEstadoCivil" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidEstadoCivil" prCl="GuidEstadoCivil"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsEstadoNacimiento" prLkCl="GuidEstado" upAc="3">
+        <PrTb mn="0" nm="TdsEstado" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidEstadoNacimiento" prCl="GuidEstado"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsGenero" prLkCl="GuidGenero" upAc="3">
+        <PrTb mn="0" nm="TdsGenero" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidGenero" prCl="GuidGenero"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsMedio" prLkCl="GuidMedio" upAc="3">
+        <PrTb mn="0" nm="TdsMedio" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidMedio" prCl="GuidMedio"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsNivelEstudios" prLkCl="GuidNivelEstudios" upAc="3">
+        <PrTb mn="0" nm="TdsNivelEstudios" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidNivelEstudios" prCl="GuidNivelEstudios"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsPaisNacimiento" prLkCl="GuidPais" upAc="3">
+        <PrTb mn="0" nm="TdsPais" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidPaisNacimiento" prCl="GuidPais"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsProducto" prLkCl="GuidProducto" upAc="3">
+        <PrTb mn="0" nm="TdsProducto" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidProducto" prCl="GuidProducto"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsProxyUser" prLkCl="GuidUser" upAc="3">
+        <PrTb mn="0" nm="TdsProxyUser" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidUser" prCl="GuidUser"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsSolicitudEstado" prLkCl="GuidSolicitudEstado" upAc="3">
+        <PrTb mn="0" nm="TdsSolicitudEstado" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidSolicitudEstado" prCl="GuidSolicitudEstado"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsTerminoCondicion" prLkCl="GuidTerminoCondicion" upAc="3">
+        <PrTb mn="0" nm="TdsTerminoCondicion" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidTerminoCondicion" prCl="GuidTerminoCondicion"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsTipoIdentificacion" prLkCl="GuidTipoIdentificacion" upAc="3">
+        <PrTb mn="0" nm="TdsTipoIdentificacion" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidTipoIdentificacion" prCl="GuidTipoIdentificacion"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitud_TdsTipoPropiedadDomicilio" prLkCl="GuidTipoPropiedadDomicilio" upAc="3">
+        <PrTb mn="0" nm="TdsTipoPropiedadDomicilio" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitud" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidTipoPropiedadDomicilio" prCl="GuidTipoPropiedadDomicilio"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsSolicitudEstado">
+      <TblOpts/>
+      <Pk ClNs="GuidSolicitudEstado" nm="pkTdsSolicitudEstado"/>
+      <Cl au="0" df="" nm="GuidSolicitudEstado" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Identificador" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsSolicitudFile">
+      <TblOpts/>
+      <Pk ClNs="GuidSolictudFile" nm="pkTdsSolicitudFile"/>
+      <Cl au="0" df="" nm="GuidSolictudFile" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidSolicitud" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidFile" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidTipoDocumento" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsSolicitudFile_TdsFile" prLkCl="GuidFile" upAc="3">
+        <PrTb mn="0" nm="TdsFile" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitudFile" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidFile" prCl="GuidFile"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitudFile_TdsSolicitud" prLkCl="GuidSolicitud" upAc="3">
+        <PrTb mn="0" nm="TdsSolicitud" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitudFile" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidSolicitud" prCl="GuidSolicitud"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_TdsSolicitudFile_TdsTipoDocumento" prLkCl="GuidTipoDocumento" upAc="3">
+        <PrTb mn="0" nm="TdsTipoDocumento" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSolicitudFile" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidTipoDocumento" prCl="GuidTipoDocumento"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsSucursal">
+      <TblOpts/>
+      <Pk ClNs="GuidSucursal" nm="pkTdsSucursal"/>
+      <Cl au="0" df="newid()" nm="GuidSucursal" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="DV" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="IdRegion" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Region" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="IdSuc" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Lat" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Lng" nu="1">
+        <DT arr="0" ds="Float" en="" id="6" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Telefono" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="1000" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Calle" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="NumExt" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="10" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="NumInt" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Colonia" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CP" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="6" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="EntreCalles1" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="EntreCalles2" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Municipio" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Estado" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidEmpresa" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="true" nm="Activa" nu="0">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsSucursal_TdsEmpresa" prLkCl="GuidEmpresa" upAc="3">
+        <PrTb mn="0" nm="TdsEmpresa" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsSucursal" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidEmpresa" prCl="GuidEmpresa"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsTerminoCondicion">
+      <TblOpts/>
+      <Pk ClNs="GuidTerminoCondicion" nm="pkTdsTerminoCondicion"/>
+      <Cl au="0" df="" nm="GuidTerminoCondicion" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="VersionNum" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="FechaInicial" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="FechaFinal" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Texto" nu="1">
+        <DT arr="0" ds="VarChar(MAX)" en="" id="731" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidProducto" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_TdsTerminoCondicion_TdsProducto" prLkCl="GuidProducto" upAc="3">
+        <PrTb mn="0" nm="TdsProducto" oe="1" sch="KS" zr="1"/>
+        <CdTb mn="1" nm="TdsTerminoCondicion" oe="0" sch="KS" zr="1"/>
+        <ClPr cdCl="GuidProducto" prCl="GuidProducto"/>
+      </Fk>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsTipoDocumento">
+      <TblOpts/>
+      <Pk ClNs="GuidTipoDocumento" nm="pkTdsTipoDocumento"/>
+      <Cl au="0" df="" nm="GuidTipoDocumento" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Identificador" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsTipoDomicilio">
+      <TblOpts/>
+      <Pk ClNs="GuidTipoDomicilio" nm="pkTdsTipoDomicilio"/>
+      <Cl au="0" df="" nm="GuidTipoDomicilio" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsTipoIdentificacion">
+      <TblOpts/>
+      <Pk ClNs="GuidTipoIdentificacion" nm="pkTdsTipoIdentificacion"/>
+      <Cl au="0" df="" nm="GuidTipoIdentificacion" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="TdsTipoPropiedadDomicilio">
+      <TblOpts/>
+      <Pk ClNs="GuidTipoPropiedadDomicilio" nm="pkTdsTipoPropiedadDomicilio"/>
+      <Cl au="0" df="" nm="GuidTipoPropiedadDomicilio" nu="0">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Nombre" nu="0">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="255" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Identificador" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="GuidCompany" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedBy" nu="1">
+        <DT arr="0" ds="UniqueID" en="" id="704" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="false" nm="IsDeleted" nu="1">
+        <DT arr="0" ds="Bit" en="" id="-7" ln="1" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="BizKeyEngine" nu="1">
+        <DT arr="0" ds="VarChar" en="" id="12" ln="32" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="CreatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="UpdatedDate" nu="1">
+        <DT arr="0" ds="DateTime" en="" id="700" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="Bytes" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <UniqueConstraints/>
+      <SchTrHis/>
+    </Tbl>
+    <CustomTypes/>
+  </Sch>
+  <Dgm nm="dgds">
+    <RnCf ClkAct="true" FtSz="11" lkStgy="RightAngleStrategy" zm="1.0">
+      <VbCfg>
+        <Fg ky="Auto Number" vl="0"/>
+        <Fg ky="Check" vl="0"/>
+        <Fg ky="Comment" vl="0"/>
+        <Fg ky="Data Type" vl="1"/>
+        <Fg ky="Default" vl="0"/>
+        <Fg ky="ENUM Values" vl="0"/>
+        <Fg ky="Length" vl="1"/>
+        <Fg ky="Name" vl="1"/>
+        <Fg ky="Nullable" vl="0"/>
+        <Fg ky="Schema Name" vl="0"/>
+        <Fg ky="Signed" vl="0"/>
+      </VbCfg>
+    </RnCf>
+    <DiaProps>
+      <Show AllCols="1" FkCols="1" FkNms="0" PkCols="1"/>
+      <ErNotation>BarkerErNotation</ErNotation>
+      <DbTableRectangleFill>HeaderFooterFill</DbTableRectangleFill>
+      <svg path=""/>
+    </DiaProps>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsTipoPropiedadDomicilio" x="557" y="325"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsTipoDomicilio" x="143" y="86"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsDireccion" x="91" y="373"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsCliente" x="170" y="799"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsSolicitud" x="840" y="959"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsContrato" x="1144" y="472"/>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_TdsCliente_TdsTipoPropiedadDomicilio" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="715" x2="715" y1="530" y2="1250"/>
+        <positionableLine lineRole="CHILD_LINE" x1="522" x2="711" y1="1254" y2="1254"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsDireccion.fk_TdsDireccion_TdsSolicitud" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1005" x2="1005" y1="959" y2="377"/>
+        <positionableLine lineRole="CHILD_LINE" x1="372" x2="1001" y1="373" y2="373"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsDireccion.fk_TdsDireccion_TdsTipoDomicilio" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="226" x2="226" y1="276" y2="373"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsCliente" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="522" x2="840" y1="1334" y2="1334"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsTipoPropiedadDomicilio" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="857" x2="857" y1="530" y2="959"/>
+      </positionableLines>
+    </FkGl>
+    <Notes/>
+    <Zones/>
+  </Dgm>
+  <Dgm nm="Diagrama1">
+    <RnCf ClkAct="true" FtSz="11" lkStgy="RightAngleStrategy" zm="1.0">
+      <VbCfg>
+        <Fg ky="Auto Number" vl="0"/>
+        <Fg ky="Check" vl="0"/>
+        <Fg ky="Comment" vl="0"/>
+        <Fg ky="Data Type" vl="1"/>
+        <Fg ky="Default" vl="0"/>
+        <Fg ky="ENUM Values" vl="0"/>
+        <Fg ky="Length" vl="1"/>
+        <Fg ky="Name" vl="1"/>
+        <Fg ky="Nullable" vl="0"/>
+        <Fg ky="Schema Name" vl="0"/>
+        <Fg ky="Signed" vl="0"/>
+      </VbCfg>
+    </RnCf>
+    <DiaProps>
+      <Show AllCols="1" FkCols="1" FkNms="0" PkCols="1"/>
+      <ErNotation>BarkerErNotation</ErNotation>
+      <DbTableRectangleFill>HeaderFooterFill</DbTableRectangleFill>
+      <svg path=""/>
+    </DiaProps>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsActividadEconomica" x="453" y="2082"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsBeneficiario" x="2336" y="373"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsCredito" x="1225" y="157"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsCreditoEstado" x="1222" y="1482"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsDestinoCredito" x="1749" y="994"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsDireccion" x="1218" y="589"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsEmailTemplate" x="2811" y="102"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsEstado" x="2186" y="1420"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsEstadoCivil" x="1239" y="1862"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsFile" x="105" y="1714"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsGenero" x="2101" y="1142"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsMedio" x="1247" y="1672"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsMunicipio" x="844" y="437"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsNivelEstudios" x="491" y="2462"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsOcupacion" x="507" y="2272"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsPais" x="1247" y="2667"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsParentesco" x="2346" y="158"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsCliente" x="854" y="2100"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsClienteFile" x="536" y="1862"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsProducto" x="1837" y="613"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsProxyRole" x="974" y="1292"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsProxyUser" x="1353" y="1183"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsReferencia" x="1967" y="129"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsSolicitud" x="1608" y="2143"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsSucursal" x="844" y="847"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsTipoDomicilio" x="823" y="657"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsTipoIdentificacion" x="3156" y="157"/>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsBeneficiario.fk_TdsBeneficiario_TdsSolicitud" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1943" x2="2337" y1="2437" y2="2437"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2341" x2="2341" y1="683" y2="2433"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_DireccionPrincipal_Estado" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2305" x2="2305" y1="1625" y2="2513"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1206" x2="2301" y1="2517" y2="2517"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsCliente.fk_DireccionPrincipal_Municipio" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="968" x2="968" y1="642" y2="2100"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_DireccionTrabajo_Estado" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2305" x2="2305" y1="1625" y2="2551"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1206" x2="2301" y1="2555" y2="2555"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsCliente.fk_DireccionTrabajo_Municipio" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="968" x2="968" y1="642" y2="2100"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsCliente.fk_TdsCliente_TdsDestinoCredito" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1749" x2="1011" y1="1089" y2="1089"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1007" x2="1007" y1="2100" y2="1093"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_TdsCliente_TdsMedio" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1372" x2="1372" y1="1862" y2="2401"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1206" x2="1368" y1="2405" y2="2405"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_TdsCliente_TdsTipoIdentificacion" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="3298" x2="3298" y1="347" y2="2378"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1206" x2="3294" y1="2382" y2="2382"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsCliente.fk_TdsPerfil_TdsActividadEconomica" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="751" x2="854" y1="2169" y2="2169"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsCliente.fk_TdsPerfil_TdsEstado" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2186" x2="858" y1="1536" y2="1536"/>
+        <positionableLine lineRole="CHILD_LINE" x1="854" x2="854" y1="2100" y2="1540"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_TdsPerfil_TdsEstadoCivil" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1241" x2="1241" y1="2052" y2="2101"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1206" x2="1237" y1="2105" y2="2105"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsCliente.fk_TdsPerfil_TdsGenero" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2101" x2="858" y1="1258" y2="1258"/>
+        <positionableLine lineRole="CHILD_LINE" x1="854" x2="854" y1="2100" y2="1262"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsCliente.fk_TdsPerfil_TdsNivelEstudios" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="751" x2="854" y1="2559" y2="2559"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsCliente.fk_TdsPerfil_TdsOcupacion" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="751" x2="854" y1="2327" y2="2327"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_TdsPerfil_TdsPaisNacimiento" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1252" x2="1252" y1="2667" y2="2666"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1206" x2="1248" y1="2662" y2="2662"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsClienteFile.fk_TdsPerfilFile_TdsFile" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="378" x2="537" y1="1813" y2="1813"/>
+        <positionableLine lineRole="CHILD_LINE" x1="541" x2="541" y1="1862" y2="1817"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsClienteFile.fk_TdsPerfilFile_TdsPerfil" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="854" x2="750" y1="2161" y2="2161"/>
+        <positionableLine lineRole="CHILD_LINE" x1="746" x2="746" y1="2082" y2="2157"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCredito.fk_TdsCredito_TdsProducto" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1837" x2="1349" y1="749" y2="749"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1345" x2="1345" y1="512" y2="745"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCredito.fk_TdsCredito_TdsSolicitud" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1610" x2="1610" y1="2143" y2="436"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1491" x2="1606" y1="432" y2="432"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsDireccion.fk_TdsDireccion_TdsEstadoNacimiento" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2186" x2="1367" y1="1478" y2="1478"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1363" x2="1363" y1="959" y2="1474"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsDireccion.fk_TdsDireccion_TdsMunicipio" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1083" x2="1219" y1="533" y2="533"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1223" x2="1223" y1="589" y2="537"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsDireccion.fk_TdsDireccion_TdsSolicitud" parentEdge="WEST" positioner="ThreeLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1608" x2="1550" y1="2148" y2="2148"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1499" x2="1542" y1="954" y2="954"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="1546" x2="1546" y1="958" y2="2144"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsDireccion.fk_TdsDireccion_TdsSucursal" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1090" x2="1359" y1="1054" y2="1054"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1363" x2="1363" y1="959" y2="1050"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsDireccion.fk_TdsDireccion_TdsTipoDomicilio" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1083" x2="1218" y1="702" y2="702"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsEstado.fk_TdsEstado_TdsPais" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1366" x2="1366" y1="2667" y2="1519"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2186" x2="1370" y1="1515" y2="1515"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsMunicipio.fk_TdsMunicipio_TdsEstado" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2305" x2="2305" y1="1420" y2="539"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1083" x2="2301" y1="535" y2="535"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsProxyUser.fk_TdsProxyUser_TdsProxyRole" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1191" x2="1353" y1="1327" y2="1327"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsReferencia.fk_TdsReferencia_TdsParentesco" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="2346" x2="2249" y1="245" y2="245"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsReferencia.fk_TdsReferencia_TdsSolicitud" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1943" x2="1968" y1="2246" y2="2246"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1972" x2="1972" y1="409" y2="2242"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsCliente" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1206" x2="1608" y1="2375" y2="2375"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsCreditoEstado" parentEdge="EAST" positioner="ThreeLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1486" x2="1544" y1="1667" y2="1667"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1608" x2="1552" y1="2148" y2="2148"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="1548" x2="1548" y1="2144" y2="1671"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsDestinoCredito" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1754" x2="1754" y1="1184" y2="2143"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsEstadoCivil" parentEdge="EAST" positioner="ThreeLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1486" x2="1544" y1="2047" y2="2047"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1608" x2="1552" y1="2148" y2="2148"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="1548" x2="1548" y1="2144" y2="2051"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsEstadoNacimiento" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2186" x2="1938" y1="1458" y2="1458"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1934" x2="1934" y1="2143" y2="1462"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsGenero" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2101" x2="1938" y1="1227" y2="1227"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1934" x2="1934" y1="2143" y2="1231"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsMedio" parentEdge="EAST" positioner="ThreeLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1486" x2="1544" y1="1857" y2="1857"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1608" x2="1552" y1="2148" y2="2148"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="1548" x2="1548" y1="2144" y2="1861"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsNivelEstudios" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="751" x2="1608" y1="2474" y2="2474"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsPaisNacimiento" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1486" x2="1608" y1="2672" y2="2672"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsProducto" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1842" x2="1842" y1="938" y2="2143"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsProxyUser" parentEdge="SOUTH" positioner="ThreeLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1581" x2="1581" y1="1343" y2="2022"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1613" x2="1613" y1="2143" y2="2030"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="1609" x2="1585" y1="2026" y2="2026"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsTipoIdentificacion" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="3156" x2="1777" y1="252" y2="252"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1773" x2="1773" y1="2143" y2="256"/>
+      </positionableLines>
+    </FkGl>
+    <Notes/>
+    <Zones/>
+  </Dgm>
+  <Dgm nm="sfsdf">
+    <RnCf ClkAct="true" FtSz="11" lkStgy="RightAngleStrategy" zm="1.0">
+      <VbCfg>
+        <Fg ky="Auto Number" vl="0"/>
+        <Fg ky="Check" vl="0"/>
+        <Fg ky="Comment" vl="0"/>
+        <Fg ky="Data Type" vl="1"/>
+        <Fg ky="Default" vl="0"/>
+        <Fg ky="ENUM Values" vl="0"/>
+        <Fg ky="Length" vl="1"/>
+        <Fg ky="Name" vl="1"/>
+        <Fg ky="Nullable" vl="0"/>
+        <Fg ky="Schema Name" vl="0"/>
+        <Fg ky="Signed" vl="0"/>
+      </VbCfg>
+    </RnCf>
+    <DiaProps>
+      <Show AllCols="1" FkCols="1" FkNms="0" PkCols="1"/>
+      <ErNotation>BarkerErNotation</ErNotation>
+      <DbTableRectangleFill>HeaderFooterFill</DbTableRectangleFill>
+      <svg path=""/>
+    </DiaProps>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsCredito" x="251" y="223"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsContrato" x="569" y="250"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsCliente" x="58" y="920"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsMatiData" x="1201" y="725"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsSolicitudEstado" x="1165" y="53"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsSolicitud" x="791" y="53"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsDireccion" x="567" y="1335"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsTipoPropiedadDomicilio" x="408" y="1783"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsProxyGeoCity" x="176" y="2060"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsProxyGeoState" x="543" y="2183"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsProxyGeoCountry" x="219" y="2318"/>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_TdsCliente_TdsMatiData" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1201" x2="410" y1="1075" y2="1075"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_TdsCliente_TdsTipoPropiedadDomicilio" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="408" x2="410" y1="1788" y2="1788"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsContrato.fk_TdsContrato_TdsCredito" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="517" x2="569" y1="375" y2="375"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCredito.fk_TdsCredito_TdsSolicitud" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="791" x2="517" y1="189" y2="189"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsDireccion.fk_TdsDireccion_TdsSolicitud" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="838" x2="838" y1="1083" y2="1335"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsMatiData.fk_TdsMatiData_TdsSolicitud" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1126" x2="1202" y1="691" y2="691"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1206" x2="1206" y1="725" y2="695"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="" nm="KS.TdsProxyGeoCity.fk_TdsProxyGeoCity_TdsProxyGeoCity" parentEdge="" positioner="">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsProxyGeoCity.fk_TdsProxyGeoCity_TdsProxyGeoState" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="650" x2="650" y1="2183" y2="2114"/>
+        <positionableLine lineRole="CHILD_LINE" x1="398" x2="646" y1="2110" y2="2110"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsProxyGeoState.fk_TdsProxyGeoState_TdsProxyGeoCountry" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="449" x2="654" y1="2360" y2="2360"/>
+        <positionableLine lineRole="CHILD_LINE" x1="658" x2="658" y1="2283" y2="2356"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsCliente" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="410" x2="791" y1="925" y2="925"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsSolicitudEstado" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1165" x2="1126" y1="185" y2="185"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsTipoPropiedadDomicilio" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="720" x2="720" y1="1783" y2="512"/>
+        <positionableLine lineRole="CHILD_LINE" x1="791" x2="724" y1="508" y2="508"/>
+      </positionableLines>
+    </FkGl>
+    <Notes/>
+    <Zones/>
+  </Dgm>
+  <Dgm nm="sfsdfs">
+    <RnCf ClkAct="true" FtSz="11" lkStgy="RightAngleStrategy" zm="1.0">
+      <VbCfg>
+        <Fg ky="Auto Number" vl="0"/>
+        <Fg ky="Check" vl="0"/>
+        <Fg ky="Comment" vl="0"/>
+        <Fg ky="Data Type" vl="1"/>
+        <Fg ky="Default" vl="0"/>
+        <Fg ky="ENUM Values" vl="0"/>
+        <Fg ky="Length" vl="1"/>
+        <Fg ky="Name" vl="1"/>
+        <Fg ky="Nullable" vl="0"/>
+        <Fg ky="Schema Name" vl="0"/>
+        <Fg ky="Signed" vl="0"/>
+      </VbCfg>
+    </RnCf>
+    <DiaProps>
+      <Show AllCols="1" FkCols="1" FkNms="0" PkCols="1"/>
+      <ErNotation>BarkerErNotation</ErNotation>
+      <DbTableRectangleFill>HeaderFooterFill</DbTableRectangleFill>
+      <svg path=""/>
+    </DiaProps>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsActividadEconomica" x="1471" y="3874"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsBeneficiario" x="969" y="1904"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsCliente" x="2011" y="264"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsClienteEstado" x="1507" y="4079"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsClienteFile" x="2605" y="264"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsCodigoPostal" x="2935" y="1909"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsColonia" x="2605" y="1909"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsContrato" x="596" y="574"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsCredito" x="940" y="574"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsCreditoEstado" x="972" y="2419"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsDestinoCredito" x="2605" y="1234"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsDireccion" x="935" y="959"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsEmailTemplate" x="3316" y="264"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsEmpresa" x="276" y="1164"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsEstado" x="1530" y="4754"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsEstadoCivil" x="1522" y="3214"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsFile" x="2953" y="264"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsGenero" x="1530" y="3434"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsMatiData" x="2605" y="2159"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsMedio" x="2605" y="1454"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsMunicipio" x="1530" y="4519"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsNivelEstudios" x="2605" y="1014"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsOcupacion" x="2605" y="809"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsPais" x="1530" y="3654"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsParentesco" x="295" y="612"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsProducto" x="932" y="2624"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsProxyGeoCity" x="276" y="4999"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsProxyGeoCountry" x="862" y="4999"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsProxyGeoState" x="570" y="4999"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsProxyRole" x="724" y="2229"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsProxyUser" x="1003" y="2229"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsReferencia" x="914" y="264"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsSolicitud" x="1428" y="264"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsSolicitudEstado" x="965" y="2979"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsSolicitudFile" x="960" y="1654"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsSucursal" x="577" y="1164"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsTipoDocumento" x="2953" y="574"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsTipoDomicilio" x="563" y="959"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsTipoIdentificacion" x="1484" y="4299"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsTipoPropiedadDomicilio" x="2605" y="1674"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsTerminoCondicion" x="135" y="129"/>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsBeneficiario.fk_TdsBeneficiario_TdsSolicitud" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1468" x2="1468" y1="1294" y2="1900"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1236" x2="1464" y1="1904" y2="1904"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_DireccionPrincipal_Estado" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1769" x2="2007" y1="4907" y2="4907"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2011" x2="2011" y1="1249" y2="4903"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_DireccionPrincipal_Municipio" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1769" x2="2183" y1="4621" y2="4621"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2187" x2="2187" y1="1249" y2="4617"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_DireccionPrincipalColonia" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2605" x2="2015" y1="2055" y2="2055"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2011" x2="2011" y1="1249" y2="2051"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_DireccionTrabajo_Colonia" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2605" x2="2015" y1="1982" y2="1982"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2011" x2="2011" y1="1249" y2="1978"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_DireccionTrabajo_Estado" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1769" x2="2007" y1="4856" y2="4856"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2011" x2="2011" y1="1249" y2="4852"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_DireccionTrabajo_Municipio" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1769" x2="2183" y1="4570" y2="4570"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2187" x2="2187" y1="1249" y2="4566"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_TdsCliente_TdsDestinoCredito" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="2605" x2="2363" y1="1241" y2="1241"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_TdsCliente_TdsMatiData" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2605" x2="2191" y1="2419" y2="2419"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2187" x2="2187" y1="1249" y2="2415"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_TdsCliente_TdsMedio" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2605" x2="2015" y1="1517" y2="1517"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2011" x2="2011" y1="1249" y2="1513"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_TdsCliente_TdsTipoIdentificacion" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1769" x2="2007" y1="4394" y2="4394"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2011" x2="2011" y1="1249" y2="4390"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_TdsCliente_TdsTipoPropiedadDomicilio" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2605" x2="2015" y1="1742" y2="1742"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2011" x2="2011" y1="1249" y2="1738"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_TdsPerfil_TdsActividadEconomica" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1769" x2="2183" y1="3969" y2="3969"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2187" x2="2187" y1="1249" y2="3965"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_TdsPerfil_TdsClienteEstado" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1769" x2="2007" y1="4181" y2="4181"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2011" x2="2011" y1="1249" y2="4177"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_TdsPerfil_TdsEstado" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1769" x2="2007" y1="4805" y2="4805"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2011" x2="2011" y1="1249" y2="4801"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_TdsPerfil_TdsEstadoCivil" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1769" x2="2007" y1="3309" y2="3309"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2011" x2="2011" y1="1249" y2="3305"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_TdsPerfil_TdsGenero" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1769" x2="2007" y1="3529" y2="3529"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2011" x2="2011" y1="1249" y2="3525"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_TdsPerfil_TdsNivelEstudios" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="2605" x2="2363" y1="1109" y2="1109"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_TdsPerfil_TdsOcupacion" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="2605" x2="2363" y1="904" y2="904"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_TdsPerfil_TdsPaisNacimiento" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1769" x2="2007" y1="3749" y2="3749"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2011" x2="2011" y1="1249" y2="3745"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsClienteFile.fk_TdsClienteFile_TdsTipoDocumento" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2953" x2="2609" y1="642" y2="642"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2605" x2="2605" y1="484" y2="638"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsClienteFile.fk_TdsPerfilFile_TdsFile" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="2953" x2="2871" y1="374" y2="374"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsClienteFile.fk_TdsPerfilFile_TdsPerfil" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="2363" x2="2605" y1="374" y2="374"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsColonia.fk_TdsColonia_TdsCodigoPostal" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="2935" x2="2863" y1="2004" y2="2004"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsColonia.fk_TdsColonia_TdsMunicipio" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1769" x2="2730" y1="4672" y2="4672"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2734" x2="2734" y1="2129" y2="4668"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsContrato.fk_TdsContrato_TdsCredito" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="940" x2="868" y1="631" y2="631"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCredito.fk_TdsCredito_TdsProducto" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1073" x2="1073" y1="2624" y2="929"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCredito.fk_TdsCredito_TdsSolicitud" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1428" x2="1206" y1="751" y2="751"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsDireccion.fk_TdsDireccion_TdsColonia" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2605" x2="939" y1="1909" y2="1909"/>
+        <positionableLine lineRole="CHILD_LINE" x1="935" x2="935" y1="1329" y2="1905"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsDireccion.fk_TdsDireccion_TdsEstadoNacimiento" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1577" x2="1577" y1="4754" y2="963"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1216" x2="1573" y1="959" y2="959"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsDireccion.fk_TdsDireccion_TdsMunicipio" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1530" x2="1079" y1="4621" y2="4621"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1075" x2="1075" y1="1329" y2="4617"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsDireccion.fk_TdsDireccion_TdsSolicitud" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1428" x2="1216" y1="1096" y2="1096"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsDireccion.fk_TdsDireccion_TdsSucursal" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="823" x2="935" y1="1246" y2="1246"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsDireccion.fk_TdsDireccion_TdsTipoDomicilio" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="823" x2="935" y1="1054" y2="1054"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsEstado.fk_TdsEstado_TdsPais" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1649" x2="1649" y1="3844" y2="4754"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsMatiData.fk_TdsMatiData_TdsSolicitud" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1668" x2="1668" y1="1294" y2="2415"/>
+        <positionableLine lineRole="CHILD_LINE" x1="2605" x2="1672" y1="2419" y2="2419"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsMunicipio.fk_TdsMunicipio_TdsEstado" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1649" x2="1649" y1="4754" y2="4724"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsProxyGeoCity.fk_TdsProxyGeoCity_TdsProxyGeoCity" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines/>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsProxyGeoCity.fk_TdsProxyGeoCity_TdsProxyGeoState" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="570" x2="498" y1="5049" y2="5049"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsProxyGeoState.fk_TdsProxyGeoState_TdsProxyGeoCountry" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="862" x2="800" y1="5041" y2="5041"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsProxyUser.fk_TdsProxyUser_TdsProxyRole" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="941" x2="1003" y1="2264" y2="2264"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsReferencia.fk_TdsReferencia_TdsParentesco" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="543" x2="915" y1="707" y2="707"/>
+        <positionableLine lineRole="CHILD_LINE" x1="919" x2="919" y1="544" y2="703"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsReferencia.fk_TdsReferencia_TdsSolicitud" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1428" x2="1196" y1="404" y2="404"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsCliente" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="2011" x2="1763" y1="749" y2="749"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsCreditoEstado" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1236" x2="1424" y1="2514" y2="2514"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1428" x2="1428" y1="1294" y2="2510"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsDestinoCredito" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2605" x2="1597" y1="1297" y2="1297"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1593" x2="1593" y1="1294" y2="1293"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsEstadoCivil" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1640" x2="1640" y1="3214" y2="1294"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsEstadoNacimiento" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1644" x2="1644" y1="4754" y2="1294"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsGenero" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1644" x2="1644" y1="3434" y2="1294"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsMedio" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2605" x2="1432" y1="1580" y2="1580"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1428" x2="1428" y1="1294" y2="1576"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsNivelEstudios" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="2605" x2="1763" y1="1109" y2="1109"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsPaisNacimiento" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1644" x2="1644" y1="3654" y2="1294"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsProducto" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1236" x2="1589" y1="2786" y2="2786"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1593" x2="1593" y1="1294" y2="2782"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsProxyUser" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1236" x2="1424" y1="2309" y2="2309"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1428" x2="1428" y1="1294" y2="2305"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsSolicitudEstado" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1236" x2="1424" y1="3081" y2="3081"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1428" x2="1428" y1="1294" y2="3077"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsTerminoCondicion" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="426" x2="1589" y1="186" y2="186"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1593" x2="1593" y1="264" y2="190"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsTipoIdentificacion" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1621" x2="1621" y1="4299" y2="1294"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsTipoPropiedadDomicilio" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2605" x2="1432" y1="1810" y2="1810"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1428" x2="1428" y1="1294" y2="1806"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsSolicitudFile.fk_TdsSolicitudFile_TdsFile" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2953" x2="964" y1="450" y2="450"/>
+        <positionableLine lineRole="CHILD_LINE" x1="960" x2="960" y1="1654" y2="454"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsSolicitudFile.fk_TdsSolicitudFile_TdsSolicitud" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1448" x2="1448" y1="1294" y2="1760"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1226" x2="1444" y1="1764" y2="1764"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsSolicitudFile.fk_TdsSolicitudFile_TdsTipoDocumento" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="2953" x2="964" y1="710" y2="710"/>
+        <positionableLine lineRole="CHILD_LINE" x1="960" x2="960" y1="1654" y2="714"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSucursal.fk_TdsSucursal_TdsEmpresa" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="515" x2="577" y1="1259" y2="1259"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsTerminoCondicion.fk_TdsTerminoCondicion_TdsProducto" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1084" x2="1084" y1="2624" y2="258"/>
+        <positionableLine lineRole="CHILD_LINE" x1="426" x2="1080" y1="254" y2="254"/>
+      </positionableLines>
+    </FkGl>
+    <Notes/>
+    <Zones/>
+  </Dgm>
+  <Dgm nm="Test1">
+    <RnCf ClkAct="true" FtSz="11" lkStgy="RightAngleStrategy" zm="1.0">
+      <VbCfg>
+        <Fg ky="Auto Number" vl="0"/>
+        <Fg ky="Check" vl="0"/>
+        <Fg ky="Comment" vl="0"/>
+        <Fg ky="Data Type" vl="1"/>
+        <Fg ky="Default" vl="0"/>
+        <Fg ky="ENUM Values" vl="0"/>
+        <Fg ky="Length" vl="1"/>
+        <Fg ky="Name" vl="1"/>
+        <Fg ky="Nullable" vl="0"/>
+        <Fg ky="Schema Name" vl="0"/>
+        <Fg ky="Signed" vl="0"/>
+      </VbCfg>
+    </RnCf>
+    <DiaProps>
+      <Show AllCols="1" FkCols="1" FkNms="0" PkCols="1"/>
+      <ErNotation>BarkerErNotation</ErNotation>
+      <DbTableRectangleFill>HeaderFooterFill</DbTableRectangleFill>
+      <svg path=""/>
+    </DiaProps>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsPais" x="234" y="123"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsEstado" x="568" y="295"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsFile" x="65" y="445"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsClienteEstado" x="604" y="572"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsCliente" x="69" y="808"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsSolicitudEstado" x="47" y="1743"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsSolicitud" x="873" y="837"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsSolicitudFile" x="426" y="1792"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsClienteFile" x="1030" y="1694"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsColonia" x="539" y="2154"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsCodigoPostal" x="113" y="2141"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsMunicipio" x="813" y="1807"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsTipoDocumento" x="79" y="1866"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsBeneficiario" x="460" y="1435"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsDireccion" x="471" y="983"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsTipoPropiedadDomicilio" x="532" y="858"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsEmpresa" x="621" y="2417"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsSucursal" x="298" y="2441"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsProducto" x="1026" y="2522"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsCredito" x="926" y="82"/>
+    <TbGl bkCl="ff4c78ff" sch="KS" tbl="TdsMatiData" x="320" y="2969"/>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsBeneficiario.fk_TdsBeneficiario_TdsSolicitud" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="873" x2="727" y1="1487" y2="1487"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_DireccionPrincipal_Estado" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="687" x2="687" y1="500" y2="1221"/>
+        <positionableLine lineRole="CHILD_LINE" x1="421" x2="683" y1="1225" y2="1225"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_DireccionPrincipal_Municipio" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="813" x2="249" y1="1909" y2="1909"/>
+        <positionableLine lineRole="CHILD_LINE" x1="245" x2="245" y1="1793" y2="1905"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_DireccionPrincipalColonia" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="668" x2="668" y1="2154" y2="1267"/>
+        <positionableLine lineRole="CHILD_LINE" x1="421" x2="664" y1="1263" y2="1263"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_DireccionTrabajo_Colonia" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="658" x2="658" y1="2374" y2="1259"/>
+        <positionableLine lineRole="CHILD_LINE" x1="421" x2="654" y1="1263" y2="1263"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_DireccionTrabajo_Estado" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="687" x2="687" y1="500" y2="1259"/>
+        <positionableLine lineRole="CHILD_LINE" x1="421" x2="683" y1="1263" y2="1263"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_DireccionTrabajo_Municipio" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="813" x2="249" y1="1909" y2="1909"/>
+        <positionableLine lineRole="CHILD_LINE" x1="245" x2="245" y1="1793" y2="1905"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCliente.fk_TdsCliente_TdsMatiData" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="370" x2="370" y1="2969" y2="1793"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_TdsCliente_TdsTipoPropiedadDomicilio" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="532" x2="421" y1="900" y2="900"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_TdsPerfil_TdsClienteEstado" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="658" x2="658" y1="777" y2="809"/>
+        <positionableLine lineRole="CHILD_LINE" x1="421" x2="654" y1="813" y2="813"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_TdsPerfil_TdsEstado" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="674" x2="674" y1="500" y2="809"/>
+        <positionableLine lineRole="CHILD_LINE" x1="421" x2="670" y1="813" y2="813"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsCliente.fk_TdsPerfil_TdsPaisNacimiento" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="460" x2="460" y1="313" y2="809"/>
+        <positionableLine lineRole="CHILD_LINE" x1="421" x2="456" y1="813" y2="813"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsClienteFile.fk_TdsClienteFile_TdsTipoDocumento" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="215" x2="215" y1="1866" y2="1808"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1030" x2="219" y1="1804" y2="1804"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsClienteFile.fk_TdsPerfilFile_TdsFile" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="338" x2="1026" y1="585" y2="585"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1030" x2="1030" y1="1694" y2="589"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsClienteFile.fk_TdsPerfilFile_TdsPerfil" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="421" x2="1135" y1="1113" y2="1113"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1139" x2="1139" y1="1694" y2="1117"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsColonia.fk_TdsColonia_TdsCodigoPostal" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="364" x2="540" y1="2149" y2="2149"/>
+        <positionableLine lineRole="CHILD_LINE" x1="544" x2="544" y1="2154" y2="2153"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsColonia.fk_TdsColonia_TdsMunicipio" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="824" x2="824" y1="2012" y2="2155"/>
+        <positionableLine lineRole="CHILD_LINE" x1="797" x2="820" y1="2159" y2="2159"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCredito.fk_TdsCredito_TdsProducto" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1187" x2="1187" y1="2522" y2="437"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsCredito.fk_TdsCredito_TdsSolicitud" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="1108" x2="1108" y1="837" y2="437"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsDireccion.fk_TdsDireccion_TdsColonia" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="660" x2="660" y1="2154" y2="1353"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsDireccion.fk_TdsDireccion_TdsEstadoNacimiento" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="715" x2="715" y1="500" y2="983"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="KS.TdsDireccion.fk_TdsDireccion_TdsMunicipio" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="813" x2="620" y1="1909" y2="1909"/>
+        <positionableLine lineRole="CHILD_LINE" x1="616" x2="616" y1="1353" y2="1905"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsDireccion.fk_TdsDireccion_TdsSolicitud" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="873" x2="752" y1="1333" y2="1333"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsDireccion.fk_TdsDireccion_TdsSucursal" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="308" x2="308" y1="2441" y2="1307"/>
+        <positionableLine lineRole="CHILD_LINE" x1="471" x2="312" y1="1303" y2="1303"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsEstado.fk_TdsEstado_TdsPais" parentEdge="EAST" positioner="ThreeLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="473" x2="542" y1="293" y2="293"/>
+        <positionableLine lineRole="CHILD_LINE" x1="568" x2="550" y1="300" y2="300"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="546" x2="546" y1="296" y2="297"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsMatiData.fk_TdsMatiData_TdsSolicitud" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1038" x2="1038" y1="1867" y2="3067"/>
+        <positionableLine lineRole="CHILD_LINE" x1="585" x2="1034" y1="3071" y2="3071"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsMunicipio.fk_TdsMunicipio_TdsEstado" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="745" x2="745" y1="500" y2="1808"/>
+        <positionableLine lineRole="CHILD_LINE" x1="813" x2="749" y1="1812" y2="1812"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsCliente" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="421" x2="873" y1="1084" y2="1084"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsEstadoNacimiento" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="807" x2="869" y1="390" y2="390"/>
+        <positionableLine lineRole="CHILD_LINE" x1="873" x2="873" y1="837" y2="394"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsPaisNacimiento" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="473" x2="869" y1="210" y2="210"/>
+        <positionableLine lineRole="CHILD_LINE" x1="873" x2="873" y1="837" y2="214"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsProducto" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="1217" x2="1217" y1="2522" y2="1671"/>
+        <positionableLine lineRole="CHILD_LINE" x1="1208" x2="1213" y1="1667" y2="1667"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsSolicitudEstado" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="313" x2="313" y1="1743" y2="1596"/>
+        <positionableLine lineRole="CHILD_LINE" x1="873" x2="317" y1="1592" y2="1592"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSolicitud.fk_TdsSolicitud_TdsTipoPropiedadDomicilio" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="849" x2="873" y1="960" y2="960"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSolicitudFile.fk_TdsSolicitudFile_TdsFile" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="201" x2="201" y1="725" y2="1830"/>
+        <positionableLine lineRole="CHILD_LINE" x1="426" x2="205" y1="1834" y2="1834"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsSolicitudFile.fk_TdsSolicitudFile_TdsSolicitud" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="873" x2="692" y1="1802" y2="1802"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="KS.TdsSolicitudFile.fk_TdsSolicitudFile_TdsTipoDocumento" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="352" x2="426" y1="1892" y2="1892"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="KS.TdsSucursal.fk_TdsSucursal_TdsEmpresa" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="PARENT_LINE" x1="738" x2="738" y1="2607" y2="2659"/>
+        <positionableLine lineRole="CHILD_LINE" x1="544" x2="734" y1="2663" y2="2663"/>
+      </positionableLines>
+    </FkGl>
+    <Notes/>
+    <Zones/>
+  </Dgm>
+  <RnmMgr NxRnmId="71">
+    <RnmCh ObjCls="Schema" ParCls="Database" ParNme="KS.Time" SupCls="" SupNme="">
+      <Rnm id="1" nNm="KS" oNm="schemaA"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsProxyUser" SupCls="Schema" SupNme="KS">
+      <Rnm id="2" nNm="GuidUser" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsProxyRole" SupCls="Schema" SupNme="KS">
+      <Rnm id="6" nNm="GuidRole" oNm="GuidProxyRole"/>
+      <Rnm id="3" nNm="GuidProxyRole" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="unProxyBusinessObject" SupCls="Schema" SupNme="KS">
+      <Rnm id="4" nNm="GuidBusinessObject" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsProxyUser" SupCls="Schema" SupNme="KS">
+      <Rnm id="5" nNm="Username" oNm="UserName"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsProxyUser" SupCls="Schema" SupNme="KS">
+      <Rnm id="7" nNm="GuidRole" oNm="GuidProxyRole"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsEmailTemplate" SupCls="Schema" SupNme="KS">
+      <Rnm id="8" nNm="GuidEmailTemplate" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsSolicitud" SupCls="Schema" SupNme="KS">
+      <Rnm id="24" nNm="GuidSolicitud" oNm="GuidCredito"/>
+      <Rnm id="9" nNm="GuidCredito" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsCreditoEstado" SupCls="Schema" SupNme="KS">
+      <Rnm id="10" nNm="GuidCreditoEstado" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsInfoCliente" SupCls="Schema" SupNme="KS">
+      <Rnm id="11" nNm="GuidInfoCliente" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsActividadEconomica" SupCls="Schema" SupNme="KS">
+      <Rnm id="12" nNm="GuidActividadEconomica" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsProducto" SupCls="Schema" SupNme="KS">
+      <Rnm id="13" nNm="GuidProducto" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsMedio" SupCls="Schema" SupNme="KS">
+      <Rnm id="14" nNm="GuidMedio" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsPais" SupCls="Schema" SupNme="KS">
+      <Rnm id="38" nNm="GuidPais" oNm="GuidPaisNacimiento"/>
+      <Rnm id="15" nNm="GuidPaisNacimiento" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsGenero" SupCls="Schema" SupNme="KS">
+      <Rnm id="16" nNm="GuidGenero" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsEstadoCivil" SupCls="Schema" SupNme="KS">
+      <Rnm id="17" nNm="GuidEstadoCivil" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsNivelEstudios" SupCls="Schema" SupNme="KS">
+      <Rnm id="18" nNm="GuidNivelEstudios" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsTipoDomicilio" SupCls="Schema" SupNme="KS">
+      <Rnm id="19" nNm="GuidTipoDomicilio" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsOcupacion" SupCls="Schema" SupNme="KS">
+      <Rnm id="20" nNm="GuidOcupacion" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsDestinoCredito" SupCls="Schema" SupNme="KS">
+      <Rnm id="21" nNm="GuidDestinoCredito" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsTipoIdentificacion" SupCls="Schema" SupNme="KS">
+      <Rnm id="22" nNm="GuidTipoIdentificacion" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="KS" SupCls="" SupNme="">
+      <Rnm id="23" nNm="TdsSolicitud" oNm="TdsCredito"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsSolicitud" SupCls="Schema" SupNme="KS">
+      <Rnm id="25" nNm="MontoSolicitado" oNm="Monto"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsSolicitud" SupCls="Schema" SupNme="KS">
+      <Rnm id="26" nNm="Perfil_PrimerApellido" oNm="PrimerApellido"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsEstado" SupCls="Schema" SupNme="KS">
+      <Rnm id="34" nNm="GuidEstado" oNm="GuidEstadoNacimiento"/>
+      <Rnm id="27" nNm="GuidEstadoNacimiento" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsSolicitud" SupCls="Schema" SupNme="KS">
+      <Rnm id="28" nNm="Perfil_FormaMigratoria" oNm="FormaaMigratoria"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsSolicitud" SupCls="Schema" SupNme="KS">
+      <Rnm id="29" nNm="Dir_Calle" oNm="Direc_Calle"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsDireccion" SupCls="Schema" SupNme="KS">
+      <Rnm id="30" nNm="GuidDireccion" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsDireccion" SupCls="Schema" SupNme="KS">
+      <Rnm id="31" nNm="GuidEstado" oNm="GuidEstadoNacimiento"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsMunicipio" SupCls="Schema" SupNme="KS">
+      <Rnm id="32" nNm="GuidMunicipio" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="KS" SupCls="" SupNme="">
+      <Rnm id="33" nNm="TdsEstado" oNm="TdsEstadoNacimiento"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsSucursal" SupCls="Schema" SupNme="KS">
+      <Rnm id="35" nNm="GuidSucursal" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsDireccion" SupCls="Schema" SupNme="KS">
+      <Rnm id="36" nNm="GuidSucursalCercana" oNm="GuidSucursal"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsCliente" SupCls="Schema" SupNme="KS">
+      <Rnm id="49" nNm="GuidCliente" oNm="GuidPerfil"/>
+      <Rnm id="37" nNm="GuidPerfil" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="KS" SupCls="" SupNme="">
+      <Rnm id="39" nNm="TdsPais" oNm="TdsPaisNacimiento"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsCliente" SupCls="Schema" SupNme="KS">
+      <Rnm id="40" nNm="GuidEstadoNacimiento" oNm="GuidEstado"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsFile" SupCls="Schema" SupNme="KS">
+      <Rnm id="41" nNm="GuidFile" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsClienteFile" SupCls="Schema" SupNme="KS">
+      <Rnm id="51" nNm="GuidClienteFile" oNm="GuidPerfilFile"/>
+      <Rnm id="42" nNm="GuidPerfilFile" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsReferencia" SupCls="Schema" SupNme="KS">
+      <Rnm id="43" nNm="GuidReferencia" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsBeneficiario" SupCls="Schema" SupNme="KS">
+      <Rnm id="44" nNm="GuidBeneficiario" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsParentesco" SupCls="Schema" SupNme="KS">
+      <Rnm id="45" nNm="GuidParentesco" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsCredito" SupCls="Schema" SupNme="KS">
+      <Rnm id="46" nNm="GuidCredito" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsClienteEstado" SupCls="Schema" SupNme="KS">
+      <Rnm id="47" nNm="GuidClienteEstado" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="KS" SupCls="" SupNme="">
+      <Rnm id="48" nNm="TdsCliente" oNm="TdsPerfil"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="KS" SupCls="" SupNme="">
+      <Rnm id="50" nNm="TdsClienteFile" oNm="TdsPerfilFile"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsClienteFile" SupCls="Schema" SupNme="KS">
+      <Rnm id="52" nNm="GuidCliente" oNm="GuidPerfil"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsSolicitudEstado" SupCls="Schema" SupNme="KS">
+      <Rnm id="53" nNm="GuidSolicitudEstado" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsSolicitudFile" SupCls="Schema" SupNme="KS">
+      <Rnm id="54" nNm="GuidSolictudFile" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsColonia" SupCls="Schema" SupNme="KS">
+      <Rnm id="55" nNm="GuidColonia" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsCodigoPostal" SupCls="Schema" SupNme="KS">
+      <Rnm id="56" nNm="GuidCodigoPostal" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsTipoDocumento" SupCls="Schema" SupNme="KS">
+      <Rnm id="57" nNm="GuidTipoDocumento" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsCliente" SupCls="Schema" SupNme="KS">
+      <Rnm id="58" nNm="File_Ident" oNm="File_Ident_INE"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsCliente" SupCls="Schema" SupNme="KS">
+      <Rnm id="59" nNm="File_Ident_Rev" oNm="File_Iden_Rev"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsTipoPropiedadDomicilio" SupCls="Schema" SupNme="KS">
+      <Rnm id="60" nNm="GuidTipoPropiedadDomicilio" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsEmpresa" SupCls="Schema" SupNme="KS">
+      <Rnm id="61" nNm="GuidEmpresa" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsMatiData" SupCls="Schema" SupNme="KS">
+      <Rnm id="62" nNm="GuidMatiData" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsMatiData" SupCls="Schema" SupNme="KS">
+      <Rnm id="63" nNm="Nombre" oNm="FirstName"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsContrato" SupCls="Schema" SupNme="KS">
+      <Rnm id="64" nNm="GuidContrato" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsProxyGeoCity" SupCls="Schema" SupNme="KS">
+      <Rnm id="65" nNm="GuidCity" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsProxyGeoState" SupCls="Schema" SupNme="KS">
+      <Rnm id="66" nNm="GuidState" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsProxyGeoCountry" SupCls="Schema" SupNme="KS">
+      <Rnm id="67" nNm="GuidCountry" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="KS" SupCls="" SupNme="">
+      <Rnm id="68" nNm="TdsProxyGeoCountry" oNm="TdsGeoCountry"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsTerminoCondicion" SupCls="Schema" SupNme="KS">
+      <Rnm id="69" nNm="GuidTerminoCondicion" oNm="Id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="TdsSolicitud" SupCls="Schema" SupNme="KS">
+      <Rnm id="70" nNm="TerminoCondicionesAceptado" oNm="AceptacionTerminoCondiciones"/>
+    </RnmCh>
+  </RnmMgr>
+  <DbDocOptionMgr>
+    <BasicOptionMgr>
+      <Name>db.doc.option.mgr</Name>
+      <BoolOpt lbl="Diagrams" nm="doc.diagrams" on="1" spl="0"/>
+      <BoolOpt lbl="Foreign Keys" nm="doc.fks" on="1" spl="0"/>
+      <BoolOpt lbl="Indexes" nm="doc.indexes" on="1" spl="0"/>
+      <BoolOpt lbl="Overwrite CSS File" nm="doc.overwrite.css" on="1" spl="0"/>
+      <BoolOpt lbl="Procedures" nm="doc.procs" on="1" spl="0"/>
+      <BoolOpt lbl="Schemas" nm="doc.schemas" on="1" spl="0"/>
+      <BoolOpt lbl="Sequences" nm="doc.sequences" on="1" spl="0"/>
+      <BoolOpt lbl="Tables" nm="doc.tables" on="1" spl="0"/>
+      <BoolOpt lbl="Triggers" nm="doc.triggers" on="1" spl="0"/>
+      <BoolOpt lbl="Views" nm="doc.views" on="1" spl="0"/>
+    </BasicOptionMgr>
+  </DbDocOptionMgr>
+  <OpenEditors>
+    <OpenEditor ClsNm="Diagram" fqn="null.Diagrama1" selected="0"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.sfsdfs" selected="1"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.sfsdf" selected="0"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.dgds" selected="0"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.Test1" selected="0"/>
+  </OpenEditors>
+  <TreePaths>
+    <TreePath/>
+    <TreePath>/Schemas (1)</TreePath>
+    <TreePath>/Schemas (1)/KS</TreePath>
+    <TreePath>/Schemas (1)/KS/Tables (41)</TreePath>
+    <TreePath>/Diagrams (5)</TreePath>
+  </TreePaths>
+  <SqlTexts/>
+</Db>

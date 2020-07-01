@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SfsModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CustomProperties>
+    <CustomProperty Name="UIGridSystem" Value="960"/>
+    <CustomProperty Name="UIGridColumns" Value="16"/>
+    <CustomProperty Name="UIGridFormColumns" Value="16"/>
+    <CustomProperty Name="UIGridMaxColumns" Value="8"/>
+    <CustomProperty Name="UILabelColumns" Value="6"/>
+    <CustomProperty Name="UIPopupColumns" Value="16"/>
+    <CustomProperty Name="UIPopupLabelColumns" Value="4"/>
+    <CustomProperty Name="DefaultFilterable" Value="true"/>
+    <CustomProperty Name="DefaultExportable" Value="true"/>
+
+    <CustomProperty Name="AutoGuidProperty" Value="rowguid" />
+    <CustomProperty Name="AutoCreatedDateProperty" Value="CreatedDate"/>
+    <CustomProperty Name="AutoUpdatedDateProperty" Value="UpdatedDate"/>
+    <CustomProperty Name="AutoCreatedUserProperty" Value="CreatedBy"/>
+    <CustomProperty Name="AutoUpdatedUserProperty" Value="UpdatedBy"/>
+    <CustomProperty Name="AutoDeletedProperty" Value="IsDeleted"/>
+    <CustomProperty Name="AutoSizeBytesProperty" Value="Bytes"/>
+    <CustomProperty Name="EngineKeyProperty" Value="BizKeyEngine"/>
+      <CustomProperty Name="RemoveFilter" Value="true"/>
+    <CustomProperty Name="CompanyProperty" Value="GuidCompany"/>
+    <CustomProperty Name="ReusableCatalog" Value="KstReusableCatalog"/>
+    <CustomProperty Name="CustomController" Value="KS.Time.Api.ControllerBase"/>
+    <CustomProperty Name="SmartCondensedLists" Value="true"/>
+    <CustomProperty Name="LocalizableDataLanguages" Value="ES,EN"/>
+    <CustomProperty Name="EntityPrefix" Value="Kst"/>
+    <CustomProperty Name="BizKeyEngine" Value="BizKeyEngine"/>
+    
+    <!--<CustomProperty Name="UIExcludeFromSiteMap" Value="tvsServiceAviability, tvsServicesCity"/>-->
+  </CustomProperties>
+  <Components />
+</SfsModel>

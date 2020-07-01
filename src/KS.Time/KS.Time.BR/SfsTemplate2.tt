@@ -1,0 +1,47 @@
+﻿<#@ template debug="True" language="C#" #>
+<#@ import namespace="SFS.VSExtension2019.Model" #> 
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #> 
+<#@ dom processor="SFSEdmxProcessor"  
+requires="EntityModel='KSTimeModel.edmx'"  #>
+ 
+ 
+// <Template>
+//   <SolutionTemplate>EF POCO 1</SolutionTemplate>
+//   <Version>1.1422.1</Version>
+//   <Update>True</Update>
+// </Template>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+//using SFS.Core.Security.BusinessObjects;
+
+using System.IO;
+using SFS.Core.Cache;
+using Microsoft.EntityFrameworkCore;
+using  <#= Model.Namespace #>.BusinessObjects;
+using System.Data;
+//using System.Data.Entity.Infrastructure;
+using SFS.Core.My;
+
+
+namespace <#= Model.Namespace #>.BR
+{
+
+
+	      public class EFContext :  <#= Model.SafeNamespace #>Context
+    {
+        public EFContext(): base(SFS.Core.Configuration.ConfigurationSettings.GetConnectionString("<#=Model.SafeNamespace#>Context", "<#=Model.Namespace#>", null))
+        {
+		 this.Database.SetCommandTimeout(300);
+        }
+        public EFContext(ContextRequest contextRequest): base(SFS.Core.Configuration.ConfigurationSettings.GetConnectionString("<#=Model.SafeNamespace#>Context", "<#=Model.Namespace#>", contextRequest))
+        {
+		 this.Database.SetCommandTimeout(300);
+        }
+      
+
+
+    }
+
+}

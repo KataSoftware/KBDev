@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SfsModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Entities>
+    <Entity Name="KstProject" SetName="KstProjects" IsUIVisible="false" GenerateCRUD="true" IsForLocalization="false" IsCustom="false" IsView="false" DefaultProperty="Name">
+      <Properties>
+        <Property Name="NumActivities" Type="Int32" Nullable="true" IsCustom="true">
+          <CustomProperties>
+            <CustomProperty Name="ComputedLinq" Value="true"/>
+          </CustomProperties>
+        </Property>
+        <Property Name="NumUsers" Type="Int32" Nullable="true" IsCustom="true">
+          <CustomProperties>
+            <CustomProperty Name="ComputedLinq" Value="true"/>
+          </CustomProperties>
+        </Property>
+      </Properties>
+    </Entity>
+  </Entities>
+</SfsModel>

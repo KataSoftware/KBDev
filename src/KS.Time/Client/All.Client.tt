@@ -1,0 +1,84 @@
+﻿<#@ template hostspecific="True"  debug="True" language="C#" #><#@ output extension="txt"  #>
+<#@ import namespace="SFS.VSExtension2019.Model" #>
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #>
+<#@ import namespace="SFS.VSExtension2019.EngTool" #>
+<#@ dom processor="SFSEdmxProcessor"  requires="EntityModel='KSTimeModel.edmx'"  #>
+<#@ include file="SaveOutput.tt" #>
+<#@ include file="utils.tt" #>
+<#@ include file="pages-list-module.tt" #>
+
+<#@ include file="pages-list-page-html.tt" #>
+<#@ include file="pages-list-page-scss.tt" #>
+<#@ include file="pages-list-page.tt" #>
+<#@ include file="pages-form-module.tt" #>
+<#@ include file="pages-form-page-html.tt" #>
+<#@ include file="pages-form-page-scss.tt" #>
+<#@ include file="pages-form-page.tt" #>
+<#@ include file="pages-routing.tt" #>
+<#@ include file="pages-form-fields.tt" #>
+<#@ include file="models.tt" #>
+<#	
+
+	foreach(EntityInfo entity in Model.Entities.Where(p=>p.GenerateCRUD == true)){
+		try{
+			if (string.IsNullOrEmpty(entity.DefaultProperty)){
+				entity.DefaultProperty = entity.Properties[0].Name;
+			}
+			//string entityPluralName = null;
+			
+			
+		
+				//GenerateGeneric(entity);
+				string folderPages = @"Ionic-KSTime\src\app\pages\business\" +entity.SetName;
+				string folderList = folderPages + "\\" + entity.Name + "-list\\";
+				GeneratePageListModule(entity);
+				SaveOutput(entity.Name + "-list.module.ts", folderList);  
+			    GeneratePageListHtml(entity);
+				SaveOutput(entity.Name + "-list.page.html", folderList);  
+				GeneratePageListSCSS(entity);
+				SaveOutput(entity.Name + "-list.page.scss", folderList);  
+
+				GenerateBasePageList(entity);
+				SaveOutput(entity.Name + "-list.page.ts", folderList);  
+				
+				//GeneratePageList(entity);
+				//SaveOutput(entity.Name + "-list.page.ts", folderList);  
+
+				folderList = folderPages + "\\" + entity.Name + "-form\\";
+				GeneratePageFormModule(entity);
+				SaveOutput(entity.Name + "-form.module.ts", folderList);  
+			    GeneratePageFormHtml(entity);
+				SaveOutput(entity.Name + "-form.page.html", folderList);  
+				GeneratePageFormSCSS(entity);
+				SaveOutput(entity.Name + "-form.page.scss", folderList);  
+				GeneratePageForm(entity);
+				SaveOutput(entity.Name + "-form.page.ts", folderList);  
+				GeneratePageFormFields(entity);
+				SaveOutput(entity.Name + "-form.fields.ts", folderList);  
+				
+			
+
+			//GenerateControllerGeneric(entity);
+			//SaveOutput(controllerName + "Controller." + entity.Name + ".Generic.gen.cs", @"Controllers");  
+	
+	
+			this.GenerationEnvironment.Clear();
+			//GenerateResourcesRESX(entity);
+			//SaveOutput(entity.Name+ "Resources.resx", @"Resources");  
+		}catch(Exception ex){
+			throw new Exception(string.Format("El error ocurri� en la entidad {0}",entity.Name),ex);
+		}
+	}
+
+	//
+	
+	GeneratePagesRouting(Model);
+	SaveOutput(@"Ionic-KSTime\src\app\app-rounting-gen.module.ts", @"");  
+
+	GenerateModels(Model);
+	SaveOutput(@"Ionic-KSTime\src\app\models\business\models.ts", @"");  
+
+	//GenerateAllModels(Model);
+	//SaveOutput("AllModels.gen.cs", @"Models");  
+			
+#>

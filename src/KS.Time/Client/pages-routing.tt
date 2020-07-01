@@ -1,0 +1,37 @@
+<#@ output  extension="ts" #>
+<#@ template language="C#" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ import namespace="SFS.VSExtension2019.Model" #>
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+<#+ public void GeneratePagesRouting(ModelInfo model)
+{ #>
+// Angular Imports
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+// SFSCommon Imports
+import { EntityPageModule, EntityListPage, EntityListPageModule, SelectCompanyPageModule } from 'sfscommon';
+import { AuthGuardService } from './services/common/AuthGuard.service';
+
+
+export class AppRoutingGenModule {
+public static routesGen: Routes = [
+<#+  	foreach(var entity in model.Entities.Where(p=>p.GenerateCRUD == true) ) {#>
+
+  { path: '<#= entity.Name #>/list',  canActivate: [AuthGuardService], loadChildren: './pages/business/<#= entity.SetName #>/<#= entity.Name #>-list/<#= entity.Name #>-list.module#<#= entity.Name #>ListPageModule' },
+  { path: '<#= entity.Name #>/form/:Id',  canActivate: [AuthGuardService], loadChildren: './pages/business/<#= entity.SetName #>/<#= entity.Name #>-form/<#= entity.Name #>-form.module#<#= entity.Name #>FormPageModule' },
+  { path: '<#= entity.Name #>/form',  canActivate: [AuthGuardService], loadChildren: './pages/business/<#= entity.SetName #>/<#= entity.Name #>-form/<#= entity.Name #>-form.module#<#= entity.Name #>FormPageModule' },
+
+<#+ 	} #>
+
+];
+
+
+ }
+
+
+<#+  }
+#>

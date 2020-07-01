@@ -1,0 +1,7 @@
+<mat-form-field *ngIf="ProviderType == 'material'">
+  <input matInput placeholder="Input" [class]="ControlClass">
+</mat-form-field>
+<ion-item *ngIf="ProviderType == 'ionic'">
+  <ion-label>Awesome Label</ion-label>
+  <ion-input type="text" placeholder="Awesome Input" [class]="Controlclass"></ion-input>
+</ion-item>

@@ -1,0 +1,22 @@
+
+<div class="role-name">
+  <button mat-button [matMenuTriggerFor]="menu"> {{userName}}<!--{{roleName}}--> <ion-icon name="ios-arrow-down"></ion-icon> </button>
+  <mat-menu #menu="matMenu" xPosition="before">
+
+    <button mat-menu-item (click)="goMyAccount()">
+        <!-- <i class="material-icons">face</i> -->
+      <mat-icon>account_circle</mat-icon>
+       Mi cuenta
+
+    </button>
+    <button mat-menu-item (click)="logOff()" >
+      <mat-icon > 
+          exit_to_app
+      </mat-icon>
+      
+        Salir
+
+    
+    </button>
+  </mat-menu>
+</div>

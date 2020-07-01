@@ -1,0 +1,109 @@
+<#@ output  extension="ts" #>
+<#@ template language="C#" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ import namespace="SFS.VSExtension2019.Model" #>
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+<#+ public void GeneratePageFormFields(EntityInfo entity)
+{ 
+
+	#>
+import { FormlyFieldConfig } from '@ngx-formly/core';
+import { 
+     <#= entity.Name #>Model, 
+<#+ List<String> propModels = new List<String>();
+	
+	foreach (var property in entity.Properties.Where(p=> p.IsNavigationPropertyMany == false && p.IsNavigationProperty == true ) ){ 
+			var navprop = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyName== property.Name);
+			var entityRelName = navprop.EntityType.Split(char.Parse("."))[navprop.EntityType.Split(char.Parse(".")).Length -1];
+			var entityRel  = entity.Model.Entities.Find(p=>p.Name == entityRelName);
+		if (!propModels.Contains(entityRel.Name) && entityRel.Name != entity.Name){
+			propModels.Add(entityRel.Name);
+        }
+    }
+		foreach(var propName in propModels){
+#>
+	<#= propName #>Model,
+<#+		} #>
+  
+} from 'src/app/models/business/models';
+
+export class <#= entity.Name #>FormFields {
+public static GetFields():Array<FormlyFieldConfig>{
+return [
+<#+ foreach (var property in entity.Properties.Where(p=> p.IsNavigationProperty == false && p.IsPrimaryKey == false ) ){ 
+
+	if (IsSystemProperty(property)  == false  ){
+	string typeData = "string";
+	if (property.Type.ToLower().Contains("int") || property.Type.ToLower().Contains("decimal") || property.Type.ToLower().Contains("float") || property.Type.ToLower().Contains("double")){
+		typeData = "number";
+    }
+	string required = "false";
+	if (property.Nullable == false){
+		required = "true";
+    }
+	string typeControl = "input";
+	var navigationProp =  entity.NavigationProperties.FirstOrDefault( p=>p.PropertyRefName == property.Name && (p.Multiplicity == "1" || p.Multiplicity == "0..1")); 
+	PropertyInfo navPropertyKey = null;
+	PropertyInfo navDefaultProperty = null;
+	PropertyInfo navProp = null;
+	EntityInfo entityRel = null;
+	if (navigationProp != null ){
+		typeControl = "select";
+		var entityRelName = navigationProp.EntityType.Split(char.Parse("."))[navigationProp.EntityType.Split(char.Parse(".")).Length -1];
+		entityRel = entity.Model.Entities.Find(p=>p.Name == entityRelName);
+		navPropertyKey = entityRel.Properties.FirstOrDefault(p=>p.IsPrimaryKey == true);
+		navDefaultProperty = entityRel.Properties.FirstOrDefault(p=>p.Name == entityRel.DefaultProperty);
+    } 
+	if (property.Type.ToLower().Contains("bool")){
+		typeControl = "checkbox";
+    }
+	if (property.Type.ToLower().Contains("date")){
+		//typeControl = "datepicker";
+		typeControl = "datepicker";
+    }
+
+	string extra ="";
+	string maxL= "";
+	if (property.MaxLength == 0  && property.Type.ToLower().Contains("string") && !property.Type.ToLower().Contains("guid")  && !property.Type.ToLower().Contains("date") ){
+			typeControl = "textarea";
+			extra= "rows: 5,";
+    }else{
+		maxL = property.MaxLength.ToString();
+    }
+#>
+{
+    key: <#= entity.Name #>Model.PropertyNames.<#= property.Name #>,
+    type: '<#= typeControl #>',
+
+    templateOptions: {
+<#+ if (navigationProp != null ){ #>
+	  "relation": {   
+			EntityModel: <#= entityRel.Name #>Model,  
+			DataValue: <#= entityRel.Name #>Model.PropertyNames.<#= navPropertyKey.Name #>,
+            DataText: <#= entityRel.Name #>Model.PropertyNames.<#= navDefaultProperty.Name #> 
+			},
+<#+ } #>
+        label: <#= entity.Name #>Model.PropertyNames.<#= property.Name #>,
+        placeholder: '',
+        required: <#= required #>,
+		<#= extra #>
+<#+ if (typeData != "string"){ #>
+        type: "<#= typeData #>",
+<#+ }else if (!string.IsNullOrEmpty(maxL) && maxL != "0"){ #>
+		maxLength: <#= maxL #>,
+<#+ } #>
+    }
+},
+<#+    }
+    }
+#>
+	];
+    }
+}
+
+<#+ 	
+}
+#>

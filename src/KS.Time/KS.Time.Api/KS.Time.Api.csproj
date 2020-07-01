@@ -1,0 +1,121 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="AddEntities.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddEntities.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KS.Time.BR\KS.Time.BR.csproj" />
+    <ProjectReference Include="..\KS.Time.BusinessObjects\KS.Time.BusinessObjects.csproj" />
+  
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Polly" Version="7.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="4.0.1" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SFS.Core">
+      <HintPath>..\..\..\LibraryDev\SFS.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SFS.Core.Api">
+      <HintPath>..\..\..\LibraryDev\SFS.Core.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="SFS.Core.Common">
+      <HintPath>..\..\..\LibraryDev\SFS.Core.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SFS.Core.Security.BusinessObjects">
+      <HintPath>..\..\..\LibraryDev\SFS.Core.Security.BusinessObjects.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="All.MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>All.MVC.txt</LastGenOutput>
+    </None>
+    <None Update="All.MVC.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>All.MVC.tt</DependentUpon>
+    </None>
+    <None Update="AllControllers.txt">
+      <DependentUpon>AllControllers.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </None>
+    <None Update="AllControllers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllControllers.txt</LastGenOutput>
+    </None>
+    <None Update="AllControllers.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AllControllers.tt</DependentUpon>
+    </None>
+    <None Update="AllModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllModels.txt</LastGenOutput>
+    </None>
+    <None Update="AllModels.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AllModels.tt</DependentUpon>
+    </None>
+    <None Update="Entity.MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Entity.MVC.txt</LastGenOutput>
+    </None>
+    <None Update="Entity.MVC.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Entity.MVC.tt</DependentUpon>
+    </None>
+    <None Update="AddEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AddEntities.cs</LastGenOutput>
+    </None>
+    <None Update="SaveOutput.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SaveOutput.txt</LastGenOutput>
+    </None>
+    <None Update="SaveOutput.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SaveOutput.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="AddEntities.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddEntities.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+     <Exec Command="xcopy &quot;$(ProjectDir)bin\Debug\netcoreapp2.2\KS.Time*.*&quot; &quot;..\..\..\shell\&quot; /Y&#xD;&#xA;" IgnoreExitCode="true"  />
+  </Target>
+
+</Project>

@@ -1,0 +1,370 @@
+<#@ output  extension="ts" #>
+<#@ template language="C#" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ import namespace="SFS.VSExtension2019.Model" #>
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+<#+ public void GenerateBasePageList(EntityInfo entity)
+{ 
+
+	#>
+import { bizAppService } from 'src/app/services/business/business.service';
+import { Component, OnInit, Injector, ViewChild, TemplateRef } from '@angular/core';
+import { <#= entity.Name #>Model } from 'src/app/models/business/models';
+import { AppListBaseTypedPage } from 'src/app/pages/common/app-list-base-typed/app-list-base-typed.page';
+import { DataService, TableColumn } from 'sfscommon';
+import { TimeAgoPipe } from 'src/app/pipes/common/timeago';
+import { sfsService } from 'src/app/services/common/sfs.service';
+import swal from 'sweetalert';
+import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormGroup } from '@angular/forms';
+import { ActionModel, BindListSettings } from 'src/app/pages/common/app-list-base/app-list-base.page';
+
+
+
+@Component({
+  selector: '<#= entity.Name #>-list',
+  templateUrl: './<#= entity.Name #>-list.page.html',
+  styleUrls: ['./<#= entity.Name #>-list.page.scss'],
+})
+<#+ 
+	var propertyKey = entity.Properties.FirstOrDefault(p=> p.IsPrimaryKey == true );
+	#>
+export class <#= entity.Name #>ListPage extends AppListBaseTypedPage<<#= entity.Name #>Model> implements OnInit {
+    fields:Array<FormlyFieldConfig> = null;
+
+     formFilter:FormGroup= new FormGroup({});
+	 ngAfterViewInit() {
+	 console.log("ubiCustomer ngAfterViewInit");
+       if (this.<#= entity.Name #>ListCustom == null ){
+
+		
+           // let _import = await import(`./${this.customClass}`);
+
+
+          //  this.<#= entity.Name #>ListCustom = _import["<#= entity.Name #>ListCustom"];
+
+          
+       }
+      
+    }
+	@ViewChild('actionsTmpl') public actionsTmpl: TemplateRef<any>;
+	@ViewChild('HeaderCheckTemplate') public HeaderCheckTemplate: TemplateRef<any>;
+<#+ foreach (var property in entity.Properties ){ #>
+	@ViewChild('<#= property.Name #>Cell') public <#= property.Name #>Cell: TemplateRef<any>;
+
+<#+ } #>
+
+    private _bizAppService: bizAppService;
+
+	public get bizAppService(): bizAppService {
+		if (!this._bizAppService) {
+
+			this._bizAppService = this.injector.get(bizAppService);
+		}
+
+		return this._bizAppService;
+	}
+
+	public set bizAppService(value: bizAppService) { this._bizAppService = value; }
+	<#= entity.Name #>ListCustom:any = null;
+	customClass = '<#= entity.Name #>-list.custom';
+
+	constructor( public injector: Injector, public sfsService: sfsService) {
+    super(injector);
+		this.itemFilter = new <#= entity.Name #>Model();
+		//this.title = "<#= entity.SetName #>";
+	    this.serviceData = {
+
+      Page: 1,
+      PageSize: 7,
+      EntitySet: <#= entity.Name #>Model._EntitySetName,
+      Fields: Object.getOwnPropertyNames(<#= entity.Name #>Model.PropertyNames).filter(p=>   !p.startsWith("Fk")).join(","),
+      AllFields: true,
+      SortBy: 'UpdatedDate',
+      SortDirection: 'desc',
+
+    };
+	/*
+	import(`./${this.customClass}`).then(p=>{
+    this.<#= entity.Name #>ListCustom = p["<#= entity.Name #>ListCustom"];
+    if (this.<#= entity.Name #>ListCustom != null && this.<#= entity.Name #>ListCustom["OnShowing"] != null){
+      this.<#= entity.Name #>ListCustom["OnShowing"](this);
+    }
+	  }).catch(error=> {
+		console.log(error);
+    });*/
+
+  }
+
+  async ionViewWillEnter() {
+    let navData = this.sfsService.GetNavigationData();
+        console.log("ionViewWillEnter navData", navData);
+        if (navData != null ){
+            if (navData.RefreshData == true ){
+                if (this.loadingData == false) { 
+                    await this.bindData({ RestartPaging: navData.RestartPaging }); 
+                }
+            }else if (navData.ItemUpdated != null){
+				let itemFormService = await this.bizAppService.GetItem(navData.ItemUpdated.Id, <#= entity.Name #>Model._EntitySetName, Object.getOwnPropertyNames(<#= entity.Name #>Model.PropertyNames).filter(p => !p.startsWith("Fk")).join(","));
+                if (itemFormService.status == "success" && itemFormService.data != null ) {
+
+                    let itemFinded = this.data.find(p => p.Id == navData.ItemUpdated.Id);
+                    Object.assign(itemFinded, itemFormService.data);
+					if (this.<#= entity.Name #>ListCustom != null && this.<#= entity.Name #>ListCustom["OnItems"] != null) {
+						this.<#= entity.Name #>ListCustom["OnItems"](this, this.data);
+					}
+				}
+            }
+        }else{
+            if (this.loadingData == false) { await this.bindData(); }
+        }
+  }
+
+  hideFilter:boolean=true;
+
+  itemFilter:<#= entity.Name #>Model = null;
+  refreshFilter(){
+    this.itemFilter = new <#= entity.Name #>Model();
+    this.serviceData.Query = "";
+    this.bindData();
+  }
+
+  showFilter(){
+    if (this.hideFilter == true) {
+      this.hideFilter = false;
+    } else{
+        this.hideFilter = true;
+    }
+  }
+
+
+   ngOnInit() {
+   console.log("ubiCustomer ngOnInit");
+  //this.userData = await this.userService.getUserData();
+  //let query: string;
+
+	
+     this.getColumns();
+    <#+ if (propertyKey != null ){ #>
+
+	this.setOrder( { Name: "<#= propertyKey.Name #>" } );
+   
+<#+ } #>    
+<#+ if (entity.DefaultProperty != null && entity.DefaultProperty != propertyKey.Name ){ 
+	   var property = entity.Properties.FirstOrDefault(p=> p.Name == entity.DefaultProperty );
+	   if (property != null ){#>
+	   this.setOrder({ Name: "<#= property.Name #>" });
+<#+		}
+	} #>
+	
+this.setOrder( { Name: "UpdatedDate", Label: "" } );
+this.setOrder({ Name: 'actions'});
+
+        if (this.<#= entity.Name #>ListCustom == null ){
+		  import(`./${this.customClass}`).then((_import)=> {
+            this.userService.getUserData().then((result)=> {
+              this.userData = result;
+              this.<#= entity.Name #>ListCustom = _import["<#= entity.Name #>ListCustom"];
+              if (this.<#= entity.Name #>ListCustom != null) {
+                this.<#= entity.Name #>ListCustom["OnShowing"](this);
+				this.externalCustomFileChecked = true;
+                this.bindDisplayColumns();
+                this.bindData();
+            }
+            }).catch((error)=> {
+				this.externalCustomFileChecked = true;
+				console.log("error userData", error);
+            });
+          
+		
+            }).catch(error=> {
+			  this.externalCustomFileChecked= true;
+              console.log("error", error);
+			  this.bindDisplayColumns();
+              this.bindData();
+            });
+       }
+       
+
+		
+
+}
+bindDisplayColumns(){
+  this.displayedColumns = [];
+  for (let column of this.tableColumns) { this.displayedColumns.push(column.prop); }
+
+}
+routeAdd:string="<#= entity.Name #>/form";
+async addItem(){
+  this.navCtrl.navigateForward(this.routeAdd, { animated: true });
+}
+
+  getColumns() {
+ 
+	  this.tableColumns = [];
+    this.backtableColumns = [
+
+<#+ 
+
+
+	foreach (var property in entity.Properties.Where(p=> p.IsNavigationPropertyMany == false  && p.Name != "IsDeleted" && p.Name != "Bytes" && p.Name != "GuidCompany" ) ){  
+			string name= "";
+			if (IsSystemProperty(property)  == false  ){
+				name = entity.Name + "Model.PropertyNames." + property.Name;
+            }else{
+				name = entity.Name + "Model.PropertyNames." + property.Name;
+            }
+			string sortBy = "sortBy: \"" + property.Name + "\"";
+			string width = "";
+			string headerCheckTemplate = "";
+			string headerClass="headerClass: 'title-cell',";
+			if ( property.IsPrimaryKey == true ){
+				width = "width: 50,";
+				name = "''";
+				headerClass="headerClass: 'selectCheck',";
+				headerCheckTemplate = "headerTemplate: this.HeaderCheckTemplate,";
+            }else{
+				headerCheckTemplate = "";
+            }
+			
+
+			string cellClass="cellClass: 'selectCheck',";
+			if (property.IsPrimaryKey == false){
+				cellClass = "";
+				
+            }
+			if (property.Name == "UpdatedDate"){
+				cellClass = "cellClass: 'updated',";
+				headerClass="headerClass: 'updated',";
+            }
+			string sortable="sortable: false,";
+			if (property.IsPrimaryKey == false){
+				sortable="sortable: true,";
+            }
+			string prop =  entity.Name + "Model.PropertyNames." + property.Name;
+			if (property.IsNavigationProperty == true ){
+				var navprop = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyName== property.Name);
+				var entityRelName = navprop.EntityType.Split(char.Parse("."))[navprop.EntityType.Split(char.Parse(".")).Length -1];
+				var entityRel  = entity.Model.Entities.Find(p=>p.Name == entityRelName);
+				var defaultPropertyName = entityRel.DefaultProperty;
+				sortBy= "sortBy: \"" + entityRel.Name + "." + defaultPropertyName + "\"";
+				prop =  "`Fk${" +entity.Name + "Model.PropertyNames." + property.Name + "}Text`";
+            }
+	#>
+{
+	<#= headerCheckTemplate #>
+	cellTemplate: this.<#= property.Name #>Cell,
+    name: <#= name #>,
+    prop: <#= prop #>,
+	<#= sortBy #>,
+    <#= sortable #>
+    <#= width #>
+    <#= headerClass #>
+	<#= cellClass #>
+},
+<#+    
+    }
+#>    
+{
+	
+	cellTemplate: this.actionsTmpl,
+    name: '',
+    prop: "actions",
+    sortable: false,
+    cellClass: 'actions',
+    headerClass: 'actions',
+	
+},
+    ];
+
+	}
+existsPendingReport:boolean=false;
+public async bindData(settings?: BindListSettings) {
+  try {
+  
+			let restartPaging: Boolean = true;
+            if (settings != null) {
+                restartPaging = settings.RestartPaging;
+            }
+			 await this.configurePagination(this.serviceData);
+                this.pagination.pageIndex = 0;
+	this.data = await this.getData(this.pagination);
+
+  }
+  catch (error) { this.logError(error); }
+  finally { this.loadingData = false; }
+}
+onGetData(data:any){
+  console.log("onGetData", data);
+  
+ 
+    data.forEach((p)=>{
+      p['_actions'] = this.getActions(p);
+    });
+
+    if (this.<#= entity.Name #>ListCustom != null && this.<#= entity.Name #>ListCustom["OnItems"] != null){
+      this.<#= entity.Name #>ListCustom["OnItems"](this, data);
+    }
+} 
+
+action(row:any, actionKey:string){
+  if (actionKey == "edit"){
+    this.edit(row);
+  }else if (actionKey == "delete"){
+    this.delete(row);
+  }else{
+    if (this.<#= entity.Name #>ListCustom != null && this.<#= entity.Name #>ListCustom["OnCustomActionExecute"] != null){
+      this.<#= entity.Name #>ListCustom["OnCustomActionExecute"](this, row);
+    }
+  }
+}
+
+clickItem(row:<#= entity.Name #>Model){
+  if (this.<#= entity.Name #>ListCustom != null && this.<#= entity.Name #>ListCustom["OnForm"] != null){
+    this.<#= entity.Name #>ListCustom["OnClickItem"](this,row);
+  }else{
+    this.edit(row);
+  }
+}
+
+
+edit(row:<#= entity.Name #>Model){
+	let route =  `${this.routeAdd}/${row.<#= propertyKey.Name #>}`;
+ if (this.routeForm != null){
+    route = this.routeForm;
+  }
+  if (this.<#= entity.Name #>ListCustom != null && this.<#= entity.Name #>ListCustom["OnForm"] != null){
+    this.<#= entity.Name #>ListCustom["OnForm"](this,row);
+  }
+  this.navCtrl.navigateForward(route, { animated: true });
+}
+
+
+
+async delete(row:<#= entity.Name #>Model){
+
+	if (row != null ){
+		this.selection.clear();
+		this.selection.select(row);
+	}
+  let modalResponse = await this.showConfirm(this.selection.selected.length);
+ 
+   if (modalResponse == true) {
+       let response = await this.bizAppService.Delete(this.selection.selected.map(({ <#= propertyKey.Name #> }) => <#= propertyKey.Name #>), <#= entity.Name #>Model._EntitySetName);
+       swal.close();
+       this.selection.clear();
+ 
+       this.bindData();
+   }else{
+     swal.close();
+   }
+ }
+
+}
+
+<#+ 	
+}
+#>

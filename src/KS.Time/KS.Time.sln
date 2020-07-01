@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KS.Time.BusinessObjects", "KS.Time.BusinessObjects\KS.Time.BusinessObjects.csproj", "{6EA83E87-871A-48C3-B1C3-EB6F351F0C10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFS.Legacy", "SFS.Legacy\SFS.Legacy.csproj", "{52B81EC4-7AB4-4A74-BB8D-29E72C9D2629}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KS.Time.BR", "KS.Time.BR\KS.Time.BR.csproj", "{388368A3-B828-4201-872B-15A3AD9240F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KS.Time.BusinessObjects.EF", "KS.Time.EF\KS.Time.BusinessObjects.EF.csproj", "{54E3FF5B-9640-42A1-ABBB-B6A281919732}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{920720AA-7C33-4ED8-AE89-BEE907A89EEF}"
+	ProjectSection(SolutionItems) = preProject
+		..\azure-pipelines-all.yml = ..\azure-pipelines-all.yml
+		..\azure-pipelines-dotnet.yml = ..\azure-pipelines-dotnet.yml
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
+		notes.txt = notes.txt
+		KS.Time.sfssln = KS.Time.sfssln
+		..\..\libraryDev\Shell\Web.config = ..\..\libraryDev\Shell\Web.config
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KS.Time.Api", "KS.Time.Api\KS.Time.Api.csproj", "{60DA379E-75C4-49C6-A6E2-68E72E3F76EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KS.Time.ClientApplication", "Client\KS.Time.ClientApplication.csproj", "{56E5D716-A28E-4205-8E81-C1A019D9FC07}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6EA83E87-871A-48C3-B1C3-EB6F351F0C10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EA83E87-871A-48C3-B1C3-EB6F351F0C10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EA83E87-871A-48C3-B1C3-EB6F351F0C10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EA83E87-871A-48C3-B1C3-EB6F351F0C10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52B81EC4-7AB4-4A74-BB8D-29E72C9D2629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52B81EC4-7AB4-4A74-BB8D-29E72C9D2629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52B81EC4-7AB4-4A74-BB8D-29E72C9D2629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52B81EC4-7AB4-4A74-BB8D-29E72C9D2629}.Release|Any CPU.Build.0 = Release|Any CPU
+		{388368A3-B828-4201-872B-15A3AD9240F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{388368A3-B828-4201-872B-15A3AD9240F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{388368A3-B828-4201-872B-15A3AD9240F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{388368A3-B828-4201-872B-15A3AD9240F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54E3FF5B-9640-42A1-ABBB-B6A281919732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54E3FF5B-9640-42A1-ABBB-B6A281919732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54E3FF5B-9640-42A1-ABBB-B6A281919732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54E3FF5B-9640-42A1-ABBB-B6A281919732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60DA379E-75C4-49C6-A6E2-68E72E3F76EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60DA379E-75C4-49C6-A6E2-68E72E3F76EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60DA379E-75C4-49C6-A6E2-68E72E3F76EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60DA379E-75C4-49C6-A6E2-68E72E3F76EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56E5D716-A28E-4205-8E81-C1A019D9FC07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56E5D716-A28E-4205-8E81-C1A019D9FC07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56E5D716-A28E-4205-8E81-C1A019D9FC07}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {95AC5691-0632-4762-A8D8-D427472CEDEB}
+	EndGlobalSection
+EndGlobal

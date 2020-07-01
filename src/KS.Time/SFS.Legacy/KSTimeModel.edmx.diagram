@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <edmx:Designer>
+    <edmx:Diagrams>
+      <Diagram Name="SecurityModel" ZoomLevel="107" xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+        <AssociationConnector Association="KSTimeModel.accInvoiceFiles" />
+        <EntityTypeShape EntityType="KSTimeModel.KstEmailTemplate" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="KSTimeModel.KstProxyGeoCity" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="KSTimeModel.KstProxyGeoCountry" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="KSTimeModel.KstProxyGeoState" Width="1.75" PointX="4.875" PointY="8.25" />
+        <AssociationConnector Association="KSTimeModel.fk_KstProxyGeoCity_KstProxyGeoCity" />
+        <AssociationConnector Association="KSTimeModel.fk_KstProxyGeoCity_KstProxyGeoState" />
+        <AssociationConnector Association="KSTimeModel.fk_KstProxyGeoState_KstProxyGeoCountry" />
+        <EntityTypeShape EntityType="KSTimeModel.KstActivity" Width="1.5" PointX="10.625" PointY="8.375" />
+        <EntityTypeShape EntityType="KSTimeModel.KstProject" Width="1.5" PointX="8.375" PointY="3.875" />
+        <EntityTypeShape EntityType="KSTimeModel.KstProjectUser" Width="1.5" PointX="10.625" PointY="3" />
+        <EntityTypeShape EntityType="KSTimeModel.KstWorkTime" Width="1.5" PointX="12.875" PointY="6" />
+        <AssociationConnector Association="KSTimeModel.fk_KstActivity_KstProject" />
+        <AssociationConnector Association="KSTimeModel.fk_KstWorkTime_KstActivity" />
+        <AssociationConnector Association="KSTimeModel.fk_KstProjectUser_KstProject" />
+        <AssociationConnector Association="KSTimeModel.fk_KstWorkTime_KstProject" />
+        <EntityTypeShape EntityType="KSTimeModel.KstFile" Width="1.5" PointX="0.75" PointY="14.5" />
+        <EntityTypeShape EntityType="KSTimeModel.KstProjectFile" Width="1.5" PointX="11" PointY="13.75" />
+        <EntityTypeShape EntityType="KSTimeModel.KstUserFile" Width="1.5" PointX="5.625" PointY="11.25" />
+        <EntityTypeShape EntityType="KSTimeModel.KstWorkTimeFile" Width="1.5" PointX="15.5" PointY="10.75" />
+        <AssociationConnector Association="KSTimeModel.fk_KstProjectFile_KstFile" />
+        <AssociationConnector Association="KSTimeModel.fk_KstUserFile_KstFile" />
+        <AssociationConnector Association="KSTimeModel.fk_KstWorkTimeFile_KstFile" />
+        <AssociationConnector Association="KSTimeModel.fk_KstProjectFile_KstProject" />
+        <AssociationConnector Association="KSTimeModel.fk_KstWorkTimeFile_KstWorkTime" />
+        <EntityTypeShape EntityType="KSTimeModel.KstProxyRole" Width="1.5" PointX="13.375" PointY="1.625" />
+        <EntityTypeShape EntityType="KSTimeModel.KstProxyUser" Width="1.5" PointX="15.625" PointY="1" />
+        <AssociationConnector Association="KSTimeModel.fk_KstProjectUser_KstProxyUser" />
+        <AssociationConnector Association="KSTimeModel.fk_KstProxyUser_KstProxyRole" />
+        <AssociationConnector Association="KSTimeModel.fk_KstUserFile_KstProxyUser" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

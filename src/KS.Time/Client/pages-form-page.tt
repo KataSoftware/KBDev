@@ -1,0 +1,145 @@
+<#@ output  extension="ts" #>
+<#@ template language="C#" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ import namespace="SFS.VSExtension2019.Model" #>
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+<#+ void GeneratePageForm(EntityInfo entity)
+{ 
+		var propertyId = entity.Properties.FirstOrDefault(p=> p.IsPrimaryKey );
+	#>
+import { bizAppService } from 'src/app/services/business/business.service';
+import { <#= entity.Name #>Model } from 'src/app/models/business/models';
+import { Component, OnInit, Injector } from '@angular/core';
+import { FormlyFieldConfig } from '@ngx-formly/core';
+import { sfsService } from 'src/app/services/common/sfs.service';
+import { AppFormBasePage, BackToListSettings } from 'src/app/pages/common/app-form-base/app-form-base.page';
+import { StorageService, UserService, ApiResponse } from 'sfscommon';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { <#= entity.Name #>FormFields } from './<#= entity.Name #>-form.fields';
+
+@Component({
+  selector: '<#= entity.Name #>-form',
+  templateUrl: './<#= entity.Name #>-form.page.html',
+  styleUrls: ['./<#= entity.Name #>-form.page.scss'],
+})
+export class <#= entity.Name #>FormPage extends AppFormBasePage implements OnInit {
+  item: <#= entity.Name #>Model = null;
+  guidItem: string = null;
+  fields: Array<FormlyFieldConfig> = [];
+  <#= entity.Name #>FormCustom:any = null;
+  customClass = '<#= entity.Name #>-form.custom';
+  setForm() {
+    this.fields = <#= entity.Name #>FormFields.GetFields();
+    if (this.<#= entity.Name #>FormCustom != null ){
+      this.<#= entity.Name #>FormCustom["OnShowing"](this);
+    }
+    this.showForm();
+
+  }
+  constructor(
+    public injector: Injector,
+
+    public storage: StorageService,
+    public userService: UserService,
+	public sfsService: sfsService
+  ) {
+
+    super(injector);
+    this.title = "<#= entity.Name #>";
+	
+    
+
+    this.defaultHref = '<#= entity.Name #>/list';
+    this.guidItem = this.route.snapshot.paramMap.get("Id");
+
+   }
+
+  ngOnInit() {
+	this.fieldsBack = <#= entity.Name #>FormFields.GetFields();
+   
+	import(`./${this.customClass}`).then( async (_import)=> {
+        this.<#= entity.Name #>FormCustom = _import["<#= entity.Name #>FormCustom"];
+        if (this.<#= entity.Name #>FormCustom != null) {
+           if (this.<#= entity.Name #>FormCustom["OnShowing"] != null ){
+            this.<#= entity.Name #>FormCustom["OnShowing"](this);
+          }
+          if (this.<#= entity.Name #>FormCustom["OnShowingAsync"] != null){
+            await (<Promise<void>>(this.<#= entity.Name #>FormCustom["OnShowingAsync"](this)));
+          }
+        }
+        this.showForm();
+        this.getData();
+      }).catch((error)=> {
+        console.log("error load partial File <#= entity.Name #>",  error);
+        this.showForm();
+        this.getData();
+      });
+  }
+
+  async getData() {
+    if (this.guidItem != null) {
+      let result = await this.bizAppService.GetItem(this.guidItem, <#= entity.Name #>Model._EntitySetName, Object.getOwnPropertyNames(<#= entity.Name #>Model.PropertyNames).filter(p=>   !p.startsWith("Fk")).join(","));
+      if (result.status == "success") {
+        this.item = result.data;
+        this.guidItem = this.item.<#= propertyId.Name #>;
+
+
+        if (this.item != null) {
+        
+     
+
+        }
+      }
+    }
+  }
+   async goBack(settings?:BackToListSettings) {
+    if (settings == null ){
+      settings = new BackToListSettings();
+      settings.RefreshData= false;
+      settings.RestartPaging = false;
+      settings.Route = this.defaultHref;
+    }
+    this.sfsService.SetNavigationData(settings);
+    this.navCtrl.navigateBack(settings.Route, { animated: true });
+  }
+ 
+  async saveData() {
+    this.savingStart();
+    if (this.form.valid == true) {
+    
+       // this.item = this.form.value;
+	  if (this.item == null ){
+	     this.item = new  <#= entity.Name #>Model();
+	  }
+	  Object.assign(this.item, this.form.value);
+      this.item.<#= propertyId.Name #> = this.guidItem;
+      
+      let apiResponse: ApiResponse<any> = null;
+      console.log("after create or save", this.guidItem);
+      if (this.guidItem != null) {
+        apiResponse = await  this.bizAppService.Update(this.item, <#= entity.Name #>Model._EntitySetName, this.visibleFields.join(","));
+      } else {
+        apiResponse = await  this.bizAppService.Create(this.item, <#= entity.Name #>Model._EntitySetName);
+      }
+      if (apiResponse.status == 'success') {
+        this.savingEnd();
+        let result = await this.showOk();
+        if (result == true){
+              if (this.guidItem == null ){
+                    this.goBack({ RestartPaging: true, RefreshData: true,  Route: this.defaultHref });
+               }else{
+                    this.goBack({ RestartPaging: false, RefreshData: false, ItemUpdated: this.item,  Route:  this.defaultHref });
+               }
+        }
+      }
+    }
+  }
+
+}
+
+<#+ 	
+}
+#>

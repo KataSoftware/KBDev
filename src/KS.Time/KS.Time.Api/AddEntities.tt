@@ -1,0 +1,131 @@
+﻿<#@ template hostspecific="True"  debug="True" language="C#" #>
+<#@ output extension="cs"  #>
+<#@ assembly name="System.Core.dll" #>
+<#@ import namespace="SFS.VSExtension2019.Model" #> 
+<#@ import namespace="SFS.VSExtension2019.EngTool" #> 
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #> 
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+<#@ dom processor="SFSEdmxProcessor"  
+requires="EntityModel='KSTimeModel.edmx'"  #>
+using SFS.Core.My;
+using SFS.Core.Security.BusinessObjects;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KS.Time.Api
+{
+   public class AddEntities
+    {
+        public static void AddOrUpdateEntitiesAsync()
+        {
+            System.Threading.Tasks.Task.Run(() =>
+                            AddOrUpdateEntities()
+                        );
+        }
+
+        public static void AddOrUpdateEntities()
+        {
+            try
+            {
+                //SFS.Core.My.EventLog.Action("creating entities");
+                secModule module = SFS.Core.Cache.Caching.SystemObjects.GetModuleByKey("<#= this.Model.SafeNamespace #>");
+                SFS.Core.Security.BR.secBusinessObjectsBR brObjects = new SFS.Core.Security.BR.secBusinessObjectsBR(true);
+                ContextRequest context = new ContextRequest();
+                context.User = new secUser();
+                context.Company = new secCompany();
+				secBusinessObject entity;
+<#	 
+
+    foreach (var entity in this.Model.Entities)
+    {
+#>
+				if (brObjects.GetCount(p => p.BusinessObjectKey == "<#= entity.Name #>" && p.secModule.GuidModule == module.GuidModule, context) == 0)
+                {
+					entity = new secBusinessObject();
+                    entity.GuidModule = module.GuidModule;
+                    entity.Name = "<#= entity.Name #>";
+					entity.EntitySetName = "<#= entity.SetName #>";
+                    entity.BusinessObjectKey = "<#= entity.Name #>";
+                    entity = SFS.Core.Security.BR.secBusinessObjectsBR.Instance.Create(entity, context);
+                }
+	
+<#		 
+    }
+            
+			
+#>
+
+   }
+            catch (Exception ex)
+            {
+                SFS.Core.My.EventLog.Exception(ex);
+            }
+
+        }
+    }
+}
+<#+
+public bool IsPropertyWritable(PropertyInfo property){
+	bool result = true ;
+	if (property.Name == "Bytes"
+		){
+		result = false;
+
+    }
+
+		return result;
+}
+public object GetCustomProperty(ModelInfo model, string customPropertyName, string propertyType){
+	object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		
+			
+		//Write(property.CustomProperties.Count().ToString());
+
+		CustomPropertyInfo cp = model.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+public bool IsForPartial(string fileFullName, string[] parts){
+	
+	bool result = false;
+		foreach(var part in parts){
+			if (fileFullName.Contains(part.Replace("/", "\\")))
+			{
+				return true;
+			}
+		}
+
+		return result;
+
+}
+public bool IsReplacable(string fileFullName, string[] parts){
+	bool result = false;
+		foreach(var part in parts){
+			if (fileFullName.EndsWith(part))
+			{
+				return true;
+			}
+		}
+
+		return result;
+		
+}
+#>

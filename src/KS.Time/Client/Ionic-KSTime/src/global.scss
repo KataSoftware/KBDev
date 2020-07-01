@@ -1,0 +1,109 @@
+// http://ionicframework.com/docs/theming/
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~@ionic/angular/css/display.css';
+$grayCame: #414042;
+$redCame: #f32735;
+// @font-face {
+//     font-family: 'LatoRegular';
+//     src: url('/assets/fontCame/Lato-Regular.woff2') format('woff2'),
+//         url('/assets/fontCame/Lato-Regular.woff') format('woff');
+//     font-weight: normal;
+//     font-style: normal;
+//     font-display: swap;
+// }
+// @font-face {
+//     font-family: 'LatoBlack';
+//     src: url('/assets/fontCame/Lato-Black.woff2') format('woff2'),
+//         url('/assets/fontCame/Lato-Black.woff') format('woff');
+//     font-weight: 900;
+//     font-style: normal;
+//     font-display: swap;
+// }
+
+// @font-face {
+//     font-family: 'LatoLight';
+//     src: url('/assets/fontCame/Lato-Light.woff2') format('woff2'),
+//         url('/assets/fontCame/Lato-Light.woff') format('woff');
+//     font-weight: 300;
+//     font-style: normal;
+//     font-display: swap;
+// }
+
+// @font-face {
+//     font-family: 'LatoItalic';
+//     src: url('/assets/fontCame/Lato-Italic.woff2') format('woff2'),
+//         url('/assets/fontCame/Lato-Italic.woff') format('woff');
+//     font-weight: normal;
+//     font-style: italic;
+//     font-display: swap;
+// }
+
+// @font-face {
+//     font-family: 'LatoBold';
+//     src: url('/assets/fontCame/Lato-Bold.woff2') format('woff2'),
+//         url('/assets/fontCame/Lato-Bold.woff') format('woff');
+//     font-weight: bold;
+//     font-style: normal;
+//     font-display: swap;
+// }
+
+// $regular:'LatoRegular';
+// $light:'LatoLight';
+// $bold:'LatoBold';
+// $black:'LatoBlack';
+// $italic:'LatoItalic';
+.noPadding{
+    padding: 0!important;
+}
+sfs-table .table tbody tr td:nth-child(2), sfs-table .table thead tr th:nth-child(2){
+    color: #0831A5;
+    width: 100%;
+    position: relative;
+    font-weight: bold;
+    //padding-left: 20px;
+    
+  }
+  sfs-table .table-striped tbody tr:nth-of-type(odd){
+    background-color: white;
+  }
+  sfs-table .table-striped tbody tr:nth-of-type(even){
+    background-color:  white;
+  } 
+
+  sfs-table .table td{
+    //border-width: 0px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    //text-align: right;
+  }
+  sfs-table .table td div{
+    padding:0px;
+    margin:0px;
+  }
+
+  sfs-table .table td.updated,  sfs-table .table th.updated{
+    padding-right: 2px;
+    text-align: right;
+    color:grey;
+  }
+  sfs-table .table td.actions,  sfs-table .table th.actions{
+    padding-left: 2px;
+  }
+  sfs-table .table td.actions button{
+    background-color: white;
+  }
+
+  td.activities-0{
+    background-color: rgb(255, 219, 187);
+  }
+

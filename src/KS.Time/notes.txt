@@ -1,0 +1,1 @@
+%SYSTEMROOT%\System32\inetsrv\appcmd stop apppool /apppool.name:"ShellAYP"

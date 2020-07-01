@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SfsModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Entities>
+    <Entity Name="unProxyBusinessObject" SetName="unProxyBusinessObjects" IsUIVisible="false" GenerateCRUD="true" IsForLocalization="false" IsCustom="true" IsView="false" DefaultProperty="Name">
+      <EntityKeys>
+        <EntityKey PropertyName="GuidBusinessObject" IsCustom="false" />
+      </EntityKeys>
+      <Properties>
+
+        <Property Name="GuidBusinessObject" Type="Guid"  Nullable="false"  IsPrimaryKey="true" >
+
+        </Property>
+        <Property Name="Name" Type="String"  Nullable="true" MaxLength="255">
+
+        </Property>
+
+        <Property Name="BusinessObjectKey" Type="String"   Nullable="true" MaxLength="100">
+
+        </Property>
+
+        <Property Name="EntitySetName" Type="String"  Nullable="true" MaxLength="100">
+
+        </Property>
+      </Properties>
+     
+    </Entity>
+  </Entities>
+</SfsModel>

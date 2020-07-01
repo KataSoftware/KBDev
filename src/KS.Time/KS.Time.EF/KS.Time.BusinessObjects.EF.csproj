@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KS.Time.BusinessObjects\KS.Time.BusinessObjects.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ModelEFCore.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelEFCore.cs</LastGenOutput>
+    </None>
+    <None Update="SqlIndexes.sql">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SqlIndexes.tt</DependentUpon>
+    </None>
+    <None Update="SqlIndexes.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SqlIndexes.sql</LastGenOutput>
+    </None>
+    <None Update="SqlSystemFields.sql">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SqlSystemFields.tt</DependentUpon>
+    </None>
+    <None Update="SqlSystemFields.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SqlSystemFields.sql</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ModelEFCore.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ModelEFCore.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

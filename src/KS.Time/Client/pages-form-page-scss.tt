@@ -1,0 +1,17 @@
+<#@ output  extension="ts" #>
+<#@ template language="C#" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ import namespace="SFS.VSExtension2019.Model" #>
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+<#+ void GeneratePageFormSCSS(EntityInfo entity)
+{ 
+
+	#>
+
+
+<#+ 	
+}
+#>

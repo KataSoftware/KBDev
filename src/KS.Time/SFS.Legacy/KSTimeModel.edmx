@@ -1,0 +1,1404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KSTimeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="KstActivity">
+          <Key>
+            <PropertyRef Name="GuidActivity" />
+          </Key>
+          <Property Name="GuidActivity" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="GuidProject" Type="uniqueidentifier" />
+          <Property Name="IsCustomByUser" Type="bit" Nullable="false" />
+          <Property Name="GuidCompany" Type="uniqueidentifier" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="BizKeyEngine" Type="varchar" MaxLength="32" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Bytes" Type="int" />
+        </EntityType>
+        <EntityType Name="KstEmailTemplate">
+          <Key>
+            <PropertyRef Name="GuidEmailTemplate" />
+          </Key>
+          <Property Name="GuidEmailTemplate" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TitleKey" Type="varchar" MaxLength="20" />
+          <Property Name="Content" Type="varchar(max)" />
+          <Property Name="GuidCompany" Type="uniqueidentifier" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="BizKeyEngine" Type="varchar" MaxLength="32" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Bytes" Type="int" />
+        </EntityType>
+        <EntityType Name="KstFile">
+          <Key>
+            <PropertyRef Name="GuidFile" />
+          </Key>
+          <Property Name="GuidFile" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FileType" Type="varchar" MaxLength="255" />
+          <Property Name="FileData" Type="varbinary(max)" />
+          <Property Name="FileStorage" Type="varchar" MaxLength="500" />
+          <Property Name="ContainerStorage" Type="varchar" MaxLength="255" />
+          <Property Name="FileThumbSizes" Type="varchar" MaxLength="255" />
+          <Property Name="FileSize" Type="bigint" />
+          <Property Name="GuidCompany" Type="uniqueidentifier" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="BizKeyEngine" Type="varchar" MaxLength="32" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Bytes" Type="int" />
+        </EntityType>
+        <EntityType Name="KstProject">
+          <Key>
+            <PropertyRef Name="GuidProject" />
+          </Key>
+          <Property Name="GuidProject" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="GuidCompany" Type="uniqueidentifier" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="BizKeyEngine" Type="varchar" MaxLength="32" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Bytes" Type="int" />
+        </EntityType>
+        <EntityType Name="KstProjectFile">
+          <Key>
+            <PropertyRef Name="GuidProjectFile" />
+          </Key>
+          <Property Name="GuidProjectFile" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GuidProject" Type="uniqueidentifier" />
+          <Property Name="GuidFile" Type="uniqueidentifier" />
+          <Property Name="GuidCompany" Type="uniqueidentifier" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="BizKeyEngine" Type="varchar" MaxLength="32" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Bytes" Type="int" />
+        </EntityType>
+        <EntityType Name="KstProjectUser">
+          <Key>
+            <PropertyRef Name="GuidProjectUser" />
+          </Key>
+          <Property Name="GuidProjectUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GuidProject" Type="uniqueidentifier" />
+          <Property Name="GuidUser" Type="uniqueidentifier" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="GuidCompany" Type="uniqueidentifier" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="BizKeyEngine" Type="varchar" MaxLength="32" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Bytes" Type="int" />
+        </EntityType>
+        <EntityType Name="KstProxyGeoCity">
+          <Key>
+            <PropertyRef Name="GuidCity" />
+          </Key>
+          <Property Name="GuidCity" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="GuidState" Type="uniqueidentifier" />
+          <Property Name="GuidParent" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="KstProxyGeoCountry">
+          <Key>
+            <PropertyRef Name="GuidCountry" />
+          </Key>
+          <Property Name="GuidCountry" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="KstProxyGeoState">
+          <Key>
+            <PropertyRef Name="GuidState" />
+          </Key>
+          <Property Name="GuidState" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="GuidCountry" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="KstProxyRole">
+          <Key>
+            <PropertyRef Name="GuidRole" />
+          </Key>
+          <Property Name="GuidRole" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="NameKey" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="KstProxyUser">
+          <Key>
+            <PropertyRef Name="GuidUser" />
+          </Key>
+          <Property Name="GuidUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="150" />
+          <Property Name="Username" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="255" />
+          <Property Name="FirstName" Type="varchar" MaxLength="255" />
+          <Property Name="LastName" Type="varchar" MaxLength="255" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+          <Property Name="GuidRole" Type="uniqueidentifier" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Disabled" Type="bit" />
+        </EntityType>
+        <EntityType Name="KstUserFile">
+          <Key>
+            <PropertyRef Name="GuidUserFile" />
+          </Key>
+          <Property Name="GuidUserFile" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GuidUser" Type="uniqueidentifier" />
+          <Property Name="GuidFile" Type="uniqueidentifier" />
+          <Property Name="IsProfileDefault" Type="bit" />
+          <Property Name="GuidCompany" Type="uniqueidentifier" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="BizKeyEngine" Type="varchar" MaxLength="32" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Bytes" Type="int" />
+        </EntityType>
+        <EntityType Name="KstWorkTime">
+          <Key>
+            <PropertyRef Name="GuidWorkTime" />
+          </Key>
+          <Property Name="GuidWorkTime" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="255" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
+          <Property Name="Hours" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="GuidProject" Type="uniqueidentifier" />
+          <Property Name="GuidActivity" Type="uniqueidentifier" />
+          <Property Name="GuidCompany" Type="uniqueidentifier" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="BizKeyEngine" Type="varchar" MaxLength="32" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Bytes" Type="int" />
+        </EntityType>
+        <EntityType Name="KstWorkTimeFile">
+          <Key>
+            <PropertyRef Name="GuidWorkTimeFile" />
+          </Key>
+          <Property Name="GuidWorkTimeFile" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GuidWorkTime" Type="uniqueidentifier" />
+          <Property Name="GuidFile" Type="uniqueidentifier" />
+          <Property Name="GuidCompany" Type="uniqueidentifier" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="BizKeyEngine" Type="varchar" MaxLength="32" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Bytes" Type="int" />
+        </EntityType>
+        <Association Name="fk_KstActivity_KstProject">
+          <End Role="KstProject" Type="Self.KstProject" Multiplicity="0..1" />
+          <End Role="KstActivity" Type="Self.KstActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProject">
+              <PropertyRef Name="GuidProject" />
+            </Principal>
+            <Dependent Role="KstActivity">
+              <PropertyRef Name="GuidProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstProjectFile_KstFile">
+          <End Role="KstFile" Type="Self.KstFile" Multiplicity="0..1" />
+          <End Role="KstProjectFile" Type="Self.KstProjectFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstFile">
+              <PropertyRef Name="GuidFile" />
+            </Principal>
+            <Dependent Role="KstProjectFile">
+              <PropertyRef Name="GuidFile" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstProjectFile_KstProject">
+          <End Role="KstProject" Type="Self.KstProject" Multiplicity="0..1" />
+          <End Role="KstProjectFile" Type="Self.KstProjectFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProject">
+              <PropertyRef Name="GuidProject" />
+            </Principal>
+            <Dependent Role="KstProjectFile">
+              <PropertyRef Name="GuidProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstProjectUser_KstProject">
+          <End Role="KstProject" Type="Self.KstProject" Multiplicity="0..1" />
+          <End Role="KstProjectUser" Type="Self.KstProjectUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProject">
+              <PropertyRef Name="GuidProject" />
+            </Principal>
+            <Dependent Role="KstProjectUser">
+              <PropertyRef Name="GuidProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstProjectUser_KstProxyUser">
+          <End Role="KstProxyUser" Type="Self.KstProxyUser" Multiplicity="0..1" />
+          <End Role="KstProjectUser" Type="Self.KstProjectUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProxyUser">
+              <PropertyRef Name="GuidUser" />
+            </Principal>
+            <Dependent Role="KstProjectUser">
+              <PropertyRef Name="GuidUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstProxyGeoCity_KstProxyGeoCity">
+          <End Role="KstProxyGeoCity" Type="Self.KstProxyGeoCity" Multiplicity="0..1" />
+          <End Role="KstProxyGeoCity1" Type="Self.KstProxyGeoCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProxyGeoCity">
+              <PropertyRef Name="GuidCity" />
+            </Principal>
+            <Dependent Role="KstProxyGeoCity1">
+              <PropertyRef Name="GuidParent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstProxyGeoCity_KstProxyGeoState">
+          <End Role="KstProxyGeoState" Type="Self.KstProxyGeoState" Multiplicity="0..1" />
+          <End Role="KstProxyGeoCity" Type="Self.KstProxyGeoCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProxyGeoState">
+              <PropertyRef Name="GuidState" />
+            </Principal>
+            <Dependent Role="KstProxyGeoCity">
+              <PropertyRef Name="GuidState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstProxyGeoState_KstProxyGeoCountry">
+          <End Role="KstProxyGeoCountry" Type="Self.KstProxyGeoCountry" Multiplicity="0..1" />
+          <End Role="KstProxyGeoState" Type="Self.KstProxyGeoState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProxyGeoCountry">
+              <PropertyRef Name="GuidCountry" />
+            </Principal>
+            <Dependent Role="KstProxyGeoState">
+              <PropertyRef Name="GuidCountry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstProxyUser_KstProxyRole">
+          <End Role="KstProxyRole" Type="Self.KstProxyRole" Multiplicity="0..1" />
+          <End Role="KstProxyUser" Type="Self.KstProxyUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProxyRole">
+              <PropertyRef Name="GuidRole" />
+            </Principal>
+            <Dependent Role="KstProxyUser">
+              <PropertyRef Name="GuidRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstUserFile_KstFile">
+          <End Role="KstFile" Type="Self.KstFile" Multiplicity="0..1" />
+          <End Role="KstUserFile" Type="Self.KstUserFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstFile">
+              <PropertyRef Name="GuidFile" />
+            </Principal>
+            <Dependent Role="KstUserFile">
+              <PropertyRef Name="GuidFile" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstUserFile_KstProxyUser">
+          <End Role="KstProxyUser" Type="Self.KstProxyUser" Multiplicity="0..1" />
+          <End Role="KstUserFile" Type="Self.KstUserFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProxyUser">
+              <PropertyRef Name="GuidUser" />
+            </Principal>
+            <Dependent Role="KstUserFile">
+              <PropertyRef Name="GuidUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstWorkTime_KstActivity">
+          <End Role="KstActivity" Type="Self.KstActivity" Multiplicity="0..1" />
+          <End Role="KstWorkTime" Type="Self.KstWorkTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstActivity">
+              <PropertyRef Name="GuidActivity" />
+            </Principal>
+            <Dependent Role="KstWorkTime">
+              <PropertyRef Name="GuidActivity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstWorkTime_KstProject">
+          <End Role="KstProject" Type="Self.KstProject" Multiplicity="0..1" />
+          <End Role="KstWorkTime" Type="Self.KstWorkTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProject">
+              <PropertyRef Name="GuidProject" />
+            </Principal>
+            <Dependent Role="KstWorkTime">
+              <PropertyRef Name="GuidProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstWorkTimeFile_KstFile">
+          <End Role="KstFile" Type="Self.KstFile" Multiplicity="0..1" />
+          <End Role="KstWorkTimeFile" Type="Self.KstWorkTimeFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstFile">
+              <PropertyRef Name="GuidFile" />
+            </Principal>
+            <Dependent Role="KstWorkTimeFile">
+              <PropertyRef Name="GuidFile" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstWorkTimeFile_KstWorkTime">
+          <End Role="KstWorkTime" Type="Self.KstWorkTime" Multiplicity="0..1" />
+          <End Role="KstWorkTimeFile" Type="Self.KstWorkTimeFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstWorkTime">
+              <PropertyRef Name="GuidWorkTime" />
+            </Principal>
+            <Dependent Role="KstWorkTimeFile">
+              <PropertyRef Name="GuidWorkTime" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KSTimeModelStoreContainer">
+          <EntitySet Name="KstActivity" EntityType="Self.KstActivity" Schema="Kst" store:Type="Tables" />
+          <EntitySet Name="KstEmailTemplate" EntityType="Self.KstEmailTemplate" Schema="Kst" store:Type="Tables" />
+          <EntitySet Name="KstFile" EntityType="Self.KstFile" Schema="Kst" store:Type="Tables" />
+          <EntitySet Name="KstProject" EntityType="Self.KstProject" Schema="Kst" store:Type="Tables" />
+          <EntitySet Name="KstProjectFile" EntityType="Self.KstProjectFile" Schema="Kst" store:Type="Tables" />
+          <EntitySet Name="KstProjectUser" EntityType="Self.KstProjectUser" Schema="Kst" store:Type="Tables" />
+          <EntitySet Name="KstProxyGeoCity" EntityType="Self.KstProxyGeoCity" Schema="Kst" store:Type="Tables" />
+          <EntitySet Name="KstProxyGeoCountry" EntityType="Self.KstProxyGeoCountry" Schema="Kst" store:Type="Tables" />
+          <EntitySet Name="KstProxyGeoState" EntityType="Self.KstProxyGeoState" Schema="Kst" store:Type="Tables" />
+          <EntitySet Name="KstProxyRole" EntityType="Self.KstProxyRole" Schema="Kst" store:Type="Tables" />
+          <EntitySet Name="KstProxyUser" EntityType="Self.KstProxyUser" Schema="Kst" store:Type="Tables" />
+          <EntitySet Name="KstUserFile" EntityType="Self.KstUserFile" Schema="Kst" store:Type="Tables" />
+          <EntitySet Name="KstWorkTime" EntityType="Self.KstWorkTime" Schema="Kst" store:Type="Tables" />
+          <EntitySet Name="KstWorkTimeFile" EntityType="Self.KstWorkTimeFile" Schema="Kst" store:Type="Tables" />
+          <AssociationSet Name="fk_KstActivity_KstProject" Association="Self.fk_KstActivity_KstProject">
+            <End Role="KstProject" EntitySet="KstProject" />
+            <End Role="KstActivity" EntitySet="KstActivity" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstProjectFile_KstFile" Association="Self.fk_KstProjectFile_KstFile">
+            <End Role="KstFile" EntitySet="KstFile" />
+            <End Role="KstProjectFile" EntitySet="KstProjectFile" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstProjectFile_KstProject" Association="Self.fk_KstProjectFile_KstProject">
+            <End Role="KstProject" EntitySet="KstProject" />
+            <End Role="KstProjectFile" EntitySet="KstProjectFile" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstProjectUser_KstProject" Association="Self.fk_KstProjectUser_KstProject">
+            <End Role="KstProject" EntitySet="KstProject" />
+            <End Role="KstProjectUser" EntitySet="KstProjectUser" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstProjectUser_KstProxyUser" Association="Self.fk_KstProjectUser_KstProxyUser">
+            <End Role="KstProxyUser" EntitySet="KstProxyUser" />
+            <End Role="KstProjectUser" EntitySet="KstProjectUser" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstProxyGeoCity_KstProxyGeoCity" Association="Self.fk_KstProxyGeoCity_KstProxyGeoCity">
+            <End Role="KstProxyGeoCity" EntitySet="KstProxyGeoCity" />
+            <End Role="KstProxyGeoCity1" EntitySet="KstProxyGeoCity" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstProxyGeoCity_KstProxyGeoState" Association="Self.fk_KstProxyGeoCity_KstProxyGeoState">
+            <End Role="KstProxyGeoState" EntitySet="KstProxyGeoState" />
+            <End Role="KstProxyGeoCity" EntitySet="KstProxyGeoCity" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstProxyGeoState_KstProxyGeoCountry" Association="Self.fk_KstProxyGeoState_KstProxyGeoCountry">
+            <End Role="KstProxyGeoCountry" EntitySet="KstProxyGeoCountry" />
+            <End Role="KstProxyGeoState" EntitySet="KstProxyGeoState" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstProxyUser_KstProxyRole" Association="Self.fk_KstProxyUser_KstProxyRole">
+            <End Role="KstProxyRole" EntitySet="KstProxyRole" />
+            <End Role="KstProxyUser" EntitySet="KstProxyUser" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstUserFile_KstFile" Association="Self.fk_KstUserFile_KstFile">
+            <End Role="KstFile" EntitySet="KstFile" />
+            <End Role="KstUserFile" EntitySet="KstUserFile" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstUserFile_KstProxyUser" Association="Self.fk_KstUserFile_KstProxyUser">
+            <End Role="KstProxyUser" EntitySet="KstProxyUser" />
+            <End Role="KstUserFile" EntitySet="KstUserFile" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstWorkTime_KstActivity" Association="Self.fk_KstWorkTime_KstActivity">
+            <End Role="KstActivity" EntitySet="KstActivity" />
+            <End Role="KstWorkTime" EntitySet="KstWorkTime" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstWorkTime_KstProject" Association="Self.fk_KstWorkTime_KstProject">
+            <End Role="KstProject" EntitySet="KstProject" />
+            <End Role="KstWorkTime" EntitySet="KstWorkTime" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstWorkTimeFile_KstFile" Association="Self.fk_KstWorkTimeFile_KstFile">
+            <End Role="KstFile" EntitySet="KstFile" />
+            <End Role="KstWorkTimeFile" EntitySet="KstWorkTimeFile" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstWorkTimeFile_KstWorkTime" Association="Self.fk_KstWorkTimeFile_KstWorkTime">
+            <End Role="KstWorkTime" EntitySet="KstWorkTime" />
+            <End Role="KstWorkTimeFile" EntitySet="KstWorkTimeFile" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KSTimeModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="KSTimeContext" a:LazyLoadingEnabled="false" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="KstEmailTemplates" EntityType="KSTimeModel.KstEmailTemplate" />
+          <EntitySet Name="KstProxyGeoCities" EntityType="KSTimeModel.KstProxyGeoCity" />
+          <EntitySet Name="KstProxyGeoCountries" EntityType="KSTimeModel.KstProxyGeoCountry" />
+          <EntitySet Name="KstProxyGeoStates" EntityType="KSTimeModel.KstProxyGeoState" />
+          <AssociationSet Name="fk_KstProxyGeoCity_KstProxyGeoCity" Association="KSTimeModel.fk_KstProxyGeoCity_KstProxyGeoCity">
+            <End Role="KstProxyGeoCity" EntitySet="KstProxyGeoCities" />
+            <End Role="KstProxyGeoCity1" EntitySet="KstProxyGeoCities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstProxyGeoCity_KstProxyGeoState" Association="KSTimeModel.fk_KstProxyGeoCity_KstProxyGeoState">
+            <End Role="KstProxyGeoState" EntitySet="KstProxyGeoStates" />
+            <End Role="KstProxyGeoCity" EntitySet="KstProxyGeoCities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstProxyGeoState_KstProxyGeoCountry" Association="KSTimeModel.fk_KstProxyGeoState_KstProxyGeoCountry">
+            <End Role="KstProxyGeoCountry" EntitySet="KstProxyGeoCountries" />
+            <End Role="KstProxyGeoState" EntitySet="KstProxyGeoStates" />
+          </AssociationSet>
+          <EntitySet Name="KstActivities" EntityType="KSTimeModel.KstActivity" />
+          <EntitySet Name="KstProjects" EntityType="KSTimeModel.KstProject" />
+          <EntitySet Name="KstProjectUsers" EntityType="KSTimeModel.KstProjectUser" />
+          <EntitySet Name="KstWorkTimes" EntityType="KSTimeModel.KstWorkTime" />
+          <AssociationSet Name="fk_KstActivity_KstProject" Association="KSTimeModel.fk_KstActivity_KstProject">
+            <End Role="KstProject" EntitySet="KstProjects" />
+            <End Role="KstActivity" EntitySet="KstActivities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstWorkTime_KstActivity" Association="KSTimeModel.fk_KstWorkTime_KstActivity">
+            <End Role="KstActivity" EntitySet="KstActivities" />
+            <End Role="KstWorkTime" EntitySet="KstWorkTimes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstProjectUser_KstProject" Association="KSTimeModel.fk_KstProjectUser_KstProject">
+            <End Role="KstProject" EntitySet="KstProjects" />
+            <End Role="KstProjectUser" EntitySet="KstProjectUsers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstWorkTime_KstProject" Association="KSTimeModel.fk_KstWorkTime_KstProject">
+            <End Role="KstProject" EntitySet="KstProjects" />
+            <End Role="KstWorkTime" EntitySet="KstWorkTimes" />
+          </AssociationSet>
+          <EntitySet Name="KstFiles" EntityType="KSTimeModel.KstFile" />
+          <EntitySet Name="KstProjectFiles" EntityType="KSTimeModel.KstProjectFile" />
+          <EntitySet Name="KstUserFiles" EntityType="KSTimeModel.KstUserFile" />
+          <EntitySet Name="KstWorkTimeFiles" EntityType="KSTimeModel.KstWorkTimeFile" />
+          <AssociationSet Name="fk_KstProjectFile_KstFile" Association="KSTimeModel.fk_KstProjectFile_KstFile">
+            <End Role="KstFile" EntitySet="KstFiles" />
+            <End Role="KstProjectFile" EntitySet="KstProjectFiles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstUserFile_KstFile" Association="KSTimeModel.fk_KstUserFile_KstFile">
+            <End Role="KstFile" EntitySet="KstFiles" />
+            <End Role="KstUserFile" EntitySet="KstUserFiles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstWorkTimeFile_KstFile" Association="KSTimeModel.fk_KstWorkTimeFile_KstFile">
+            <End Role="KstFile" EntitySet="KstFiles" />
+            <End Role="KstWorkTimeFile" EntitySet="KstWorkTimeFiles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstProjectFile_KstProject" Association="KSTimeModel.fk_KstProjectFile_KstProject">
+            <End Role="KstProject" EntitySet="KstProjects" />
+            <End Role="KstProjectFile" EntitySet="KstProjectFiles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstWorkTimeFile_KstWorkTime" Association="KSTimeModel.fk_KstWorkTimeFile_KstWorkTime">
+            <End Role="KstWorkTime" EntitySet="KstWorkTimes" />
+            <End Role="KstWorkTimeFile" EntitySet="KstWorkTimeFiles" />
+          </AssociationSet>
+          <EntitySet Name="KstProxyRoles" EntityType="KSTimeModel.KstProxyRole" />
+          <EntitySet Name="KstProxyUsers" EntityType="KSTimeModel.KstProxyUser" />
+          <AssociationSet Name="fk_KstProjectUser_KstProxyUser" Association="KSTimeModel.fk_KstProjectUser_KstProxyUser">
+            <End Role="KstProxyUser" EntitySet="KstProxyUsers" />
+            <End Role="KstProjectUser" EntitySet="KstProjectUsers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstProxyUser_KstProxyRole" Association="KSTimeModel.fk_KstProxyUser_KstProxyRole">
+            <End Role="KstProxyRole" EntitySet="KstProxyRoles" />
+            <End Role="KstProxyUser" EntitySet="KstProxyUsers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstUserFile_KstProxyUser" Association="KSTimeModel.fk_KstUserFile_KstProxyUser">
+            <End Role="KstProxyUser" EntitySet="KstProxyUsers" />
+            <End Role="KstUserFile" EntitySet="KstUserFiles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="KstEmailTemplate">
+          <Key>
+            <PropertyRef Name="GuidEmailTemplate" />
+          </Key>
+          <Property Name="GuidEmailTemplate" Type="Guid" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TitleKey" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="GuidCompany" Type="Guid" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="BizKeyEngine" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Bytes" Type="Int32" />
+        </EntityType>
+        <EntityType Name="KstProxyGeoCity">
+          <Key>
+            <PropertyRef Name="GuidCity" />
+          </Key>
+          <Property Name="GuidCity" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="GuidState" Type="Guid" />
+          <Property Name="GuidParent" Type="Guid" />
+          <NavigationProperty Name="KstProxyGeoCity1" Relationship="KSTimeModel.fk_KstProxyGeoCity_KstProxyGeoCity" FromRole="KstProxyGeoCity" ToRole="KstProxyGeoCity1" />
+          <NavigationProperty Name="KstProxyGeoCity2" Relationship="KSTimeModel.fk_KstProxyGeoCity_KstProxyGeoCity" FromRole="KstProxyGeoCity1" ToRole="KstProxyGeoCity" />
+          <NavigationProperty Name="KstProxyGeoState" Relationship="KSTimeModel.fk_KstProxyGeoCity_KstProxyGeoState" FromRole="KstProxyGeoCity" ToRole="KstProxyGeoState" />
+        </EntityType>
+        <EntityType Name="KstProxyGeoCountry">
+          <Key>
+            <PropertyRef Name="GuidCountry" />
+          </Key>
+          <Property Name="GuidCountry" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="KstProxyGeoStates" Relationship="KSTimeModel.fk_KstProxyGeoState_KstProxyGeoCountry" FromRole="KstProxyGeoCountry" ToRole="KstProxyGeoState" />
+        </EntityType>
+        <EntityType Name="KstProxyGeoState">
+          <Key>
+            <PropertyRef Name="GuidState" />
+          </Key>
+          <Property Name="GuidState" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="GuidCountry" Type="Guid" />
+          <NavigationProperty Name="KstProxyGeoCities" Relationship="KSTimeModel.fk_KstProxyGeoCity_KstProxyGeoState" FromRole="KstProxyGeoState" ToRole="KstProxyGeoCity" />
+          <NavigationProperty Name="KstProxyGeoCountry" Relationship="KSTimeModel.fk_KstProxyGeoState_KstProxyGeoCountry" FromRole="KstProxyGeoState" ToRole="KstProxyGeoCountry" />
+        </EntityType>
+        <Association Name="fk_KstProxyGeoCity_KstProxyGeoCity">
+          <End Type="KSTimeModel.KstProxyGeoCity" Role="KstProxyGeoCity" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstProxyGeoCity" Role="KstProxyGeoCity1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProxyGeoCity">
+              <PropertyRef Name="GuidCity" />
+            </Principal>
+            <Dependent Role="KstProxyGeoCity1">
+              <PropertyRef Name="GuidParent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstProxyGeoCity_KstProxyGeoState">
+          <End Type="KSTimeModel.KstProxyGeoState" Role="KstProxyGeoState" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstProxyGeoCity" Role="KstProxyGeoCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProxyGeoState">
+              <PropertyRef Name="GuidState" />
+            </Principal>
+            <Dependent Role="KstProxyGeoCity">
+              <PropertyRef Name="GuidState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstProxyGeoState_KstProxyGeoCountry">
+          <End Type="KSTimeModel.KstProxyGeoCountry" Role="KstProxyGeoCountry" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstProxyGeoState" Role="KstProxyGeoState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProxyGeoCountry">
+              <PropertyRef Name="GuidCountry" />
+            </Principal>
+            <Dependent Role="KstProxyGeoState">
+              <PropertyRef Name="GuidCountry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="KstActivity">
+          <Key>
+            <PropertyRef Name="GuidActivity" />
+          </Key>
+          <Property Name="GuidActivity" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GuidProject" Type="Guid" />
+          <Property Name="IsCustomByUser" Type="Boolean" Nullable="false" />
+          <Property Name="GuidCompany" Type="Guid" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="BizKeyEngine" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Bytes" Type="Int32" />
+          <NavigationProperty Name="KstProject" Relationship="KSTimeModel.fk_KstActivity_KstProject" FromRole="KstActivity" ToRole="KstProject" />
+          <NavigationProperty Name="KstWorkTimes" Relationship="KSTimeModel.fk_KstWorkTime_KstActivity" FromRole="KstActivity" ToRole="KstWorkTime" />
+        </EntityType>
+        <EntityType Name="KstProject">
+          <Key>
+            <PropertyRef Name="GuidProject" />
+          </Key>
+          <Property Name="GuidProject" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GuidCompany" Type="Guid" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="BizKeyEngine" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Bytes" Type="Int32" />
+          <NavigationProperty Name="KstActivities" Relationship="KSTimeModel.fk_KstActivity_KstProject" FromRole="KstProject" ToRole="KstActivity" />
+          <NavigationProperty Name="KstProjectUsers" Relationship="KSTimeModel.fk_KstProjectUser_KstProject" FromRole="KstProject" ToRole="KstProjectUser" />
+          <NavigationProperty Name="KstWorkTimes" Relationship="KSTimeModel.fk_KstWorkTime_KstProject" FromRole="KstProject" ToRole="KstWorkTime" />
+          <NavigationProperty Name="KstProjectFiles" Relationship="KSTimeModel.fk_KstProjectFile_KstProject" FromRole="KstProject" ToRole="KstProjectFile" />
+        </EntityType>
+        <EntityType Name="KstProjectUser">
+          <Key>
+            <PropertyRef Name="GuidProjectUser" />
+          </Key>
+          <Property Name="GuidProjectUser" Type="Guid" Nullable="false" />
+          <Property Name="GuidProject" Type="Guid" />
+          <Property Name="GuidUser" Type="Guid" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="GuidCompany" Type="Guid" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="BizKeyEngine" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Bytes" Type="Int32" />
+          <NavigationProperty Name="KstProject" Relationship="KSTimeModel.fk_KstProjectUser_KstProject" FromRole="KstProjectUser" ToRole="KstProject" />
+          <NavigationProperty Name="KstProxyUser" Relationship="KSTimeModel.fk_KstProjectUser_KstProxyUser" FromRole="KstProjectUser" ToRole="KstProxyUser" />
+        </EntityType>
+        <EntityType Name="KstWorkTime">
+          <Key>
+            <PropertyRef Name="GuidWorkTime" />
+          </Key>
+          <Property Name="GuidWorkTime" Type="Guid" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Comments" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Hours" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="GuidProject" Type="Guid" />
+          <Property Name="GuidActivity" Type="Guid" />
+          <Property Name="GuidCompany" Type="Guid" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="BizKeyEngine" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Bytes" Type="Int32" />
+          <NavigationProperty Name="KstActivity" Relationship="KSTimeModel.fk_KstWorkTime_KstActivity" FromRole="KstWorkTime" ToRole="KstActivity" />
+          <NavigationProperty Name="KstProject" Relationship="KSTimeModel.fk_KstWorkTime_KstProject" FromRole="KstWorkTime" ToRole="KstProject" />
+          <NavigationProperty Name="KstWorkTimeFiles" Relationship="KSTimeModel.fk_KstWorkTimeFile_KstWorkTime" FromRole="KstWorkTime" ToRole="KstWorkTimeFile" />
+        </EntityType>
+        <Association Name="fk_KstActivity_KstProject">
+          <End Type="KSTimeModel.KstProject" Role="KstProject" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstActivity" Role="KstActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProject">
+              <PropertyRef Name="GuidProject" />
+            </Principal>
+            <Dependent Role="KstActivity">
+              <PropertyRef Name="GuidProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstWorkTime_KstActivity">
+          <End Type="KSTimeModel.KstActivity" Role="KstActivity" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstWorkTime" Role="KstWorkTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstActivity">
+              <PropertyRef Name="GuidActivity" />
+            </Principal>
+            <Dependent Role="KstWorkTime">
+              <PropertyRef Name="GuidActivity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstProjectUser_KstProject">
+          <End Type="KSTimeModel.KstProject" Role="KstProject" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstProjectUser" Role="KstProjectUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProject">
+              <PropertyRef Name="GuidProject" />
+            </Principal>
+            <Dependent Role="KstProjectUser">
+              <PropertyRef Name="GuidProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstWorkTime_KstProject">
+          <End Type="KSTimeModel.KstProject" Role="KstProject" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstWorkTime" Role="KstWorkTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProject">
+              <PropertyRef Name="GuidProject" />
+            </Principal>
+            <Dependent Role="KstWorkTime">
+              <PropertyRef Name="GuidProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="KstFile">
+          <Key>
+            <PropertyRef Name="GuidFile" />
+          </Key>
+          <Property Name="GuidFile" Type="Guid" Nullable="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FileType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FileStorage" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ContainerStorage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FileThumbSizes" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FileSize" Type="Int64" />
+          <NavigationProperty Name="KstProjectFiles" Relationship="KSTimeModel.fk_KstProjectFile_KstFile" FromRole="KstFile" ToRole="KstProjectFile" />
+          <NavigationProperty Name="KstUserFiles" Relationship="KSTimeModel.fk_KstUserFile_KstFile" FromRole="KstFile" ToRole="KstUserFile" />
+          <NavigationProperty Name="KstWorkTimeFiles" Relationship="KSTimeModel.fk_KstWorkTimeFile_KstFile" FromRole="KstFile" ToRole="KstWorkTimeFile" />
+          <Property Name="GuidCompany" Type="Guid" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="BizKeyEngine" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Bytes" Type="Int32" />
+        </EntityType>
+        <EntityType Name="KstProjectFile">
+          <Key>
+            <PropertyRef Name="GuidProjectFile" />
+          </Key>
+          <Property Name="GuidProjectFile" Type="Guid" Nullable="false" />
+          <Property Name="GuidProject" Type="Guid" />
+          <Property Name="GuidFile" Type="Guid" />
+          <NavigationProperty Name="KstFile" Relationship="KSTimeModel.fk_KstProjectFile_KstFile" FromRole="KstProjectFile" ToRole="KstFile" />
+          <NavigationProperty Name="KstProject" Relationship="KSTimeModel.fk_KstProjectFile_KstProject" FromRole="KstProjectFile" ToRole="KstProject" />
+          <Property Name="GuidCompany" Type="Guid" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="BizKeyEngine" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Bytes" Type="Int32" />
+        </EntityType>
+        <EntityType Name="KstUserFile">
+          <Key>
+            <PropertyRef Name="GuidUserFile" />
+          </Key>
+          <Property Name="GuidUserFile" Type="Guid" Nullable="false" />
+          <Property Name="GuidUser" Type="Guid" />
+          <Property Name="GuidFile" Type="Guid" />
+          <Property Name="IsProfileDefault" Type="Boolean" />
+          <NavigationProperty Name="KstFile" Relationship="KSTimeModel.fk_KstUserFile_KstFile" FromRole="KstUserFile" ToRole="KstFile" />
+          <NavigationProperty Name="KstProxyUser" Relationship="KSTimeModel.fk_KstUserFile_KstProxyUser" FromRole="KstUserFile" ToRole="KstProxyUser" />
+          <Property Name="GuidCompany" Type="Guid" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="BizKeyEngine" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Bytes" Type="Int32" />
+        </EntityType>
+        <EntityType Name="KstWorkTimeFile">
+          <Key>
+            <PropertyRef Name="GuidWorkTimeFile" />
+          </Key>
+          <Property Name="GuidWorkTimeFile" Type="Guid" Nullable="false" />
+          <Property Name="GuidWorkTime" Type="Guid" />
+          <Property Name="GuidFile" Type="Guid" />
+          <NavigationProperty Name="KstFile" Relationship="KSTimeModel.fk_KstWorkTimeFile_KstFile" FromRole="KstWorkTimeFile" ToRole="KstFile" />
+          <NavigationProperty Name="KstWorkTime" Relationship="KSTimeModel.fk_KstWorkTimeFile_KstWorkTime" FromRole="KstWorkTimeFile" ToRole="KstWorkTime" />
+          <Property Name="GuidCompany" Type="Guid" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="BizKeyEngine" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Bytes" Type="Int32" />
+        </EntityType>
+        <Association Name="fk_KstProjectFile_KstFile">
+          <End Type="KSTimeModel.KstFile" Role="KstFile" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstProjectFile" Role="KstProjectFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstFile">
+              <PropertyRef Name="GuidFile" />
+            </Principal>
+            <Dependent Role="KstProjectFile">
+              <PropertyRef Name="GuidFile" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstUserFile_KstFile">
+          <End Type="KSTimeModel.KstFile" Role="KstFile" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstUserFile" Role="KstUserFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstFile">
+              <PropertyRef Name="GuidFile" />
+            </Principal>
+            <Dependent Role="KstUserFile">
+              <PropertyRef Name="GuidFile" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstWorkTimeFile_KstFile">
+          <End Type="KSTimeModel.KstFile" Role="KstFile" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstWorkTimeFile" Role="KstWorkTimeFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstFile">
+              <PropertyRef Name="GuidFile" />
+            </Principal>
+            <Dependent Role="KstWorkTimeFile">
+              <PropertyRef Name="GuidFile" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstProjectFile_KstProject">
+          <End Type="KSTimeModel.KstProject" Role="KstProject" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstProjectFile" Role="KstProjectFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProject">
+              <PropertyRef Name="GuidProject" />
+            </Principal>
+            <Dependent Role="KstProjectFile">
+              <PropertyRef Name="GuidProject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstWorkTimeFile_KstWorkTime">
+          <End Type="KSTimeModel.KstWorkTime" Role="KstWorkTime" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstWorkTimeFile" Role="KstWorkTimeFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstWorkTime">
+              <PropertyRef Name="GuidWorkTime" />
+            </Principal>
+            <Dependent Role="KstWorkTimeFile">
+              <PropertyRef Name="GuidWorkTime" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="KstProxyRole">
+          <Key>
+            <PropertyRef Name="GuidRole" />
+          </Key>
+          <Property Name="GuidRole" Type="Guid" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NameKey" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="KstProxyUsers" Relationship="KSTimeModel.fk_KstProxyUser_KstProxyRole" FromRole="KstProxyRole" ToRole="KstProxyUser" />
+        </EntityType>
+        <EntityType Name="KstProxyUser">
+          <Key>
+            <PropertyRef Name="GuidUser" />
+          </Key>
+          <Property Name="GuidUser" Type="Guid" Nullable="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GuidRole" Type="Guid" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="KstProjectUsers" Relationship="KSTimeModel.fk_KstProjectUser_KstProxyUser" FromRole="KstProxyUser" ToRole="KstProjectUser" />
+          <NavigationProperty Name="KstProxyRole" Relationship="KSTimeModel.fk_KstProxyUser_KstProxyRole" FromRole="KstProxyUser" ToRole="KstProxyRole" />
+          <NavigationProperty Name="KstUserFiles" Relationship="KSTimeModel.fk_KstUserFile_KstProxyUser" FromRole="KstProxyUser" ToRole="KstUserFile" />
+          <Property Name="Disabled" Type="Boolean" />
+        </EntityType>
+        <Association Name="fk_KstProjectUser_KstProxyUser">
+          <End Type="KSTimeModel.KstProxyUser" Role="KstProxyUser" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstProjectUser" Role="KstProjectUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProxyUser">
+              <PropertyRef Name="GuidUser" />
+            </Principal>
+            <Dependent Role="KstProjectUser">
+              <PropertyRef Name="GuidUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstProxyUser_KstProxyRole">
+          <End Type="KSTimeModel.KstProxyRole" Role="KstProxyRole" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstProxyUser" Role="KstProxyUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProxyRole">
+              <PropertyRef Name="GuidRole" />
+            </Principal>
+            <Dependent Role="KstProxyUser">
+              <PropertyRef Name="GuidRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstUserFile_KstProxyUser">
+          <End Type="KSTimeModel.KstProxyUser" Role="KstProxyUser" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstUserFile" Role="KstUserFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstProxyUser">
+              <PropertyRef Name="GuidUser" />
+            </Principal>
+            <Dependent Role="KstUserFile">
+              <PropertyRef Name="GuidUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KSTimeModelStoreContainer" CdmEntityContainer="KSTimeContext">
+          <EntitySetMapping Name="KstEmailTemplates">
+            <EntityTypeMapping TypeName="KSTimeModel.KstEmailTemplate">
+              <MappingFragment StoreEntitySet="KstEmailTemplate">
+                <ScalarProperty Name="Bytes" ColumnName="Bytes" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="BizKeyEngine" ColumnName="BizKeyEngine" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GuidCompany" ColumnName="GuidCompany" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="TitleKey" ColumnName="TitleKey" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="GuidEmailTemplate" ColumnName="GuidEmailTemplate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KstProxyGeoCities">
+            <EntityTypeMapping TypeName="KSTimeModel.KstProxyGeoCity">
+              <MappingFragment StoreEntitySet="KstProxyGeoCity">
+                <ScalarProperty Name="GuidParent" ColumnName="GuidParent" />
+                <ScalarProperty Name="GuidState" ColumnName="GuidState" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GuidCity" ColumnName="GuidCity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KstProxyGeoCountries">
+            <EntityTypeMapping TypeName="KSTimeModel.KstProxyGeoCountry">
+              <MappingFragment StoreEntitySet="KstProxyGeoCountry">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GuidCountry" ColumnName="GuidCountry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KstProxyGeoStates">
+            <EntityTypeMapping TypeName="KSTimeModel.KstProxyGeoState">
+              <MappingFragment StoreEntitySet="KstProxyGeoState">
+                <ScalarProperty Name="GuidCountry" ColumnName="GuidCountry" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GuidState" ColumnName="GuidState" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KstActivities">
+            <EntityTypeMapping TypeName="KSTimeModel.KstActivity">
+              <MappingFragment StoreEntitySet="KstActivity">
+                <ScalarProperty Name="Bytes" ColumnName="Bytes" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="BizKeyEngine" ColumnName="BizKeyEngine" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GuidCompany" ColumnName="GuidCompany" />
+                <ScalarProperty Name="IsCustomByUser" ColumnName="IsCustomByUser" />
+                <ScalarProperty Name="GuidProject" ColumnName="GuidProject" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GuidActivity" ColumnName="GuidActivity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KstProjects">
+            <EntityTypeMapping TypeName="KSTimeModel.KstProject">
+              <MappingFragment StoreEntitySet="KstProject">
+                <ScalarProperty Name="Bytes" ColumnName="Bytes" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="BizKeyEngine" ColumnName="BizKeyEngine" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GuidCompany" ColumnName="GuidCompany" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GuidProject" ColumnName="GuidProject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KstProjectUsers">
+            <EntityTypeMapping TypeName="KSTimeModel.KstProjectUser">
+              <MappingFragment StoreEntitySet="KstProjectUser">
+                <ScalarProperty Name="Bytes" ColumnName="Bytes" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="BizKeyEngine" ColumnName="BizKeyEngine" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GuidCompany" ColumnName="GuidCompany" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="GuidUser" ColumnName="GuidUser" />
+                <ScalarProperty Name="GuidProject" ColumnName="GuidProject" />
+                <ScalarProperty Name="GuidProjectUser" ColumnName="GuidProjectUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KstWorkTimes">
+            <EntityTypeMapping TypeName="KSTimeModel.KstWorkTime">
+              <MappingFragment StoreEntitySet="KstWorkTime">
+                <ScalarProperty Name="Bytes" ColumnName="Bytes" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="BizKeyEngine" ColumnName="BizKeyEngine" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GuidCompany" ColumnName="GuidCompany" />
+                <ScalarProperty Name="GuidActivity" ColumnName="GuidActivity" />
+                <ScalarProperty Name="GuidProject" ColumnName="GuidProject" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="GuidWorkTime" ColumnName="GuidWorkTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KstFiles">
+            <EntityTypeMapping TypeName="KSTimeModel.KstFile">
+              <MappingFragment StoreEntitySet="KstFile">
+                <ScalarProperty Name="Bytes" ColumnName="Bytes" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="BizKeyEngine" ColumnName="BizKeyEngine" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GuidCompany" ColumnName="GuidCompany" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="FileThumbSizes" ColumnName="FileThumbSizes" />
+                <ScalarProperty Name="ContainerStorage" ColumnName="ContainerStorage" />
+                <ScalarProperty Name="FileStorage" ColumnName="FileStorage" />
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="GuidFile" ColumnName="GuidFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KstProjectFiles">
+            <EntityTypeMapping TypeName="KSTimeModel.KstProjectFile">
+              <MappingFragment StoreEntitySet="KstProjectFile">
+                <ScalarProperty Name="Bytes" ColumnName="Bytes" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="BizKeyEngine" ColumnName="BizKeyEngine" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GuidCompany" ColumnName="GuidCompany" />
+                <ScalarProperty Name="GuidFile" ColumnName="GuidFile" />
+                <ScalarProperty Name="GuidProject" ColumnName="GuidProject" />
+                <ScalarProperty Name="GuidProjectFile" ColumnName="GuidProjectFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KstUserFiles">
+            <EntityTypeMapping TypeName="KSTimeModel.KstUserFile">
+              <MappingFragment StoreEntitySet="KstUserFile">
+                <ScalarProperty Name="Bytes" ColumnName="Bytes" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="BizKeyEngine" ColumnName="BizKeyEngine" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GuidCompany" ColumnName="GuidCompany" />
+                <ScalarProperty Name="IsProfileDefault" ColumnName="IsProfileDefault" />
+                <ScalarProperty Name="GuidFile" ColumnName="GuidFile" />
+                <ScalarProperty Name="GuidUser" ColumnName="GuidUser" />
+                <ScalarProperty Name="GuidUserFile" ColumnName="GuidUserFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KstWorkTimeFiles">
+            <EntityTypeMapping TypeName="KSTimeModel.KstWorkTimeFile">
+              <MappingFragment StoreEntitySet="KstWorkTimeFile">
+                <ScalarProperty Name="Bytes" ColumnName="Bytes" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="BizKeyEngine" ColumnName="BizKeyEngine" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GuidCompany" ColumnName="GuidCompany" />
+                <ScalarProperty Name="GuidFile" ColumnName="GuidFile" />
+                <ScalarProperty Name="GuidWorkTime" ColumnName="GuidWorkTime" />
+                <ScalarProperty Name="GuidWorkTimeFile" ColumnName="GuidWorkTimeFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KstProxyRoles">
+            <EntityTypeMapping TypeName="KSTimeModel.KstProxyRole">
+              <MappingFragment StoreEntitySet="KstProxyRole">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="NameKey" ColumnName="NameKey" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="GuidRole" ColumnName="GuidRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KstProxyUsers">
+            <EntityTypeMapping TypeName="KSTimeModel.KstProxyUser">
+              <MappingFragment StoreEntitySet="KstProxyUser">
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="GuidRole" ColumnName="GuidRole" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="GuidUser" ColumnName="GuidUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet >
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+          <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram DiagramId="2ab0a4c76a45408a9d88193285f32720" Name="Diagram1" ZoomLevel="96">
+        <EntityTypeShape EntityType="KSTimeModel.accAccountingClassification" Width="1.5" PointX="0.75" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accAuthProcess" Width="1.5" PointX="0.75" PointY="39.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accAuthProcessLog" Width="1.5" PointX="5.25" PointY="50.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accAuthProcessStep" Width="1.5" PointX="0.75" PointY="51" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accBankImport" Width="1.5" PointX="14.25" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accBankImportMov" Width="1.5" PointX="16.5" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accBank" Width="1.5" PointX="1.5" PointY="59.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accBeneficiary" Width="1.5" PointX="3.75" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accBulkPayment" Width="1.5" PointX="3.75" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accBulkPaymentFile" Width="1.5" PointX="11.25" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accCatalog" Width="1.5" PointX="3.75" PointY="70.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accCatalogEntry" Width="1.5" PointX="6" PointY="71.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accCompanyArea" Width="1.5" PointX="1.5" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accCustomer" Width="1.5" PointX="6" PointY="60.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accDocValidatioLog" Width="1.5" PointX="8.25" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accExpenseMatchInEx" Width="1.5" PointX="8.25" PointY="50.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accExpensePending" Width="1.5" PointX="6" PointY="56.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accFile" Width="1.875" PointX="6" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accIncomeExpens" Width="1.5" PointX="3" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accIncomeExpensFile" Width="1.5" PointX="11.25" PointY="44" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accIncomeMatchInEx" Width="1.5" PointX="11.25" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accIncomePending" Width="1.5" PointX="9" PointY="30.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accInExCategory" Width="1.5" PointX="3.75" PointY="59.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accInOutAuthProcess" Width="1.5" PointX="11.25" PointY="51.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accInOutDetail" Width="1.5" PointX="14.25" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accInOutInOut" Width="1.5" PointX="5.25" PointY="76.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accInOutLog" Width="1.5" PointX="14.25" PointY="39.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accInOutPayment" Width="1.5" PointX="14.25" PointY="50" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accInOutTax" Width="1.5" PointX="8.25" PointY="34.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accInOutUserWaiting" Width="1.5" PointX="5.25" PointY="94.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accInvoiceServProduct" Width="1.5" PointX="10.5" PointY="55.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accInvoiceTemplate" Width="1.5" PointX="8.25" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accLayoutCatalog" Width="1.5" PointX="6.75" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accLayoutUtility" Width="1.5" PointX="9" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accMoneyInOutConcept" Width="1.5" PointX="6" PointY="44.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accMoneyMovAccClasification" Width="1.5" PointX="17.25" PointY="41.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accMoneyMovement" Width="1.5" PointX="19.5" PointY="40.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accMoneyMovement2" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accMoneyMovementFile" Width="1.5" PointX="21.75" PointY="43.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accMoneyPlace" Width="1.5" PointX="3.75" PointY="63.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accMovementTax" Width="1.5" PointX="24.75" PointY="44.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accOtherBankAccount" Width="1.5" PointX="9" PointY="44.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accPayment" Width="1.5" PointX="6" PointY="38" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accPlace" Width="1.5" PointX="1.5" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accPlaceUser" Width="1.5" PointX="8.75" PointY="60.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accProjActivityUser" Width="1.5" PointX="11.75" PointY="61.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accProject" Width="1.5" PointX="0.75" PointY="78.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accProjectActivity" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accProjectConcept" Width="1.5" PointX="1.5" PointY="86.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accProjectType" Width="1.5" PointX="1.5" PointY="90" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accProjectUser" Width="1.5" PointX="3.75" PointY="86.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accProviderConcept" Width="1.5" PointX="17.25" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accProvider" Width="1.5" PointX="0.75" PointY="44.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accProxyCompany" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accProxyUser" Width="1.5" PointX="1.5" PointY="93.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accRegion" Width="1.5" PointX="1.5" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accReport" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accReportType" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accReusableCatalog" Width="1.5" PointX="1.5" PointY="73.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accReusableCatalogValue" Width="1.5" PointX="1.5" PointY="66.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accServiceProductCategory" Width="1.5" PointX="6" PointY="66" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accServiceProduct" Width="1.5" PointX="8.25" PointY="65.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KSTimeModel.accTax" Width="1.5" PointX="6" PointY="33.125" IsExpanded="true" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeExpenses_accAccountingClassification" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accProject_accAccountingClassification" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accAuthProcessLog_accAuthProcess" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accAuthProcessStep_accAuthProcess" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeExpenses_accAuthProcess" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accInOutAuthProcess_accAuthProcess" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accAuthProcessLog_accAuthProcessStep" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accAuthProcessLog_accIncomeExpenses" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accAuthProcessStep_Next" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeExpenses_accAuthProcessStep" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accInOutLog_accAuthProcessStep" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accBankImport_accBanks" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accBankImport_accFiles" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accBankImportMovs_accBankImport" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accBankAccounts_accBanks" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accOtherBankAccount_accBanks" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accBeneficiary_accCompanyAreas" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accBeneficiary_accPlace" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeExpenses_accBeneficiary" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accOtherBankAccount_accBeneficiary" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accPayment_accBeneficiary" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accBulkPaymentFile_accBulkPayment" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accLayoutUtility_accBulkPayment" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accPayment_accBulkPayment" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accBulkPaymentFile_accFiles" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accCatalog_Parent" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accCatalogEntries_accCatalog" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_Reusable_Catalog_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accCompanyAreas_accCompanyAreas" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accCompanyAreas_accPlace" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeExpenses_accCompanyAreas" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accLegalValidatioLog_accFiles" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accLegalValidatioLog_accIncomeExpenses" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accExpenseMatchInEx_accExpensePendings" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accExpenseMatchInEx_accIncomeExpenses" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeExpensFiles_accFiles" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.FK_accInvoiceTemplates_accFiles" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accMoneyMovementFile_accFiles" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.FK_accServiceProducts_accFiles" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeExpenses_accIncomeExpenses" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeExpenses_accMoneyInOutConcepts" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeExpenses_accMoneyPlace" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeExpenses_accOtherBankAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeExpenses_accPlace" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeExpenses_accProject" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeExpenses_accProjectActivity" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.FK_accIncomeExpenses_accProviders" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeExpensFiles_accIncomeExpenses" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeMatchInEx_accIncomeExpenses" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accInOutAuthProcess_accIncomeExpenses" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accInOutDetail_accIncomeExpenses" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accInOutInOut_One" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accInOutInOut_Two" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accInOutLog_accIncomeExpenses" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accInOutPayment_accIncomeExpenses" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accInOutTax_accIncomeExpenses" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accInOutUserWaiting_accIncomeExpenses" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accMoneyMovementFile_accIncomeExpenses" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_Movement_Request" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_MovementType_Reusable" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_Parent_Request_Parts" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_Reusable_MovementType" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_Reusable_PaymentType" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_Reusable_StatusAuthorization" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accMoneyMovement_accIncomeExpensFiles" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accIncomeMatchInEx_accIncomePendings" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accMoneyInOutConcepts_accInExCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accInOutDetail_accProviderConcept" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accInOutPayment_accPayment" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accInOutTax_accReusableCatalogValues" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accInOutTax_accTax" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.FK_accInvoiceServProducts_accServiceProducts" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accLayoutUtility_accLayoutCatalog" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accMoneyInOutConcepts_accProviders" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accMoneyMovement_accMoneyInOutConcepts" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accProviderConcept_accMoneyInOutConcepts" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_Reusable_MoneyConceptType" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accMoneyMovement_accMoneyMovAccClasification" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accMoneyMovement_accProviders" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accMoneyMovementFile_accMoneyMovement" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accMovementTax_accMoneyMovement" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_Reusable_PaymentType_MoneyMovement" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.Reusable_MovementType" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accMoneyPlace_reusable_MoneyPlaceType" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accPayment_accMoneyPlace" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accMovementTax_accTax" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_Movement_Reusable_TypeApplyTax" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accOtherBankAccount_accProviders" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accPayment_accProviders" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accPayment_Reusable_PaymentType" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accPlace_accRegion" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accPlaceUser_accPlace" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accPlaceUser_accProxyUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accProjActivityUser_accProjectActivity" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accProjActivityUser_accProxyUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accProject_accProjectConcept" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accProject_accProjectType" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accProject_accProxyUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accProjectActivity_accProject" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accProjectUser_accProject" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accProjectUser_accProxyUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accProviderConcept_accProviders" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accReport_accReportType" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.fk_accReusableCatalogValues_accReusableCatalog" ManuallyRouted="false" />
+        <AssociationConnector Association="KSTimeModel.FK_accServiceProducts_accServiceProductCategory" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="KSTimeModel.accInvoice" Width="1.5" PointX="8.625" PointY="55.875" />
+        <AssociationConnector Association="KSTimeModel.FK_accInvoices_accCustomers" />
+        <AssociationConnector Association="KSTimeModel.FK_accInvoiceServProducts_accInvoices" />
+        </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

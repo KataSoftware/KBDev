@@ -1,0 +1,717 @@
+﻿<#@ template debug="True" language="C#" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ assembly name="System.Web" #>
+<#@ import namespace="SFS.VSExtension2019.Model" #> 
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #> 
+<#@ import namespace="SFS.VSExtension2019.EngTool" #>
+
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+<#@ dom processor="SFSEdmxProcessor"  
+requires="EntityModel='KSTimeModel.edmx'"  #>
+#region using
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Runtime.Serialization;
+using SFS.Core.Common.Entities.Metadata;
+using SFS.Core.Common.Entities;
+using System.Linq.Dynamic.Core;
+using System.Linq.Dynamic.Core.CustomTypeProviders;
+using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
+
+#endregion
+namespace <#= Model.Namespace #>.BusinessObjects
+{
+
+<#    foreach(EntityInfo entity in this.Model.Entities) {
+	try{
+	#>
+<#
+	System.Text.StringBuilder keyParams = new System.Text.StringBuilder();
+	System.Text.StringBuilder requiredProps = new System.Text.StringBuilder();
+	PropertyInfo propertyID = null;
+	foreach(PropertyKeyInfo propertyKey in entity.EntityKey){
+		
+			if(keyParams.Length > 0) keyParams.Append(", ");
+			keyParams.Append(propertyKey.Property.Type + " " + Code.CamelCase(propertyKey.PropertyName));
+			propertyID = propertyKey.Property;
+	}
+    foreach (var prop in entity.Properties.Where(p=> p.Nullable == false && p.IsPrimaryKey == false))
+    {
+		
+
+			if (requiredProps.Length > 0) requiredProps.Append(",");
+			 requiredProps.Append(prop.Name);
+       
+
+    }
+	string propertyCompanyName = (String)GetCustomProperty(Model,"CompanyProperty", "String");
+	string propertyCompanyAttr = "";
+	if (!string.IsNullOrEmpty(propertyCompanyName) && entity.Name != "secCompany"){
+		PropertyInfo companyProperty = entity.Properties.FirstOrDefault(p=> p.Name == propertyCompanyName);
+		if (companyProperty != null ){
+			propertyCompanyAttr = ", CompanyPropertyName = \"" + companyProperty.Name + "\"";
+        }
+	}
+
+	string propertyCreatedByAttr = "";
+	string propertyUpdatedByAttr = "";
+	string propertyCreatedDateAttr = "";
+	string propertyUpdatedDateAttr = "";
+	string propertyDeletedAttr = "";
+	string propertyIntegrationAttr = "";
+
+
+#>
+	  [Serializable()]
+<#	PropertyInfo propUpdatedDate = null ;
+	PropertyInfo propCreatedDate = null ;
+		PropertyInfo propDefault = null;
+	string PropertyDefaultText = "";
+	if (propertyID != null ) {
+		
+		string RequiredPropertiesText = "";
+		if (!string.IsNullOrEmpty(entity.DefaultProperty)){
+			propDefault = entity.Properties.FirstOrDefault(p=> p.Name == entity.DefaultProperty);
+			if (propDefault != null ){
+				if (propDefault.Name != propertyID.Name){
+					if (propDefault.Type.ToLower() == "string" || propDefault.Type.ToLower() == "datetime" || propDefault.Type.ToLower() == "int32"){
+						PropertyDefaultText = ",PropertyDefaultText=\"" + propDefault.Name + "\"";
+					}
+				}
+			}
+		}
+		if (requiredProps.Length > 0){
+			RequiredPropertiesText = ",RequiredProperties=\"" + requiredProps.ToString() + "\"";
+
+        }
+		var propertyCreatedBy = (String)GetCustomProperty(Model,"AutoCreatedUserProperty", "String");
+		var propertyUpdatedBy = (String)GetCustomProperty(Model,"AutoUpdatedUserProperty", "String");
+		var propertyCreatedDate = (String)GetCustomProperty(Model,"AutoCreatedDateProperty", "String");
+		var propertyUpdatedDate = (String)GetCustomProperty(Model,"AutoUpdatedDateProperty", "String");
+		var propertyDeleted = (String)GetCustomProperty(Model,"AutoDeletedProperty", "String");
+
+		var propertyIntegration = (String)GetCustomProperty(Model,"IntegrationProperty", "String");
+		var propIntegration = entity.Properties.FirstOrDefault(p=> p.Name == propertyIntegration);
+		if (propIntegration != null ){
+			propertyIntegrationAttr = ", IntegrationProperty=\"" + propIntegration.Name + "\"";
+		}
+
+		var propCreatedBy = entity.Properties.FirstOrDefault(p=> p.Name == propertyCreatedBy);
+		if (propCreatedBy != null)
+		{
+			propertyCreatedByAttr = ",CreatedByPropertyName=\"" + propCreatedBy.Name + "\"";
+        }
+
+		var propUpdatedBy = entity.Properties.FirstOrDefault(p=> p.Name == propertyUpdatedBy);
+		if (propUpdatedBy != null)
+		{
+			propertyUpdatedByAttr = ",UpdatedByPropertyName=\"" + propUpdatedBy.Name + "\"";
+        }
+
+		 propCreatedDate = entity.Properties.FirstOrDefault(p=> p.Name == propertyCreatedDate);
+		if (propCreatedDate != null)
+		{
+			propertyCreatedDateAttr = ",CreatedDatePropertyName=\"" + propCreatedDate.Name + "\"";
+        }
+
+		 propUpdatedDate = entity.Properties.FirstOrDefault(p=> p.Name == propertyUpdatedDate);
+		if (propUpdatedDate != null)
+		{
+			propertyUpdatedDateAttr = ",UpdatedDatePropertyName=\"" + propUpdatedDate.Name + "\"";
+        }
+
+		var propDeleted = entity.Properties.FirstOrDefault(p=> p.Name == propertyDeleted);
+		if (propDeleted != null)
+		{
+			propertyDeletedAttr = ",DeletedPropertyName=\"" + propDeleted.Name + "\"";
+        }
+		string propertiesFileAttr = "";
+		if ((Boolean)GetCustomProperty(entity,"IsFile", "Boolean") == true ){
+			var propExtraSize = entity.Properties.FirstOrDefault(p=> !string.IsNullOrEmpty(((String)GetCustomProperty(p,"FileSize", "String"))) );
+			if (propExtraSize != null ){
+				propertiesFileAttr = ", IsFile=true, ExtraSizeField= \"" + propExtraSize.Name + "\"";
+            }
+		}
+
+
+		string propertiesDeleteAttr = "";
+		
+			var propDelete = entity.Properties.FirstOrDefault(p=>  p.Name == "IsDeleted" );
+			if (propDelete != null ){
+				propertiesDeleteAttr = ", DeletedPropertyName= \"IsDeleted\"";
+            }
+		
+
+	
+	
+
+	 #>
+	  [EntityInfo(PropertyKeyName="<#= propertyID.Name #>"<#=PropertyDefaultText#><#=propertyIntegrationAttr#><#=RequiredPropertiesText#><#=propertyCompanyAttr#><#= propertyCreatedByAttr #><#= propertyUpdatedByAttr #><#= propertyCreatedDateAttr #><#= propertyUpdatedDateAttr #><#= propertyDeletedAttr #><#= propertiesFileAttr #>)]
+<# }
+
+		string sqlTableName = (String)GetCustomProperty(entity, "SqlTableName", "String");
+		if (string.IsNullOrEmpty(sqlTableName)){
+			sqlTableName = entity.Name;
+        }
+		string prefix = (String)GetCustomProperty(this.Model, "EntityPrefix", "String");
+#>
+	  [Table("<#= sqlTableName #>", Schema = "<#= prefix #>")]
+	  [DynamicLinqType]
+	  [JsonObject(IsReference = true)]
+      [DataContract(IsReference = true, Namespace = "http://schemas.datacontract.org/2004/07/TrackableEntities.Models")]
+<# if (entity.IsCustom == true){ #>
+		[NotMapped]
+<# } #>
+<# string interfaces = ":  ITrackable, IMyEntity";
+   if (entity.Properties.Where(p=>p.IsPrimaryKey).Count() == 0){
+	  interfaces = "";
+ } #>
+	  public partial class <#=entity.Name#><#= interfaces #>{
+<# if (propertyID != null && propDefault != null && entity.IsCustom == false ){
+      string nullableSymbol =  NullableSymbol(propDefault);
+#>
+	   public  <#=entity.Name#>(Guid? <#=Code.CamelCase(propertyID.Name) #>, <#= propDefault.Type #><#= nullableSymbol #> <#=Code.CamelCase(propDefault.Name)#>)
+        {
+			if (<#=Code.CamelCase(propertyID.Name) #> != null ){
+            this.<#= propertyID.Name #> = <#=Code.CamelCase(propertyID.Name) #>.Value;
+            this.<#= propDefault.Name #> = <#=Code.CamelCase(propDefault.Name)#>;
+
+			}
+        }
+<# } #>
+<# if (entity.Properties.Where(p=>p.IsPrimaryKey).Count() > 0){ #>
+      [NotMapped]
+	  public string Key { 
+                  get {
+                      StringBuilder sb = new StringBuilder();
+<#  	int nkeys =0;
+		foreach (var property in entity.Properties.Where(p=>p.IsPrimaryKey)) {
+			nkeys ++;#>
+<# 			if (nkeys > 1) { #>
+						sb.Append("|");
+<# 			} #>
+<# 					if (property.Nullable) { #>
+					  if (<#= property.Name #> != null)
+<# 					} #>					sb.Append(this.<#= property.Name #>.ToString());
+<# 	} #>
+                      return sb.ToString();
+                } 
+set{
+<# 
+	var typeToParse = "Guid";
+	if (propertyID.Type.ToLower() == "int" || propertyID.Type.ToLower()  == "int32" ){
+		typeToParse = "int";
+	}
+#>
+	this.<#= propertyID.Name #> = <#= typeToParse #>.Parse(value);
+}
+		}
+
+<# } #>
+<#
+ if (propertyID != null ) {
+	string nullableValue = "";
+	if (propUpdatedDate != null && propUpdatedDate.Nullable ){
+		nullableValue = ".Value";
+    }
+ #>
+<#	
+	if (propUpdatedDate != null ){  #>
+			[NotMapped]
+            public double? _<#= propUpdatedDate.Name #>TS
+            {
+                get
+                {
+                    if (this.<#= propUpdatedDate.Name #> != null)
+                    {
+                        return (this.<#= propUpdatedDate.Name #><#= nullableValue #> - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+                    }else
+                    {
+                        return null;
+                    }
+                }
+            }
+<# } #>
+<# 
+	nullableValue = "";
+	if (propCreatedDate != null && propCreatedDate.Nullable ){
+		nullableValue = ".Value";
+    }
+	if (propCreatedDate != null ){  #>
+			[NotMapped]
+            public double? _<#= propCreatedDate.Name #>TS
+            {
+                get
+                {
+                    if (this.<#= propCreatedDate.Name #> != null)
+                    {
+                        return (this.<#= propCreatedDate.Name #><#= nullableValue #> - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+                    }else
+                    {
+                        return null;
+                    }
+                }
+            }
+<# } 
+    }
+
+#>
+		[NotMapped]
+		public SFS.Core.Common.GlobalObjects.UserInfo CreatedByUser { get; set; }
+
+			public override string ToString()
+            {
+<# 			if (!string.IsNullOrEmpty(entity.DefaultProperty)) { #>	
+				if (this.<#= entity.DefaultProperty #> != null )		
+            		return this.<#= entity.DefaultProperty #>.ToString();
+				else
+					return String.Empty;
+<# 			}else{ #>				
+				return base.ToString();
+<# 			} #>
+			}
+
+		//public <#= entity.Name #>()
+        //  {
+
+        //  }
+
+	  #region Composite Key
+	  
+        #endregion
+
+		public <#= entity.Name #>(){
+		#region 
+			this.ModifiedProperties = new List<string>();
+<# 
+
+
+foreach(PropertyInfo property in entity.Properties.Where(p=> p.Entity.IsCustom==false && p.IsNavigationPropertyMany == true)) { 
+	//EntityInfo entityRel = null;
+	var navprop = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyName== property.Name);
+	var entityRelName = navprop.EntityType.Split(char.Parse("."))[navprop.EntityType.Split(char.Parse(".")).Length -1];
+	var	entityRel = entity.Model.Entities.Find(p=>p.Name == entityRelName);
+
+#>
+	this.<#= property.Name #> = new HashSet<<#= entityRel.Name #>>();
+
+
+<# } #>
+		#endregion
+		}
+		#region
+<#  
+foreach(PropertyInfo property in entity.Properties.Where(p=> p.Entity.IsCustom==false && p.IsNavigationPropertyMany == true)) { 
+	//EntityInfo entityRel = null;
+	var navprop = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyName== property.Name);
+	var entityRelName = navprop.EntityType.Split(char.Parse("."))[navprop.EntityType.Split(char.Parse(".")).Length -1];
+	var	entityRel = entity.Model.Entities.Find(p=>p.Name == entityRelName);
+#>
+	
+	//[DataMember]
+	public virtual ICollection<<#= entityRel.Name #>> <#= property.Name #> { get; set; }
+	
+
+<# } #>
+
+//x1
+<# foreach(var prop in entity.Properties.Where(p=> !string.IsNullOrEmpty((string)GetCustomProperty(p, "IsParam", "String")) )){
+		
+	#>            
+				
+	[DataMember]
+          	 public Guid? <#= prop.Name #>Id { get; set; }
+<# } #>
+<#  
+foreach(PropertyInfo property in entity.Properties.Where(p=> p.IsCustom == false && p.Entity.IsCustom == false && p.IsNavigationPropertyMany == false && p.IsNavigationProperty == true )) { 
+	//EntityInfo entityRel = null;
+	var navprop = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyName== property.Name);
+	var entityRelName = navprop.EntityType.Split(char.Parse("."))[navprop.EntityType.Split(char.Parse(".")).Length -1];
+	var	entityRel = entity.Model.Entities.Find(p=>p.Name == entityRelName);
+	if (entityRel != null ){
+	
+#>
+	private <#= entityRel.Name #> __<#= property.Name #>;
+	[DataMember]
+	public virtual <#= entityRel.Name #> <#= property.Name #> {
+		get{
+			return __<#= property.Name #>;
+		}
+		set{
+			__<#= property.Name #> = value;
+<# 
+		string propertyFKLocal = navprop.PropertyRefName ;
+		var relPropertyKey = entityRel.Properties.FirstOrDefault(p=>p.IsPrimaryKey);
+		//var navpropNative  = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyRefName == property.Name ); 
+		//if (navpropNative != null ){
+		//	propertyFKLocal = navpropNative.PropertyName;
+        //}
+ #>
+				if (value != null)
+                {
+                   this.__<#= propertyFKLocal #> = value.<#= relPropertyKey.Name #>;
+                }else
+                {
+					<# if (property.Nullable == true ){ #>
+                    this.__<#= propertyFKLocal #> = null;
+					<# }else{ #>
+						 this.__<#= propertyFKLocal #> = Guid.Empty;
+					<# } #>
+                }
+		}
+	}
+	
+
+<# }
+} #>
+
+	#endregion
+<#  #>
+
+<#  #>
+	#region
+<# 
+
+string nullable = null ;
+foreach(PropertyInfo property in entity.Properties.Where(p=> p.IsCustom == false && p.Entity.IsCustom == false && p.IsNavigationProperty == false)) { 
+	nullable = NullableSymbol(property);
+	var navpropRef = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyRefName== property.Name);
+	
+	
+#>
+	private <#=  GetNetType(property.NetType) #><#= nullable #> __<#=property.Name#>;
+	[DataMember]
+	<#= GetMetaForType(property) #>
+	public <#=  GetNetType(property.NetType) #><#= nullable #> <#=property.Name#>  { 
+		get{
+			return __<#=property.Name#>;
+		}
+		set{
+
+			__<#=property.Name#> = value;
+<# if (navpropRef != null ){
+		var navprop = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyName== navpropRef.PropertyName);
+		var entityRelName = navprop.EntityType.Split(char.Parse("."))[navprop.EntityType.Split(char.Parse(".")).Length -1];
+		var	entityRel = entity.Model.Entities.Find(p=>p.Name == entityRelName);
+		var relPropertyKey = entityRel.Properties.FirstOrDefault(p=>p.IsPrimaryKey);
+ #>
+				if (value == null)
+                {
+                    this.__<#= navpropRef.PropertyName #> = null;
+                }else
+                {
+					<# if (property.Nullable == true ){ #>
+						if (this.__<#= navpropRef.PropertyName #> != null && this.__<#= navpropRef.PropertyName #>.<#= relPropertyKey.Name #> != value.Value)
+						{
+							this.__<#= navpropRef.PropertyName #> = new <#= entityRel.Name #>() { <#= relPropertyKey.Name #> = value.Value };
+
+						}
+                    //this.__<#= navpropRef.PropertyName #> = new <#= entityRel.Name #>() { <#= relPropertyKey.Name #> = value.Value };
+					  // if (this.__<#= navpropRef.PropertyName #> == null )
+                      //      this.__<#= navpropRef.PropertyName #> = new <#= entityRel.Name #>() {  <#= relPropertyKey.Name #> = value.Value };
+                      //  else {
+                       //     if (this.__<#= navpropRef.PropertyName #>.<#= relPropertyKey.Name #> != value)
+                       //     {
+                       //     this.__<#= navpropRef.PropertyName #> = new <#= entityRel.Name #>() {  <#= relPropertyKey.Name #> = value.Value };
+					//		}
+                     //   }
+					<# }else{ #>
+                      //this.__<#= navpropRef.PropertyName #> = new <#= entityRel.Name #>() { <#= relPropertyKey.Name #> = value };
+					     if (this.__<#= navpropRef.PropertyName #> != null && this.__<#= navpropRef.PropertyName #>.<#= relPropertyKey.Name #> != value)
+						{
+							this.__<#= navpropRef.PropertyName #> = new <#= entityRel.Name #>() { <#= relPropertyKey.Name #> = value };
+
+						}
+						// if (this.__<#= navpropRef.PropertyName #> == null )
+                        //    this.__<#= navpropRef.PropertyName #> = new <#= entityRel.Name #>() {  <#= relPropertyKey.Name #> = value };
+                        //else {
+                        //    if (this.__<#= navpropRef.PropertyName #>.<#= relPropertyKey.Name #> != value)
+                        //    {
+                        //    this.__<#= navpropRef.PropertyName #> = new <#= entityRel.Name #>() {  <#= relPropertyKey.Name #> = value };
+						//	}
+                        //}
+					<# } #>
+                }
+<# }
+	 #>			
+		}
+	 }
+<# } #>
+    #endregion    
+<# foreach(PropertyInfo property in entity.Properties.Where(p=>p.Type.ToLower() != "include" && p.IsCustom == true && p.Entity.IsCustom==false)) { 
+		 nullable = NullableSymbol(property);
+		//if (property.Nullable && !property.NetType.Contains("ICollection")  && property.Nullable && property.NetType != "String" && property.NetType != "Byte[]"){
+		//		nullable= "?";
+		//}
+		
+#>
+[NotMapped]
+<#if (string.IsNullOrEmpty((string)GetCustomProperty(property, "Computed", "String")) && string.IsNullOrEmpty((string)GetCustomProperty(property, "ComputedLinq", "String"))) {#>
+			
+	public <#= property.NetType.Split(char.Parse("."))[property.NetType.Split(char.Parse(".")).Length - 1 ] #><#= nullable #> <#=property.Name#> { get; set; }
+<#   }else if (!string.IsNullOrEmpty((string)GetCustomProperty(property, "Computed", "String"))){ #>
+			 public <#= GetNetType(property.NetType) #><#= nullable #> <#=property.Name#> {
+				get{
+					return <#= ((string)GetCustomProperty(property, "Computed", "String")).ToString().Replace("'", @"""") #>;
+				}
+				set{
+				
+				}
+			 }
+
+<# 		}else if (!string.IsNullOrEmpty((string)GetCustomProperty(property, "ComputedLinq", "String"))){ #>
+			[DataMember]
+          	 public <#=  GetNetType(property.NetType) #><#= nullable #> <#=property.Name#> { get; set; } //test
+
+<# 			} #>
+<# } #>	
+	//[DataMember]
+	[NotMapped]
+    public TrackingState TrackingState { get; set; }
+    //[DataMember]
+	[NotMapped]
+   public ICollection<string> ModifiedProperties { get; set; }
+   // [JsonProperty, DataMember]
+   // private Guid EntityIdentifier { get; set; }
+
+<# foreach(PropertyInfo property in entity.Properties.Where(p=> (bool)GetCustomProperty(p, "IsUniqueFile", "Boolean") == true )) {#>
+	[NotMapped]
+	public string files_<#= property.Name #> { get; set; }
+
+<# } #>
+      
+<# foreach(PropertyInfo property in entity.Properties.Where(p=>p.Type.ToLower() != "include" && p.Entity.IsCustom && IsPropertyForBusinessObject(p))) {
+			if (!property.IsPrimaryKey && !property.IsNavigationProperty){
+				nullable = "";
+				if (property.Nullable && property.NetType != "String" && property.NetType != "Byte[]"){
+					nullable= "?";
+				}
+			if (property.Type.ToLower() == "selectitemlist") {#>
+		private Dictionary<string, string> _<#=property.Name#>List = null;
+        public Dictionary<string, string> <#=property.Name#>List
+        {
+            get {
+                if (_<#=property.Name#>List == null)
+                    _<#=property.Name#>List = new Dictionary<string, string>();
+                return _<#=property.Name#>List;
+            }
+            set {
+                _<#=property.Name#>List = value;
+            }   
+        }			[DataMember]
+           	public string <#=property.Name#>Value { get; set; }
+           	public string <#=property.Name#>Text { get; set; }
+			
+<#			}else{  
+			if (string.IsNullOrEmpty((string)GetCustomProperty(property, "Computed", "String"))) {
+				if (property.NetType.ToLower() != "captcha"){	#>
+			[DataMember]
+          	 public <#= property.NetType #><#= nullable #> <#=property.Name#> { get; set; }
+<# 				}
+			}else{ #>
+			 public <#= property.NetType #><#= nullable #> <#=property.Name#> {
+				get{
+					return <#= ((string)GetCustomProperty(property, "Computed", "String")).ToString().Replace("'", @"""") #>;
+				}
+				set{
+				
+				}
+			 }
+<# 			}
+			} #>
+<#		}else if (!property.IsNavigationPropertyMany){ #>
+			[DataMember]
+			//[System.Xml.Serialization.SoapIgnoreAttribute()]
+			//[System.Xml.Serialization.XmlIgnoreAttribute()]
+			public <#= property.NetType.Split(char.Parse("."))[property.NetType.Split(char.Parse(".")).Length - 1 ] #> <#=property.Name#> { get; set; }
+<#		}else{ #>
+			[DataMember]
+			//[System.Xml.Serialization.SoapIgnoreAttribute()]
+			//[System.Xml.Serialization.XmlIgnoreAttribute()]
+			public ICollection<<#= property.NetType.Split(char.Parse("."))[property.NetType.Split(char.Parse(".")).Length - 1 ] #>> <#=property.Name#> { get; set; }
+	<#  } 
+	}#>
+
+
+	      #region propertyNames
+		public static readonly string EntityName = "<#= entity.Name #>";
+<# if(entity.Properties.Count(p=> p.Name == "EntitySetName") ==  0) { #>
+		public static readonly string EntitySetName = "<#= entity.SetName #>";
+<# }else{ #>
+		public static readonly string _EntitySetName = "<#= entity.SetName #>";
+<# }#>
+        public struct PropertyNames {
+<# foreach(PropertyInfo property in entity.Properties.Where (p=>IsPropertyForBusinessObject(p))) {#>
+            public static readonly string <#=property.Name#> = "<#=property.Name#>";
+<# }#>
+		}
+		#endregion
+	}
+	<# 
+		}catch(Exception ex){
+		throw new Exception(string.Format("El error ocurrió en la entidad {0}",entity.Name),ex);
+		}
+	} #> 
+	
+}
+<#+
+public string PrepareLinqExpression(string originalValue){
+	string result = originalValue;
+	if (originalValue.Contains("[NotDeleted]") || originalValue.Contains("[AND]")){
+		result = result.Replace("[NotDeleted]", "deleted => deleted.IsDeleted != true || deleted.IsDeleted == null");
+		result = result.Replace("[AND]", "&&");
+		result = result.Replace("[Quote]", "\"");
+	}
+
+	return result;
+}
+public string GetNetType(string netType){
+	if (netType.ToLower() == "xml")
+        {
+			netType = "string";
+        }
+		if (netType.ToLower() == "time")
+        {
+			netType = "TimeSpan";
+        }
+
+		return netType;
+}
+// [Column(TypeName = "datetime")]
+public string GetMetaForType(PropertyInfo property){
+	string result = "";
+	if (property.Type.ToLower() == "datetime")
+    {
+		result = "[Column(TypeName = \"datetime\")]";
+    }
+	if (property.Type.ToLower() == "timespan")
+    {
+		result = "[Column(TypeName = \"time\")]";
+    }
+
+	return result;
+}
+public string NullableSymbol(PropertyInfo property){
+			string result = "";
+			if (property.Nullable){
+	string pname = property.NetType.Split(char.Parse("."))[property.NetType.Split(char.Parse(".")).Length - 1 ];
+	
+	
+		if (!property.Type.Contains("ICollection")  && !property.Type.ToLower().Contains("string") && !property.Type.ToLower().Contains("xml") && property.Entity.Model.Entities.Count(p=>p.Name == pname) == 0 ) {
+			if (!property.Type.Contains("ICollection")  && property.Type != "String" && property.Type != "Binary" && property.IsPrimaryKey== false){
+				if (property.Nullable)
+				{
+					result = "?";
+				}
+			}else if (property.IsPrimaryKey && property.Type != "String"){
+				result = "?";
+			}
+		}else if (property.IsPrimaryKey && property.Type != "String" && property.Type != "DateTime"){
+			result = "?";
+		}
+            }
+		return result;
+	}
+public object GetCustomProperty(EntityInfo entity, string customPropertyName, string propertyType){
+	object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		//Write(property.CustomProperties.Count().ToString());
+
+		CustomPropertyInfo cp = entity.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+public object GetCustomProperty(ModelInfo model, string customPropertyName, string propertyType){
+	object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		
+
+		CustomPropertyInfo cp = model.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+public bool IsPropertyForBusinessObject(PropertyInfo property){
+	bool result = true;
+
+		/*if (
+			(property.Type.ToLower() == "string" 
+			|| property.Type.ToLower() == "int"
+			|| property.Type.ToLower() == "guid"
+			|| property.Type.ToLower() == "int16"
+			|| property.Type.ToLower() == "int32"
+			|| property.Type.ToLower() == "datetime" 
+			|| property.Type.ToLower() == "timespan" 
+			|| property.Type.ToLower() == "double"
+			|| property.Type.ToLower() == "decimal"
+			|| property.Type.ToLower() == "smallint" 
+			|| property.Type.ToLower() == "boolean" 
+			|| property.Type.ToLower() == "string" 
+			|| property.Type.ToLower() == "byte[]"
+			|| property.Type.ToLower() == "binary" 
+			|| property.Type.ToLower() == "bit" ) 
+			|| 
+			( property.Type.ToLower() != "captcha")){
+			result = true;
+		}*/
+	return result;
+}
+public object GetCustomProperty(PropertyInfo property, string customPropertyName, string propertyType){
+		
+		object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		else if (propertyType.ToLower() == "int?")
+			result = null;
+		//Write(property.CustomProperties.Count().ToString());
+
+		CustomPropertyInfo cp = property.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else if(propertyType.ToLower() == "int?")
+				result = Convert.ToInt32(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+		
+}
+#>

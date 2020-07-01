@@ -1,0 +1,159 @@
+﻿<#@ template debug="True" language="C#"  #>
+<#@ assembly name="System.Core.dll" #>
+<#@ assembly name="System.Web" #>
+<#@output extension=".sql"#>
+<#@ import namespace="SFS.VSExtension2019.Model" #> 
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #> 
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+<#@ dom processor="SFSEdmxProcessor"  
+requires="EntityModel='KSTimeModel.edmx'" #>
+<#  
+	string prefix = (String)GetCustomProperty(this.Model, "EntityPrefix", "String");
+	string schema = (String)GetCustomProperty(this.Model, "schema", "String");
+	
+
+	string companyProperty = (String)GetCustomProperty(this.Model, "CompanyProperty", "String");
+	string createdDateProperty = (String)GetCustomProperty(this.Model, "AutoCreatedDateProperty", "String");
+	string updatedDateProperty = (String)GetCustomProperty(this.Model, "AutoUpdatedDateProperty", "String");
+	string createdByProperty = (String)GetCustomProperty(this.Model, "AutoCreatedUserProperty", "String");
+	string updatedByProperty = (String)GetCustomProperty(this.Model, "AutoUpdatedUserProperty", "String");
+	string deletedProperty = "IsDeleted";
+	string bytesProperty = (String)GetCustomProperty(this.Model, "AutoSizeBytesProperty", "String");
+
+	string bizKeyEngine = (String)GetCustomProperty(this.Model, "BizKeyEngine", "String");
+
+	string reusableCatalogName = (String)GetCustomProperty(this.Model, "ReusableCatalog", "String");
+	
+	bool isCore = false;
+	if (this.Model.SafeNamespace == "SFSCoreSecurity"){
+		isCore = true ;
+    }
+	foreach(EntityInfo entity in this.Model.Entities.Where(p=> p.Name.Contains(reusableCatalogName) == false && p.Name.Contains("Proxy") == false  && p.IsCustom == false)) {
+		string sqlTableName = (String)GetCustomProperty(entity, "SqlTableName", "String");
+		if (string.IsNullOrEmpty(sqlTableName)){
+			sqlTableName = entity.Name;
+        }
+
+#>
+PRINT 'Table <#= sqlTableName #>, entity <#= entity.Name #>'
+<# if (isCore == false) { #>
+-- <#= companyProperty #>
+if COLUMNPROPERTY(OBJECT_ID(N'<#= prefix #>.<#= sqlTableName #>', N'U'),'<#= companyProperty #>','ColumnId') is null
+begin 
+  alter table <#= prefix #>.<#= sqlTableName #> 
+  add <#= companyProperty #> uniqueidentifier null 
+end
+GO
+
+-- <#= createdByProperty #>
+if COLUMNPROPERTY(OBJECT_ID(N'<#= prefix #>.<#= sqlTableName #>', N'U'),'<#= createdByProperty #>','ColumnId') is null
+begin 
+  alter table <#= prefix #>.<#= sqlTableName #> 
+  add <#= createdByProperty #> uniqueidentifier null 
+end
+GO
+-- <#= updatedByProperty #>
+if COLUMNPROPERTY(OBJECT_ID(N'<#= prefix #>.<#= sqlTableName #>', N'U'),'<#= updatedByProperty #>','ColumnId') is null
+begin 
+  alter table <#= prefix #>.<#= sqlTableName #> 
+  add <#= updatedByProperty #> uniqueidentifier null 
+end
+GO
+
+-- <#= deletedProperty #>
+if COLUMNPROPERTY(OBJECT_ID(N'<#= prefix #>.<#= sqlTableName #>', N'U'),'<#= deletedProperty #>','ColumnId') is null
+begin 
+  alter table <#= prefix #>.<#= sqlTableName #> 
+  add <#= deletedProperty #> [bit] null DEFAULT ('false') 
+end
+GO
+
+<# if (! string.IsNullOrEmpty(bizKeyEngine) ){ #>
+-- <#= bizKeyEngine #>
+
+if COLUMNPROPERTY(OBJECT_ID(N'<#= prefix #>.<#= sqlTableName #>', N'U'),'<#= bizKeyEngine #>','ColumnId') is null
+begin 
+  alter table <#= prefix #>.<#= sqlTableName #> 
+  add <#= bizKeyEngine #> VARCHAR(32) null 
+end
+GO
+<# } #>
+
+<# } #>
+-- <#= createdDateProperty #>
+if COLUMNPROPERTY(OBJECT_ID(N'<#= prefix #>.<#= sqlTableName #>', N'U'),'<#= createdDateProperty #>','ColumnId') is null
+begin 
+  alter table <#= prefix #>.<#= sqlTableName #> 
+  add <#= createdDateProperty #> DATETIME null 
+end
+GO
+-- <#= updatedDateProperty #>
+if COLUMNPROPERTY(OBJECT_ID(N'<#= prefix #>.<#= sqlTableName #>', N'U'),'<#= updatedDateProperty #>','ColumnId') is null
+begin 
+  alter table <#= prefix #>.<#= sqlTableName #> 
+  add <#= updatedDateProperty #> DATETIME null 
+end
+GO
+
+-- <#= bytesProperty #>
+if COLUMNPROPERTY(OBJECT_ID(N'<#= prefix #>.<#= sqlTableName #>', N'U'),'<#= bytesProperty #>','ColumnId') is null
+begin 
+  alter table <#= prefix #>.<#= sqlTableName #> 
+  add <#= bytesProperty #> [int] null 
+end
+GO
+
+
+
+
+
+<#    }#>
+
+<#+ 
+public object GetCustomProperty(EntityInfo entity, string customPropertyName, string propertyType){
+	object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		//Write(property.CustomProperties.Count().ToString());
+
+		CustomPropertyInfo cp = entity.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+public object GetCustomProperty(ModelInfo model, string customPropertyName, string propertyType){
+	object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		
+
+		CustomPropertyInfo cp = model.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+ #>

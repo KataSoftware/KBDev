@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SfsModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Entities>
+    <Entity Name="unProxySetting" SetName="unProxySettings" IsUIVisible="false" GenerateCRUD="true" IsForLocalization="false" IsCustom="true" IsView="false" DefaultProperty="SMTPServer">
+      <EntityKeys>
+        <EntityKey PropertyName="GuidUnProxySetting" IsCustom="false" />
+      </EntityKeys>
+      <Properties>
+
+        <Property Name="GuidUnProxySetting" Type="Guid"  Nullable="false"  IsPrimaryKey="true" >
+          
+        </Property>
+        <Property Name="SMTPServer" Type="String"  Nullable="true" MaxLength="255">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+            <CustomProperty Name="ContextParam" Value="Company" />
+            <CustomProperty Name="AppNameKey" Value="SFSCoreSecurity" />
+          </CustomProperties>
+        </Property>
+
+        <!--<Property Name="SMTPServerId" Type="Guid"  Nullable="true" MaxLength="255">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>-->
+       
+
+        <Property Name="SMTPSSLEnabled" Type="Boolean"   Nullable="true">
+
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+            <CustomProperty Name="ContextParam" Value="Company" />
+            <CustomProperty Name="AppNameKey" Value="SFSCoreSecurity" />
+          </CustomProperties>
+        </Property>
+
+       
+
+        <Property Name="SMTPUser" Type="String"  Nullable="true" MaxLength="100">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+            <CustomProperty Name="ContextParam" Value="Company" />
+            <CustomProperty Name="AppNameKey" Value="SFSCoreSecurity" />
+          </CustomProperties>
+        </Property>
+      
+        
+        <Property Name="SMTPPassword" Type="String"  Nullable="true" MaxLength="100">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+            <CustomProperty Name="ContextParam" Value="Company" />
+            <CustomProperty Name="AppNameKey" Value="SFSCoreSecurity" />
+          </CustomProperties>
+        </Property>
+       
+        
+        <Property Name="SMTPFromName" Type="String"  Nullable="true" MaxLength="255">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+            <CustomProperty Name="ContextParam" Value="Company" />
+            <CustomProperty Name="AppNameKey" Value="SFSCoreSecurity" />
+          </CustomProperties>
+        </Property>
+    
+        
+        <Property Name="SMTPPort" Type="String"  Nullable="true" MaxLength="255">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+            <CustomProperty Name="ContextParam" Value="Company" />
+            <CustomProperty Name="AppNameKey" Value="SFSCoreSecurity" />
+          </CustomProperties>
+        </Property>
+      
+        
+        <Property Name="SMTPFromEmail" Type="String"  Nullable="true" MaxLength="255">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+            <CustomProperty Name="ContextParam" Value="Company" />
+            <CustomProperty Name="AppNameKey" Value="SFSCoreSecurity" />
+          </CustomProperties>
+        </Property>
+       
+        
+        <Property Name="AzureBlobStorageConnection" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+            <CustomProperty Name="ParamId" Value="AzureStorageConnectionString" />
+            <CustomProperty Name="AppNameKey" Value="SFSCoreSecurity" />
+            
+          </CustomProperties>
+        </Property>
+       
+        
+        <Property Name="SaveBlobInAzureStorage" Type="Boolean"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+            <CustomProperty Name="ParamId" Value="save-files-blob" />
+          </CustomProperties>
+        </Property>
+        
+
+        <Property Name="SaveBlobInDataBase" Type="Boolean"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+            <CustomProperty Name="ParamId" Value="save-files-db" />
+          </CustomProperties>
+        </Property>
+
+        <Property Name="UserNameGeoNames" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+            <CustomProperty Name="ParamId" Value="username-geonames" />
+            <CustomProperty Name="AppNameKey" Value="SFSCoreSecurity" />
+
+          </CustomProperties>
+        </Property>
+
+        
+
+
+        <Property Name="EngineURL" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+       
+        
+
+
+        <Property Name="ENGINE_API_KEY" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+        
+
+
+        <Property Name="MAMBU_URL" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+      
+        
+        <Property Name="MAMBU_USER" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+       
+        
+
+        <Property Name="MAMBU_PWD" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+       
+        
+        <Property Name="KM_MAXIMO" Type="Int32"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+            <CustomProperty Name="ParamId" Value="km-maximo" />
+          </CustomProperties>
+        </Property>
+       
+        
+        <Property Name="MAP_KEY" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+        
+        
+        <Property Name="ENGINE_OAUTH_CLIENT_ID" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+        <Property Name="ENGINE_OAUTH_LOGIN_URL" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+        <Property Name="ENGINE_OAUTH_USERNAME" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+
+        <Property Name="ENGINE_OAUTH_PASSWORD" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+        <Property Name="ENGINE_OAUTH_CLIENT_SECRET" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+
+        <Property Name="ENGINE_DEFINITION_ID" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+
+
+
+
+     
+        <Property Name="CONTAINER_DATOS_CLIENTE_ID" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+        <Property Name="CONTAINER_DOCUMENTOS_ID" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+        <Property Name="CONTAINER_DIRECCION_ID" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+        <Property Name="CONTAINER_DATOS_FINANCIEROS_ID" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+        <Property Name="CONTAINER_ENVIO_SMS_CONSULTA_UNYKOO_ID" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+
+        <Property Name="CONTAINER_BENEFICIARIOS_ID" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+        <Property Name="CONTAINER_CONTRATOS_ID" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+        <Property Name="CONTAINER_APROBACION_ID" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+
+        <Property Name="MAMBU_CONTRATO_TEMPLATEID" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+
+        <Property Name="MAMBU_CARATULA_TEMPLATEID" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+
+        <Property Name="MAMBU_PAGARE_TEMPLATEID" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+
+        <Property Name="MAMBU_REFERENCIASPAGO_TEMPLATEID" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+
+        <Property Name="MATI_AUTH_HEADER" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+
+        <Property Name="WEBBHOOK_MATI_KEY" Type="String"  Nullable="true" MaxLength="500">
+          <CustomProperties>
+            <CustomProperty Name="IsParam" Value="true" />
+          </CustomProperties>
+        </Property>
+
+        
+
+      </Properties>
+
+    </Entity>
+  </Entities>
+</SfsModel>

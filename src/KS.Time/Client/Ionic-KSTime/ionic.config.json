@@ -1,0 +1,7 @@
+{
+  "name": "KS.Time.client",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

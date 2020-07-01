@@ -1,0 +1,104 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+
+ 
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="DotNetZip" Version="1.13.3" />
+
+    <PackageReference Include="EFCore.BulkExtensions" Version="2.3.9" />
+
+    <PackageReference Include="EPPlus" Version="4.5.3.2" />
+    <PackageReference Include="FastMember.Signed" Version="1.4.1" />
+    <PackageReference Include="GoogleMaps.LocationServices" Version="1.2.0.2" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.8.14" />
+    <PackageReference Include="itext7.pdfhtml" Version="2.1.1" />
+    <PackageReference Include="LinqKit.Core" Version="1.1.15" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="9.4.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.DynamicLinq" Version="1.0.18" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.1" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Azure.KeyVault.Core" Version="3.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="2.2.0" />
+    <PackageReference Include="Polly" Version="7.2.0" />
+    <PackageReference Include="Sendgrid" Version="9.10.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.5.3" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.5.3" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.5.3" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.5.3" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KS.Time.BusinessObjects\KS.Time.BusinessObjects.csproj" />
+    <ProjectReference Include="..\KS.Time.EF\KS.Time.BusinessObjects.EF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SFS.Core">
+      <HintPath>..\..\..\LibraryDev\SFS.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SFS.Core.Common">
+      <HintPath>..\..\..\LibraryDev\SFS.Core.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SFS.Core.Security.BusinessObjects">
+      <HintPath>..\..\..\LibraryDev\SFS.Core.Security.BusinessObjects.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <None Update="BRCRUD.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BRCRUD.cs</LastGenOutput>
+    </None>
+    <None Update="Settings.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Settings.cs</LastGenOutput>
+    </None>
+    <None Update="SfsTemplate2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SfsTemplate2.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="BRCRUD.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BRCRUD.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Settings.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.tt</DependentUpon>
+    </Compile>
+    <Compile Update="SfsTemplate2.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SfsTemplate2.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,309 @@
+﻿<#@ output  extension="txt" #>
+<#@ template language="C#" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ import namespace="SFS.VSExtension2019.Model" #>
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+<#+ 
+string entityPluralName = "";
+string entitySingularName ="";
+#>
+
+<#+
+public bool IsPropertyWritable(PropertyInfo property){
+	bool result = true ;
+	if (property.Name == "Bytes"
+		){
+		result = false;
+
+    }
+
+		return result;
+}
+/*
+public object GetCustomProperty(ModelInfo model, string customPropertyName, string propertyType){
+	object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		
+			
+		//Write(property.CustomProperties.Count().ToString());
+
+		CustomPropertyInfo cp = model.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}*/
+public bool IsForPartial(string fileFullName, string[] parts){
+	
+	bool result = false;
+		foreach(var part in parts){
+			if (fileFullName.Contains(part.Replace("/", "\\")))
+			{
+				return true;
+			}
+		}
+
+		return result;
+
+}
+public bool IsReplacable(string fileFullName, string[] parts){
+	bool result = false;
+		foreach(var part in parts){
+			if (fileFullName.EndsWith(part))
+			{
+				return true;
+			}
+		}
+
+		return result;
+		
+}
+#>
+<#+ 
+	public string NullableSymbol(PropertyInfo property){
+		string result = "";
+		if (!property.Type.ToLower().Contains("trackablecollection") && !property.Type.ToLower().Contains("string") && !property.Type.ToLower().Contains("xml")){
+			if (property.Type != "String" && property.Type != "Binary" && property.IsPrimaryKey== false){
+				if (property.Nullable)
+				{
+					result = "?";
+				}
+			}else if (property.IsPrimaryKey && property.Type != "String"){
+				result = "?";
+			}
+		}
+		return result;
+	}
+public object GetCustomProperty(EntityInfo entity, string customPropertyName, string propertyType){
+	object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if (propertyType.ToLower() == "object")
+			result = null;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		//Write(property.CustomProperties.Count().ToString());
+
+		CustomPropertyInfo cp = entity.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else if(propertyType.ToLower() == "object")
+				result = cp.Value;
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+public object GetCustomProperty(ModelInfo model, string customPropertyName, string propertyType){
+	object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if (propertyType.ToLower() == "object")
+			result = null;
+
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		
+			
+		//Write(property.CustomProperties.Count().ToString());
+
+		CustomPropertyInfo cp = model.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else if(propertyType.ToLower() == "object")
+				result = cp.Value;
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+
+public object GetCustomProperty(PropertyInfo property, string customPropertyName, string propertyType){
+		
+		object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if (propertyType.ToLower() == "boolean?")
+			result = null;
+		else if (propertyType.ToLower() == "object")
+			result = null;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		else if (propertyType.ToLower() == "int?")
+			result = null;
+		//Write(property.CustomProperties.Count().ToString());
+
+		CustomPropertyInfo cp = property.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else if(propertyType.ToLower() == "int?")
+				result = Convert.ToInt32(cp.Value);
+			else if(propertyType.ToLower() == "object")
+				result = cp.Value;
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+string AutoGuidProperty = null;
+string AutoCreatedDateProperty = null;				
+string AutoCreatedUserProperty = null;
+string AutoUpdatedDateProperty = null; 
+string AutoUpdatedUserProperty = null; 
+string AutoCompanyProperty = null;
+string AutoSizeBytesProperty = null;
+string EngineKeyProperty = null;
+string AutoDeletedProperty = null;
+
+bool modelPropertiesLoaded = false;
+public void  LoadModelProperties(ModelInfo model){
+	AutoGuidProperty = (String)GetCustomProperty(model,"AutoGuidProperty", "String");
+	AutoCreatedDateProperty = (String)GetCustomProperty(model,"AutoCreatedDateProperty", "String");				
+	AutoCreatedUserProperty = (String)GetCustomProperty(model,"AutoCreatedUserProperty", "String");
+	AutoUpdatedDateProperty = (String)GetCustomProperty(model,"AutoUpdatedDateProperty", "String"); 
+	AutoUpdatedUserProperty = (String)GetCustomProperty(model,"AutoUpdatedUserProperty", "String"); 
+	
+	AutoSizeBytesProperty = (String)GetCustomProperty(model,"AutoSizeBytesProperty", "String"); 
+	EngineKeyProperty = (String)GetCustomProperty(model,"EngineKeyProperty", "String"); 
+
+	AutoCompanyProperty = (String)GetCustomProperty(model,"CompanyProperty", "String"); 
+	AutoDeletedProperty = "IsDeleted";
+	modelPropertiesLoaded =true;
+}
+public bool IsSystemProperty(PropertyInfo property){
+	bool result = false;
+	if (!modelPropertiesLoaded)
+		LoadModelProperties(property.Entity.Model);
+	if (!string.IsNullOrEmpty(AutoGuidProperty)){
+		if (property.Name == AutoGuidProperty)
+			result = true;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoCreatedDateProperty)){
+		if (property.Name == AutoCreatedDateProperty)
+			result = true;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoCreatedUserProperty)){
+		if (property.Name == AutoCreatedUserProperty)
+			result = true;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoSizeBytesProperty)){
+		if (property.Name == AutoSizeBytesProperty)
+			result = true;
+	}
+	
+
+	if (!string.IsNullOrEmpty(AutoUpdatedDateProperty)){
+		if (property.Name == AutoUpdatedDateProperty)
+			result = true;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoUpdatedUserProperty)){
+		if (property.Name == AutoUpdatedUserProperty)
+			result = true;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoCompanyProperty)){
+		if (property.Name == AutoCompanyProperty)
+			result = true;
+	}
+	if (!string.IsNullOrEmpty(AutoCompanyProperty)){
+		if (property.Name == AutoCompanyProperty)
+			result = true;
+	}
+
+	    if (!string.IsNullOrEmpty(AutoDeletedProperty)){
+        if (property.Name == AutoDeletedProperty)
+		result = true;
+		}
+
+	if (!string.IsNullOrEmpty(EngineKeyProperty)){
+		if (property.Name == EngineKeyProperty)
+			result = true;
+	}
+	return result;
+}
+public string UppercaseFirst(string s)
+    {
+	if (string.IsNullOrEmpty(s))
+	{
+	    return string.Empty;
+	}
+	char[] a = s.ToCharArray();
+	a[0] = char.ToUpper(a[0]);
+	return new string(a);
+    }
+public bool IsVisibleProperty(PropertyInfo property){
+	bool result = true;
+	
+
+	if (!modelPropertiesLoaded)
+		LoadModelProperties(property.Entity.Model);
+
+	if (!string.IsNullOrEmpty(AutoGuidProperty)){
+		if (property.Name == AutoGuidProperty)
+			result = false;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoCreatedDateProperty)){
+		if (property.Name == AutoCreatedDateProperty)
+			result = false;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoCreatedUserProperty)){
+		if (property.Name == AutoCreatedUserProperty)
+			result = false;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoUpdatedDateProperty)){
+		if (property.Name == AutoUpdatedDateProperty)
+			result = false;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoUpdatedUserProperty)){
+		if (property.Name == AutoUpdatedUserProperty)
+			result = false;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoCompanyProperty)){
+		if (property.Name == AutoCompanyProperty)
+			result = false;
+	}
+	
+	return result;
+}
+#>

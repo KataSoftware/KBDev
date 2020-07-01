@@ -1,0 +1,155 @@
+
+
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+
+resources:
+  repositories:
+  - repository: LibraryDev
+    type: git
+    name: [project devops name]/LibraryDev
+    ref: dev-kata
+
+trigger:
+- dev-kata
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Debug'
+  CSEnvironment: 'QA-KSTime'
+  projects.app.architect.build.options.outputPath: '$(System.DefaultWorkingDirectory)/Shell/App'
+  BuildConfigurationAngular: 'devops'
+
+steps:
+- checkout: self
+- checkout: LibraryDev
+
+
+
+- task: CmdLine@2
+  inputs:
+    script: 'mkdir Shell'
+    workingDirectory: '$(Build.SourcesDirectory)'
+    failOnStderr: false
+- task: FileTransform@2
+  inputs:
+    folderPath: '$(Build.SourcesDirectory)/src/KS.Time/Client/Ionic-KSTime/'
+    xmlTransformationRules:
+    jsonTargetFiles: 'angular.json'
+
+
+- script: dir $(Build.SourcesDirectory)
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: RegexReplace@3
+  inputs:
+    InputSearchPattern: '$(Build.SourcesDirectory)\src\KS.Time\KS.Time.Api\SettingsModule.cs'
+    FindRegex: '(token-build-id)'
+    ReplaceRegex: '$(Build.BuildID)'
+    UseUTF8: true
+    UseRAW: true
+
+- task: RegexReplace@3
+  inputs:
+    InputSearchPattern: '$(Build.SourcesDirectory)\src\KS.Time\KS.Time.Api\SettingsModule.cs'
+    FindRegex: '(token-commit)'
+    ReplaceRegex: '$(Build.SourceVersion)'
+    UseUTF8: true
+    UseRAW: true
+
+- task: RegexReplace@3
+  inputs:
+    InputSearchPattern: '$(Build.SourcesDirectory)\src\KS.Time\Client\Ionic-KSTime\src\environments\environment.devops.ts'
+    FindRegex: '(token-build-id)'
+    ReplaceRegex: '$(Build.BuildID)'
+    UseUTF8: true
+    UseRAW: true
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    vsVersion: '16.0'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+    createLogFile: true
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/LibraryDev/Shell'
+    Contents: '**'
+    TargetFolder: '$(Build.SourcesDirectory)/Shell'
+    CleanTargetFolder: true
+    OverWrite: true
+    flattenFolders: false
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/src/KS.Time/KS.Time.Api/bin/$(buildConfiguration)/netcoreapp2.2'
+    Contents: 'KS.Time*.*'
+    TargetFolder: '$(Build.SourcesDirectory)/Shell'
+    CleanTargetFolder: false
+    OverWrite: true
+    flattenFolders: true
+
+#- task: CopyFiles@2
+#  inputs:
+#    SourceFolder: '$(Build.SourcesDirectory)/src/KS.Time/ConnectionString/$(CSEnvironment)'
+#    Contents: '*.config'
+#    TargetFolder: '$(Build.SourcesDirectory)/Shell'
+#    OverWrite: true
+#    flattenFolders: true
+
+- task: CmdLine@2
+  inputs:
+    script: 'dir'
+    workingDirectory: '$(Build.SourcesDirectory)/Shell'
+    failOnStderr: false
+
+
+- task: CmdLine@2
+  inputs:
+    script: 'cat angular.json'
+    workingDirectory: '$(Build.SourcesDirectory)/src/KS.Time/Client/Ionic-KSTime/'
+    failOnStderr: false
+
+- task: CmdLine@2
+  inputs:
+    script: 'npm i -g @ionic/cli'
+    workingDirectory: '$(Build.SourcesDirectory)/src/KS.Time/Client/Ionic-KSTime/'
+    failOnStderr: false
+
+- task: CmdLine@2
+  inputs:
+    script: 'npm i -D -E @angular/cli'
+    workingDirectory: '$(Build.SourcesDirectory)/src/KS.Time/Client/Ionic-KSTime/'
+    failOnStderr: false
+
+- task: CmdLine@2
+  inputs:
+    script: 'mkdir App'
+    workingDirectory: '$(Build.SourcesDirectory)'
+    failOnStderr: false
+
+- task: CmdLine@2
+  inputs:
+    script: 'ionic build --verbose --configuration $(BuildConfigurationAngular)'
+    workingDirectory: '$(Build.SourcesDirectory)/src/KS.Time/Client/Ionic-KSTime/'
+    failOnStderr: false
+
+
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'angular-net'
+    targetPath: '$(Build.SourcesDirectory)/Shell'

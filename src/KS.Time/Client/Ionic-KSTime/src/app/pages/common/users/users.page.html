@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" #content>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-back-button text="Configuración" icon="arrow-round-back" [defaultHref]="defaultHref"></ion-back-button>
+          </ion-buttons>
+
+          <span class="title">| Usuarios </span>
+        </ion-toolbar>
+      </ion-col>
+      <ion-col class="ion-no-padding">
+        <ion-item class="table-header" lines="none">
+          <ion-button (click)="addItem()" class="button-table" size="default" slot="end">
+            Agregar nuevo
+          </ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+
+        <div class="input-group search-place ">
+          <!-- <input #inputSearch class="form-control border-right-0 border" type="search" placeholder="Buscar"
+            (search)="search($event)"> -->
+          <!-- <span class="input-group-append">
+            <button class="btn btn-outline-secondary border-left-0 border" type="button" (click)="search($event)">
+              <ion-icon name="search" class="icon-search-azul"></ion-icon>
+            </button>
+          </span> -->
+        </div>
+
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <ion-button fill="clear" (click)="delete()" *ngIf="selection.selected.length > 0">
+          <ion-icon slot="start" name="trash"></ion-icon>
+          Eliminar seleccionados
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <!-- Tabla -->
+        <ng-container>
+
+
+          <sfs-table class="hidde-when-mobile" [data]="data" [columns]="tableColumns"
+            [displayedColumns]="displayedColumns" [pagination]="pagination" (onPageChange)="handlePageChange($event)">
+          </sfs-table>
+
+        </ng-container>
+        <ng-template  #userGuidCell let-value="value" let-row="row">
+            <div>
+            <mat-checkbox  (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)"
+            [aria-label]="checkboxLabel(row)" ></mat-checkbox>
+          </div>
+          </ng-template>
+
+          <ng-template #displayNameCell let-value="value" let-row="row">
+            <div class="navigation-cell" (click)="edit(row)">
+              {{ row?.DisplayName }}
+            </div>
+
+
+
+          </ng-template>
+
+          <ng-template #emailCell let-value="value" let-row="row">
+            {{ row?.Email }}
+          </ng-template>
+
+          <ng-template #numRolesCell let-value="value" let-row="row">
+            <div class="navigation-cell" 
+        (click)="goToUserRoles(row)">
+            <span class="num-users">
+              {{ row?.NumRoles }} </span></div>
+           
+          </ng-template>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

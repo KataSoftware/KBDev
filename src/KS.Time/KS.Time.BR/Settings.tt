@@ -1,0 +1,282 @@
+﻿<#@ template debug="True" language="C#" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ import namespace="SFS.VSExtension2019.Model" #> 
+<#@ import namespace="SFS.VSExtension2019.EngTool" #> 
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #> 
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+<#@ dom processor="SFSEdmxProcessor"  
+requires="EntityModel='KSTimeModel.edmx'"  #>
+// <Template>
+//   <SolutionTemplate>EF POCO 1</SolutionTemplate>
+//   <Version>20140213.2136</Version>
+//   <Update>mas de contextRequest</Update>
+// </Template>
+#region using
+using System;
+using System.Collections.Generic;
+using System.Text;
+using SFS.Core.BR;
+using System.Linq.Dynamic.Core;
+//using EntityFrameworkCore.DynamicLinq;
+using System.Collections;
+using System.Linq;
+using LinqKit;
+using SFS.Core.Entities;
+using SFS.Core.Linq;
+using System.Linq.Expressions;
+using System.Data;
+
+using SFSdotNet.Framework;
+using SFS.Core.My;
+//using System.Data.Entity.Core.Objects.DataClasses;
+//using System.Data.Entity.Core.Objects;
+using <#= Model.Namespace #>.BusinessObjects;
+//using <#= Model.Namespace #>.BusinessObjects.EFPocoAdapter;
+
+//using EFPocoAdapter;
+using SFS.Core.Entities.Trackable;
+using SFS.Core.Security.BR;
+using EFCore.BulkExtensions;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Dynamic.Core;
+using SFS.Core.Security.BusinessObjects;
+//using EntityFrameworkCore.DynamicLinq;
+
+
+#endregion
+namespace <#= Model.Namespace #>.BR
+{
+
+	<# foreach(EntityInfo entity in this.Model.Entities.Where(p=>p.GenerateCRUD == true && p.Name == "unProxySetting")) {
+
+
+#>
+	public  class Settings{
+	    
+<# foreach(var prop in entity.Properties.Where(p=> !string.IsNullOrEmpty((string)GetCustomProperty(p, "IsParam", "String")) )){
+		string dataType = "String";
+		string defaultValue = "\"\"";
+	   string sufix = "String";
+	string paramId = (string)GetCustomProperty(prop, "ParamId", "String");
+		if (string.IsNullOrEmpty(paramId)){
+			paramId = prop.Name;
+        }
+	   if (prop.Type.ToLower().Contains("int")){
+			dataType = "Int32";
+		   defaultValue = "0";
+		   sufix = "Int";
+       }
+	    if (prop.Type.ToLower().Contains("bool")){
+			dataType = "Boolean";
+		   defaultValue = "false";
+			 sufix = "Boolean";
+       }
+		string contextPart = "Module";
+		if (!string.IsNullOrEmpty((string)GetCustomProperty(prop, "ContextParam", "String")) ){
+
+		contextPart = (string)GetCustomProperty(prop, "ContextParam", "String");
+
+        }
+
+				string moduleKey = "KSTime";
+		if (!string.IsNullOrEmpty((string)GetCustomProperty(prop, "AppNameKey", "String")) ){
+
+		moduleKey = (string)GetCustomProperty(prop, "AppNameKey", "String");
+
+        }
+
+		if (contextPart == "Module"){
+	#>            
+			       
+			public static <#= dataType #> <#= prop.Name #> ( ContextRequest contextRequest ){
+               
+                return  (<#= dataType #>)SFS.Core.Configuration.ModuleAppSettings.GetValue("<#= paramId #>", "<#= moduleKey #>", "<#= dataType #>", <#= defaultValue #>, false);
+
+               
+            
+        }
+<#    }else{
+#>
+		public static <#= dataType #> <#= prop.Name #> ( ContextRequest contextRequest ){
+               
+                return  (<#= dataType #>)SFS.Core.Configuration.CompanyAppSettings.GetValue("<#= paramId #>",  "<#= moduleKey #>", contextRequest.Company.GuidCompany, "<#= dataType #>",  <#= defaultValue #>, false);
+
+               
+            
+        }
+<#    }
+	  } #>
+       
+		
+	}
+
+	}
+<#  } #>
+<#+ 
+	public string NullableSymbol(PropertyInfo property){
+		string result = "";
+		
+		if (property.Type != "String" && property.Type != "DateTime" && property.IsPrimaryKey== false){
+			if (property.Nullable || property.IsNavigationProperty)
+			{
+				result = "?";
+			}
+		}else if (property.IsPrimaryKey && property.Type != "String" && property.Type != "DateTime"){
+			result = "?";
+		}
+		
+		return result;
+	}
+public object GetCustomProperty(EntityInfo entity, string customPropertyName, string propertyType){
+	object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		//Write(property.CustomProperties.Count().ToString());
+
+		CustomPropertyInfo cp = entity.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+public string PrepareLinqExpression(string originalValue){
+	string result = originalValue;
+	//if (originalValue.Contains("[NotDeleted]") || originalValue.Contains("[AND]")){
+		result = result.Replace("[NotDeleted]", "deleted => deleted." + AutoDeletedProperty + " != true || deleted." + AutoDeletedProperty + " == null");
+		result = result.Replace("[AND]", "&&");
+		result = result.Replace("[Quote]", "\"");
+	//}
+
+	return result;
+}
+public object GetCustomProperty(ModelInfo model, string customPropertyName, string propertyType){
+	object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		
+			
+		//Write(property.CustomProperties.Count().ToString());
+
+		CustomPropertyInfo cp = model.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+
+public object GetCustomProperty(PropertyInfo property, string customPropertyName, string propertyType){
+		
+		object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		//Write(property.CustomProperties.Count().ToString());
+
+		CustomPropertyInfo cp = property.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+string AutoGuidProperty = null;
+string AutoCreatedDateProperty = null;				
+string AutoCreatedUserProperty = null;
+string AutoUpdatedDateProperty = null; 
+string AutoUpdatedUserProperty = null; 
+string AutoCompanyProperty = null;
+string AutoDeletedProperty = null;
+string AutoSizeBytesProperty = null;
+
+bool modelPropertiesLoaded = false;
+public void  LoadModelProperties(ModelInfo model){
+	AutoGuidProperty = (String)GetCustomProperty(model,"AutoGuidProperty", "String");
+	AutoCreatedDateProperty = (String)GetCustomProperty(model,"AutoCreatedDateProperty", "String");				
+	AutoCreatedUserProperty = (String)GetCustomProperty(model,"AutoCreatedUserProperty", "String");
+	AutoUpdatedDateProperty = (String)GetCustomProperty(model,"AutoUpdatedDateProperty", "String"); 
+	AutoUpdatedUserProperty = (String)GetCustomProperty(model,"AutoUpdatedUserProperty", "String"); 
+	AutoSizeBytesProperty = (String)GetCustomProperty(model,"AutoSizeBytesProperty", "String"); 
+	AutoCompanyProperty = (String)GetCustomProperty(model,"CompanyProperty", "String"); 
+	AutoDeletedProperty = (String)GetCustomProperty(model,"AutoDeletedProperty", "String");
+	modelPropertiesLoaded =true;
+}
+
+public bool IsSystemProperty(PropertyInfo property){
+	bool result = false;
+	if (!modelPropertiesLoaded)
+		LoadModelProperties(property.Entity.Model);
+	if (!string.IsNullOrEmpty(AutoGuidProperty)){
+		if (property.Name == AutoGuidProperty)
+			result = true;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoCreatedDateProperty)){
+		if (property.Name == AutoCreatedDateProperty)
+			result = true;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoCreatedUserProperty)){
+		if (property.Name == AutoCreatedUserProperty)
+			result = true;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoUpdatedDateProperty)){
+		if (property.Name == AutoUpdatedDateProperty)
+			result = true;
+	}
+	
+	
+	if (!string.IsNullOrEmpty(AutoSizeBytesProperty)){
+		if (property.Name == AutoSizeBytesProperty)
+			result = true;
+	}
+	
+
+	if (!string.IsNullOrEmpty(AutoUpdatedUserProperty)){
+		if (property.Name == AutoUpdatedUserProperty)
+			result = true;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoCompanyProperty)){
+		if (property.Name == AutoCompanyProperty)
+			result = true;
+	}
+	
+	if (!string.IsNullOrEmpty(AutoDeletedProperty)){
+		if (property.Name == AutoDeletedProperty)
+			result = true;
+	}
+	return result;
+}
+
+#>

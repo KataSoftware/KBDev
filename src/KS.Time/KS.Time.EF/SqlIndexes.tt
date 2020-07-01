@@ -1,0 +1,160 @@
+﻿<#@ template debug="True" language="C#"  #>
+<#@ assembly name="System.Core.dll" #>
+<#@ assembly name="System.Web" #>
+<#@output extension=".sql"#>
+<#@ import namespace="SFS.VSExtension2019.Model" #> 
+<#@ import namespace="SFS.VSExtension2019.EngTool" #> 
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #> 
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+<#@ dom processor="SFSEdmxProcessor"  
+requires="EntityModel='KSTimeModel.edmx'" #>
+<#  
+	string prefix = (String)GetCustomProperty(this.Model, "EntityPrefix", "String");
+	string companyProperty = (String)GetCustomProperty(this.Model, "CompanyProperty", "String");
+	string createdDateProperty = (String)GetCustomProperty(this.Model, "AutoCreatedDateProperty", "String");
+	string updatedDateProperty = (String)GetCustomProperty(this.Model, "AutoUpdatedDateProperty", "String");
+	string createdByProperty = (String)GetCustomProperty(this.Model, "AutoCreatedUserProperty", "String");
+	string updatedByProperty = (String)GetCustomProperty(this.Model, "AutoUpdatedUserProperty", "String");
+	string deletedProperty = "IsDeleted";
+	string bytesProperty = (String)GetCustomProperty(this.Model, "AutoSizeBytesProperty", "String");
+
+		string reusableCatalogName = (String)GetCustomProperty(this.Model, "ReusableCatalog", "String");
+
+
+	foreach(EntityInfo entity in this.Model.Entities.Where(p=> p.Name.Contains(reusableCatalogName) == false && p.Name.Contains("Proxy") == false  && p.IsCustom == false)) { 
+		string sqlTableName = (String)GetCustomProperty(entity, "SqlTableName", "String");
+		if (string.IsNullOrEmpty(sqlTableName)){
+			sqlTableName = entity.Name;
+
+        }
+
+		if (entity.Properties.Count(p=> p.Name == createdDateProperty ) > 0 || entity.Properties.Count(p=> p.Name == updatedDateProperty ) > 0 || entity.Properties.Count(p=> p.Name == createdByProperty ) > 0 || entity.Properties.Count(p=> p.Name == deletedProperty ) > 0)
+		{
+
+			System.Text.StringBuilder sbInclude = new System.Text.StringBuilder();
+				
+
+				if (entity.Properties.Count(p=> p.Name == bytesProperty ) > 0){
+					if (sbInclude.Length > 0 ){
+						sbInclude.Append(",");
+					}
+					sbInclude.Append(bytesProperty);
+				}
+            
+#>
+IF NOT EXISTS (
+    SELECT * FROM sys.tables t
+    INNER JOIN sys.schemas s ON t.schema_id = s.schema_id
+    INNER JOIN sys.indexes i on i.object_id = t.object_id
+    WHERE s.name = '<#= prefix #>' AND t.name = '<#= sqlTableName #>' and i.name = '<#= sqlTableName #>_FullStatics_Idx'
+) 
+    CREATE NONCLUSTERED INDEX <#= sqlTableName #>_FullStatics_Idx 
+    on <#= prefix #>.<#= sqlTableName #> ( 
+<# 
+	var idPropertyName = entity.Properties.FirstOrDefault(p=> p.IsPrimaryKey);
+ #>
+<#= idPropertyName.Name #> 
+
+<#	if (entity.Properties.Count(p=> p.Name == createdDateProperty ) > 0){ #>
+        ,<#= createdDateProperty #> desc 
+<#	}#>
+
+<#	if (entity.Properties.Count(p=> p.Name == updatedDateProperty ) > 0){ 
+		var propUpdatedDateFinded = entity.Properties.FirstOrDefault(p=> p.Name == updatedDateProperty );
+		if (!string.IsNullOrEmpty((String)GetCustomProperty(propUpdatedDateFinded, "ComputedLinq", "String")) ){
+#>
+		
+<#		}else{ #>
+	,<#= updatedDateProperty #> desc 
+<#		}
+	} #>
+<#	if (entity.Properties.Count(p=> p.Name == createdByProperty ) > 0){ #>
+		,<#= createdByProperty #> 
+<#	}#>
+<#	if (entity.Properties.Count(p=> p.Name == companyProperty ) > 0 && idPropertyName.Name != companyProperty && entity.Name != "secCompany"){ #>
+		,<#= companyProperty #> 
+<#	}#>
+<#	if (entity.Properties.Count(p=> p.Name == deletedProperty ) > 0){ #>
+		,<#= deletedProperty #> desc
+<#	}#>
+    ) 
+<# if (sbInclude.Length > 0){ #>	
+	INCLUDE(<#= sbInclude.ToString() #>)
+<# } #>
+	WITH (ONLINE = ON)
+<#    }
+		
+}#>
+
+<#+ 
+public object GetCustomProperty(EntityInfo entity, string customPropertyName, string propertyType){
+	object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		//Write(property.CustomProperties.Count().ToString());
+
+		CustomPropertyInfo cp = entity.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+
+public object GetCustomProperty(PropertyInfo property, string customPropertyName, string propertyType){
+		
+		object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		//Write(property.CustomProperties.Count().ToString());
+
+		CustomPropertyInfo cp = property.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+public object GetCustomProperty(ModelInfo model, string customPropertyName, string propertyType){
+	object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		
+
+		CustomPropertyInfo cp = model.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+ #>

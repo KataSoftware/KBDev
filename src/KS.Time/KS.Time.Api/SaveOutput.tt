@@ -1,0 +1,17 @@
+<#@ output extension="txt" #> 
+<#@ import namespace="System.IO" #>
+<#+
+  void SaveOutput(string outputFileName, string folderName)
+  {
+      string templateDirectory = Path.GetDirectoryName(Host.TemplateFile);
+		if (!Directory.Exists(templateDirectory +  @"\\" +  folderName )) {
+                Directory.CreateDirectory(templateDirectory +  @"\\" +  folderName);
+		}
+
+      string outputFilePath = Path.Combine(templateDirectory +  @"\\" +  folderName, outputFileName);
+
+      File.WriteAllText(outputFilePath, this.GenerationEnvironment.ToString(), System.Text.Encoding.UTF8); 
+
+      this.GenerationEnvironment.Remove(0, this.GenerationEnvironment.Length);
+  }
+#>

@@ -1,0 +1,89 @@
+<ion-content class="tutorial-page" style="background-color: #e7e7e7;">
+
+  <ion-slides #slides pager="true">
+
+    <ion-slide>
+      <ion-footer>
+        <ion-toolbar color="introToolbar">
+          <button float-left ion-button clear color="light" (click)="goToHome()">OMITIR</button>
+          <button float-right ion-button clear color="light" (click)="goToSlide(1)">SIGUIENTE</button>
+        </ion-toolbar>
+      </ion-footer>
+      <p></p>
+      <div class="phone-container">
+        <div class="marvel-device note8">
+          <div class="inner"></div>
+          <div class="overflow">
+            <div class="shadow"></div>
+          </div>
+          <div class="speaker"></div>
+          <div class="screen">
+            <img src="" class="slide-image" />
+          </div>
+        </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-footer>
+        <ion-toolbar color="introToolbar">
+          <button float-left ion-button clear color="light" (click)="goToHome()">OMITIR</button>
+          <button float-right ion-button clear color="light" (click)="goToSlide(2)">SIGUIENTE</button>
+        </ion-toolbar>
+      </ion-footer>
+      <p></p>
+      <div class="phone-container">
+        <div class="marvel-device note8">
+          <div class="inner"></div>
+          <div class="overflow">
+            <div class="shadow"></div>
+          </div>
+          <div class="speaker"></div>
+          <div class="screen">
+            <img src="" class="slide-image" />
+          </div>
+        </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-footer>
+        <ion-toolbar color="introToolbar">
+          <button float-left ion-button clear color="light" (click)="goToHome()">OMITIR</button>
+          <button float-right ion-button clear color="light" (click)="goToSlide(3)">SIGUIENTE</button>
+        </ion-toolbar>
+      </ion-footer>
+      <p></p>
+      <div class="phone-container">
+        <div class="marvel-device note8">
+          <div class="inner"></div>
+          <div class="overflow">
+            <div class="shadow"></div>
+          </div>
+          <div class="speaker"></div>
+          <div class="screen">
+            <img src="" class="slide-image" />
+          </div>
+        </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="lastSlide">
+      <ion-footer>
+        <ion-toolbar color="introToolbar">
+          <button float-left ion-button clear color="light" (click)="goToHome()">OMITIR</button>
+        </ion-toolbar>
+      </ion-footer>
+      <img src="" class="logo-padding"/>
+      <br />
+      <br />
+      <h1 style="color:white;">ENCIENDE PARA CONTINUAR</h1>
+      <br />
+      <br />
+      <img *ngIf="isPressed == false" src="" (click)="pressStart()" />
+      <img *ngIf="isPressed == true" src="" (click)="pressStart()" />
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>
+

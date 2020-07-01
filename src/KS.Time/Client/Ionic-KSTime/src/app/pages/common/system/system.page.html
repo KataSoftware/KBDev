@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>system</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <mat-grid-list [cols]="colsBreak" rowHeight="2:1" (window:resize)="onResize($event)">
+    <mat-grid-tile>
+      <ion-button fill="clear" (click)="goToUsers()">
+        <ion-icon slot="icon-only" name="person"></ion-icon>
+      </ion-button>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <ion-button fill="clear" (click)="goToUsers()">
+        <ion-icon slot="icon-only" name="people"></ion-icon>
+      </ion-button>
+
+    </mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+  </mat-grid-list>
+</ion-content>

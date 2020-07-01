@@ -1,0 +1,12 @@
+{
+	"/Shell": {
+		"target": "http://localhost/ShellTime",
+
+		"secure": false,
+		"logLevel": "debug",
+		"changeOrigin": true,
+		"pathRewrite": {
+			"^/Shell": ""
+		}
+	}
+}

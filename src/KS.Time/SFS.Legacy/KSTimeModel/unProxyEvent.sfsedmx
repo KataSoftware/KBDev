@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SfsModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Entities>
+    <Entity Name="unProxyEvent" SetName="unProxyEvents" IsUIVisible="false" GenerateCRUD="true" IsForLocalization="false" IsCustom="true" IsView="false" DefaultProperty="Title">
+      <EntityKeys>
+        <EntityKey PropertyName="GuidUnProxyEvent" IsCustom="false" />
+      </EntityKeys>
+      <Properties>
+
+        <Property Name="GuidUnProxyEvent" Type="Guid"  Nullable="false"  IsPrimaryKey="true" >
+
+        </Property>
+        <Property Name="Title" Type="String"  Nullable="true" MaxLength="255">
+
+        </Property>
+        <Property Name="Message" Type="String"  Nullable="true" MaxLength="255">
+
+        </Property>
+
+        <Property Name="TypeEvent" Type="String"   Nullable="true">
+
+        </Property>
+        <Property Name="IsException" Type="Boolean"   Nullable="true">
+
+        </Property>
+        <Property Name="UpdatedDate" Type="DateTime"   Nullable="true">
+
+        </Property>
+        
+        
+        
+        
+      </Properties>
+     
+    </Entity>
+  </Entities>
+</SfsModel>

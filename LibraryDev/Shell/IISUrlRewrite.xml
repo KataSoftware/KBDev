@@ -1,0 +1,11 @@
+<rewrite>
+  <rules>
+ 	<!--<rule name="Redirect old-domain to new-domain" stopProcessing="true">
+          <match url=".*" />
+          <conditions>
+            <add input="{HTTP_HOST}" pattern="^localhost$"  />
+          </conditions>
+          <action type="Redirect" url="http://local.test.com/{R:0}" appendQueryString="true" redirectType="Permanent" />
+        </rule>-->
+      </rules>
+</rewrite>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SfsModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Entities>
+    <Entity Name="KstEmailTemplate" SetName="KstEmailTemplates" IsUIVisible="false" GenerateCRUD="true" IsForLocalization="false" IsCustom="false" IsView="false" DefaultProperty="Title">
+      <CustomProperties>
+        <CustomProperty Name="SharedAndMultiCompany" Value="true" />
+      </CustomProperties>   
+    </Entity>
+  </Entities>
+</SfsModel>

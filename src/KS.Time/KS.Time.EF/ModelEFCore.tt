@@ -1,0 +1,148 @@
+﻿<#@ template debug="True" language="C#" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ import namespace="SFS.VSExtension2019.Model" #> 
+<#@ import namespace="SFS.VSExtension2019.EngTool" #> 
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #> 
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+<#@ dom processor="SFSEdmxProcessor"  
+requires="EntityModel='KSTimeModel.edmx'"  #>
+using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using <#= Model.Namespace #>.BusinessObjects;
+
+namespace <#= Model.Namespace #>
+{
+
+  public partial class <#= Model.SafeNamespace #>Context : DbContext
+    {
+	  public string ConnectionString { get; set; }
+        public <#= Model.SafeNamespace #>Context()
+        {
+
+        }
+		 public <#= Model.SafeNamespace #>Context(string connectionString )
+        {
+			this.ConnectionString = connectionString;
+        }
+
+        public <#= Model.SafeNamespace #>Context(DbContextOptions<<#= Model.SafeNamespace #>Context> options)
+            : base(options)
+        {
+        }
+#region
+<# foreach(EntityInfo entity in this.Model.Entities.Where(p=> p.IsCustom == false)) { #>
+        public virtual DbSet<<#= entity.Name #>> <#= entity.SetName #> { get; set; }
+<# } #>
+#endregion
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+				#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer(this.ConnectionString);
+            }
+        }
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+<# foreach(EntityInfo entity in this.Model.Entities.Where(p=> p.IsCustom == false)) { #>
+			modelBuilder.Entity<<#= entity.Name #>>(entity =>
+            {
+<#
+	   System.Text.StringBuilder sbKeys = new System.Text.StringBuilder();
+foreach(PropertyKeyInfo propertyKey in entity.EntityKey){ 
+	if (sbKeys.Length > 0){
+		sbKeys.Append(", ");
+    }
+	sbKeys.Append("e."+ propertyKey.PropertyName);
+} 
+string sqlTableName = (String)GetCustomProperty(entity, "SqlTableName", "String");
+		if (string.IsNullOrEmpty(sqlTableName)){
+			sqlTableName = entity.Name;
+        }
+
+#>
+			entity.HasKey(e => new { <#=sbKeys.ToString() #>});
+
+			
+			 entity.ToTable("<#= sqlTableName #>");
+<# foreach(PropertyInfo property in entity.Properties.Where(p=>p.IsNavigationProperty == false && p.IsCustom == false)){ #>
+			 entity.Property(e => e.<#= property.Name #>);
+<# } #>
+<# foreach(PropertyInfo property in entity.Properties.Where(p=>p.IsNavigationProperty == true && p.IsNavigationPropertyMany == false)){
+
+	   var navprop = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyName == property.Name);
+			var entityRelName = navprop.EntityType.Substring(navprop.EntityType.LastIndexOf(".") + 1);
+			var entityRel = entity.Model.Entities.Find(p=>p.Name == entityRelName);
+			var relNav = entityRel.NavigationProperties.Where(p=>p.RelationshipName == property.NavigationProperty.RelationshipName).FirstOrDefault();
+			if (relNav != null){
+#>
+
+		entity.HasOne(d => d.<#= property.Name #>)
+                    .WithMany(p => p.<#= relNav.PropertyName #>)
+                    .HasForeignKey(d => d.<#= navprop.PropertyRefName #>)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+<# }
+} #>
+
+
+		});
+<# } #>
+OnModelCreatingPartial(modelBuilder);
+		}
+
+		 partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+   }
+
+}
+
+
+<#+ 
+public object GetCustomProperty(EntityInfo entity, string customPropertyName, string propertyType){
+	object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		//Write(property.CustomProperties.Count().ToString());
+
+		CustomPropertyInfo cp = entity.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+public object GetCustomProperty(ModelInfo model, string customPropertyName, string propertyType){
+	object result = null;
+		if (propertyType.ToLower() =="boolean")
+			result = false;
+		else if(propertyType.ToLower() == "string")
+			result = "";
+		
+
+		CustomPropertyInfo cp = model.CustomProperties.FirstOrDefault(p=>p.Name == customPropertyName);
+		if (cp!= null ){
+			//Write(cp.Value);
+			if(propertyType.ToLower() == "boolean")	
+				result = Convert.ToBoolean(cp.Value);
+			else if(propertyType.ToLower() == "string")
+				result = Convert.ToString(cp.Value);
+			else
+				result = Convert.ToString(cp.Value);
+		}		
+		
+	
+		return result;
+}
+ #>

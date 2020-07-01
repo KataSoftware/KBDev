@@ -1,0 +1,9 @@
+diff a/KS.Time/KS.Time.Api/KS.Time.Api.csproj b/KS.Time/KS.Time.Api/KS.Time.Api.csproj	(rejected hunks)
+@@ -114,6 +114,7 @@
+   </ItemGroup>
+ 
+   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
++    <Exec Command="xcopy &quot;$(ProjectDir)bin\Debug\netcoreapp2.2\KS.Time*.*&quot; &quot;C:\PalApuro\Dev\TeCreemos\shell\&quot; /Y&#xD;&#xA;" />
+   </Target>
+ 
+ </Project>

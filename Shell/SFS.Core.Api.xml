@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SFS.Core.Api</name>
+    </assembly>
+    <members>
+        <member name="F:SFS.Core.Api.UIModelContextTypes.ListForm">
+            <summary>
+            El caso de una lista
+            </summary>
+        </member>
+        <member name="F:SFS.Core.Api.UIModelContextTypes.DisplayForm">
+            <summary>
+            El caso de un detalle de un registro
+            </summary>
+        </member>
+        <member name="F:SFS.Core.Api.UIModelContextTypes.EditForm">
+            <summary>
+            El caso de una forma de edición
+            </summary>
+        </member>
+        <member name="F:SFS.Core.Api.UIModelContextTypes.Items">
+            <summary>
+            Elementos de resultado de una lista
+            </summary>
+        </member>
+        <member name="F:SFS.Core.Api.UIModelContextTypes.GenericForm">
+            <exclude />
+        </member>
+        <member name="F:SFS.Core.Api.UIModelContextTypes.FilterFields">
+            <summary>
+            The filter fields
+            </summary>
+        </member>
+        <member name="F:SFS.Core.Api.UIModelContextTypes.ExportDownload">
+            <summary>
+            Exportación de datos de una lista
+            </summary>
+        </member>
+        <member name="P:SFS.Core.Api.ContextActionModel`1.ActionKey">
+            <summary>
+            Identificador de la acción que se ha ejecutado
+            </summary>
+        </member>
+        <member name="P:SFS.Core.Api.ContextActionModel`1.SelectedKeys">
+            <summary>
+            Lista de elementos seleccionados en el cliente. Corresponde a una consulta que ya se llevó a cabo a la base de datos
+            </summary>
+        </member>
+        <member name="P:SFS.Core.Api.ContextActionModel`1.SelectedSafeKeys">
+            <summary>
+            Llaves encriptadas correspondientes a los registros seleccionados en el cliente
+            </summary>
+        </member>
+        <member name="P:SFS.Core.Api.ContextActionModel`1.SelectedItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:SFS.Core.Api.MyEventArgs`1.UIModel">
+            <summary>
+            Modelo de UI 
+            </summary>
+        </member>
+        <member name="T:SFS.Core.Api.Controllers.AuthController">
+            <summary>
+            Authentication class
+            </summary>
+        </member>
+        <member name="M:SFS.Core.Api.Controllers.AuthController.Login(SFS.Core.Api.Models.ApiUserLoginData)">
+            <summary>
+            Authenticate a user
+            </summary>
+            <param name="data"></param>
+            <returns>Token and other data of authenticated user</returns>
+        </member>
+        <member name="T:SFS.Core.Api.Controllers.GenericEntityController">
+            <summary>
+            Controller genérico de ejemplo que representa cualquier otra entidad de negocio de la aplicación, por ejemplo:
+            </summary>
+            <remarks> 
+             [GenericEntity]Controller -> EmpleadosController -> Empleados/Get
+            </remarks>
+        </member>
+        <member name="M:SFS.Core.Api.Controllers.ControllerBase`1.ApiGetByKeyJson(System.String,SFS.Core.My.ContextRequest)">
+            <summary>
+            Resuelve la respuesta correspondiente a una petición REST
+            </summary>
+            <param name="status">Estado</param>
+            <param name="reason">Descripció corta o identificador</param>
+            <param name="message">Descripción larga o texto del error</param>
+            <param name="data">Elemento de negocio</param>
+            <returns></returns>
+        </member>
+        <member name="M:SFS.Core.Api.Controllers.ControllerBase.GetPropertyDefinition(System.String,System.String)">
+            <summary>
+            Devuelve el actionResult adecuado de acuerdo a las características de la forma en contexto
+            </summary>
+            <param name="message"></param>
+            <param name="typeMessage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SFS.Core.Api.Controllers.ControllerBase.GetCopyProperty(SFS.Core.Api.Models.PropertyDefinition,System.String,System.String)">
+            <summary>
+            Get a copy of property definition for usemode use
+            </summary>
+            <param name="property"></param>
+            <param name="usemode"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:SFS.Core.Api.Models.UIModel.UseMode" -->
+        <member name="F:SFS.Core.Api.Models.UIModel.indexProp">
+            <summary>
+            Obtiene el valor falso o verdadero acerca del permiso
+            </summary>
+            <param name="permissionKey"></param>
+            <returns></returns>
+        </member>
+        <member name="P:SFS.Core.Api.Models.UIModel.Properties">
+            <summary>
+            Propiedades a desplegarse en la forma a lista
+            </summary>
+        </member>
+        <member name="P:SFS.Core.Api.Models.UIModel.FilterStart">
+            <summary>
+            Filtro inicial en la lista, que debe ser inalterable
+            </summary>
+        </member>
+        <member name="P:SFS.Core.Api.Models.UIModel.FilterCustom">
+            <summary>
+            For custom filter from controller 
+            </summary>
+        </member>
+        <member name="M:SFS.Core.Api.Models.UIModel.CanAction(System.String)">
+            <summary>
+            Determina  cuando una acción con determinado identificador está habilitada.
+            </summary>
+            <param name="actionKey">Identificador de la acción.</param>
+            <returns><c>true</c> if this instance can action the specified action key; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:SFS.Core.Api.Models.UIModel.SetAction(System.String,System.Boolean)">
+            <summary>
+            Establece si una acción esta habilitada o no.
+            </summary>
+            <param name="actionKey">Identificador de la acción.</param>
+            <param name="enabled">Si es <c>true</c> se habilita, si es <c>false</c> se deshabilita.</param>
+        </member>
+        <member name="M:SFS.Core.Api.Models.UIModel`1.#ctor(System.Boolean,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SFS.Core.Api.Models.UIModel`1"/> class.
+            </summary>
+            <param name="createDefault">if set to <c>true</c> [create default].</param>
+            <param name="controllerName">Name of the controller.</param>
+        </member>
+        <member name="P:SFS.Core.Api.Models.UIModel`1.Items">
+            <summary>
+            Gets or sets the items.
+            </summary>
+            <value>The items.</value>
+        </member>
+    </members>
+</doc>

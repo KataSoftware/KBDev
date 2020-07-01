@@ -1,0 +1,80 @@
+<ion-content no-padding class="login-page content-dark">
+  <ion-grid class="grid" [style.height.px]="height">
+    <ion-row>
+      <ion-col push-md="4" pull-md="4" size-md="4" class="login-space ion-text-center" [style.height.px]="height">
+        <img style="height:100px;margin-top: 50px;" src="{{appLogo}}" />
+        <div *ngIf="isLogin == true" style="margin-left: auto; margin-right: auto; width:100%;">
+          <form [formGroup]="formlogin" (ngSubmit)="handelLoginToSFS()" (keyup.enter)="handelLoginToSFS()">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <formly-form [form]="formlogin" [fields]="fields" [model]="model"></formly-form>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="ion-text-right">
+                  <button type="button" class="btn btn-link" (click)="goToRecoveryPassword()">Olvidé mi
+                    contraseña</button>.
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-button [disabled]="((formlogin.invalid == true || submitButtonDisabled == true))"
+                    (click)="handelLoginToSFS()" size="default" class="sfs-button primary">
+                    {{ submitButtonText }}
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </form>
+          <span>
+            ¿No tienes una cuenta? Regístrate <button type="button" class="btn btn-link"
+              (click)="goToRegister()">aquí</button>.
+          </span>
+        </div>
+        <div *ngIf="isRecoveryPassword " class="recovery-password"
+          style="margin-left: auto; margin-right: auto; width:500px;">
+          <form [formGroup]="form">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-button (click)="goToLogin()" size="default" class=" sfs-button secondary" fill="outline">
+                    Cancelar
+                  </ion-button>
+                  <ion-button [disabled]="this.form.invalid == true || disabledButton == true"
+                    (click)="recoverPassword()" size="default" class="sfs-button primary">
+                    Recuperar
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </form>
+        </div>
+        <div *ngIf="isSetPassword" style="margin-left: auto; margin-right: auto; width:500px;">
+          <form [formGroup]="formsetpassword">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <p><span>Establezca su contraseña</span></p>
+                  <formly-form [form]="formsetpassword" [fields]="fields" [model]="model"></formly-form>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-button [disabled]="this.formsetpassword.invalid == true || disabledButton == true"
+                    (click)="setPassword()" size="default" class="sfs-button primary">
+                    Establecer contraseña </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </form>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

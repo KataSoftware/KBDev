@@ -1,0 +1,56 @@
+# Node.js with Angular
+# Build a Node.js project that uses Angular.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- dev-kata
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  projects.app.architect.build.options.outputPath: '$(System.DefaultWorkingDirectory)/App'
+  BuildConfigurationAngular: 'todosi-qa-dev'
+
+steps:
+- task: FileTransform@2
+  inputs:
+    folderPath: '$(Build.SourcesDirectory)/KS.Time/Client/Ionic-KSTime/'
+    xmlTransformationRules:
+    jsonTargetFiles: 'angular.json'
+
+- task: CmdLine@2
+  inputs:
+    script: 'cat angular.json'
+    workingDirectory: '$(Build.SourcesDirectory)/KS.Time/Client/Ionic-KSTime/'
+    failOnStderr: false
+
+- task: CmdLine@2
+  inputs:
+    script: 'npm i -g @ionic/cli'
+    workingDirectory: '$(Build.SourcesDirectory)/KS.Time/Client/Ionic-KSTime/'
+    failOnStderr: false
+
+- task: CmdLine@2
+  inputs:
+    script: 'npm i -D -E @angular/cli'
+    workingDirectory: '$(Build.SourcesDirectory)/KS.Time/Client/Ionic-KSTime/'
+    failOnStderr: false
+
+- task: CmdLine@2
+  inputs:
+    script: 'mkdir App'
+    workingDirectory: '$(Build.SourcesDirectory)'
+    failOnStderr: false
+
+- task: CmdLine@2
+  inputs:
+    script: 'ionic build --verbose --configuration $(BuildConfigurationAngular)'
+    workingDirectory: '$(Build.SourcesDirectory)/KS.Time/Client/Ionic-KSTime/'
+    failOnStderr: false
+  
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'angular'
+    targetPath: '$(Build.SourcesDirectory)/App'

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SfsModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Entities>
+    <Entity Name="UploadFileResult" SetName="UploadFileResult" IsUIVisible="false" GenerateCRUD="false" IsForLocalization="false" IsCustom="true" IsView="false" DefaultProperty="TotalRows">
+    
+      <Properties>
+
+        <Property Name="TotalRows" Type="Int32"  Nullable="false"  >
+
+        </Property>
+
+        <Property Name="UrlFileResult" Type="String"  Nullable="false"  >
+
+        </Property>
+        
+        <Property Name="Ignored" Type="Int32"  Nullable="true" >
+
+        </Property>
+      
+        
+        
+        
+      </Properties>
+     
+    </Entity>
+  </Entities>
+</SfsModel>

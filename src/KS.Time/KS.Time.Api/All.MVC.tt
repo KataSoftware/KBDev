@@ -1,0 +1,69 @@
+﻿<#@ template hostspecific="True"  debug="True" language="C#" #><#@ output extension="txt"  #><#@ import namespace="SFS.VSExtension2019.Model" #><#@ import namespace="SFS.VSExtension2019.Model.Utils" #><#@ import namespace="SFS.VSExtension2019.EngTool" #><#@ dom processor="SFSEdmxProcessor"  requires="EntityModel='KSTimeModel.edmx'"  #><#@ include file="SaveOutput.tt" #><#@ include file="Entity.MVC.tt" #><#@ include file="AllControllers.tt" #><#@ include file="AllModels.tt" #>
+
+<#	
+
+	foreach(EntityInfo entity in Model.Entities){
+		try{
+			if (string.IsNullOrEmpty(entity.DefaultProperty)){
+				entity.DefaultProperty = entity.Properties[0].Name;
+			}
+			//string entityPluralName = null;
+			if (!string.IsNullOrEmpty(entity.SetName)){
+				entityPluralName = entity.SetName;
+			}else{
+				entityPluralName = Code.MakePlural(entity.Name);
+			}
+			entitySingularName = entity.Name;
+		if ((bool)GetCustomProperty(entity, "IsGeneric", "Boolean")){
+			
+				//GenerateGeneric(entity);
+				//string folderViews =@"Views\" +entityPluralName;
+				//string folderModels = @"Models\" +entityPluralName;
+				//if (!string.IsNullOrEmpty((string)GetCustomProperty(entity, "RelativeFolder", "String"))){
+				//	folderViews = @"Views\" + (string)GetCustomProperty(entity, "RelativeFolder", "String");
+				//	folderModels = @"Models\" + (string)GetCustomProperty(entity, "RelativeFolder", "String");
+				//}
+				//SaveOutput(entity.Name + "Gen.cshtml", folderViews);  
+				
+				//GenerateGenericView(entity);
+				//SaveOutput(entity.Name + "ViewGen.ascx", folderViews);  
+				
+				if (entity.NavigationProperties.Count > 0 || (bool)GetCustomProperty(entity, "UICreateChilds", "Boolean"))
+				{
+						// ChildsViewGen
+					//GenerateChildsView(entity);
+					//SaveOutput(entity.Name + "ChildsViewGen.ascx", folderViews);  
+
+				}
+			//GenerateModel(entity);
+			//SaveOutput(entityPluralName + ".gen.cs", folderModels);  
+			//GenerateController(entity);
+			//SaveOutput(entityPluralName + "Controller.gen.cs", @"Controllers");  
+			string controllerName = entityPluralName;
+			if (!string.IsNullOrEmpty((string)GetCustomProperty(entity, "ControllerName", "String")))
+			{
+				controllerName =(string)GetCustomProperty(entity, "ControllerName", "String");
+			}
+
+			//GenerateControllerGeneric(entity);
+			//SaveOutput(controllerName + "Controller." + entity.Name + ".Generic.gen.cs", @"Controllers");  
+	
+			//Views
+		}else{
+			
+			
+		}
+			this.GenerationEnvironment.Clear();
+			//GenerateResourcesRESX(entity);
+			//SaveOutput(entity.Name+ "Resources.resx", @"Resources");  
+		}catch(Exception ex){
+			throw new Exception(string.Format("El error ocurri� en la entidad {0}",entity.Name),ex);
+		}
+	}
+
+	GenerateAllControllers(Model);
+	SaveOutput("AllControllers.gen.cs", @"Controllers");  
+	GenerateAllModels(Model);
+	SaveOutput("AllModels.gen.cs", @"Models");  
+			
+#>
