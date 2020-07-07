@@ -26,9 +26,9 @@ public static routesGen: Routes = [
   { path: '<#= entity.Name #>/list',  canActivate: [AuthGuardService], 
     loadChildren: () => import('./pages/business/<#= entity.SetName #>/<#= entity.Name #>-list/<#= entity.Name #>-list.module').then(m => m.<#= entity.Name #>ListPageModule)  },
   { path: '<#= entity.Name #>/form/:Id',  canActivate: [AuthGuardService], 
-    loadChildren: loadChildren: () => import('./pages/business/<#= entity.SetName #>/<#= entity.Name #>-form/<#= entity.Name #>-form.module').then(m => m.<#= entity.Name #>FormPageModule) },
+    loadChildren: () => import('./pages/business/<#= entity.SetName #>/<#= entity.Name #>-form/<#= entity.Name #>-form.module').then(m => m.<#= entity.Name #>FormPageModule) },
   { path: '<#= entity.Name #>/form',  canActivate: [AuthGuardService], 
-    loadChildren: loadChildren: () => import('./pages/business/<#= entity.SetName #>/<#= entity.Name #>-form/<#= entity.Name #>-form.module').then(m => m.<#= entity.Name #>FormPageModule) },
+    loadChildren: () => import('./pages/business/<#= entity.SetName #>/<#= entity.Name #>-form/<#= entity.Name #>-form.module').then(m => m.<#= entity.Name #>FormPageModule) },
 
 
 <#+ 	} #>
