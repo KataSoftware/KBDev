@@ -5,7 +5,7 @@ import { secEventLogModel } from 'src/app/models/common/system-models';
 import { DataService, UserService, ServiceData } from 'sfscommon';
 import { TimeAgoPipe } from 'src/app/pipes/common/timeago';
 
-import swal from 'sweetalert';
+
 @Component({
   selector: 'app-event-logs-page',
   templateUrl: './event-logs-page.page.html',
@@ -109,12 +109,12 @@ export class EventLogsPage extends AppListBaseTypedPage<secEventLogModel> implem
    
      if (modalResponse == true) {
          let response = await this.sfsService.Delete(this.selection.selected.map(({ GuidMyEventLog }) => GuidMyEventLog), secEventLogModel._EntitySetName);
-         swal.close();
+         
           this.selection.clear();
    
          this.bindData();
      }else{
-       swal.close();
+       
      }
    }
   

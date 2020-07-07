@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { unProxyEventListPage } from './unProxyEvent-list.page';
 import { SFSCommonModule } from 'sfscommon';
-import { MatCheckboxModule, MatIconModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatIconModule} from '@angular/material/icon';
 import { TimeAgoPipe } from 'src/app/pipes/common/timeago';
 import { timeagoModule } from 'src/app/pipes/common/timeago.module';
 import { SharedModule } from 'src/app/shared/shared.module';

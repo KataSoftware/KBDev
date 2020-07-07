@@ -4,7 +4,11 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CheckboxWrapperComponent } from './common/material/checkbox-wrapper';
-import { MatButtonModule, MatButtonToggleModule, MatMenuModule, MatIconModule, MatMenu, MatInputModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { AuthGuardService } from '../services/common/AuthGuard.service';
 import { FormlyFieldRatingComponent } from './common/FormlyFieldRating';
 import { RatingWrapperComponent } from './common/material/rating-wrapper';
@@ -12,7 +16,9 @@ import { RatingWrapperComponent } from './common/material/rating-wrapper';
 import { CommonModule } from '@angular/common';
 import { ModalPage } from '../pages/common/modal/modal.page';
 import { DatepickerTypeComponent } from './common/material/datepicker-type';
-import {MAT_DATE_LOCALE} from '@angular/material';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({

@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SFSCommonModule, EntityListPageModule, SelectCompanyPageModule } from 'sfscommon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCheckboxModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormlyModule } from '@ngx-formly/core';
 //import { FormlyIonicModule } from '@ngx-formly/ionic';
 import { SharedModule } from './shared/shared.module';
@@ -22,6 +22,7 @@ import { FormlyWrapperAddons } from './components/business/components/addons-ext
 import { addonsExtension } from './components/business/components/formly-wrapper-addons/formly-wrapper-addons.component';
 // Enviroment
 import { environment } from 'src/environments/environment';
+import { SocialLoginModule } from 'angularx-social-login';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { environment } from 'src/environments/environment';
     BrowserAnimationsModule,
     SharedModule,
     MatExpansionModule,
+    SocialLoginModule,
     MatGridListModule, MatCheckboxModule,
     IonicModule.forRoot(),
     SelectCompanyPageModule,

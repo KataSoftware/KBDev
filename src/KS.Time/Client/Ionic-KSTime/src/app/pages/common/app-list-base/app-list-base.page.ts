@@ -1,6 +1,6 @@
 import { Component, Injector } from '@angular/core';
 import { ListPage, UserDataModel, Pagination, TableColumn } from 'sfscommon';
-import swal from 'sweetalert';
+
 import { FieldSettings } from '../app-form-base/app-form-base.page';
 
 @Component({
@@ -60,32 +60,32 @@ export class AppListBasePage extends ListPage {
   public userData: UserDataModel;
   public defaultHref: string;
   public tempPagination: Pagination;
-    public async showConfirm(selectedRows?:Number): Promise<Boolean>{
-        const modalResponse = await swal({
-            icon:'warning',
-            title: 'Borrando',
-            className: 'swal-danger-modal',
-            text: `Se eliminarán los ${selectedRows} registros seleccionados ¿Desea continuar?`,
-            
-            closeOnClickOutside: false,
-            buttons: {
-              cancelar: {
-                text: 'Cancelar',
-                value: false,
-                visible: true,
-                className: 'modal-cancelar-button',
-                closeModal: false,
-              },
-              confirmar: {
-                text: 'Continuar',
-                value: true,
-                visible: true,
-                className: 'modal-continuar-button',
-                closeModal: false
-              }
+    public  async showConfirm(selectedRows?:Number):Promise<boolean>{
+      
+        const alert = await this.alertCtrl.create({
+        cssClass: 'my-custom-class',
+        header: 'Confirm!',
+        message: 'Message <strong>text</strong>!!!',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              console.log('Confirm Cancel: blah');
             }
-          });
-          return modalResponse;
+          }, {
+            text: 'Okay',
+            handler: () => {
+              console.log('Confirm Okay');
+            }
+          }
+        ]
+      });
+  
+       alert.present();
+      
+       return true;
     }
 
 }

@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { RolesPage } from './roles.page';
 import { SFSCommonModule } from 'sfscommon';
-import { MatCheckboxModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const routes: Routes = [
   {

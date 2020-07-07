@@ -3,7 +3,7 @@ import { ModalPage } from './../modal/modal.page';
 import { ServiceDataOptions, sfsService } from './../../../services/common/sfs.service';
 import { BasePage, DataService } from 'sfscommon';
 import { OnInit, Injector, Component } from '@angular/core';
-import swal from 'sweetalert';
+
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyTemplateOptions } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
@@ -133,54 +133,20 @@ export class AppFormBasePage extends BasePage implements OnInit {
 
 
     } else {
-      let result = await swal({
-        title: title != null ? title : 'Registro exitoso',
-        className: 'swal-ok-modal',
-        text: message,
-        buttons: buttons != null ? buttons : {
-          confirmar: {
-            text: 'Continuar',
-            value: true,
-            visible: true,
-            className: 'modal-continuar-button',
-            closeModal: true
-          }
-        }
-      });
-
-      return result;
+     
+      let ress = await this.showOk("ok");
+      
     }
   }
   public async showOk(title?: string, message?: string, buttons?: Array<any>) {
-    return await this.showDialog({ Message: message, Title: title, Buttons: buttons, Type: "ok" });
+    return await this.showConfirm();
   }
   public async showWarning(title?: string, message?: string, buttons?: Array<any>) {
     return await this.showDialog({ Message: message, Title: title, Buttons: buttons, Type: "warning" });
   }
   public async showConfirm(message?: string): Promise<Boolean> {
-    const modalResponse = await swal({
-      title: 'Advertencia',
-      className: 'swal-danger-modal',
-      text: message,
-      closeOnClickOutside: false,
-      buttons: {
-        cancelar: {
-          text: 'Cancelar',
-          value: false,
-          visible: true,
-          className: 'modal-cancelar-button',
-          closeModal: false,
-        },
-        confirmar: {
-          text: 'Continuar',
-          value: true,
-          visible: true,
-          className: 'modal-continuar-button',
-          closeModal: false
-        }
-      }
-    });
-    return modalResponse;
+    return true;
+    
   }
   ngOnInit(): void {
 

@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FieldType } from '@ngx-formly/material';
-import { MatInput } from '@angular/material';
+import { MatInput } from '@angular/material/input';
+
 
 @Component({
   selector: 'app-form-datepicker-type',

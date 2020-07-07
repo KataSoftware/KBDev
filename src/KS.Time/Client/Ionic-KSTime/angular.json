@@ -37,6 +37,7 @@
               }
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               {
                 "input": "src/theme/common/variables.scss"
               },
@@ -72,8 +73,6 @@
                 }
               ]
             },
-
-            
             "devops": {
               "fileReplacements": [
                 {
@@ -89,15 +88,12 @@
                   "with": "src/environments/environment.dev.ts"
                 }
               ]
-           
             },
-
             "ci": {
               "progress": false
             }
           }
         },
-        
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
@@ -126,7 +122,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "styles": [],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+            ],
             "scripts": [],
             "assets": [
               {

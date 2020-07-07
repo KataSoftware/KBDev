@@ -1,9 +1,9 @@
 import { UserService, BasePage } from 'sfscommon';
 import { Component, OnInit, NgModule, Injector } from '@angular/core';
-import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Events } from '@ionic/angular';
+
 import { extend } from 'webdriver-js-extender';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-menu',

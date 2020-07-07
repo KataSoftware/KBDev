@@ -4,7 +4,7 @@ import { secUserCompanyModel } from 'src/app/models/common/system-models';
 import { SelectionModel } from '@angular/cdk/collections';
 
 // Third Library Imports
-import swal from 'sweetalert';
+
 import { sfsService } from 'src/app/services/common/sfs.service';
 
 @Component({
@@ -163,38 +163,18 @@ export class UserRolesPage extends ListPage implements OnInit {
   }
 
   async delete() {
-    const modalResponse = await swal({
-      title: 'Advertencia',
-      className: 'swal-danger-modal',
-      text: `Se eliminarán los ${this.selection.selected.length} registros seleccionados ¿Desea continuar?`,
-      closeOnClickOutside: false,
-      buttons: {
-        cancelar: {
-          text: 'Cancelar',
-          value: false,
-          visible: true,
-          className: 'modal-cancelar-button',
-          closeModal: false,
-        },
-        confirmar: {
-          text: 'Continuar',
-          value: true,
-          visible: true,
-          className: 'modal-continuar-button',
-          closeModal: false
-        }
-      }
-    });
+   
+    
 
-    if (modalResponse == true) {
-      let response = await this.sfsService.Delete(this.selection.selected.map(({ GuidUserCompany }) => GuidUserCompany), secUserCompanyModel._EntitySetName);
-      swal.close();
-      console.log("response of delete", response);
+    // if (modalResponse == true) {
+    //   let response = await this.sfsService.Delete(this.selection.selected.map(({ GuidUserCompany }) => GuidUserCompany), secUserCompanyModel._EntitySetName);
+      
+    //   console.log("response of delete", response);
 
-      this.bindData();
-    } else {
-      swal.close();
-    }
+    //   this.bindData();
+    // } else {
+      
+    // }
   }
 
   async edit(row) {

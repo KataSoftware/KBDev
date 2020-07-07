@@ -2,7 +2,6 @@ import { CheckboxWrapperComponent } from './material/checkbox-wrapper';
 //import { FormlyFieldRating } from './FormlyFieldRating';
 import { RatingWrapperComponent } from './material/rating-wrapper';
 import { FormlyFieldRatingComponent } from './FormlyFieldRating';
-import { FormlyFieldInput } from '@ngx-formly/ionic';
 
 export function minlengthValidationMessage(err, field) {
   return `Debe tener al menos ${field.templateOptions.minLength} caracteres`;

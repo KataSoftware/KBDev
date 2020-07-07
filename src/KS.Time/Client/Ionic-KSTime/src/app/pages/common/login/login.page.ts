@@ -7,7 +7,7 @@ import { LoginPage, AuthenticationService, ApiResponse } from 'sfscommon';
 import { FormGroup, FormControl, Validators, AbstractControl, Form } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import swal from 'sweetalert';
+
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { RegisterModel } from 'src/app/models/common/models';
 
@@ -216,22 +216,22 @@ export class LocalLoginPage extends LoginPage {
   }
 
   public async showOk(message?: string) {
-    const response = await swal({
-      title: null,
-      className: 'swal-ok-modal',
-      text: message,
-      buttons: {
-        confirmar: {
-          text: 'Continuar',
-          value: true,
-          visible: true,
-          className: 'modal-continuar-button',
-          closeModal: true
-        }
-      }
-    });
+    // const response = await swal({
+    //   title: null,
+    //   className: 'swal-ok-modal',
+    //   text: message,
+    //   buttons: {
+    //     confirmar: {
+    //       text: 'Continuar',
+    //       value: true,
+    //       visible: true,
+    //       className: 'modal-continuar-button',
+    //       closeModal: true
+    //     }
+    //   }
+    // });
 
-    return response;
+    // return response;
   }
   async goBack() {
     this.navCtrl.navigateForward(`login`, { animated: true });

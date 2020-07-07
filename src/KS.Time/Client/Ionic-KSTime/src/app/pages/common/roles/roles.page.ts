@@ -4,7 +4,7 @@ import { ListPage, UserDataModel, UserService, DataService, Pagination, ServiceD
 import { secRoleModel } from 'src/app/models/common/system-models';
 
 import { bizAppService } from 'src/app/services/business/business.service';
-import swal from 'sweetalert';
+
 import { AppListBaseTypedPage } from 'src/app/pages/common/app-list-base-typed/app-list-base-typed.page';
 
 @Component({
@@ -109,12 +109,12 @@ export class RolesPage extends AppListBaseTypedPage<secRoleModel> implements OnI
    
      if (modalResponse == true) {
          let response = await this.sfsService.Delete(this.selection.selected.map(({ GuidRole }) => GuidRole), secRoleModel._EntitySetName);
-         swal.close();
+         
           this.selection.clear();
    
          this.bindData();
      }else{
-       swal.close();
+       
      }
    }
   async addItem(){

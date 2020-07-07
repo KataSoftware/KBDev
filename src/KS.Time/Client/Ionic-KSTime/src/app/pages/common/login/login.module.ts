@@ -9,7 +9,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SFSCommonModule } from 'sfscommon';
 import { FormlyModule } from '@ngx-formly/core';
-import { FormlyIonicModule } from '@ngx-formly/ionic';
+
 import { FormlyConfig } from 'src/app/shared/common/formly';
 import { SharedModule } from 'src/app/shared/shared.module';
 

@@ -5,7 +5,7 @@ import { ListPage, DataService, UserDataModel, UserService, Pagination, ServiceD
 import { secUserModel } from 'src/app/models/common/system-models';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AppListBasePage } from 'src/app/pages/common/app-list-base/app-list-base.page';
-import swal from 'sweetalert';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.page.html',
@@ -71,12 +71,12 @@ export class UsersPage extends AppListBasePage implements OnInit {
 
     if (modalResponse == true) {
         let response = await this.sfsService.Delete(this.selection.selected.map(({ GuidUser }) => GuidUser), secUserModel._EntitySetName);
-        swal.close();
+        
        
 
         this.bindData();
     }else{
-      swal.close();
+      
     }
   }
 

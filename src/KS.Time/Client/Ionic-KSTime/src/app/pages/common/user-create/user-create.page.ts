@@ -5,7 +5,7 @@ import { secUserModel } from 'src/app/models/common/system-models';
 import { sfsService } from 'src/app/services/common/sfs.service';
 
 // Third Library Imports
-import swal from 'sweetalert';
+
 
 @Component({
   selector: 'app-user-create',
@@ -127,21 +127,7 @@ export class UserCreatePage extends BasePage implements OnInit {
 
        
 
-        const response = await swal({
-          title: 'Registro exitoso',
-          className: 'swal-ok-modal',
-          text: this.textoModal,
-          buttons: {
-            confirmar: {
-              text: 'Continuar',
-              value: true,
-              visible: true,
-              className: 'modal-continuar-button',
-              closeModal: true
-            }
-          }
-        });
-
+        
         this.goBack();
       }
     }

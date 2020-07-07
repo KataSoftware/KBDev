@@ -4,7 +4,7 @@ import { BasePage, StorageService, UserService, ApiResponse } from 'sfscommon';
 import { FormGroup, AbstractControl, FormControl, Validators } from '@angular/forms';
 import { sfsService } from 'src/app/services/common/sfs.service';
 import { secRoleModel } from 'src/app/models/common/system-models';
-import swal from 'sweetalert';
+
 @Component({
   selector: 'app-role-edit',
   templateUrl: './role-edit.page.html',
@@ -133,20 +133,8 @@ export class RoleEditPage extends BasePage implements OnInit {
         this.disabledButton = false;
 
 
-        const response = await swal({
-          title: 'Registro exitoso',
-          className: 'swal-ok-modal',
-          text: this.textoModal,
-          buttons: {
-            confirmar: {
-              text: 'Continuar',
-              value: true,
-              visible: true,
-              className: 'modal-continuar-button',
-              closeModal: true
-            }
-          }
-        });
+      
+        
 
         this.goBack();
       }

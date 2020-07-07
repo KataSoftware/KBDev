@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { RoleEditPage } from './role-edit.page';
 import { SFSCommonModule } from 'sfscommon';
-import { MatSelectModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material/select';
+
 
 const routes: Routes = [
   {

@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { EventLogsPage } from './event-logs-page.page';
 import { SFSCommonModule } from 'sfscommon';
-import { MatCheckboxModule } from '@angular/material';
 import { timeagoModule } from 'src/app/pipes/common/timeago.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const routes: Routes = [
   {

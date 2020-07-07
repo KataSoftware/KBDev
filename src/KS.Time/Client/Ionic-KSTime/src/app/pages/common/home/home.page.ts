@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, Injector } from '@angular/core';
-import swal from 'sweetalert';
+
 import { BasePage } from 'sfscommon';
 @Component({
   selector: 'app-home',
@@ -19,7 +19,7 @@ export class HomePage extends BasePage {
   }
 
   public showModal() {
-    swal({ title: "Here's a title!", });
+   
     
   }
 

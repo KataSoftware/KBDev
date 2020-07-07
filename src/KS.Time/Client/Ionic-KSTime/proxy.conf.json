@@ -1,6 +1,6 @@
 {
 	"/Shell": {
-		"target": "http://localhost/ShellTime",
+		"target": "http://172.16.193.148/ShellTime",
 
 		"secure": false,
 		"logLevel": "debug",

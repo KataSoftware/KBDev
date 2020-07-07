@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { EventLogPage } from './event-log.page';
-import { MatSelectModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material/select';
 
 const routes: Routes = [
   {

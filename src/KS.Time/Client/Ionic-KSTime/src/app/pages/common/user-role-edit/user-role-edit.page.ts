@@ -5,7 +5,7 @@ import { FormGroup, AbstractControl, FormControl, Validators } from '@angular/fo
 import { secUserCompanyModel, secUserModel, secRoleModel } from 'src/app/models/common/system-models';
 
 // Third Library Imports
-import swal from 'sweetalert';
+
 
 @Component({
   selector: 'app-user-role-edit',
@@ -244,21 +244,8 @@ export class UserRoleEditPage extends BasePage implements OnInit {
         this.loadingData = false;
         this.activatingText = 'Guardado';
 
-        const response = await swal({
-          title: 'Registro exitoso',
-          className: 'swal-ok-modal',
-          text: this.textoModal,
-          buttons: {
-            confirmar: {
-              text: 'Continuar',
-              value: true,
-              visible: true,
-              className: 'modal-continuar-button',
-              closeModal: true
-            }
-          }
-        });
-
+       
+        
         this.goBack();
       }
     }
