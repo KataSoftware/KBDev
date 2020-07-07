@@ -11,11 +11,10 @@
 	var propertyId = entity.Properties.FirstOrDefault(p=> p.IsPrimaryKey );
 
 	var propertyDefault = entity.Properties.FirstOrDefault(p=> p.Name == entity.DefaultProperty );
-	#>
-<ion-header>
-<ion-grid  no-padding >
+	#><ion-header>
+<ion-grid  no-padding>
     <ion-row>
-      <ion-col size="8"  no-padding  >
+      <ion-col size="8" no-padding>
 
   <ion-toolbar [ngStyle]="{ 'display': showSearchBar ? 'none' : '' }">
     <ion-buttons slot="start">

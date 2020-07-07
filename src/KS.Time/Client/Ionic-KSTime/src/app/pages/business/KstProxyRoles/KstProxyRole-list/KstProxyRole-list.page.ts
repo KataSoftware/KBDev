@@ -5,7 +5,7 @@ import { AppListBaseTypedPage } from 'src/app/pages/common/app-list-base-typed/a
 import { DataService, TableColumn } from 'sfscommon';
 import { TimeAgoPipe } from 'src/app/pipes/common/timeago';
 import { sfsService } from 'src/app/services/common/sfs.service';
-
+//import swal from 'sweetalert';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { FormGroup } from '@angular/forms';
 import { ActionModel, BindListSettings } from 'src/app/pages/common/app-list-base/app-list-base.page';
@@ -338,12 +338,12 @@ async delete(row:KstProxyRoleModel){
  
    if (modalResponse == true) {
        let response = await this.bizAppService.Delete(this.selection.selected.map(({ GuidRole }) => GuidRole), KstProxyRoleModel._EntitySetName);
-       
+       //swal.close();
        this.selection.clear();
  
        this.bindData();
    }else{
-     
+     //swal.close();
    }
  }
 
