@@ -19,19 +19,16 @@ import { AuthGuardService } from './services/common/AuthGuard.service';
 
 export class AppRoutingGenModule {
 public static routesGen: Routes = [
-
-
 <#+  	foreach(var entity in model.Entities.Where(p=>p.GenerateCRUD == true) ) {#>
 
-  { path: '<#= entity.Name #>/list',  canActivate: [AuthGuardService], 
-    loadChildren: () => import('./pages/business/<#= entity.SetName #>/<#= entity.Name #>-list/<#= entity.Name #>-list.module').then(m => m.<#= entity.Name #>ListPageModule)  },
-  { path: '<#= entity.Name #>/form/:Id',  canActivate: [AuthGuardService], 
-    loadChildren: () => import('./pages/business/<#= entity.SetName #>/<#= entity.Name #>-form/<#= entity.Name #>-form.module').then(m => m.<#= entity.Name #>FormPageModule) },
-  { path: '<#= entity.Name #>/form',  canActivate: [AuthGuardService], 
-    loadChildren: () => import('./pages/business/<#= entity.SetName #>/<#= entity.Name #>-form/<#= entity.Name #>-form.module').then(m => m.<#= entity.Name #>FormPageModule) },
+  { path: '<#= entity.Name #>/list',  canActivate: [AuthGuardService], loadChildren: './pages/business/<#= entity.SetName #>/<#= entity.Name #>-list/<#= entity.Name #>-list.module#<#= entity.Name #>ListPageModule' },
+  { path: '<#= entity.Name #>/form/:Id',  canActivate: [AuthGuardService], loadChildren: './pages/business/<#= entity.SetName #>/<#= entity.Name #>-form/<#= entity.Name #>-form.module#<#= entity.Name #>FormPageModule' },
+  { path: '<#= entity.Name #>/form',  canActivate: [AuthGuardService], loadChildren: './pages/business/<#= entity.SetName #>/<#= entity.Name #>-form/<#= entity.Name #>-form.module#<#= entity.Name #>FormPageModule' },
 
 
 <#+ 	} #>
+
+
 
 ];
 
