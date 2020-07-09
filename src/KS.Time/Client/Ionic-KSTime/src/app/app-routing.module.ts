@@ -1,7 +1,7 @@
 import { AppRoutingGenModule } from './app-rounting-gen.module';
 // Angular Imports
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, NoPreloading, PreloadAllModules } from '@angular/router';
 
 // SFSCommon Imports
 import { EntityPageModule, EntityListPage, EntityListPageModule, SelectCompanyPageModule } from 'sfscommon';
@@ -76,15 +76,17 @@ const routes: Routes = [
   { path: 'system/events/detail/:Id', loadChildren: './pages/common/event-log/event-log.module#EventLogPageModule' },
   { path: 'system/settings', loadChildren: './pages/common/settings/settings.module#SettingsPageModule' },
   
-  { path: 'home', canActivate: [AuthGuardService], loadChildren: './pages/common/home/home.module#HomePageModule' },  { path: 'home-calendar', loadChildren: './pages/business/home-calendar/home-calendar.module#HomeCalendarPageModule' },
+  { path: 'home', canActivate: [AuthGuardService], loadChildren: './pages/common/home/home.module#HomePageModule' },
+  { path: 'home-calendar', loadChildren: './pages/business/home-calendar/home-calendar.module#HomeCalendarPageModule' },
   { path: 'register-work-time', loadChildren: './pages/business/register-work-time/register-work-time.module#RegisterWorkTimePageModule' },
+  { path: 'catalogs', loadChildren: './pages/business/catalogs/catalogs.module#CatalogsModule' },
 
     
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot([ ...routes, ...AppRoutingGenModule.routesGen], { useHash: true, paramsInheritanceStrategy: 'always' })],
+  imports: [RouterModule.forRoot(routes, { useHash: true, paramsInheritanceStrategy: 'always', preloadingStrategy: NoPreloading  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

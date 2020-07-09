@@ -41,6 +41,7 @@
     "@ngx-formly/core": "5.7.2",
     "@ngx-formly/material": "5.7.2",
     "@ngx-formly/schematics": "5.7.2",
+    "@schematics/angular": "^9.1.9",
     "angularx-social-login": "3.0.1",
     "bootstrap": "4.5.0",
     "code-push": "3.1.3",
