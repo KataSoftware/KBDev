@@ -68,7 +68,7 @@
     "ionic2-calendar": "^0.6.5",
     "ng-recaptcha": "^5.0.0",
     "rxjs": "6.5.5",
-    "sfscommon": "file:SFSCommon/sfscommon-2.0.140.tgz",
+    "sfscommon": "file:SFSCommon/sfscommon-2.0.142.tgz",
     "zone.js": "0.10.3"
   },
   "devDependencies": {
@@ -101,7 +101,7 @@
     "tsickle": ">=0.38.1",
     "tslib": "2.0.0",
     "tslint": "6.1.2",
-    "typescript": "3.8.3"
+    "typescript": "3.8.0"
   },
   "description": "An Ionic project",
   "cordova": {

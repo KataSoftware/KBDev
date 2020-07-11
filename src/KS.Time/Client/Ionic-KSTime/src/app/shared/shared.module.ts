@@ -19,6 +19,7 @@ import { DatepickerTypeComponent } from './common/material/datepicker-type';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { MatIconModule } from '@angular/material/icon';
   ],
   imports: [
 
-    CommonModule,
+   // BrowserModule,
     FormsModule,
     MatButtonModule,
     MatButtonToggleModule,

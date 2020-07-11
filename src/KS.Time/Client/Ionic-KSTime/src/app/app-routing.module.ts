@@ -80,6 +80,9 @@ const routes: Routes = [
   { path: 'home-calendar', loadChildren: './pages/business/home-calendar/home-calendar.module#HomeCalendarPageModule' },
   { path: 'register-work-time', loadChildren: './pages/business/register-work-time/register-work-time.module#RegisterWorkTimePageModule' },
   { path: 'catalogs', loadChildren: './pages/business/catalogs/catalogs.module#CatalogsModule' },
+  { path: 'KstProject/list',  canActivate: [AuthGuardService], loadChildren: './pages/business/KstProjects/KstProject-list/KstProject-list.module#KstProjectListPageModule' },
+  { path: 'KstProject/form/:Id',  canActivate: [AuthGuardService], loadChildren: './pages/business/KstProjects/KstProject-form/KstProject-form.module#KstProjectFormPageModule' },
+  { path: 'KstProject/form',  canActivate: [AuthGuardService], loadChildren: './pages/business/KstProjects/KstProject-form/KstProject-form.module#KstProjectFormPageModule' },
 
     
 

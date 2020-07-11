@@ -23,6 +23,8 @@ import { addonsExtension } from './components/business/components/formly-wrapper
 // Enviroment
 import { environment } from 'src/environments/environment';
 import { SocialLoginModule } from 'angularx-social-login';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { SocialLoginModule } from 'angularx-social-login';
     SharedModule,
   ],
   imports: [
+
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyCwlw3uJsHw732X1W3ScbjqjbR6JUxAE4M'
     //   /* apiKey is required, unless you are a 
