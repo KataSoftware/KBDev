@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CountersService {
   private _clickCounter = 0;
   private clickCounterObservable: Subject<number> = new Subject();

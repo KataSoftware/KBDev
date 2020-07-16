@@ -9,7 +9,7 @@ import { IonicModule } from '@ionic/angular';
 import { KstProjectListPage } from './KstProject-list.page';
 import { SFSCommonModule } from 'sfscommon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { TimeAgoPipe } from 'src/app/pipes/common/timeago';
 import { timeagoModule } from 'src/app/pipes/common/timeago.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -26,7 +26,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-   
+   CommonModule,
     FormsModule,
 	SharedModule,
 	FormlyModule.forRoot(FormlyConfig),

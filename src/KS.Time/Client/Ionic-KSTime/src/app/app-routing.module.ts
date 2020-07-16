@@ -77,7 +77,7 @@ const routes: Routes = [
   { path: 'system/settings', loadChildren: './pages/common/settings/settings.module#SettingsPageModule' },
   
   { path: 'home', canActivate: [AuthGuardService], loadChildren: './pages/common/home/home.module#HomePageModule' },
-  { path: 'home-calendar', loadChildren: './pages/business/home-calendar/home-calendar.module#HomeCalendarPageModule' },
+  //{ path: 'home-calendar', loadChildren: './pages/business/home-calendar/home-calendar.module#HomeCalendarPageModule' },
   { path: 'register-work-time', loadChildren: './pages/business/register-work-time/register-work-time.module#RegisterWorkTimePageModule' },
   { path: 'catalogs', loadChildren: './pages/business/catalogs/catalogs.module#CatalogsModule' },
   { path: 'KstProject/list',  canActivate: [AuthGuardService], loadChildren: './pages/business/KstProjects/KstProject-list/KstProject-list.module#KstProjectListPageModule' },

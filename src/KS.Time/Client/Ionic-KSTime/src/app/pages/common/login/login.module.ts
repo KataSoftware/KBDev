@@ -13,7 +13,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyConfig } from 'src/app/shared/common/formly';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-import { RecaptchaModule } from 'ng-recaptcha';
+//import { RecaptchaModule } from 'ng-recaptcha';
 import { MainMenuButtonModule } from 'src/app/components/business/main-menu-button/main-menu-button.module';
 import { LocalLoginPage } from './login.page';
 //import { PersistenceModule } from 'angular-persistence';
@@ -36,7 +36,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormlyModule.forRoot(FormlyConfig),
     FormlyMaterialModule,
-    RecaptchaModule,
+   // RecaptchaModule,
    // PersistenceModule,
    MainMenuButtonModule,
     RouterModule.forChild(routes)

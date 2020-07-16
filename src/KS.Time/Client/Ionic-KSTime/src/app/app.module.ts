@@ -14,17 +14,19 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormlyModule } from '@ngx-formly/core';
 //import { FormlyIonicModule } from '@ngx-formly/ionic';
 import { SharedModule } from './shared/shared.module';
-import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+//import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
 import { MainMenuButtonModule } from './components/business/main-menu-button/main-menu-button.module';
-import { AgmCoreModule } from '@agm/core';
+//import { AgmCoreModule } from '@agm/core';
 import { FormlyWrapperAddons } from './components/business/components/addons-extension/addons-extension.component';
 import { addonsExtension } from './components/business/components/formly-wrapper-addons/formly-wrapper-addons.component';
 // Enviroment
 import { environment } from 'src/environments/environment';
 import { SocialLoginModule } from 'angularx-social-login';
-import { CommonModule } from '@angular/common';
+//import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormlyMaterialModule } from '@ngx-formly/material';
 
 
 @NgModule({
@@ -34,11 +36,10 @@ import { BrowserModule } from '@angular/platform-browser';
   ],
   entryComponents: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [
-    SharedModule,
-  ],
+  exports: [  ],
   imports: [
-
+    BrowserModule,
+   
     // AgmCoreModule.forRoot({
     //   apiKey: 'AIzaSyCwlw3uJsHw732X1W3ScbjqjbR6JUxAE4M'
     //   /* apiKey is required, unless you are a 
@@ -46,9 +47,9 @@ import { BrowserModule } from '@angular/platform-browser';
     //   use clientId 
     //   */
     // }),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCwlw3uJsHw732X1W3ScbjqjbR6JUxAE4M'
-    }),
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyCwlw3uJsHw732X1W3ScbjqjbR6JUxAE4M'
+    // }),
     MainMenuButtonModule,
     FormlyModule.forRoot({
       wrappers: [
@@ -59,7 +60,7 @@ import { BrowserModule } from '@angular/platform-browser';
       ],
     }),
     BrowserAnimationsModule,
-    SharedModule,
+   
     MatExpansionModule,
     SocialLoginModule,
     MatGridListModule, MatCheckboxModule,
@@ -68,8 +69,11 @@ import { BrowserModule } from '@angular/platform-browser';
     SFSCommonModule.forRoot(environment.sfscommon),
     AppRoutingModule,
     EntityListPageModule,
-    RecaptchaModule,
-    RecaptchaFormsModule
+    // RecaptchaModule,
+    // RecaptchaFormsModule,
+    ReactiveFormsModule,
+    FormlyModule.forRoot(),
+    FormlyMaterialModule
 
   ],
   providers: [
