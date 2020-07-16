@@ -6,9 +6,12 @@ describe('new App', () => {
   beforeEach(() => {
     page = new AppPage();
   });
-
-  it('should be blank', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toContain('The world is your oyster.');
+  describe('default screen', () => {
+    beforeEach(() => {
+      page.navigateTo('/Inbox');
+    });
+    it('should say Inbox', () => {
+      expect(page.getParagraphText()).toContain('Inbox');
+    });
   });
 });

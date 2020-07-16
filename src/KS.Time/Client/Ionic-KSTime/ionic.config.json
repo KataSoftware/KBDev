@@ -1,6 +1,7 @@
 {
-  "name": "KS.Time.client",
+  "name": "myApp",
   "integrations": {
+    "capacitor": {},
     "cordova": {}
   },
   "type": "angular"

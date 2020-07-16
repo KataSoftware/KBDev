@@ -1,66 +1,65 @@
-import { StorageService, UserDataModel } from 'sfscommon';
-import { Component, Injector, ElementRef, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Injector, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+
 import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { AuthenticationService, EVENT_USER_LOGGED_IN, EVENT_USER_LOGGED_OUT, BasePage, ICompany, SelectCompanyPage, IUserDataModel, LoggingService } from 'sfscommon';
+import { StorageService, LoggingService, AuthenticationService, BasePage, EVENT_USER_LOGGED_IN, ICompany, IUserDataModel, UserDataModel, SelectCompanyPage } from 'sfscommon';
 import { Router } from '@angular/router';
-import { MainMenuService } from './services/business/main-menu.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html'
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
 })
+export class AppComponent  extends BasePage implements OnInit, AfterViewInit  {
+  public selectedIndex = 0;
+ 
+  
 
-export class AppComponent extends BasePage implements OnInit, AfterViewInit {
-
-  ngOnInit() {
-    this.ionMenu.enable(true, 'first');
-  }
-
-  ngAfterViewInit() {
-
-  }
+ 
   @ViewChild('menu') menu: ElementRef;
+ 
+  
+    public appPages = [
+      {
+        title: 'Inicio',
+        url: '/inicio',
+        icon: 'menu',
+        visible: true,
+        active: true
+      },
+      {
+        title: 'Perfil',
+        url: '/perfil',
+        icon: 'person',
+        visible: true,
+        active: false
+      },
+      {
+        title: 'Proyectos',
+        url: '/KstProject/list',
+        icon: 'apps',
+        visible: true,
+        active: false
+      },
+      {
+        title: 'Actividades',
+        url: '/KstActivity/list',
+        icon: 'apps',
+        visible: true,
+        active: false
+      },
+      
+      {
+        title: 'Cerrar sesión',
+        url: '/logoff',
+        icon: 'close',
+        visible: true,
+        active: false
+      },
+    ];
 
-  public appPages = [
-    {
-      title: 'Inicio',
-      url: '/inicio',
-      icon: 'menu',
-      visible: true,
-      active: true
-    },
-    {
-      title: 'Perfil',
-      url: '/perfil',
-      icon: 'person',
-      visible: true,
-      active: false
-    },
-    {
-      title: 'Proyectos',
-      url: '/KstProject/list',
-      icon: 'apps',
-      visible: true,
-      active: false
-    },
-    {
-      title: 'Actividades',
-      url: '/KstActivity/list',
-      icon: 'apps',
-      visible: true,
-      active: false
-    },
-    
-    {
-      title: 'Cerrar sesión',
-      url: '/logoff',
-      icon: 'close',
-      visible: true,
-      active: false
-    },
-  ];
+  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   visible = false;
   open = false;
@@ -85,34 +84,16 @@ export class AppComponent extends BasePage implements OnInit, AfterViewInit {
     private statusBar: StatusBar,
     private storage: StorageService,
     private logging: LoggingService,
-    private auth: AuthenticationService, public router: Router, private mainMenuService: MainMenuService) {
+    private auth: AuthenticationService, public router: Router) {
     super(injector);
     this.initializeApp();
     this.events.subscribe(EVENT_USER_LOGGED_IN, this.logIn);
-    this.events.subscribe(EVENT_USER_LOGGED_OUT, this.logOut);
+    this.events.subscribe(EVENT_USER_LOGGED_IN, this.logOut);
 
     this.events.subscribe('company:changed', () => {
       this.checkSelectCompany(this.currentUser);
       this.navCtrl.navigateRoot('reports/list');
     });
-
-  }
-
-  navigateToMenuOption(urlOptionSelected: string) {
-    if (urlOptionSelected.endsWith("logoff")) {
-      this.logOff();
-    } else if (this.systemService.isMobile()) {
-      this.navCtrl.navigateRoot(urlOptionSelected);
-      this.mainMenuService.toggle();
-    }
-    else {
-      this.navCtrl.navigateRoot(urlOptionSelected);
-    }
-
-  }
-
-  public async goToChangeCompany() {
-    this.navCtrl.navigateForward('selectcompany');
   }
 
   public async checkSelectCompany(userData: IUserDataModel) {
@@ -164,6 +145,9 @@ export class AppComponent extends BasePage implements OnInit, AfterViewInit {
         }
       }
     });
+  }
+  ngAfterViewInit(): void {
+  //  throw new Error("Method not implemented.");
   }
 
   async initializeApp() {
@@ -246,5 +230,10 @@ export class AppComponent extends BasePage implements OnInit, AfterViewInit {
 
     this.appPages = this.appPages.filter(p=> p.visible == true); 
   }
-
+  ngOnInit() {
+    const path = window.location.pathname.split('folder/')[1];
+    if (path !== undefined) {
+      this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
+    }
+  }
 }
