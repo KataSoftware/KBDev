@@ -1,13 +1,9 @@
 ﻿
 
- class KstActivityPropertyNames{
+ class KstProjectFilePropertyNames{
 	constructor(){}
 	//axd
-	GuidActivity:string = "GuidActivity";	
-
-				 
-				 
-	Name:string = "Name";	
+	GuidProjectFile:string = "GuidProjectFile";	
 
 				 
 				 
@@ -15,7 +11,7 @@
 
 				 
 				 
-	IsCustomByUser:string = "IsCustomByUser";	
+	GuidFile:string = "GuidFile";	
 
 				 
 				 
@@ -47,25 +43,25 @@
 
 				 
 				 
+		FkKstFile:string = "FkKstFile";
+		KstFile:string = "KstFile"; //test
+				 
 		FkKstProject:string = "FkKstProject";
 		KstProject:string = "KstProject"; //test
 				 
 }
 
 //test
-export  class KstActivityModel{
+export  class KstProjectFileModel{
 	Id?:string;
 
-		GuidActivity:string;	
-
-		 
-	Name?:string;	
+		GuidProjectFile:string;	
 
 		 
 	GuidProject?:string;	
 
 		 
-	IsCustomByUser:boolean;	
+	GuidFile?:string;	
 
 		 
 	GuidCompany?:string;	
@@ -89,6 +85,14 @@ export  class KstActivityModel{
 	UpdatedDate?:string;	
 
 		 
+		FkKstFile:string ;
+
+		FkKstFileText:any;
+
+		KstFile:string;
+		
+			 
+		 
 		FkKstProject:string ;
 
 		FkKstProjectText:any;
@@ -98,17 +102,17 @@ export  class KstActivityModel{
 			 
 		 
 
-	public static _EntitySetName:string =  "KstActivities";
-	public static _EntityName:string =  "KstActivity";
-	public static PropertyNames: KstActivityPropertyNames = new KstActivityPropertyNames();
-	public static _PropertyNamesForUpdate: string = "GuidActivity,Name,GuidProject,IsCustomByUser,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes";
+	public static _EntitySetName:string =  "KstProjectFiles";
+	public static _EntityName:string =  "KstProjectFile";
+	public static PropertyNames: KstProjectFilePropertyNames = new KstProjectFilePropertyNames();
+	public static _PropertyNamesForUpdate: string = "GuidProjectFile,GuidProject,GuidFile,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes";
 
 
 	public get getSetName() : string {
-		return KstActivityModel._EntitySetName;
+		return KstProjectFileModel._EntitySetName;
 	}
-	public get getPropertyNames() : KstActivityPropertyNames {
-		return KstActivityModel.PropertyNames;
+	public get getPropertyNames() : KstProjectFilePropertyNames {
+		return KstProjectFileModel.PropertyNames;
 	}
 }
 

@@ -1,0 +1,67 @@
+﻿
+
+ class KstProxyGeoStatePropertyNames{
+	constructor(){}
+	//axd
+	GuidState:string = "GuidState";	
+
+				 
+				 
+	Name:string = "Name";	
+
+				 
+				 
+	IsDeleted:string = "IsDeleted";	
+
+				 
+				 
+	GuidCountry:string = "GuidCountry";	
+
+				 
+				 
+		FkKstProxyGeoCountry:string = "FkKstProxyGeoCountry";
+		KstProxyGeoCountry:string = "KstProxyGeoCountry"; //test
+				 
+}
+
+//test
+export  class KstProxyGeoStateModel{
+	Id?:string;
+
+		GuidState:string;	
+
+		 
+	Name:string;	
+
+		 
+	IsDeleted?:boolean;	
+
+		 
+	GuidCountry?:string;	
+
+		 
+		FkKstProxyGeoCountry:string ;
+
+		FkKstProxyGeoCountryText:any;
+
+		KstProxyGeoCountry:string;
+		
+			 
+		 
+
+	public static _EntitySetName:string =  "KstProxyGeoStates";
+	public static _EntityName:string =  "KstProxyGeoState";
+	public static PropertyNames: KstProxyGeoStatePropertyNames = new KstProxyGeoStatePropertyNames();
+	public static _PropertyNamesForUpdate: string = "GuidState,Name,IsDeleted,GuidCountry";
+
+
+	public get getSetName() : string {
+		return KstProxyGeoStateModel._EntitySetName;
+	}
+	public get getPropertyNames() : KstProxyGeoStatePropertyNames {
+		return KstProxyGeoStateModel.PropertyNames;
+	}
+}
+
+
+	

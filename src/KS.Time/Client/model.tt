@@ -1,0 +1,105 @@
+﻿<#@ output  extension="ts" #>
+<#@ template language="C#" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ import namespace="SFS.VSExtension2019.Model" #>
+<#@ import namespace="SFS.VSExtension2019.Model.Utils" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Linq" #>
+
+<#+ public void GenerateModel(EntityInfo entity)
+{ #>
+<#+	
+
+#>
+
+
+ class <#= entity.Name #>PropertyNames{
+	constructor(){}
+	//axd
+<#+ foreach(var prop in entity.Properties.Where(p=> !string.IsNullOrEmpty((string)GetCustomProperty(p, "IsParam", "String")) )){	 #>
+	 <#= prop.Name #>Id:string = "<#= prop.Name #>";	
+<#+ } #>
+<#+		foreach (var property in entity.Properties.Where(p=> IsPropertyWritable(p) && p.IsNavigationPropertyMany == false))
+        {
+			string type = "string";
+			
+#>
+<#+  if (property.IsNavigationProperty == false){  #>
+	<#= property.Name #>:<#= type #> = "<#= property.Name #>";	
+
+				 
+<#+	}else{	#>
+		Fk<#= property.Name #>:<#= type #> = "Fk<#= property.Name #>";
+		<#= property.Name #>:<#= type #> = "<#= property.Name #>"; //test
+<#+	     } #>				 
+<#+      } #>
+}
+
+//test
+export  class <#= entity.Name #>Model{
+	Id?:string;
+
+	<#+ foreach(var prop in entity.Properties.Where(p=> !string.IsNullOrEmpty((string)GetCustomProperty(p, "IsParam", "String")) )){	 #>
+	 <#= prop.Name #>Id: string;
+<#+ } #>
+
+<#+		foreach (var property in entity.Properties.Where(p=> IsPropertyWritable(p) && p.IsNavigationPropertyMany == false))
+        {
+			string type = "string";
+			if (property.Type.ToLower().Contains("int") || property.Type.ToLower().Contains("dec")  ){
+				type = "number";
+            }else if (property.Type.ToLower().Contains("bool")){
+				type = "boolean";
+			}
+#>
+<#+  if (property.IsNavigationProperty == false){ 
+		 string nullableSymbol = "";
+		 if (property.Nullable == true){
+			 nullableSymbol= "?";
+         }
+#>
+	<#= property.Name #><#= nullableSymbol #>:<#= type #>;	
+
+<#+	}else if (property.IsPrimaryKey ){	#>
+			 
+<#+	}else{	#>
+		Fk<#= property.Name #>:<#= type #> ;
+
+		Fk<#= property.Name #>Text:any;
+
+		<#= property.Name #>:<#= type #>;
+		
+			 
+<#+      } #>		 
+<#+      } #>
+
+	public static _EntitySetName:string =  "<#= entity.SetName #>";
+	public static _EntityName:string =  "<#= entity.Name #>";
+	public static PropertyNames: <#= entity.Name #>PropertyNames = new <#= entity.Name #>PropertyNames();
+<#+ 
+	System.Text.StringBuilder sbProps = new System.Text.StringBuilder();
+	foreach(var prop in entity.Properties.Where(p=> p.IsNavigationProperty == false)){
+		if (sbProps.Length > 0) sbProps.Append(",");
+		sbProps.Append(prop.Name);
+    }
+#>
+	public static _PropertyNamesForUpdate: string = "<#= sbProps.ToString() #>";
+
+
+	public get getSetName() : string {
+		return <#= entity.Name #>Model._EntitySetName;
+	}
+	public get getPropertyNames() : <#= entity.Name #>PropertyNames {
+		return <#= entity.Name #>Model.PropertyNames;
+	}
+}
+
+
+	
+<#+		 
+    
+            
+}
+#>
+

@@ -25,6 +25,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="pages-routing.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>pages-routing.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="All.Client.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>All.Client.txt</LastGenOutput>
@@ -33,6 +41,15 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>All.Client.tt</DependentUpon>
+    </None>
+    <None Update="model.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>model.tt</DependentUpon>
+    </None>
+    <None Update="model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>model.ts</LastGenOutput>
     </None>
     <None Update="pages-routing.ts">
       <DesignTime>True</DesignTime>
@@ -161,6 +178,14 @@
   <ItemGroup>
     <Folder Include="Ionic-KSTime\src\app\pages\business\" />
     <Folder Include="Ionic-KSTime\src\assets\business\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="pages-routing.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>pages-routing.tt</DependentUpon>
+    </None>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
