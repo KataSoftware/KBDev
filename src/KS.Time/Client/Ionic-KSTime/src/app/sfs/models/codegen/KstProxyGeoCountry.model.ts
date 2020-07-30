@@ -1,4 +1,8 @@
-﻿
+﻿import { 
+     KstProxyGeoCountryModel, 
+  
+} from 'src/app/models/business/models';
+
 
  class KstProxyGeoCountryPropertyNames{
 	constructor(){}
@@ -19,6 +23,22 @@
 
 //test
 export  class KstProxyGeoCountryModel{
+public static GetFields():Array<FormlyFieldConfig>{
+return [
+{
+    key: KstProxyGeoCountryModel.PropertyNames.Name,
+    type: 'input',
+
+    templateOptions: {
+        label: KstProxyGeoCountryModel.PropertyNames.Name,
+        placeholder: '',
+        required: true,
+		
+		maxLength: 255,
+    }
+},
+	];
+    }
 	Id?:string;
 
 		GuidCountry:string;	

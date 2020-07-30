@@ -4,6 +4,10 @@
 
 
 
+import { 
+     KstEmailTemplateModel, 
+  
+} from 'src/app/models/business/models';
 
 
  class KstEmailTemplatePropertyNames{
@@ -57,6 +61,45 @@
 
 //test
 export  class KstEmailTemplateModel{
+public static GetFields():Array<FormlyFieldConfig>{
+return [
+{
+    key: KstEmailTemplateModel.PropertyNames.Title,
+    type: 'input',
+
+    templateOptions: {
+        label: KstEmailTemplateModel.PropertyNames.Title,
+        placeholder: '',
+        required: true,
+		
+		maxLength: 255,
+    }
+},
+{
+    key: KstEmailTemplateModel.PropertyNames.TitleKey,
+    type: 'input',
+
+    templateOptions: {
+        label: KstEmailTemplateModel.PropertyNames.TitleKey,
+        placeholder: '',
+        required: false,
+		
+		maxLength: 20,
+    }
+},
+{
+    key: KstEmailTemplateModel.PropertyNames.Content,
+    type: 'textarea',
+
+    templateOptions: {
+        label: KstEmailTemplateModel.PropertyNames.Content,
+        placeholder: '',
+        required: false,
+		rows: 5,
+    }
+},
+	];
+    }
 	Id?:string;
 
 		GuidEmailTemplate:string;	
