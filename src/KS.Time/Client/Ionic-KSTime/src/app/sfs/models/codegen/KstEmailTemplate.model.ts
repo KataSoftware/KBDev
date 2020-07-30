@@ -1,12 +1,10 @@
-﻿ 
+﻿import { FormlyFieldConfig } from '@ngx-formly/core';
+
+ 
 
 
 
 
-
-import { FormlyFieldConfig } from '@ngx-formly/core';
-
-	
 
 
 

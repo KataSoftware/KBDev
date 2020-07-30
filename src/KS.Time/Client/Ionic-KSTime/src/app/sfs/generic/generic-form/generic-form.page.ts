@@ -2,7 +2,6 @@
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { StorageService, UserService, ApiResponse } from 'sfscommon';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { KstEmailTemplateFormFields } from './generic-form.fields';
 import { ActivatedRoute } from '@angular/router';
 import { AppFormBasePage } from '../../common/app-form-base/app-form-base.page';
 import { sfsService } from '../../services/sfs.service';
@@ -22,7 +21,7 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
   entityName:string=null;
   entityModel:any=null;
   setForm() {
-    this.fields = KstEmailTemplateFormFields.GetFields();
+    this.fields = this.entityModel.GetFields();
     if (this.KstEmailTemplateFormCustom != null ){
       this.KstEmailTemplateFormCustom["OnShowing"](this);
     }
@@ -38,7 +37,7 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
   ) {
 
     super(injector);
-    this.title = "KstEmailTemplate";
+    this.title = this.route.snapshot.paramMap.get("catalog");
     this.entityName = this.activatedRoute.snapshot.paramMap.get('catalog');
 
     
@@ -48,16 +47,22 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
 
    }
 
-  ngOnInit() {
-	  this.fieldsBack = KstEmailTemplateFormFields.GetFields();
+  async ngOnInit() {
+    import(
+      /* webpackMode: "lazy-once" */
+      /* webpackPrefetch: true */
+      /* webpackInclude: /\.ts$/ */
+      /* webpackPreload: true */
+`../../models/codegen/${this.entityName}.model`).then((_model)=> {
+    this.entityModel = _model[this.entityName +"Model"]
+	  this.pageService.fieldsBack = this.entityModel.GetFields();
    
 	import(
-                /* webpackChunkName: "KstProjectFormCustom" */
                 /* webpackMode: "eager" */
                 /* webpackPrefetch: true */
                 /* webpackInclude: /\.ts$/ */
                 /* webpackPreload: true */   
-    `./${this.customClass}`).then( async (_import)=> {
+                `../../../pages/catalogs/${this.entityName}Form.custom`).then( async (_import)=> {
         this.KstEmailTemplateFormCustom = _import[ this.entityName + "FormCustom"];
         if (this.KstEmailTemplateFormCustom != null) {
            if (this.KstEmailTemplateFormCustom["OnShowing"] != null ){
@@ -70,10 +75,15 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
         this.showForm();
         this.getData();
       }).catch((error)=> {
-        console.log("error load partial File KstEmailTemplate",  error);
+        console.log("error load partial File",  error);
         this.showForm();
         this.getData();
       });
+
+    }).catch((error)=> {
+    //  this.externalCustomFileChecked = true;
+      console.log("error ", error);
+    });
   }
 
   async getData() {

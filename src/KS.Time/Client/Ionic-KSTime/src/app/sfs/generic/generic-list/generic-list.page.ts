@@ -186,7 +186,7 @@ bindDisplayColumns(){
 }
 routeAdd:string;
 async addItem(){
-  this.routeAdd = this.entityName + "/form";
+  this.routeAdd = "/catalog/" +this.entityName + "/form";
   this.navCtrl.navigateForward(this.routeAdd, { animated: true });
 }
 

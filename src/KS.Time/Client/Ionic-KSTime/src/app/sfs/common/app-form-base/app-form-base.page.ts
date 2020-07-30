@@ -175,19 +175,19 @@ export class AppFormBasePage extends BasePage implements OnInit {
     this.pageService.setOrder(settings, this.fields);
   }
   public showForm() {
-    this.pageService.showForm(this.fields);
+    this.fields = this.pageService.showForm(this.fields);
   }
 
   public resetFieldsForm() {
-    this.pageService.resetFieldsForm(this.fields);
+    this.fields = this.pageService.resetFieldsForm(this.fields);
   }
 
   public getFieldsForm() {
-    this.pageService.getFieldsForm(this.fields);
+    this.fields = this.pageService.getFieldsForm(this.fields);
   }
 
   public setOrderFields(fieldNames: Array<string>) {
-    this.pageService.setOrderFields(fieldNames, this.fields);
+    //this.fields = this.pageService.setOrderFields(fieldNames, this.fields);
   }
 
 

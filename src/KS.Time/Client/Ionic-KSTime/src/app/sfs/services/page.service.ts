@@ -143,7 +143,7 @@ export class PageService {
     }
   }
 
-  public showForm(fields: Array<FormlyFieldConfig>) {
+  public showForm(fields: Array<FormlyFieldConfig>):Array<any> {
     //this.propertiesForUpdate. = this.visibleFields;
 
     if (this.temp == null) {
@@ -165,14 +165,15 @@ export class PageService {
     }
 
 
-
+    return fields;
   }
-  public resetFieldsForm(fields: Array<FormlyFieldConfig>) {
+  public resetFieldsForm(fields: Array<FormlyFieldConfig>):Array<any> {
     this.temp = null;
     this.colsSum = 0;
     if (this.fieldsBack != null) {
       fields = this.fieldsBack;
     }
+    return fields;
   }
   public getFieldsForm(fields: Array<FormlyFieldConfig>) {
     if (this.rowGroup != null && this.temp != null) {
