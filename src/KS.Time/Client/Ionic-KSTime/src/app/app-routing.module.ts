@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'FolderIn/:id',
     loadChildren: () => import('./folder/Folder-In.module').then( m => m.FolderPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./sfs/common/login/login.module').then( m => m.LoginPageModule)
+  },
   
   
 

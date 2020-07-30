@@ -95,24 +95,25 @@ export class LocalLoginPage extends LoginPage {
     this.form = new FormGroup({});
       this.model = new RegisterModel();
     this.urlLogo = '';
-    if (window.location.hash.indexOf("recovery-password") != -1) {
+    if (this.router.url.indexOf("recovery-password") != -1) {
       this.isRecoveryPassword = true;
     }
-    if (window.location.hash.indexOf("set-password") != -1) {
+    if (this.router.url.indexOf("set-password") != -1) {
       this.code = this.route.snapshot.paramMap.get("code");
       this.email = this.route.snapshot.paramMap.get("email");
       this.isSetPassword = true;
     }
-    if (window.location.hash.indexOf("activate-account") != -1) {
+    if (this.router.url.indexOf("activate-account") != -1) {
       this.code = this.route.snapshot.paramMap.get("code");
       this.email = this.route.snapshot.paramMap.get("email");
       this.isActivateAccount = true;
     }
-    if (window.location.hash.indexOf("login") != -1) {
+    if (this.router.url.indexOf("login") != -1) {
       // this.code = this.route.snapshot.paramMap.get("code");
       // this.email = this.route.snapshot.paramMap.get("email");
       this.isLogin = true;
     }
+   
 
     this.fields = [{
       key: 'Email',
@@ -248,7 +249,7 @@ export class LocalLoginPage extends LoginPage {
         let item = this.formlogin.value;
         item["Username"] = item.Email;
         // Se hace la peticion al servidor.
-        const response = <ApiResponse>await this.authService.loginToSFSApp(this.formlogin.value);
+        const response = <ApiResponse>await this.sfsService.loginToSFSApp(this.formlogin.value);
 
         // Existe respuesta.
         if (response) {

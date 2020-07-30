@@ -1,10 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpService, DataService, EntityWrapper, ApiResponse, ServiceData, IGeoData } from 'sfscommon';
+import { HttpService, DataService, EntityWrapper, ApiResponse, ServiceData, IGeoData, IUserDataModel, SystemCore, UserService } from 'sfscommon';
 @Injectable({ providedIn: 'root' })
 export class sfsService {
   url: string;
-  constructor(public http: HttpService, public dataService: DataService) {
+  constructor( private system: SystemCore,   private userService: UserService, public http: HttpService, public dataService: DataService) {
     this.url = http.generateUrl();
+  }
+  public async loginToSFSApp(userData: IUserDataModel): Promise<any> {
+
+    // Se recupera el Header para la petición.
+    const headers = await this.http.getHeaderOptions();
+
+    // Se recuperan la Url y el GuidCompany.
+    const url = this.http.generateUrl();
+
+    userData.GetCompanyRoles = true;
+    userData.AppKey = this.system.appNameKey;
+
+    if (this.system.guidCompanyId != null && userData.IdCompany == null) {
+      userData.IdCompany = this.system.guidCompanyId;
+    }
+    let apiPath = `${url}/Api/Login`;
+
+    if (this.system.serverVersion === 3){
+      apiPath = `${url}/Auth/Login`
+    }
+    const response = await this.http.post(apiPath, userData, headers);
+
+    if (response['status'] !== 'error') {
+
+      // Se guarda la información.
+      await this.userService.setUserData(response['data']);
+      await this.userService.setUserToken(response['data'].Token);
+    }
+
+    return response;
   }
   private NavigationData?:any=null;
   public GetNavigationData():any{
