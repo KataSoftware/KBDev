@@ -1,9 +1,9 @@
-﻿import { 
-     KstProjectUserModel, 
-	KstProjectModel,
-	KstProxyUserModel,
-  
-} from 'src/app/models/business/models';
+﻿import { FormlyFieldConfig } from '@ngx-formly/core';
+
+import { KstProjectModel } from './KstProject.model';
+import { KstProxyUserModel } from './KstProxyUser.model';
+	
+
 
 
  class KstProjectUserPropertyNames{

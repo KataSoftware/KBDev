@@ -1,8 +1,8 @@
-﻿import { 
-     KstProxyGeoStateModel, 
-	KstProxyGeoCountryModel,
-  
-} from 'src/app/models/business/models';
+﻿import { FormlyFieldConfig } from '@ngx-formly/core';
+
+import { KstProxyGeoCountryModel } from './KstProxyGeoCountry.model';
+	
+
 
 
  class KstProxyGeoStatePropertyNames{

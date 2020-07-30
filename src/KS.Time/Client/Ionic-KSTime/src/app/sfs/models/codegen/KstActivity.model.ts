@@ -1,8 +1,8 @@
-﻿import { 
-     KstActivityModel, 
-	KstProjectModel,
-  
-} from 'src/app/models/business/models';
+﻿import { FormlyFieldConfig } from '@ngx-formly/core';
+
+import { KstProjectModel } from './KstProject.model';
+	
+
 
 
  class KstActivityPropertyNames{

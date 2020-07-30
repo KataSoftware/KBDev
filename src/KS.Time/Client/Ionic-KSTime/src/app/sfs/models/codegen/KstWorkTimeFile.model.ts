@@ -1,9 +1,9 @@
-﻿import { 
-     KstWorkTimeFileModel, 
-	KstFileModel,
-	KstWorkTimeModel,
-  
-} from 'src/app/models/business/models';
+﻿import { FormlyFieldConfig } from '@ngx-formly/core';
+
+import { KstFileModel } from './KstFile.model';
+import { KstWorkTimeModel } from './KstWorkTime.model';
+	
+
 
 
  class KstWorkTimeFilePropertyNames{

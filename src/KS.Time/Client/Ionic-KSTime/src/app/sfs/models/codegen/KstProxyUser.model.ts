@@ -1,8 +1,8 @@
-﻿import { 
-     KstProxyUserModel, 
-	KstProxyRoleModel,
-  
-} from 'src/app/models/business/models';
+﻿import { FormlyFieldConfig } from '@ngx-formly/core';
+
+import { KstProxyRoleModel } from './KstProxyRole.model';
+	
+
 
 
  class KstProxyUserPropertyNames{

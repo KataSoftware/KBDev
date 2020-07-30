@@ -1,7 +1,7 @@
-﻿import { 
-     unProxySettingModel, 
-  
-} from 'src/app/models/business/models';
+﻿import { FormlyFieldConfig } from '@ngx-formly/core';
+
+	
+
 
 
  class unProxySettingPropertyNames{

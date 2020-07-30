@@ -4,10 +4,10 @@
 
 
 
-import { 
-     KstEmailTemplateModel, 
-  
-} from 'src/app/models/business/models';
+import { FormlyFieldConfig } from '@ngx-formly/core';
+
+	
+
 
 
  class KstEmailTemplatePropertyNames{

@@ -12,8 +12,8 @@
 <#+	
 
 #>
-//import { 
-//     <#= entity.Name #>Model, 
+import { FormlyFieldConfig } from '@ngx-formly/core';
+
 <#+ List<String> propModels = new List<String>();
 	
 	foreach (var property in entity.Properties.Where(p=> p.IsNavigationPropertyMany == false && p.IsNavigationProperty == true ) ){ 
@@ -22,14 +22,14 @@
 			var entityRel  = entity.Model.Entities.Find(p=>p.Name == entityRelName);
 		if (!propModels.Contains(entityRel.Name) && entityRel.Name != entity.Name){
 			propModels.Add(entityRel.Name);
+#>
+import { <#= entityRel.Name #>Model } from './<#=entityRel.Name #>.model';
+<#+
         }
     }
-		foreach(var propName in propModels){
 #>
-	import { <#= propName #>Model } from './<#=entity.Name>.model';
-<#+		} #>
-  
-//} from 'src/app/models/business/models';
+	
+
 
 
  class <#= entity.Name #>PropertyNames{

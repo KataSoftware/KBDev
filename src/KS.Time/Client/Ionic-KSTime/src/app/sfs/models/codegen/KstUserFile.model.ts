@@ -1,9 +1,9 @@
-﻿import { 
-     KstUserFileModel, 
-	KstFileModel,
-	KstProxyUserModel,
-  
-} from 'src/app/models/business/models';
+﻿import { FormlyFieldConfig } from '@ngx-formly/core';
+
+import { KstFileModel } from './KstFile.model';
+import { KstProxyUserModel } from './KstProxyUser.model';
+	
+
 
 
  class KstUserFilePropertyNames{
