@@ -3,8 +3,9 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { ActivatedRoute } from '@angular/router';
-import { StorageService, UserService } from 'sfscommon';
+import { StorageService, UserService, ApiResponse } from 'sfscommon';
 import { AppFormBasePage } from '../../common/app-form-base/app-form-base.page';
+import { BackToListSettings } from '../../models/common/page.model';
 
 @Component({
   selector: 'app-generic-form',
@@ -12,7 +13,12 @@ import { AppFormBasePage } from '../../common/app-form-base/app-form-base.page';
   styleUrls: ['./generic-form.page.scss'],
 })
 export class GenericFormPage extends AppFormBasePage implements OnInit {
- entityName:string=null;
+  item:any = null;
+  guidItem: string = null;
+  fields: Array<FormlyFieldConfig> = [];
+  KstEmailTemplateFormCustom:any = null;
+  customClass = 'KstEmailTemplate-form.custom';
+  entityName:string=null;
   entityModel:any=null;
   constructor(
     public injector: Injector,
@@ -23,84 +29,111 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
   ) { 
 
     super(injector);
-    // this.title = this.route.snapshot.paramMap.get("catalog");
-    // this.entityName = this.activatedRoute.snapshot.paramMap.get('catalog');
+    this.title = this.route.snapshot.paramMap.get("catalog");
+    this.entityName = this.activatedRoute.snapshot.paramMap.get('catalog');
 
     
-
-    // this.defaultHref = 'KstEmailTemplate/list';
-    // this.guidItem = this.route.snapshot.paramMap.get("Id");
+    this.defaultHref = 'catalog/' + this.entityName;
+   
+    this.guidItem = this.route.snapshot.paramMap.get("Id");
   }
-  form = new FormGroup({});
-  model: any = {};
-  options: FormlyFormOptions = {
-    formState: {
-      awesomeIsForced: false,
-    },
-  };
-  fields2: FormlyFieldConfig[] = [
-    {
-      key: 'text',
-      type: 'input',
-      templateOptions: {
-        label: 'Text',
-        placeholder: 'Formly is terrific!',
-        required: true,
-      },
-    },
-    {
-      key: 'nested.story',
-      type: 'textarea',
-      templateOptions: {
-        label: 'Some sweet story',
-        placeholder: 'It allows you to build and maintain your forms with the ease of JavaScript :-)',
-        description: '',
-      },
-      expressionProperties: {
-        'templateOptions.focus': 'formState.awesomeIsForced',
-        'templateOptions.description': (model, formState) => {
-          if (formState.awesomeIsForced) {
-            return 'And look! This field magically got focus!';
+  
+  async ngOnInit() {
+    import(
+      /* webpackMode: "lazy-once" */
+      /* webpackPrefetch: true */
+      /* webpackInclude: /\.ts$/ */
+      /* webpackPreload: true */
+`../../models/codegen/${this.entityName}.model`).then((_model)=> {
+    this.entityModel = _model[this.entityName +"Model"]
+	  this.pageService.fieldsBack = this.entityModel.GetFields();
+   
+	import(
+                /* webpackMode: "eager" */
+                /* webpackPrefetch: true */
+                /* webpackInclude: /\.ts$/ */
+                /* webpackPreload: true */   
+                `../../../pages/catalogs/${this.entityName}Form.custom`).then( async (_import)=> {
+        this.KstEmailTemplateFormCustom = _import[ this.entityName + "FormCustom"];
+        if (this.KstEmailTemplateFormCustom != null) {
+           if (this.KstEmailTemplateFormCustom["OnShowing"] != null ){
+            this.KstEmailTemplateFormCustom["OnShowing"](this);
           }
-        },
-      },
-    },
-    {
-      key: 'awesome',
-      type: 'checkbox',
-      templateOptions: { label: '' },
-      expressionProperties: {
-        'templateOptions.disabled': 'formState.awesomeIsForced',
-        'templateOptions.label': (model, formState) => {
-          if (formState.awesomeIsForced) {
-            return 'Too bad, formly is really awesome...';
-          } else {
-            return 'Is formly totally awesome? (uncheck this and see what happens)';
+          if (this.KstEmailTemplateFormCustom["OnShowingAsync"] != null){
+            await (<Promise<void>>(this.KstEmailTemplateFormCustom["OnShowingAsync"](this)));
           }
-        },
-      },
-    },
-    {
-      key: 'whyNot',
-      type: 'textarea',
-      expressionProperties: {
-        'templateOptions.placeholder': (model, formState) => {
-          if (formState.awesomeIsForced) {
-            return 'Too bad... It really is awesome! Wasn\'t that cool?';
-          } else {
-            return 'Type in here... I dare you';
-          }
-        },
-        'templateOptions.disabled': 'formState.awesomeIsForced',
-      },
-      hideExpression: 'model.awesome',
-      templateOptions: {
-        label: 'Why Not?',
-        placeholder: 'Type in here... I dare you',
-      },
+        }
+        this.showForm();
+        this.getData();
+      }).catch((error)=> {
+        console.log("error load partial File",  error);
+        this.showForm();
+        this.getData();
+      });
+
+    }).catch((error)=> {
+    //  this.externalCustomFileChecked = true;
+      console.log("error ", error);
+    });
+  }
+
+  async getData() {
+    if (this.guidItem != null) {
+      let result = await this.bizAppService.GetItem(this.guidItem, this.entityModel._EntitySetName, Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p=>   !p.startsWith("Fk")).join(","));
+      if (result.status == "success") {
+        this.item = result.data;
+        this.guidItem = this.item.GuidEmailTemplate;
+
+
+        if (this.item != null) {
+        
+     
+
+        }
+      }
     }
-  ];
-  ngOnInit() {
+  }
+   async goBack(settings?:BackToListSettings) {
+    if (settings == null ){
+      settings = new BackToListSettings();
+      settings.RefreshData= false;
+      settings.RestartPaging = false;
+      settings.Route = this.defaultHref;
+    }
+    this.sfsService.SetNavigationData(settings);
+    this.navCtrl.navigateBack(settings.Route, { animated: true });
+  }
+ 
+  async saveData() {
+    this.savingStart();
+    if (this.form.valid == true) {
+    
+       // this.item = this.form.value;
+	  if (this.item == null ){
+	     this.item = new  this.entityModel();
+	  }
+	  Object.assign(this.item, this.form.value);
+      this.item.GuidEmailTemplate = this.guidItem;
+      
+      let apiResponse: ApiResponse<any> = null;
+      console.log("after create or save", this.guidItem);
+      if (this.guidItem != null) {
+        apiResponse = await  this.bizAppService.Update(this.item, this.entityModel._EntitySetName, this.visibleFields.join(","));
+      } else {
+        apiResponse = await  this.bizAppService.Create(this.item, this.entityModel._EntitySetName);
+      }
+      if (apiResponse.status == 'success') {
+        this.savingEnd();
+        let result = await this.showOk();
+        if (result == true){
+              if (this.guidItem == null ){
+                    this.goBack({ RestartPaging: true, RefreshData: true,  Route: this.defaultHref });
+               }else{
+                    this.goBack({ RestartPaging: false, RefreshData: false, ItemUpdated: this.item,  Route:  this.defaultHref });
+               }
+        }
+      }
+    }
   }
 
 }

@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'catalog/:catalog/form',
-   
+    canActivate: [AuthGuardService],
     loadChildren: () => import('./sfs/generic/generic-form/generic-form.module').then( m => m.GenericFormPageModule)
   },
   {

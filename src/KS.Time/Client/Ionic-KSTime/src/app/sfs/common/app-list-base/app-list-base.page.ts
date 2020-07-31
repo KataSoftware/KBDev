@@ -4,11 +4,7 @@ import { FieldSettings } from '../../models/common/page.model';
 import { PageService } from '../../services/page.service';
 
 
-@Component({
-  selector: 'app-app-list-base',
-  templateUrl: './app-list-base.page.html',
-  styleUrls: ['./app-list-base.page.scss'],
-})
+
 export class AppListBasePage extends ListPage {
   backtableColumns:Array<TableColumn> = [];
   private _pageService: PageService;
