@@ -19,12 +19,21 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="Ionic-KSTime\src\app\pages\business\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="Ionic-KSTime\src\app\pages\business\**" />
+    <EmbeddedResource Remove="Ionic-KSTime\src\app\pages\business\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="Ionic-KSTime\src\app\pages\business\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="model.ts">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
     <Compile Include="pages-routing.ts">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -176,11 +185,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Ionic-KSTime\src\app\pages\business\" />
     <Folder Include="Ionic-KSTime\src\assets\business\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="model.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>model.tt</DependentUpon>
+    </None>
     <None Include="pages-routing.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

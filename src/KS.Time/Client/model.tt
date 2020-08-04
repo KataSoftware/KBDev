@@ -69,6 +69,7 @@ return [
 	if (property.Nullable == false){
 		required = "true";
     }
+
 	string typeControl = "input";
 	var navigationProp =  entity.NavigationProperties.FirstOrDefault( p=>p.PropertyRefName == property.Name && (p.Multiplicity == "1" || p.Multiplicity == "0..1")); 
 	PropertyInfo navPropertyKey = null;
@@ -84,6 +85,7 @@ return [
     } 
 	if (property.Type.ToLower().Contains("bool")){
 		typeControl = "checkbox";
+		required = "false";
     }
 	if (property.Type.ToLower().Contains("date")){
 		//typeControl = "datepicker";
@@ -104,8 +106,12 @@ return [
     type: '<#= typeControl #>',
 
     templateOptions: {
+	<#+ if (property.Type.ToLower().Contains("bool")){ #> 
+	indeterminate: false,
+<#+ } #>
 <#+ if (navigationProp != null ){ #>
-	  "relation": {   
+	  "relation": {
+			PropertyRelationName: "<#=navigationProp.PropertyName>",
 			EntityModel: <#= entityRel.Name #>Model,  
 			DataValue: <#= entityRel.Name #>Model.PropertyNames.<#= navPropertyKey.Name #>,
             DataText: <#= entityRel.Name #>Model.PropertyNames.<#= navDefaultProperty.Name #> 
