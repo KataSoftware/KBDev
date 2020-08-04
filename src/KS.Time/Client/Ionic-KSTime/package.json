@@ -52,7 +52,7 @@
     "cordova-plugin-zip": "3.1.0",
     "cordova-sqlite-storage": "5.0.0",
     "rxjs": "6.5.1",
-    "sfscommon": "file:SFSCommon/sfscommon-2.0.142.tgz",
+    "sfscommon": "file:SFSCommon/sfscommon-2.0.150.tgz",
     "tslib": "1.10.0",
     "zone.js": "0.10.2"
   },

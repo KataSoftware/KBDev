@@ -2,6 +2,9 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { addButtonPlace, addButtonFloatType } from 'sfscommon';
+
+
 export const environment = {
   production: false,
   sfscommon: {
@@ -16,7 +19,14 @@ export const environment = {
     GoogleLocationAPIKey: '***',
     FacebookConfigAuth: { permissions: ['public_profile', 'email', 'user_birthday'], clientId: '1333094310151842' },
     GoogleConfigAuth: { offline: true, webClientId: '241810682914-n2rflefn6mqfunf7arotpq5tdrkmgr3o.apps.googleusercontent.com' },
-   
+    uiSettingsMobile: {
+      addButtonPlace:addButtonPlace.header,
+      addButtonFloatType:addButtonFloatType.BR
+   },
+   uiSettingsDesktop:{
+    addButtonPlace:addButtonPlace.header,
+    addButtonFloatType:addButtonFloatType.BR
+   }
   }
 };
 

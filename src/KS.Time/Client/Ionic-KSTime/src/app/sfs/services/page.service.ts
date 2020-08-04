@@ -332,16 +332,29 @@ export class PageService {
     });
 
   }
+  public getPrimaryColumn(tableColumns: Array<FormlyFieldConfig>):any
+  {
+    return tableColumns[0];
+  }
+ 
 
   public getColumnsFromFields(fields: Array<FormlyFieldConfig>):Array<any>{
     let result:Array<any> = [];
 
     fields.forEach(element => {
+      let isFk = false;
+      let prop = element.key;
+    
+      if (element.templateOptions != null && element.templateOptions.relation != null ){
+        isFk = true;
+        prop = `Fk${element.key}Text`;
+      }
       result.push(
         {
           name: element.key,
           prop: element.key,
           sortable: element.key,
+          isFk: isFk,
           headerClass: 'title-cell'
         }
       );

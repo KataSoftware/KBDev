@@ -36,7 +36,6 @@ export class GenericModel{
 	 static _EntityName?:string;
 }
 
-
 export interface FileRecord {
     url?: string;
     name?: string;

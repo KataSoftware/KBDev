@@ -7,7 +7,7 @@ import { KstActivityModel } from 'src/app/sfs/models/codegen/KstActivity.model';
 
 export class KstActivityListCustom {
     public static OnShowing(page: GenericListPage, e: any): void {
-        console.log("aver");
+        console.log("aver ");
         page.title = "Actividades";
         page.tableColumns = [];
         page.setOrder({ Name: KstActivityModel.PropertyNames.GuidActivity });
