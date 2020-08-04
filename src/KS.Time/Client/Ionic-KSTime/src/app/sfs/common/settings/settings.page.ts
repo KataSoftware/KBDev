@@ -21,7 +21,7 @@ export class SettingsPage extends AppFormBasePage implements OnInit {
     public sfsService: sfsService
   ) {
     super(injector);
-    this.title = 'Configuración de la aplicación';
+    //this.title = 'Configuración de la aplicación';
 
 
     this.form = new FormGroup({

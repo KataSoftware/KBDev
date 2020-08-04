@@ -15,6 +15,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyConfig } from '../../shared/common/formly';
 import { FormlyMaterialModule } from '@ngx-formly/material';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const routes: Routes = [
   {
@@ -34,6 +35,7 @@ const routes: Routes = [
 	MatIconModule,
     SFSCommonModule,
     MatCheckboxModule,
+    MatExpansionModule,
 	MatMenuModule,
     timeagoModule,
     RouterModule.forChild(routes)

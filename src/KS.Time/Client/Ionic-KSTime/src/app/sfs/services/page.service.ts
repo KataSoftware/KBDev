@@ -143,7 +143,7 @@ export class PageService {
     }
   }
 
-  public showForm(fields: Array<FormlyFieldConfig>) {
+  public showForm(fields: Array<FormlyFieldConfig>):Array<any> {
     //this.propertiesForUpdate. = this.visibleFields;
 
     if (this.temp == null) {
@@ -165,14 +165,15 @@ export class PageService {
     }
 
 
-
+    return fields;
   }
-  public resetFieldsForm(fields: Array<FormlyFieldConfig>) {
+  public resetFieldsForm(fields: Array<FormlyFieldConfig>):Array<any> {
     this.temp = null;
     this.colsSum = 0;
     if (this.fieldsBack != null) {
       fields = this.fieldsBack;
     }
+    return fields;
   }
   public getFieldsForm(fields: Array<FormlyFieldConfig>) {
     if (this.rowGroup != null && this.temp != null) {
@@ -331,16 +332,29 @@ export class PageService {
     });
 
   }
+  public getPrimaryColumn(tableColumns: Array<FormlyFieldConfig>):any
+  {
+    return tableColumns[0];
+  }
+ 
 
   public getColumnsFromFields(fields: Array<FormlyFieldConfig>):Array<any>{
     let result:Array<any> = [];
 
     fields.forEach(element => {
+      let isFk = false;
+      let prop = element.key;
+    
+      if (element.templateOptions != null && element.templateOptions.relation != null ){
+        isFk = true;
+        prop = `Fk${element.key}Text`;
+      }
       result.push(
         {
           name: element.key,
           prop: element.key,
           sortable: element.key,
+          isFk: isFk,
           headerClass: 'title-cell'
         }
       );

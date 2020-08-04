@@ -1,11 +1,7 @@
 import { Component, Injector } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AppListBasePage } from '../app-list-base/app-list-base.page';
-@Component({
-  selector: 'app-app-list-base-typed',
-  templateUrl: './app-list-base-typed.page.html',
-  styleUrls: ['./app-list-base-typed.page.scss'],
-})
+
 export class AppListBaseTypedPage<T> extends AppListBasePage {
 
   

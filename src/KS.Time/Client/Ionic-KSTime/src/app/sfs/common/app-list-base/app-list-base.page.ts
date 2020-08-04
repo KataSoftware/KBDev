@@ -1,18 +1,28 @@
 import { Component, Injector } from '@angular/core';
-import { ListPage, UserDataModel, Pagination, TableColumn } from 'sfscommon';
+import { ListPage, UserDataModel, Pagination, TableColumn, uiSettings, titlePlace } from 'sfscommon';
 import { FieldSettings } from '../../models/common/page.model';
 import { PageService } from '../../services/page.service';
 
 
-@Component({
-  selector: 'app-app-list-base',
-  templateUrl: './app-list-base.page.html',
-  styleUrls: ['./app-list-base.page.scss'],
-})
+
 export class AppListBasePage extends ListPage {
   backtableColumns:Array<TableColumn> = [];
   private _pageService: PageService;
 
+  public get uiSettings(): uiSettings{
+    if (this.systemService.isMobile()){
+      if (this.systemService.uiSettingsMobile.titlePlace == null ){
+        this.systemService.uiSettingsMobile.titlePlace = titlePlace.header;
+      }
+      return this.systemService.uiSettingsMobile;
+    }else{
+      if (this.systemService.uiSettingsDesktop.titlePlace == null ){
+        this.systemService.uiSettingsDesktop.titlePlace = titlePlace.header;
+      }
+      return this.systemService.uiSettingsDesktop;
+      
+    }
+  }
   public get pageService(): PageService {
     if (!this._pageService) {
 
@@ -25,6 +35,11 @@ export class AppListBasePage extends ListPage {
     super(injector);
     this.actions.push({ Text: "Agregar nuevo", ActionKey:"add" });
     this.actions.push({ Text: "Eliminar", ActionKey:"delete" });
+    this.listSettings = { 
+      listMobile: listMobile.CardMin,
+      goToDetailsMobile: goToDetailsMobile.primaryColumn,
+      showIconExpand: true,
+    };
   }
   onGetData(data:any){
     //console.log("data", data);
@@ -98,6 +113,7 @@ export class AppListBasePage extends ListPage {
       
        return true;
     }
+    public listSettings?:listSettings=null;
 
 }
 
@@ -107,6 +123,24 @@ export class ActionModel{
   Text:string=null;
   ActionKey:string=null;
 }
+
+export class listSettings{
+   listMobile?:listMobile= listMobile.CardMin;
+   goToDetailsMobile?:goToDetailsMobile=goToDetailsMobile.primaryColumn;
+   showIconExpand?:boolean=true;
+
+ }
+export enum listMobile{
+  CardMin=1,
+  CardMax=2,
+  NoExpanded=3
+}
+export enum goToDetailsMobile{
+ primaryColumn=1,
+ actionButton=2,
+ allCard=3
+}
+
 
 export class BindListSettings{
  RestartPaging?:Boolean=true;

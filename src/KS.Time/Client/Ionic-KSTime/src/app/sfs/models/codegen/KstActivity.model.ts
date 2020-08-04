@@ -94,9 +94,11 @@ return [
     type: 'checkbox',
 
     templateOptions: {
+		indeterminate: false,
+
         label: KstActivityModel.PropertyNames.IsCustomByUser,
         placeholder: '',
-        required: true,
+        required: false,
 		
     }
 },

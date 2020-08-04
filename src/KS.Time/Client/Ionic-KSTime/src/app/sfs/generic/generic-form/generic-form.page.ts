@@ -1,15 +1,14 @@
-﻿import { Component, OnInit, Injector } from '@angular/core';
-import { FormlyFieldConfig } from '@ngx-formly/core';
-import { StorageService, UserService, ApiResponse } from 'sfscommon';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { KstEmailTemplateFormFields } from './generic-form.fields';
+import { sfsService } from './../../services/sfs.service';
+import { Component, OnInit, Injector } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { ActivatedRoute } from '@angular/router';
+import { StorageService, UserService, ApiResponse } from 'sfscommon';
 import { AppFormBasePage } from '../../common/app-form-base/app-form-base.page';
-import { sfsService } from '../../services/sfs.service';
 import { BackToListSettings } from '../../models/common/page.model';
 
 @Component({
-  selector: 'generic-form',
+  selector: 'app-generic-form',
   templateUrl: './generic-form.page.html',
   styleUrls: ['./generic-form.page.scss'],
 })
@@ -21,43 +20,40 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
   customClass = 'KstEmailTemplate-form.custom';
   entityName:string=null;
   entityModel:any=null;
-  setForm() {
-    this.fields = KstEmailTemplateFormFields.GetFields();
-    if (this.KstEmailTemplateFormCustom != null ){
-      this.KstEmailTemplateFormCustom["OnShowing"](this);
-    }
-    this.showForm();
-
-  }
   constructor(
     public injector: Injector,
     private activatedRoute: ActivatedRoute,
     public storage: StorageService,
     public userService: UserService,
 	public sfsService: sfsService
-  ) {
+  ) { 
 
     super(injector);
-    this.title = "KstEmailTemplate";
+    this.title = this.route.snapshot.paramMap.get("catalog");
     this.entityName = this.activatedRoute.snapshot.paramMap.get('catalog');
 
     
-
-    this.defaultHref = 'KstEmailTemplate/list';
+    this.defaultHref = 'catalog/' + this.entityName;
+   
     this.guidItem = this.route.snapshot.paramMap.get("Id");
-
-   }
-
-  ngOnInit() {
-	  this.fieldsBack = KstEmailTemplateFormFields.GetFields();
+  }
+  
+  async ngOnInit() {
+    import(
+      /* webpackMode: "lazy-once" */
+      /* webpackPrefetch: true */
+      /* webpackInclude: /\.ts$/ */
+      /* webpackPreload: true */
+`../../models/codegen/${this.entityName}.model`).then((_model)=> {
+    this.entityModel = _model[this.entityName +"Model"]
+	  this.pageService.fieldsBack = this.entityModel.GetFields();
    
 	import(
-                /* webpackChunkName: "KstProjectFormCustom" */
                 /* webpackMode: "eager" */
                 /* webpackPrefetch: true */
                 /* webpackInclude: /\.ts$/ */
                 /* webpackPreload: true */   
-    `./${this.customClass}`).then( async (_import)=> {
+                `../../../pages/catalogs/${this.entityName}Form.custom`).then( async (_import)=> {
         this.KstEmailTemplateFormCustom = _import[ this.entityName + "FormCustom"];
         if (this.KstEmailTemplateFormCustom != null) {
            if (this.KstEmailTemplateFormCustom["OnShowing"] != null ){
@@ -70,10 +66,15 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
         this.showForm();
         this.getData();
       }).catch((error)=> {
-        console.log("error load partial File KstEmailTemplate",  error);
+        console.log("error load partial File",  error);
         this.showForm();
         this.getData();
       });
+
+    }).catch((error)=> {
+    //  this.externalCustomFileChecked = true;
+      console.log("error ", error);
+    });
   }
 
   async getData() {
@@ -136,4 +137,3 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
   }
 
 }
-

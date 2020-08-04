@@ -32,9 +32,8 @@ const routes: Routes = [
   {
     path: 'catalog/:catalog/form/:id',
     canActivate: [AuthGuardService],
-    loadChildren: () => import('./sfs//generic/generic-form/generic-form.module').then( m => m.GenericFormPageModule)
-  },
-
+    loadChildren: () => import('./sfs/generic/generic-form/generic-form.module').then( m => m.GenericFormPageModule)
+  } 
 ];
 
 @NgModule({

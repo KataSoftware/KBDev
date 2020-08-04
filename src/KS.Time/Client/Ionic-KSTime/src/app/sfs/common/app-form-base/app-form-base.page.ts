@@ -11,12 +11,7 @@ import { bizAppService } from '../../services/business.service';
 import { Button } from 'protractor';
 import { PageService } from '../../services/page.service';
 import { DialogSettings, DialogButton, SeparatorSettings, FieldSettings } from '../../models/common/page.model';
-
-@Component({
-  selector: 'app-app-form-base',
-  templateUrl: './app-form-base.page.html',
-  styleUrls: ['./app-form-base.page.scss'],
-})
+ 
 export class AppFormBasePage extends BasePage implements OnInit {
 
 
@@ -63,6 +58,7 @@ export class AppFormBasePage extends BasePage implements OnInit {
     return <AbstractControl>this.form.get(name);
   }
   public getFormGroup(name: string): FormGroup {
+    
     return <FormGroup>this.form.get(name);
   }
 
@@ -175,15 +171,15 @@ export class AppFormBasePage extends BasePage implements OnInit {
     this.pageService.setOrder(settings, this.fields);
   }
   public showForm() {
-    this.pageService.showForm(this.fields);
+    this.fields = this.pageService.showForm(this.fields);
   }
 
   public resetFieldsForm() {
-    this.pageService.resetFieldsForm(this.fields);
+    this.fields = this.pageService.resetFieldsForm(this.fields);
   }
 
   public getFieldsForm() {
-    this.pageService.getFieldsForm(this.fields);
+    this.fields = this.pageService.getFieldsForm(this.fields);
   }
 
   public setOrderFields(fieldNames: Array<string>) {
