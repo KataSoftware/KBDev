@@ -23,7 +23,7 @@ namespace KS.Time.Api
         {
             try
             {
-                SFS.Core.My.EventLog.Action("creating entities", );
+                //SFS.Core.My.EventLog.Action("creating entities");
                 secModule module = SFS.Core.Cache.Caching.SystemObjects.GetModuleByKey("KSTime");
                 SFS.Core.Security.BR.secBusinessObjectsBR brObjects = new SFS.Core.Security.BR.secBusinessObjectsBR(true);
                 ContextRequest context = new ContextRequest();

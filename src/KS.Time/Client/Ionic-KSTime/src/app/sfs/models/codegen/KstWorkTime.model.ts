@@ -78,7 +78,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstWorkTimeModel.PropertyNames.Title,
+	        label: KstWorkTimeModel.PropertyNames.Title,
         placeholder: '',
         required: false,
 		
@@ -90,7 +90,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstWorkTimeModel.PropertyNames.Comments,
+	        label: KstWorkTimeModel.PropertyNames.Comments,
         placeholder: '',
         required: false,
 		
@@ -102,7 +102,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstWorkTimeModel.PropertyNames.Hours,
+	        label: KstWorkTimeModel.PropertyNames.Hours,
         placeholder: '',
         required: false,
 		
@@ -114,7 +114,8 @@ return [
     type: 'select',
 
     templateOptions: {
-	  "relation": {   
+		  "relation": {
+			PropertyRelationName: "KstProject",
 			EntityModel: KstProjectModel,  
 			DataValue: KstProjectModel.PropertyNames.GuidProject,
             DataText: KstProjectModel.PropertyNames.Name 
@@ -130,7 +131,8 @@ return [
     type: 'select',
 
     templateOptions: {
-	  "relation": {   
+		  "relation": {
+			PropertyRelationName: "KstActivity",
 			EntityModel: KstActivityModel,  
 			DataValue: KstActivityModel.PropertyNames.GuidActivity,
             DataText: KstActivityModel.PropertyNames.Name 

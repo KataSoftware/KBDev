@@ -212,7 +212,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.SMTPServer,
+	        label: unProxySettingModel.PropertyNames.SMTPServer,
         placeholder: '',
         required: false,
 		
@@ -224,6 +224,8 @@ return [
     type: 'checkbox',
 
     templateOptions: {
+	 
+	indeterminate: false,
         label: unProxySettingModel.PropertyNames.SMTPSSLEnabled,
         placeholder: '',
         required: false,
@@ -235,7 +237,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.SMTPUser,
+	        label: unProxySettingModel.PropertyNames.SMTPUser,
         placeholder: '',
         required: false,
 		
@@ -247,7 +249,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.SMTPPassword,
+	        label: unProxySettingModel.PropertyNames.SMTPPassword,
         placeholder: '',
         required: false,
 		
@@ -259,7 +261,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.SMTPFromName,
+	        label: unProxySettingModel.PropertyNames.SMTPFromName,
         placeholder: '',
         required: false,
 		
@@ -271,7 +273,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.SMTPPort,
+	        label: unProxySettingModel.PropertyNames.SMTPPort,
         placeholder: '',
         required: false,
 		
@@ -283,7 +285,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.SMTPFromEmail,
+	        label: unProxySettingModel.PropertyNames.SMTPFromEmail,
         placeholder: '',
         required: false,
 		
@@ -295,7 +297,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.AzureBlobStorageConnection,
+	        label: unProxySettingModel.PropertyNames.AzureBlobStorageConnection,
         placeholder: '',
         required: false,
 		
@@ -307,6 +309,8 @@ return [
     type: 'checkbox',
 
     templateOptions: {
+	 
+	indeterminate: false,
         label: unProxySettingModel.PropertyNames.SaveBlobInAzureStorage,
         placeholder: '',
         required: false,
@@ -319,6 +323,8 @@ return [
     type: 'checkbox',
 
     templateOptions: {
+	 
+	indeterminate: false,
         label: unProxySettingModel.PropertyNames.SaveBlobInDataBase,
         placeholder: '',
         required: false,
@@ -331,7 +337,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.UserNameGeoNames,
+	        label: unProxySettingModel.PropertyNames.UserNameGeoNames,
         placeholder: '',
         required: false,
 		
@@ -343,7 +349,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.EngineURL,
+	        label: unProxySettingModel.PropertyNames.EngineURL,
         placeholder: '',
         required: false,
 		
@@ -355,7 +361,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.ENGINE_API_KEY,
+	        label: unProxySettingModel.PropertyNames.ENGINE_API_KEY,
         placeholder: '',
         required: false,
 		
@@ -367,7 +373,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.MAMBU_URL,
+	        label: unProxySettingModel.PropertyNames.MAMBU_URL,
         placeholder: '',
         required: false,
 		
@@ -379,7 +385,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.MAMBU_USER,
+	        label: unProxySettingModel.PropertyNames.MAMBU_USER,
         placeholder: '',
         required: false,
 		
@@ -391,7 +397,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.MAMBU_PWD,
+	        label: unProxySettingModel.PropertyNames.MAMBU_PWD,
         placeholder: '',
         required: false,
 		
@@ -403,7 +409,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.KM_MAXIMO,
+	        label: unProxySettingModel.PropertyNames.KM_MAXIMO,
         placeholder: '',
         required: false,
 		
@@ -415,7 +421,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.MAP_KEY,
+	        label: unProxySettingModel.PropertyNames.MAP_KEY,
         placeholder: '',
         required: false,
 		
@@ -427,7 +433,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.ENGINE_OAUTH_CLIENT_ID,
+	        label: unProxySettingModel.PropertyNames.ENGINE_OAUTH_CLIENT_ID,
         placeholder: '',
         required: false,
 		
@@ -439,7 +445,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.ENGINE_OAUTH_LOGIN_URL,
+	        label: unProxySettingModel.PropertyNames.ENGINE_OAUTH_LOGIN_URL,
         placeholder: '',
         required: false,
 		
@@ -451,7 +457,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.ENGINE_OAUTH_USERNAME,
+	        label: unProxySettingModel.PropertyNames.ENGINE_OAUTH_USERNAME,
         placeholder: '',
         required: false,
 		
@@ -463,7 +469,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.ENGINE_OAUTH_PASSWORD,
+	        label: unProxySettingModel.PropertyNames.ENGINE_OAUTH_PASSWORD,
         placeholder: '',
         required: false,
 		
@@ -475,7 +481,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.ENGINE_OAUTH_CLIENT_SECRET,
+	        label: unProxySettingModel.PropertyNames.ENGINE_OAUTH_CLIENT_SECRET,
         placeholder: '',
         required: false,
 		
@@ -487,7 +493,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.ENGINE_DEFINITION_ID,
+	        label: unProxySettingModel.PropertyNames.ENGINE_DEFINITION_ID,
         placeholder: '',
         required: false,
 		
@@ -499,7 +505,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.CONTAINER_DATOS_CLIENTE_ID,
+	        label: unProxySettingModel.PropertyNames.CONTAINER_DATOS_CLIENTE_ID,
         placeholder: '',
         required: false,
 		
@@ -511,7 +517,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.CONTAINER_DOCUMENTOS_ID,
+	        label: unProxySettingModel.PropertyNames.CONTAINER_DOCUMENTOS_ID,
         placeholder: '',
         required: false,
 		
@@ -523,7 +529,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.CONTAINER_DIRECCION_ID,
+	        label: unProxySettingModel.PropertyNames.CONTAINER_DIRECCION_ID,
         placeholder: '',
         required: false,
 		
@@ -535,7 +541,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.CONTAINER_DATOS_FINANCIEROS_ID,
+	        label: unProxySettingModel.PropertyNames.CONTAINER_DATOS_FINANCIEROS_ID,
         placeholder: '',
         required: false,
 		
@@ -547,7 +553,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.CONTAINER_ENVIO_SMS_CONSULTA_UNYKOO_ID,
+	        label: unProxySettingModel.PropertyNames.CONTAINER_ENVIO_SMS_CONSULTA_UNYKOO_ID,
         placeholder: '',
         required: false,
 		
@@ -559,7 +565,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.CONTAINER_BENEFICIARIOS_ID,
+	        label: unProxySettingModel.PropertyNames.CONTAINER_BENEFICIARIOS_ID,
         placeholder: '',
         required: false,
 		
@@ -571,7 +577,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.CONTAINER_CONTRATOS_ID,
+	        label: unProxySettingModel.PropertyNames.CONTAINER_CONTRATOS_ID,
         placeholder: '',
         required: false,
 		
@@ -583,7 +589,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.CONTAINER_APROBACION_ID,
+	        label: unProxySettingModel.PropertyNames.CONTAINER_APROBACION_ID,
         placeholder: '',
         required: false,
 		
@@ -595,7 +601,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.MAMBU_CONTRATO_TEMPLATEID,
+	        label: unProxySettingModel.PropertyNames.MAMBU_CONTRATO_TEMPLATEID,
         placeholder: '',
         required: false,
 		
@@ -607,7 +613,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.MAMBU_CARATULA_TEMPLATEID,
+	        label: unProxySettingModel.PropertyNames.MAMBU_CARATULA_TEMPLATEID,
         placeholder: '',
         required: false,
 		
@@ -619,7 +625,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.MAMBU_PAGARE_TEMPLATEID,
+	        label: unProxySettingModel.PropertyNames.MAMBU_PAGARE_TEMPLATEID,
         placeholder: '',
         required: false,
 		
@@ -631,7 +637,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.MAMBU_REFERENCIASPAGO_TEMPLATEID,
+	        label: unProxySettingModel.PropertyNames.MAMBU_REFERENCIASPAGO_TEMPLATEID,
         placeholder: '',
         required: false,
 		
@@ -643,7 +649,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.MATI_AUTH_HEADER,
+	        label: unProxySettingModel.PropertyNames.MATI_AUTH_HEADER,
         placeholder: '',
         required: false,
 		
@@ -655,7 +661,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxySettingModel.PropertyNames.WEBBHOOK_MATI_KEY,
+	        label: unProxySettingModel.PropertyNames.WEBBHOOK_MATI_KEY,
         placeholder: '',
         required: false,
 		

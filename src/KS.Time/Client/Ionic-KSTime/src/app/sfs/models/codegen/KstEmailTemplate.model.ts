@@ -1,10 +1,12 @@
-﻿import { FormlyFieldConfig } from '@ngx-formly/core';
-
- 
+﻿ 
 
 
 
 
+
+import { FormlyFieldConfig } from '@ngx-formly/core';
+
+	
 
 
 
@@ -66,7 +68,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstEmailTemplateModel.PropertyNames.Title,
+	        label: KstEmailTemplateModel.PropertyNames.Title,
         placeholder: '',
         required: true,
 		
@@ -78,7 +80,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstEmailTemplateModel.PropertyNames.TitleKey,
+	        label: KstEmailTemplateModel.PropertyNames.TitleKey,
         placeholder: '',
         required: false,
 		
@@ -90,7 +92,7 @@ return [
     type: 'textarea',
 
     templateOptions: {
-        label: KstEmailTemplateModel.PropertyNames.Content,
+	        label: KstEmailTemplateModel.PropertyNames.Content,
         placeholder: '',
         required: false,
 		rows: 5,

@@ -111,7 +111,7 @@ return [
 <#+ } #>
 <#+ if (navigationProp != null ){ #>
 	  "relation": {
-			PropertyRelationName: "<#=navigationProp.PropertyName>",
+			PropertyRelationName: "<#= navigationProp.PropertyName #>",
 			EntityModel: <#= entityRel.Name #>Model,  
 			DataValue: <#= entityRel.Name #>Model.PropertyNames.<#= navPropertyKey.Name #>,
             DataText: <#= entityRel.Name #>Model.PropertyNames.<#= navDefaultProperty.Name #> 

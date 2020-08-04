@@ -70,7 +70,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstProxyUserModel.PropertyNames.DisplayName,
+	        label: KstProxyUserModel.PropertyNames.DisplayName,
         placeholder: '',
         required: false,
 		
@@ -82,7 +82,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstProxyUserModel.PropertyNames.Username,
+	        label: KstProxyUserModel.PropertyNames.Username,
         placeholder: '',
         required: false,
 		
@@ -94,7 +94,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstProxyUserModel.PropertyNames.Password,
+	        label: KstProxyUserModel.PropertyNames.Password,
         placeholder: '',
         required: false,
 		
@@ -106,7 +106,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstProxyUserModel.PropertyNames.FirstName,
+	        label: KstProxyUserModel.PropertyNames.FirstName,
         placeholder: '',
         required: false,
 		
@@ -118,7 +118,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstProxyUserModel.PropertyNames.LastName,
+	        label: KstProxyUserModel.PropertyNames.LastName,
         placeholder: '',
         required: false,
 		
@@ -130,7 +130,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstProxyUserModel.PropertyNames.Email,
+	        label: KstProxyUserModel.PropertyNames.Email,
         placeholder: '',
         required: false,
 		
@@ -142,7 +142,8 @@ return [
     type: 'select',
 
     templateOptions: {
-	  "relation": {   
+		  "relation": {
+			PropertyRelationName: "KstProxyRole",
 			EntityModel: KstProxyRoleModel,  
 			DataValue: KstProxyRoleModel.PropertyNames.GuidRole,
             DataText: KstProxyRoleModel.PropertyNames.RoleName 
@@ -158,6 +159,8 @@ return [
     type: 'checkbox',
 
     templateOptions: {
+	 
+	indeterminate: false,
         label: KstProxyUserModel.PropertyNames.Disabled,
         placeholder: '',
         required: false,

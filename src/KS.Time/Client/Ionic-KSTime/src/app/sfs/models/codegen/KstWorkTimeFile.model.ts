@@ -66,7 +66,8 @@ return [
     type: 'select',
 
     templateOptions: {
-	  "relation": {   
+		  "relation": {
+			PropertyRelationName: "KstWorkTime",
 			EntityModel: KstWorkTimeModel,  
 			DataValue: KstWorkTimeModel.PropertyNames.GuidWorkTime,
             DataText: KstWorkTimeModel.PropertyNames.Title 
@@ -82,7 +83,8 @@ return [
     type: 'select',
 
     templateOptions: {
-	  "relation": {   
+		  "relation": {
+			PropertyRelationName: "KstFile",
 			EntityModel: KstFileModel,  
 			DataValue: KstFileModel.PropertyNames.GuidFile,
             DataText: KstFileModel.PropertyNames.FileName 

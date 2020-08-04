@@ -42,7 +42,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxyEventModel.PropertyNames.Title,
+	        label: unProxyEventModel.PropertyNames.Title,
         placeholder: '',
         required: false,
 		
@@ -54,7 +54,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: unProxyEventModel.PropertyNames.Message,
+	        label: unProxyEventModel.PropertyNames.Message,
         placeholder: '',
         required: false,
 		
@@ -66,7 +66,7 @@ return [
     type: 'textarea',
 
     templateOptions: {
-        label: unProxyEventModel.PropertyNames.TypeEvent,
+	        label: unProxyEventModel.PropertyNames.TypeEvent,
         placeholder: '',
         required: false,
 		rows: 5,
@@ -77,6 +77,8 @@ return [
     type: 'checkbox',
 
     templateOptions: {
+	 
+	indeterminate: false,
         label: unProxyEventModel.PropertyNames.IsException,
         placeholder: '',
         required: false,

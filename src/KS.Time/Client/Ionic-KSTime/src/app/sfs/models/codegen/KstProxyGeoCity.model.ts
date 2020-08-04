@@ -45,7 +45,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstProxyGeoCityModel.PropertyNames.Name,
+	        label: KstProxyGeoCityModel.PropertyNames.Name,
         placeholder: '',
         required: true,
 		
@@ -57,7 +57,8 @@ return [
     type: 'select',
 
     templateOptions: {
-	  "relation": {   
+		  "relation": {
+			PropertyRelationName: "KstProxyGeoState",
 			EntityModel: KstProxyGeoStateModel,  
 			DataValue: KstProxyGeoStateModel.PropertyNames.GuidState,
             DataText: KstProxyGeoStateModel.PropertyNames.Name 
@@ -73,7 +74,8 @@ return [
     type: 'select',
 
     templateOptions: {
-	  "relation": {   
+		  "relation": {
+			PropertyRelationName: "KstProxyGeoCity2",
 			EntityModel: KstProxyGeoCityModel,  
 			DataValue: KstProxyGeoCityModel.PropertyNames.GuidCity,
             DataText: KstProxyGeoCityModel.PropertyNames.Name 

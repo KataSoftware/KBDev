@@ -70,7 +70,8 @@ return [
     type: 'select',
 
     templateOptions: {
-	  "relation": {   
+		  "relation": {
+			PropertyRelationName: "KstProxyUser",
 			EntityModel: KstProxyUserModel,  
 			DataValue: KstProxyUserModel.PropertyNames.GuidUser,
             DataText: KstProxyUserModel.PropertyNames.DisplayName 
@@ -86,7 +87,8 @@ return [
     type: 'select',
 
     templateOptions: {
-	  "relation": {   
+		  "relation": {
+			PropertyRelationName: "KstFile",
 			EntityModel: KstFileModel,  
 			DataValue: KstFileModel.PropertyNames.GuidFile,
             DataText: KstFileModel.PropertyNames.FileName 
@@ -102,6 +104,8 @@ return [
     type: 'checkbox',
 
     templateOptions: {
+	 
+	indeterminate: false,
         label: KstUserFileModel.PropertyNames.IsProfileDefault,
         placeholder: '',
         required: false,

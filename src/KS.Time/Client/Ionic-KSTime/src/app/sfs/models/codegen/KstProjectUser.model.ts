@@ -74,7 +74,8 @@ return [
     type: 'select',
 
     templateOptions: {
-	  "relation": {   
+		  "relation": {
+			PropertyRelationName: "KstProject",
 			EntityModel: KstProjectModel,  
 			DataValue: KstProjectModel.PropertyNames.GuidProject,
             DataText: KstProjectModel.PropertyNames.Name 
@@ -90,7 +91,8 @@ return [
     type: 'select',
 
     templateOptions: {
-	  "relation": {   
+		  "relation": {
+			PropertyRelationName: "KstProxyUser",
 			EntityModel: KstProxyUserModel,  
 			DataValue: KstProxyUserModel.PropertyNames.GuidUser,
             DataText: KstProxyUserModel.PropertyNames.DisplayName 
@@ -106,7 +108,7 @@ return [
     type: 'datepicker',
 
     templateOptions: {
-        label: KstProjectUserModel.PropertyNames.StartDate,
+	        label: KstProjectUserModel.PropertyNames.StartDate,
         placeholder: '',
         required: false,
 		
@@ -117,7 +119,7 @@ return [
     type: 'datepicker',
 
     templateOptions: {
-        label: KstProjectUserModel.PropertyNames.EndDate,
+	        label: KstProjectUserModel.PropertyNames.EndDate,
         placeholder: '',
         required: false,
 		

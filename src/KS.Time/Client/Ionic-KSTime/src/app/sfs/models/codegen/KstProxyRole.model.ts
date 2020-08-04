@@ -42,7 +42,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstProxyRoleModel.PropertyNames.RoleName,
+	        label: KstProxyRoleModel.PropertyNames.RoleName,
         placeholder: '',
         required: true,
 		
@@ -54,7 +54,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstProxyRoleModel.PropertyNames.NameKey,
+	        label: KstProxyRoleModel.PropertyNames.NameKey,
         placeholder: '',
         required: true,
 		

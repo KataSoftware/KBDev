@@ -66,7 +66,7 @@ return [
     type: 'input',
 
     templateOptions: {
-        label: KstActivityModel.PropertyNames.Name,
+	        label: KstActivityModel.PropertyNames.Name,
         placeholder: '',
         required: false,
 		
@@ -78,7 +78,8 @@ return [
     type: 'select',
 
     templateOptions: {
-	  "relation": {   
+		  "relation": {
+			PropertyRelationName: "KstProject",
 			EntityModel: KstProjectModel,  
 			DataValue: KstProjectModel.PropertyNames.GuidProject,
             DataText: KstProjectModel.PropertyNames.Name 
@@ -94,8 +95,8 @@ return [
     type: 'checkbox',
 
     templateOptions: {
-		indeterminate: false,
-
+	 
+	indeterminate: false,
         label: KstActivityModel.PropertyNames.IsCustomByUser,
         placeholder: '',
         required: false,
