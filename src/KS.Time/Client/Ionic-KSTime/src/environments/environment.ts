@@ -10,7 +10,7 @@ export const environment = {
   sfscommon: {
     AppNameKey: 'KSTime',
     GuidCompanyId: 'F8A6AAE5-624F-4D42-AF85-C1E71F6D769A',
-    GeneralUrl: 'https://*.azurewebsites.net',
+    GeneralUrl: 'https://7dc0bccbc091.ngrok.io/ShellTime',
     LocalUrl: '/Shell',
     BlobStorageURL: 'https://*.blob.core.windows.net/kstime',
     IsDebug: true,

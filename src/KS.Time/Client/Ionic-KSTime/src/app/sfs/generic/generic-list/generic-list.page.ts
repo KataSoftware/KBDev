@@ -60,12 +60,13 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     const id = card.nativeElement.id;
     const row = this.data.filter(p=> p.Id == id)[0];
     console.log("row", row);
-    if (row["_isChecked"] == true){
-      row["_isChecked"] = false;
+    if (row["__isChecked"] == true){
+      row["__isChecked"] = false;
     }else{
-      row["_isChecked"] = true;
+      row["__isChecked"] = true;
     }
-    this.selection.isSelected(row);
+    this.selection.select(row);
+    
     setTimeout(()=>{
       if (this.longPressActivate == true){
         this.zone.run(()=>{
