@@ -347,12 +347,12 @@ export class PageService {
     
       if (element.templateOptions != null && element.templateOptions.relation != null ){
         isFk = true;
-        prop = `Fk${element.key}Text`;
+        prop = `Fk${element.templateOptions.relation.PropertyRelationName}Text`;
       }
       result.push(
         {
           name: element.key,
-          prop: element.key,
+          prop: prop,
           sortable: element.key,
           isFk: isFk,
           headerClass: 'title-cell'

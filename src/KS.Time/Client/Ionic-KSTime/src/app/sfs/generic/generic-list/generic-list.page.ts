@@ -1,4 +1,5 @@
-﻿import { Component, OnInit, Injector, ViewChild, TemplateRef } from '@angular/core';
+﻿import { NgZone } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild, TemplateRef, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
 import { DataService, TableColumn, SystemCore, titlePlace, addButtonPlace } from 'sfscommon';
 //import swal from 'sweetalert';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -9,6 +10,8 @@ import { bizAppService } from '../../services/business.service';
 import { GenericModel } from '../../models/common/models';
 import { sfsService } from '../../services/sfs.service';
 import { BindListSettings } from '../../common/app-list-base/app-list-base.page';
+import { MatExpansionPanel, MatExpansionPanelTitle } from '@angular/material/expansion';
+import {  GestureController } from '@ionic/angular';
 
 
 
@@ -17,18 +20,88 @@ import { BindListSettings } from '../../common/app-list-base/app-list-base.page'
   templateUrl: './generic-list.page.html',
   styleUrls: ['./generic-list.page.scss'],
 })
-export class GenericListPage extends AppListBaseTypedPage<GenericModel> implements OnInit {
+export class GenericListPage extends AppListBaseTypedPage<GenericModel> implements OnInit, AfterViewInit {
 
   fields: Array<FormlyFieldConfig> = null;
   bindedData: boolean = false;
   formFilter: FormGroup = new FormGroup({});
   ngAfterViewInit() {
-
-
-
-
+    const cardArray = this.cards.toArray();
+    this.useLongPress(cardArray);
   }
-  public async scrollTo(content, id, index) {
+  useLongPress(cardArray){
+
+    for (let i = 0; i < cardArray.length; i++) {
+
+      const card = cardArray[i];
+      console.log("card", card);
+      const gesture = this.gestureCtrl.create({
+        el: card.nativeElement,
+        
+        gestureName: 'my-gesture',
+        onStart: ev=> {
+          this.longPressActivate = true;
+          this.test(card);
+          console.log("this.longPressActivate", this.longPressActivate);
+        },
+        onEnd: ev=> {
+          this.longPressActivate = false;
+          console.log("this.longPressActivate", this.longPressActivate);
+        }
+      });
+      gesture.enable(true);
+      
+    }
+    
+    
+  }
+
+  test(card:ElementRef){
+    const id = card.nativeElement.id;
+    const row = this.data.filter(p=> p.Id == id)[0];
+    console.log("row", row);
+    if (row["_isChecked"] == true){
+      row["_isChecked"] = false;
+    }else{
+      row["_isChecked"] = true;
+    }
+    this.selection.isSelected(row);
+    setTimeout(()=>{
+      if (this.longPressActivate == true){
+        this.zone.run(()=>{
+          console.log("test() ");
+        });
+      }
+    }, 200);
+  }
+  public async openMassiveActions() {
+    let actions = this.actionSheetCtrl.create(
+      {
+        header: 'Selecionados',
+        buttons: [
+          { text: 'Delete', role: 'destructive' },
+
+          { text: 'Cancel', role: 'cancel' }
+        ]
+      }
+
+    );
+
+    (await actions).present();
+  }
+  private _isExpansionIndicator(target: any): boolean {
+    console.log(target);
+    const expansionIndicatorClass = 'mat-expansion-indicator';
+    return (target.classList && target.classList.contains(expansionIndicatorClass));
+  }
+  expand(matExpansionPanel: MatExpansionPanel, event: Event): void {
+    event.stopPropagation(); // Preventing event bubbling
+
+    if (!this._isExpansionIndicator(event.target)) {
+      matExpansionPanel.close(); // Here's the magic
+    }
+  }
+  public async scrollTo(content, id, index,) {
 
     let customOffset = index * this.averageItemHeight;
 
@@ -51,14 +124,25 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   public set bizAppService(value: bizAppService) { this._bizAppService = value; }
   GenericListCustom: any = null;
 
-  noSysColumns:Array<TableColumn> = [];
+  noSysColumns: Array<TableColumn> = [];
   customClass: string;
   entityName: string = "Generic";
   entityModel: any = null;
-  constructor(public injector: Injector, private activatedRoute: ActivatedRoute, public sfsService: sfsService) {
+
+  @ViewChildren(MatExpansionPanel, { read: ElementRef }) cards: QueryList<ElementRef>;
+  longPressActivate=false;
+  constructor(public injector: Injector, private activatedRoute: ActivatedRoute, public sfsService: sfsService,
+    public gestureCtrl: GestureController,
+    private zone:NgZone
+  ) {
     super(injector);
     this.entityName = this.activatedRoute.snapshot.paramMap.get('catalog');
-
+    // const gesture: Gesture = this.gestureCtrl.create({
+    //   el: this.element.nativeElement,
+    //   threshold: 15,
+    //   gestureName: 'my-gesture',
+    //   onMove: ev => this.onMoveHandler(ev)
+    // }, true);
     /*
     import(`./${this.customClass}`).then(p=>{
       this.GenericListCustom = p["GenericListCustom"];
@@ -70,7 +154,6 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       });*/
 
   }
-
   async ionViewWillEnter() {
     let navData = this.sfsService.GetNavigationData();
     console.log("ionViewWillEnter navData", navData);
@@ -144,7 +227,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
         this.getColumns();
 
-        this.setOrder({ Name: "GuidEmailTemplate" });
+        this.setOrder({ Name: "Id" });
 
 
         this.setOrder({ Name: "Title" });
@@ -207,15 +290,13 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     } else {
       return null;
     }
-  
+
   }
-  getColumnsForMobile(item:any) {
-    let values:Array<any> =[];
+  getColumnsForMobile(item: any) {
+    let values: Array<any> = [];
     this.noSysColumns.forEach(col => {
       let nameProp = col.prop;
-      if (col["isFk"] == true){
-        nameProp = `Fk${col.prop}Text` ;
-      }
+
       values.push({ text: col.name, value: item[nameProp] });
     });
     return values;
@@ -304,6 +385,12 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     if (this.GenericListCustom != null && this.GenericListCustom["OnItems"] != null) {
       this.GenericListCustom["OnItems"](this, data);
     }
+
+    setTimeout(()=>{
+      const cardArray = this.cards.toArray();
+      this.useLongPress(cardArray);
+    }, 200);
+  
   }
 
   action(row: any, actionKey: string) {

@@ -1,7 +1,7 @@
 ﻿<ion-header>
   <ion-grid class="ion-no-padding">
     <ion-row class="ion-no-padding">
-      <ion-col size-lg="8" class="ion-no-padding">
+      <ion-col size-md="12" class="ion-no-padding">
 
         <ion-toolbar [ngStyle]="{ 'display': showSearchBar ? 'none' : '' }">
           <ion-buttons slot="start">
@@ -15,28 +15,29 @@
             <ion-button (click)="showSearchBar = !showSearchBar">
               <ion-icon name="search" slot="icon-only"></ion-icon>
             </ion-button>
+            <app-user-menu *ngIf="currentMediaQuery =='lg' || currentMediaQuery =='xl' || currentMediaQuery =='md' " ></app-user-menu>
+
+   
           </ion-buttons>
-        </ion-toolbar>
+            </ion-toolbar>
         <ion-searchbar placeholder="buscar" animated showCancelButton debounce="500" *ngIf="showSearchBar"
           (ionCancel)="handleCancelSearchbar($event)" (ionClear)="handleClearSearchbar($event)"
           (ionChange)="handleChangeSearchbar($event)">
         </ion-searchbar>
-      </ion-col>
-      <ion-col class="ion-no-padding" *ngIf="currentMediaQuery =='lg' || currentMediaQuery =='xl'" size-lg="4"
-        class="ion-text-right">
-        <app-user-menu></app-user-menu>
-      </ion-col>
+
+        </ion-col>
     </ion-row>
   </ion-grid>
   <ion-progress-bar type="indeterminate" *ngIf="loadingData == true"></ion-progress-bar>
 </ion-header>
 
 <ion-content padding class="page-list" #content>
-  <!--<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab *ngIf="uiSettings.addButtonPlace == 1" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="addItem()" ion-fab>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-  </ion-fab>-->
+  </ion-fab>
+  
 
 
   <ion-grid>
@@ -118,7 +119,7 @@
                 <!--<ion-icon slot="start" name="trash"></ion-icon>-->
                 Eliminar seleccionados
               </ion-button>
-              <ion-button *ngIf="canAdd == true && externalCustomFileChecked == true" color="primary"
+              <ion-button *ngIf="canAdd == true && externalCustomFileChecked == true && uiSettings.addButtonPlace == 2" color="primary"
                 class="ion-align-self-end sfs-button primary" (click)="addItem()">
 
                 {{addNewTitle}}
@@ -131,7 +132,7 @@
             <ion-col class="">
 
 
-              <ng-container *ngIf="currentMediaQuery =='lg' || currentMediaQuery =='xl'">
+              <ng-container *ngIf="currentMediaQuery =='lg' || currentMediaQuery =='xl' || currentMediaQuery =='md'">
 
                 <sfs-table class="hidde-when-mobile" [data]="data" [columns]="tableColumns"
                   (onSortChange)="onSortChange($event)" [pagination]="pagination" [displayedColumns]="displayedColumns"
@@ -142,15 +143,16 @@
 
 
 
-              <ng-container *ngIf="currentMediaQuery =='xs' || currentMediaQuery =='sm' || currentMediaQuery =='md'">
+              <ng-container *ngIf="currentMediaQuery =='xs' || currentMediaQuery =='sm' ">
 
                 <mat-accordion *ngIf="bindedData == true" class="accordion">
-                  <mat-expansion-panel [id]="item.Id" #expansionPanel
+                  <mat-expansion-panel [id]="item.Id" #expansionPanel 
                     (afterExpand)="scrollTo(content, item.Id, index)"
                     *ngFor="let item of data; let odd = odd;let index = index;">
-                    <mat-expansion-panel-header
+                    <mat-expansion-panel-header (click)="expand(expansionPanel, $event)"
                       [ngClass]="{'odd-item-list' : odd, 'item-list-expanded' : expansionPanel.expanded}">
                       <mat-panel-title style="display: unset;">
+                        <ion-checkbox [(ngModel)]="item._isChecked"></ion-checkbox>
                         <ion-label style="width: 100%">
                           {{getPrimaryColumn(item)}}
                         </ion-label>
@@ -165,8 +167,8 @@
               
                     <!-- Acciones -->
                     <div style="text-align: end;">
-                      <ion-button size="small" fill="clear" (click)="presentActions($event, request)">
-                        <ion-icon slot="icon-only" name="md-more"></ion-icon>
+                      <ion-button size="small">
+                        Abrir
                       </ion-button>
 
                     </div>
@@ -199,7 +201,7 @@
   </ng-template>
 
 
-  <ng-template #GuidEmailTemplateCell let-value="value" let-row="row">
+  <ng-template #Id let-value="value" let-row="row">
     <div>
       <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
         [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)"></mat-checkbox>
@@ -229,3 +231,16 @@
 
 
 </ion-content>
+
+<ion-footer *ngIf="currentMediaQuery =='xs' || currentMediaQuery =='sm' ">
+  <ion-toolbar>
+    <ion-button icon-start size="small" fill="clear" (click)="openMassiveActions()">
+      <ion-icon name="ellipsis-vertical"></ion-icon> selecciona la acción
+    </ion-button>
+
+    <!-- <ion-button icon-start size="small">
+      <ion-icon name="trash"></ion-icon> Eliminar
+    </ion-button> -->
+
+  </ion-toolbar>
+</ion-footer>
