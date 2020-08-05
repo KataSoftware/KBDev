@@ -33,6 +33,7 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
     this.entityName = this.activatedRoute.snapshot.paramMap.get('catalog');
 
     
+    
     this.defaultHref = 'catalog/' + this.entityName;
    
     this.guidItem = this.route.snapshot.paramMap.get("Id");
@@ -47,7 +48,7 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
 `../../models/codegen/${this.entityName}.model`).then((_model)=> {
     this.entityModel = _model[this.entityName +"Model"]
 	  this.pageService.fieldsBack = this.entityModel.GetFields();
-   
+    this.item = new  this.entityModel();
 	import(
                 /* webpackMode: "eager" */
                 /* webpackPrefetch: true */
@@ -113,7 +114,7 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
 	     this.item = new  this.entityModel();
 	  }
 	  Object.assign(this.item, this.form.value);
-      this.item.GuidEmailTemplate = this.guidItem;
+      //this.item.Id = this.guidItem;
       
       let apiResponse: ApiResponse<any> = null;
       console.log("after create or save", this.guidItem);

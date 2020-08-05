@@ -59,6 +59,11 @@ import { KstProjectModel } from './KstProject.model';
 
 //test
 export  class KstActivityModel{
+	/**
+	 *
+	 */
+	
+	 
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {
@@ -116,7 +121,7 @@ return [
 	GuidProject?:string;	
 
 		 
-	IsCustomByUser:boolean;	
+	IsCustomByUser:boolean=false;	
 
 		 
 	GuidCompany?:string;	

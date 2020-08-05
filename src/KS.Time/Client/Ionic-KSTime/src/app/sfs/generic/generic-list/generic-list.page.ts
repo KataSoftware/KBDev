@@ -95,10 +95,11 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     const expansionIndicatorClass = 'mat-expansion-indicator';
     return (target.classList && target.classList.contains(expansionIndicatorClass));
   }
-  expand(matExpansionPanel: MatExpansionPanel, event: Event): void {
+  expand(matExpansionPanel: MatExpansionPanel, event: Event, item:any): void {
     event.stopPropagation(); // Preventing event bubbling
-
+   
     if (!this._isExpansionIndicator(event.target)) {
+      this.edit(item);
       matExpansionPanel.close(); // Here's the magic
     }
   }
@@ -198,6 +199,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
 
   async ngOnInit() {
+    this.routeAdd = "/catalog/" + this.entityName + "/form";
 
     import(
       /* webpackMode: "lazy-once" */
@@ -209,17 +211,26 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
         this.itemFilter = new this.entityModel();
         //this.title = "KstEmailTemplates";
-        this.serviceData = {
+        // this.serviceData = {
 
-          Page: 1,
-          PageSize: 7,
-          EntitySet: this.entityModel._EntitySetName,
-          Fields: Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p => !p.startsWith("Fk")).join(","),
-          AllFields: true,
-          SortBy: 'UpdatedDate',
-          SortDirection: 'desc',
+        //   Page: 1,
+        //   PageSize: 7,
+        //   EntitySet: this.entityModel._EntitySetName,
+        //   Fields: Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p => !p.startsWith("Fk")).join(","),
+        //   AllFields: true,
+        //   SortBy: 'UpdatedDate',
+        //   SortDirection: 'desc',
 
-        };
+        
+        // };
+        this.serviceData.PageSize = 15;
+        this.serviceData.EntitySet =  this.entityModel._EntitySetName;
+        this.serviceData.Fields =  Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p => !p.startsWith("Fk")).join(",");
+        this.serviceData.AllFields = true;
+
+        this.serviceData.SortBy= 'UpdatedDate';
+
+        this.serviceData.SortDirection= 'desc';
 
         console.log("ubiCustomer ngOnInit");
         //this.userData = await this.userService.getUserData();
@@ -278,9 +289,9 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     for (let column of this.tableColumns) { this.displayedColumns.push(column.prop); }
 
   }
-  routeAdd: string;
+  routeAdd: string = "/catalog/" + this.entityName + "/form";
+ 
   async addItem() {
-    this.routeAdd = "/catalog/" + this.entityName + "/form";
     this.navCtrl.navigateForward(this.routeAdd, { animated: true });
   }
 

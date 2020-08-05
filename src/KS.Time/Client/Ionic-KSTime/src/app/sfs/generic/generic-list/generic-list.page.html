@@ -199,13 +199,13 @@
     <mat-accordion *ngIf="bindedData == true" class="accordion">
       <mat-expansion-panel [id]="item.Id" #expansionPanel (afterExpand)="scrollTo(content, item.Id, index)"
         *ngFor="let item of data; let odd = odd;let index = index;">
-        <mat-expansion-panel-header (click)="expand(expansionPanel, $event)"
+        <mat-expansion-panel-header (click)="expand(expansionPanel, $event, item)"
           [ngClass]="{'odd-item-list' : odd, 'item-list-expanded' : expansionPanel.expanded}">
           <mat-panel-title style="display: unset;">
             <ion-item lines="none">
               <ion-avatar slot="start" *ngIf="item.__avatar != null">
              </ion-avatar>
-             <ion-checkbox *ngIf="this.selection.isEmpty() == false" [(ngModel)]="item.__isChecked"></ion-checkbox>
+             <ion-checkbox (ionChange)="$event ? selection.toggle(item) : null" *ngIf="this.selection.isEmpty() == false" [(ngModel)]="item.__isChecked"></ion-checkbox>
  
               <ion-label style="width: 100%">
                 {{getPrimaryColumn(item)}}
@@ -240,7 +240,7 @@
 
 </ion-content>
 
-<ion-footer *ngIf="currentMediaQuery =='xs' || currentMediaQuery =='sm' ">
+<ion-footer *ngIf=" selection.isEmpty() == false && (currentMediaQuery =='xs' || currentMediaQuery =='sm') ">
   <ion-toolbar>
     <ion-button icon-start size="small" fill="clear" (click)="openMassiveActions()">
       <ion-icon name="ellipsis-vertical"></ion-icon> selecciona la acción
