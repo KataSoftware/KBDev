@@ -198,13 +198,13 @@ return [
 	UpdatedDate?:string;	
 
 		 
-	IsDeleted?:boolean;	
+	IsDeleted?:boolean = false;	
 
 		 
 	CreatedDate?:string;	
 
 		 
-	Disabled?:boolean;	
+	Disabled?:boolean = false;	
 
 		 
 		FkKstProxyRole:string ;

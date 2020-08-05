@@ -112,7 +112,7 @@ return [
 	UpdatedBy?:string;	
 
 		 
-	IsDeleted?:boolean;	
+	IsDeleted?:boolean = false;	
 
 		 
 	BizKeyEngine?:string;	

@@ -142,10 +142,12 @@ return [
 <#+		foreach (var property in entity.Properties.Where(p=> IsPropertyWritable(p) && p.IsNavigationPropertyMany == false))
         {
 			string type = "string";
+			string valueStr = "";
 			if (property.Type.ToLower().Contains("int") || property.Type.ToLower().Contains("dec")  ){
 				type = "number";
             }else if (property.Type.ToLower().Contains("bool")){
 				type = "boolean";
+				valueStr = " = false";
 			}
 #>
 <#+  if (property.IsNavigationProperty == false){ 
@@ -154,7 +156,7 @@ return [
 			 nullableSymbol= "?";
          }
 #>
-	<#= property.Name #><#= nullableSymbol #>:<#= type #>;	
+	<#= property.Name #><#= nullableSymbol #>:<#= type #><#=valueStr#>;	
 
 <#+	}else if (property.IsPrimaryKey ){	#>
 			 
