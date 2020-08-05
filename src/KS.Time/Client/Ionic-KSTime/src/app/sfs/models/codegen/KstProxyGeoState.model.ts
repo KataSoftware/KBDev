@@ -72,7 +72,7 @@ return [
 	Name:string;	
 
 		 
-	IsDeleted?:boolean;	
+	IsDeleted?:boolean = false;	
 
 		 
 	GuidCountry?:string;	

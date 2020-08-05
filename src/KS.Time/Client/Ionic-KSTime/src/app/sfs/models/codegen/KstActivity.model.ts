@@ -116,7 +116,7 @@ return [
 	GuidProject?:string;	
 
 		 
-	IsCustomByUser:boolean;	
+	IsCustomByUser:boolean = false;	
 
 		 
 	GuidCompany?:string;	
@@ -128,7 +128,7 @@ return [
 	UpdatedBy?:string;	
 
 		 
-	IsDeleted?:boolean;	
+	IsDeleted?:boolean = false;	
 
 		 
 	BizKeyEngine?:string;	

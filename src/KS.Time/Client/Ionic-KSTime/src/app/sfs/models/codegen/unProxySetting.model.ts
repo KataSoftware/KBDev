@@ -716,7 +716,7 @@ return [
 	SMTPServer?:string;	
 
 		 
-	SMTPSSLEnabled?:boolean;	
+	SMTPSSLEnabled?:boolean = false;	
 
 		 
 	SMTPUser?:string;	
@@ -737,10 +737,10 @@ return [
 	AzureBlobStorageConnection?:string;	
 
 		 
-	SaveBlobInAzureStorage?:boolean;	
+	SaveBlobInAzureStorage?:boolean = false;	
 
 		 
-	SaveBlobInDataBase?:boolean;	
+	SaveBlobInDataBase?:boolean = false;	
 
 		 
 	UserNameGeoNames?:string;	

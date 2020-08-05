@@ -77,7 +77,7 @@ return [
 	UpdatedDate?:string;	
 
 		 
-	IsDeleted?:boolean;	
+	IsDeleted?:boolean = false;	
 
 		 
 	CreatedDate?:string;	

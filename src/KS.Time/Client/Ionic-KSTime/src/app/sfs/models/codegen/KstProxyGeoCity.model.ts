@@ -96,7 +96,7 @@ return [
 	Name:string;	
 
 		 
-	IsDeleted?:boolean;	
+	IsDeleted?:boolean = false;	
 
 		 
 	GuidState?:string;	

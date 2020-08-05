@@ -101,7 +101,7 @@ return [
 	TypeEvent?:string;	
 
 		 
-	IsException?:boolean;	
+	IsException?:boolean = false;	
 
 		 
 	UpdatedDate?:string;	

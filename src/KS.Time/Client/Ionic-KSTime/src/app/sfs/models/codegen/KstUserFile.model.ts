@@ -125,7 +125,7 @@ return [
 	GuidFile?:string;	
 
 		 
-	IsProfileDefault?:boolean;	
+	IsProfileDefault?:boolean = false;	
 
 		 
 	GuidCompany?:string;	
@@ -137,7 +137,7 @@ return [
 	UpdatedBy?:string;	
 
 		 
-	IsDeleted?:boolean;	
+	IsDeleted?:boolean = false;	
 
 		 
 	BizKeyEngine?:string;	
