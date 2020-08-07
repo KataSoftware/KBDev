@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -18,6 +18,8 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormlyWrapperAddons } from './sfs/components/business/components/addons-extension/addons-extension.component';
 import { AppRoutingModule } from './app-routing.module';
+import { IonicGestureConfig } from './sfs/utils/IonicGestureConfig';
+
 
 @NgModule({
   declarations: [AppComponent,
@@ -26,7 +28,7 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-   
+    HammerModule,
     MatExpansionModule,
     MatGridListModule, MatCheckboxModule,
     IonicModule.forRoot(),
@@ -43,7 +45,12 @@ import { AppRoutingModule } from './app-routing.module';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+            provide: HAMMER_GESTURE_CONFIG,
+            useClass: IonicGestureConfig
+        },
+   
   ],
   bootstrap: [AppComponent]
 })

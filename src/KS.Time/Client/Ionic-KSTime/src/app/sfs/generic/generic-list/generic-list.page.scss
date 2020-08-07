@@ -12,6 +12,7 @@
 
 
 ion-item{
+    touch-action: pan-y !important;
     --inner-padding-start: 0px;
     --padding-start:0px
 }

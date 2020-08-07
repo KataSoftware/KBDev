@@ -33,15 +33,11 @@
 </ion-header>
 
 <ion-content padding class="page-list" #content>
-  <ion-fab *ngIf="uiSettings.addButtonPlace == 1" vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="addItem()" ion-fab>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+
 
 
 <!-- Desktop -->
-  <ion-grid>
+  <ion-grid *ngIf="currentMediaQuery =='lg' || currentMediaQuery =='xl' || currentMediaQuery =='md'">
     <ion-row>
       <ion-col size="3" *ngIf="hideFilter == false">
 
@@ -196,47 +192,72 @@
   <!-- Mobile -->
   <ng-container *ngIf="currentMediaQuery =='xs' || currentMediaQuery =='sm' ">
 
-    <mat-accordion *ngIf="bindedData == true" class="accordion">
+   
+    <mat-accordion *ngIf="bindedData == true && uiSettings.useMaterialExpansionPanel == true" class="accordion">
       <mat-expansion-panel [id]="item.Id" #expansionPanel (afterExpand)="scrollTo(content, item.Id, index)"
         *ngFor="let item of data; let odd = odd;let index = index;">
         <mat-expansion-panel-header (click)="expand(expansionPanel, $event, item)"
           [ngClass]="{'odd-item-list' : odd, 'item-list-expanded' : expansionPanel.expanded}">
           <mat-panel-title style="display: unset;">
-            <ion-item lines="none">
-              <ion-avatar slot="start" *ngIf="item.__avatar != null">
+            <ion-item lines="none"    >
+             <ion-avatar slot="start" *ngIf="item.__avatar != null">
              </ion-avatar>
-             <ion-checkbox (ionChange)="$event ? selection.toggle(item) : null" *ngIf="this.selection.isEmpty() == false" [(ngModel)]="item.__isChecked"></ion-checkbox>
+             <ion-checkbox style="margin-right: 20px;" (ionChange)="$event ? checkboxChange(item) : null" *ngIf="this.selection.isEmpty() == false" [(ngModel)]="item.__isChecked"></ion-checkbox>
  
-              <ion-label style="width: 100%">
+              <ion-label style="width: 100%;" (tap)="selectItem($event, item)"  (press)="longPress($event, item, 2)" >
                 {{getPrimaryColumn(item)}}
               </ion-label>
             </ion-item>
           </mat-panel-title>
         </mat-expansion-panel-header>
 
+
         <div class="row-content" *ngFor="let prop of getColumnsForMobile(item)">
           <span class="label">{{prop.text}}</span>
           <span class="value">{{prop.value}}</span>
-        </div>
+        </div> 
 
 
         <!-- Acciones -->
         <div style="text-align: end;">
-          <ion-button size="small">
+          <ion-button size="small" (touchstart)="longPress($event, item, 77)" (tap)="longPress($event, item, 1)"    (press)="longPress($event, item, 2)" (pressup)="longPress($event, item, 3)">
             Abrir
           </ion-button>
 
         </div>
-
       </mat-expansion-panel>
     </mat-accordion>
 
+
+        <ion-list *ngIf="uiSettings.useMaterialExpansionPanel == false">
+        
+        <ion-item-sliding *ngFor="let item of data; let odd = odd;let index = index;">
+          <ion-item  [id]="item.Id" lines="none"  >
+            <ion-avatar slot="start" *ngIf="item.__avatar != null">
+           </ion-avatar>
+           <ion-checkbox (ionChange)="$event ? selection.toggle(item) : null" *ngIf="this.selection.isEmpty() == false" [(ngModel)]="item.__isChecked"></ion-checkbox>
+
+            <ion-label style="width: 100%">
+              {{getPrimaryColumn(item)}}
+            </ion-label>
+          </ion-item>
+          <ion-item-options side="start">
+            <ion-item-option color="danger">trash</ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+
+        </ion-list>
     <!-- Infinite Scroll -->
     <ion-infinite-scroll #infiniteScroll (ionInfinite)="handleInfiniteScroll(infiniteScroll, $event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </ng-container>
 
+  <ion-fab *ngIf="uiSettings.addButtonPlace == 1" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addItem()" ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>
 

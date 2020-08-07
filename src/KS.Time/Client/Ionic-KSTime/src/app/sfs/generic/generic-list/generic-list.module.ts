@@ -16,6 +16,8 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyConfig } from '../../shared/common/formly';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+
 
 const routes: Routes = [
   {
@@ -38,8 +40,10 @@ const routes: Routes = [
     MatExpansionModule,
 	MatMenuModule,
     timeagoModule,
+    
     RouterModule.forChild(routes)
   ],
+
   declarations: [GenericListPage]
 })
 export class GenericListPageModule {}

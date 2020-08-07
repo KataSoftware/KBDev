@@ -10,7 +10,7 @@ export const environment = {
   sfscommon: {
     AppNameKey: 'KSTime',
     GuidCompanyId: 'F8A6AAE5-624F-4D42-AF85-C1E71F6D769A',
-    GeneralUrl: 'https://7dc0bccbc091.ngrok.io/ShellTime',
+    GeneralUrl: 'https://kstime.azurewebsites.net',
     LocalUrl: '/Shell',
     BlobStorageURL: 'https://*.blob.core.windows.net/kstime',
     IsDebug: true,
@@ -21,7 +21,8 @@ export const environment = {
     GoogleConfigAuth: { offline: true, webClientId: '241810682914-n2rflefn6mqfunf7arotpq5tdrkmgr3o.apps.googleusercontent.com' },
     uiSettingsMobile: {
       addButtonPlace:addButtonPlace.float,
-      addButtonFloatType:addButtonFloatType.BR
+      addButtonFloatType:addButtonFloatType.BR,
+      useMaterialExpansionPanel: true
    },
    uiSettingsDesktop:{
     addButtonPlace:addButtonPlace.header,

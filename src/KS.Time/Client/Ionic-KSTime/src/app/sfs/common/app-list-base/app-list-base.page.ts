@@ -10,7 +10,9 @@ export class AppListBasePage extends ListPage {
   private _pageService: PageService;
 
   public get uiSettings(): uiSettings{
-    if (this.systemService.isMobile()){
+    if ((this.currentMediaQuery != undefined && (this.currentMediaQuery =='xs' || this.currentMediaQuery =='sm'))
+     ||  this.systemService.isMobile()
+    ){
       if (this.systemService.uiSettingsMobile.titlePlace == null ){
         this.systemService.uiSettingsMobile.titlePlace = titlePlace.header;
       }

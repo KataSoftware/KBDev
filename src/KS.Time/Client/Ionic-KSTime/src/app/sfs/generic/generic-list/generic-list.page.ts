@@ -11,7 +11,7 @@ import { GenericModel } from '../../models/common/models';
 import { sfsService } from '../../services/sfs.service';
 import { BindListSettings } from '../../common/app-list-base/app-list-base.page';
 import { MatExpansionPanel, MatExpansionPanelTitle } from '@angular/material/expansion';
-import {  GestureController } from '@ionic/angular';
+import {  GestureController, IonItem } from '@ionic/angular';
 
 
 
@@ -26,55 +26,27 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   bindedData: boolean = false;
   formFilter: FormGroup = new FormGroup({});
   ngAfterViewInit() {
-    const cardArray = this.cards.toArray();
-    this.useLongPress(cardArray);
+    //const cardArray = this.cards.toArray();
+    //this.useLongPress(cardArray);
   }
-  useLongPress(cardArray){
-
-    for (let i = 0; i < cardArray.length; i++) {
-
-      const card = cardArray[i];
-      console.log("card", card);
-      const gesture = this.gestureCtrl.create({
-        el: card.nativeElement,
-        
-        gestureName: 'my-gesture',
-        onStart: ev=> {
-          this.longPressActivate = true;
-          this.test(card);
-          console.log("this.longPressActivate", this.longPressActivate);
-        },
-        onEnd: ev=> {
-          this.longPressActivate = false;
-          console.log("this.longPressActivate", this.longPressActivate);
-        }
-      });
-      gesture.enable(true);
+  public checkboxChange(item:any){
+    if (item.__isChecked == false){
+      this.selection.deselect(item);
+      
+    }else{
+      this.selection.select(item);
       
     }
-    
-    
   }
+  public longPress(event:any, item:any, num:any){
+  
+    item.__isChecked = true;
+    this.selection.select(item);
 
-  test(card:ElementRef){
-    const id = card.nativeElement.id;
-    const row = this.data.filter(p=> p.Id == id)[0];
-    console.log("row", row);
-    if (row["__isChecked"] == true){
-      row["__isChecked"] = false;
-    }else{
-      row["__isChecked"] = true;
-    }
-    this.selection.select(row);
-    
-    setTimeout(()=>{
-      if (this.longPressActivate == true){
-        this.zone.run(()=>{
-          console.log("test() ");
-        });
-      }
-    }, 200);
   }
+  
+  
+  
   public async openMassiveActions() {
     let actions = this.actionSheetCtrl.create(
       {
@@ -95,11 +67,17 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     const expansionIndicatorClass = 'mat-expansion-indicator';
     return (target.classList && target.classList.contains(expansionIndicatorClass));
   }
+  selectItem( event: Event, item:any){
+    if (!event.target["classList"].contains("checkbox-icon") && event.type != "ionChange"){
+      this.edit(item);
+    }
+    console.log("checkbox", event);
+  }
   expand(matExpansionPanel: MatExpansionPanel, event: Event, item:any): void {
-    event.stopPropagation(); // Preventing event bubbling
+    event.preventDefault(); // Preventing event bubbling
    
     if (!this._isExpansionIndicator(event.target)) {
-      this.edit(item);
+      //this.edit(item);
       matExpansionPanel.close(); // Here's the magic
     }
   }
@@ -131,7 +109,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   entityName: string = "Generic";
   entityModel: any = null;
 
-  @ViewChildren(MatExpansionPanel, { read: ElementRef }) cards: QueryList<ElementRef>;
+  @ViewChildren(IonItem, { read: ElementRef }) cards: QueryList<ElementRef>;
   longPressActivate=false;
   constructor(public injector: Injector, private activatedRoute: ActivatedRoute, public sfsService: sfsService,
     public gestureCtrl: GestureController,
@@ -398,10 +376,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       this.GenericListCustom["OnItems"](this, data);
     }
 
-    setTimeout(()=>{
-      const cardArray = this.cards.toArray();
-      this.useLongPress(cardArray);
-    }, 200);
+    
   
   }
 
