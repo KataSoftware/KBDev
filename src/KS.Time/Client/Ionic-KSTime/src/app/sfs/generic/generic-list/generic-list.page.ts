@@ -25,7 +25,11 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   fields: Array<FormlyFieldConfig> = null;
   bindedData: boolean = false;
   formFilter: FormGroup = new FormGroup({});
+  async doRefresh(event){
+    await this.refreshFilter(event);
+  }
   ngAfterViewInit() {
+    
     //const cardArray = this.cards.toArray();
     //this.useLongPress(cardArray);
   }
@@ -161,10 +165,11 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   hideFilter: boolean = true;
 
   itemFilter: any = null;
-  refreshFilter() {
+  async refreshFilter(event) {
     this.itemFilter = new this.entityModel();
     this.serviceData.Query = "";
-    this.bindData();
+    await this.bindData();
+    event.target.complete();
   }
 
   showFilter() {

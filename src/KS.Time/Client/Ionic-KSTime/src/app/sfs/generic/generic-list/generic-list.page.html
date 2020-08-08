@@ -1,4 +1,4 @@
-﻿<ion-header>
+﻿<ion-header #header>
   <ion-grid class="ion-no-padding">
     <ion-row class="ion-no-padding">
       <ion-col size-md="12" class="ion-no-padding">
@@ -32,11 +32,15 @@
   <ion-progress-bar type="indeterminate" *ngIf="loadingData == true"></ion-progress-bar>
 </ion-header>
 
-<ion-content padding class="page-list" #content>
+<ion-content padding class="page-list" #content scrollEvents="true" appHideHeader [header]="header">
 
+  <ion-refresher *ngIf="currentMediaQuery =='xs' || currentMediaQuery =='sm'" slot="fixed"
+    (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
 
-
-<!-- Desktop -->
+  <!-- Desktop -->
   <ion-grid *ngIf="currentMediaQuery =='lg' || currentMediaQuery =='xl' || currentMediaQuery =='md'">
     <ion-row>
       <ion-col size="3" *ngIf="hideFilter == false">
@@ -140,7 +144,7 @@
 
 
 
-             
+
 
 
             </ion-col>
@@ -192,22 +196,45 @@
   <!-- Mobile -->
   <ng-container *ngIf="currentMediaQuery =='xs' || currentMediaQuery =='sm' ">
 
-   
+
     <mat-accordion *ngIf="bindedData == true && uiSettings.useMaterialExpansionPanel == true" class="accordion">
       <mat-expansion-panel [id]="item.Id" #expansionPanel (afterExpand)="scrollTo(content, item.Id, index)"
         *ngFor="let item of data; let odd = odd;let index = index;">
-        <mat-expansion-panel-header (click)="expand(expansionPanel, $event, item)"
+        <mat-expansion-panel-header class="mat-exp-list-head" (click)="expand(expansionPanel, $event, item)"
           [ngClass]="{'odd-item-list' : odd, 'item-list-expanded' : expansionPanel.expanded}">
           <mat-panel-title style="display: unset;">
-            <ion-item lines="none"    >
-             <ion-avatar slot="start" *ngIf="item.__avatar != null">
-             </ion-avatar>
-             <ion-checkbox style="margin-right: 20px;" (ionChange)="$event ? checkboxChange(item) : null" *ngIf="this.selection.isEmpty() == false" [(ngModel)]="item.__isChecked"></ion-checkbox>
- 
-              <ion-label style="width: 100%;" (tap)="selectItem($event, item)"  (press)="longPress($event, item, 2)" >
-                {{getPrimaryColumn(item)}}
-              </ion-label>
-            </ion-item>
+            <ion-item-sliding>
+
+              <ion-item lines="none" >
+                <ion-avatar slot="start" *ngIf="item.__avatar != null">
+                </ion-avatar>
+                <ion-checkbox class="ion-margin-start" (ionChange)="$event ? checkboxChange(item) : null"
+                  *ngIf="this.selection.isEmpty() == false" [(ngModel)]="item.__isChecked"></ion-checkbox>
+              
+                 
+                      <ion-label  class="ion-margin-start " (tap)="selectItem($event, item)"
+                        (press)="longPress($event, item, 2)">
+                        {{getPrimaryColumn(item)}}
+                      </ion-label>
+                 
+                      
+                      <div slot="end">
+                        Test
+                      </div>
+                  
+              </ion-item>
+              <ion-item-options side="start">
+                <ion-item-option color="danger">
+                  <ion-icon slot="icon-only" name="trash"></ion-icon>
+
+                </ion-item-option>
+                <ion-item-option color="success">
+
+                  <ion-icon slot="icon-only" name="eye"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+
           </mat-panel-title>
         </mat-expansion-panel-header>
 
@@ -215,12 +242,13 @@
         <div class="row-content" *ngFor="let prop of getColumnsForMobile(item)">
           <span class="label">{{prop.text}}</span>
           <span class="value">{{prop.value}}</span>
-        </div> 
+        </div>
 
 
         <!-- Acciones -->
         <div style="text-align: end;">
-          <ion-button size="small" (touchstart)="longPress($event, item, 77)" (tap)="longPress($event, item, 1)"    (press)="longPress($event, item, 2)" (pressup)="longPress($event, item, 3)">
+          <ion-button size="small" (touchstart)="longPress($event, item, 77)" (tap)="longPress($event, item, 1)"
+            (press)="longPress($event, item, 2)" (pressup)="longPress($event, item, 3)">
             Abrir
           </ion-button>
 
@@ -229,24 +257,25 @@
     </mat-accordion>
 
 
-        <ion-list *ngIf="uiSettings.useMaterialExpansionPanel == false">
-        
-        <ion-item-sliding *ngFor="let item of data; let odd = odd;let index = index;">
-          <ion-item  [id]="item.Id" lines="none"  >
-            <ion-avatar slot="start" *ngIf="item.__avatar != null">
-           </ion-avatar>
-           <ion-checkbox (ionChange)="$event ? selection.toggle(item) : null" *ngIf="this.selection.isEmpty() == false" [(ngModel)]="item.__isChecked"></ion-checkbox>
+    <ion-list *ngIf="uiSettings.useMaterialExpansionPanel == false">
 
-            <ion-label style="width: 100%">
-              {{getPrimaryColumn(item)}}
-            </ion-label>
-          </ion-item>
-          <ion-item-options side="start">
-            <ion-item-option color="danger">trash</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
+      <ion-item-sliding *ngFor="let item of data; let odd = odd;let index = index;">
+        <ion-item [id]="item.Id" lines="none">
+          <ion-avatar slot="start" *ngIf="item.__avatar != null">
+          </ion-avatar>
+          <ion-checkbox (ionChange)="$event ? selection.toggle(item) : null" *ngIf="this.selection.isEmpty() == false"
+            [(ngModel)]="item.__isChecked"></ion-checkbox>
 
-        </ion-list>
+          <ion-label style="width: 100%">
+            {{getPrimaryColumn(item)}}
+          </ion-label>
+        </ion-item>
+        <ion-item-options side="start">
+          <ion-item-option color="danger">trash</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+
+    </ion-list>
     <!-- Infinite Scroll -->
     <ion-infinite-scroll #infiniteScroll (ionInfinite)="handleInfiniteScroll(infiniteScroll, $event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>

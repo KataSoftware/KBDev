@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { ModalPage } from '../common/modal/modal.page';
+import { HideHeaderDirective } from '../directives/hide-header.directive';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { ModalPage } from '../common/modal/modal.page';
     RatingWrapperComponent,
     DatepickerTypeComponent,
     ModalPage,
+    HideHeaderDirective
   ],
   entryComponents: [ModalPage],
   providers: [
@@ -38,7 +40,7 @@ import { ModalPage } from '../common/modal/modal.page';
     { provide: MAT_DATE_LOCALE, useValue: 'es-MX'}
   ],
   imports: [
-
+   
    // BrowserModule,
     FormsModule,
     MatButtonModule,
@@ -74,7 +76,7 @@ import { ModalPage } from '../common/modal/modal.page';
   exports: [
     CheckboxWrapperComponent,
     UserMenuComponent,
-
+    HideHeaderDirective,
   ]
 
 })

@@ -26,3 +26,16 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.mat-expansion-indicator
+{
+    //margin-right: 16px;
+    //display: block;
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+    // margin-left: 16px !important;
+    // margin-right: 16px !important;
+}
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  //  box-shadow: none;// 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}

@@ -10,9 +10,35 @@
 //     padding: 0 5px;
 // }
 
-
+mat-expansion-panel-header{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+mat-expansion-panel  mat-panel-title{
+    margin-right: 0px;
+    width: 100%;
+}
+.overflow-ellipsis {
+    text-overflow: ellipsis;
+  }
+.td{
+    white-space: nowrap;
+  overflow: hidden;
+}  
 ion-item{
     touch-action: pan-y !important;
     --inner-padding-start: 0px;
     --padding-start:0px
+}
+ion-refresher-content {
+    //padding-bottom: 200px;
+    background-color: white;
+  
+    .refresher-pulling {
+    //  position: fixed;
+   //   top: 150px;
+    }
+  }
+.refresher-pulling-icon{
+  //  margin-top: 150px;
 }
