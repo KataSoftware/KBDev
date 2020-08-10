@@ -56,7 +56,7 @@
     "ionic-long-press": "^2.0.3",
     "ionicons": "^5.1.2",
     "rxjs": "6.5.1",
-    "sfscommon": "file:SFSCommon/sfscommon-2.0.151.tgz",
+    "sfscommon": "file:SFSCommon/sfscommon-2.0.153.tgz",
     "tslib": "1.10.0",
     "zone.js": "0.10.2"
   },

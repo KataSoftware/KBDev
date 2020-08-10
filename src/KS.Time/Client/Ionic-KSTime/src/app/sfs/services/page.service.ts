@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpService, DataService, EntityWrapper, ApiResponse, ServiceData, IGeoData } from 'sfscommon';
+import { HttpService, DataService, EntityWrapper, ApiResponse, ServiceData, IGeoData, TableColumn } from 'sfscommon';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ServiceDataOptions } from './sfs.service';
 import { SeparatorSettings, FieldSettings, ControlTypes, FieldTypes } from '../models/common/page.model';
 import { bizAppService } from './business.service';
+import { table } from 'console';
 @Injectable({ providedIn: 'root' })
 export class PageService {
   constructor(public http: HttpService, public dataService: DataService, public bizAppService:bizAppService) {
@@ -332,9 +333,21 @@ export class PageService {
     });
 
   }
-  public getPrimaryColumn(tableColumns: Array<FormlyFieldConfig>):any
+  public getPrimaryColumn(tableColumns: Array<any>, defaultProperty?:string):any
   {
-    return tableColumns[0];
+    let result = tableColumns[0];
+    if (defaultProperty != null ){
+       result = tableColumns.find(p=> p.prop == defaultProperty);
+    }
+    return result;
+  }
+  public getValueColumn(tableColumns: Array<any>, valueColumn:string):any
+  {
+
+    let result = null;
+
+       result = tableColumns.find(p=> p.prop == valueColumn);
+    return result;
   }
  
 
@@ -355,6 +368,7 @@ export class PageService {
           prop: prop,
           sortable: element.key,
           isFk: isFk,
+          
           headerClass: 'title-cell'
         }
       );

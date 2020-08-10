@@ -16,9 +16,17 @@ export enum FieldTypes {
     
   
   }
+  export enum MobileFieldPlace{
+    Principal=1,
+    Value=2,
+    Secondary=3,
+    Summary=4
+  }
   export class FieldSettings {
     public Fields?: Array<FormlyFieldConfig> = null;
     public Id?: string = null;
+    public Place?:MobileFieldPlace = null; 
+    public Num?: number = null;
     public Name?: string = null;
     public Content?: string = null;
     public ClassName?: string = null;

@@ -11,7 +11,7 @@ import { GenericModel } from '../../models/common/models';
 import { sfsService } from '../../services/sfs.service';
 import { BindListSettings } from '../../common/app-list-base/app-list-base.page';
 import { MatExpansionPanel, MatExpansionPanelTitle } from '@angular/material/expansion';
-import {  GestureController, IonItem } from '@ionic/angular';
+import { GestureController, IonItem } from '@ionic/angular';
 
 
 
@@ -25,32 +25,32 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   fields: Array<FormlyFieldConfig> = null;
   bindedData: boolean = false;
   formFilter: FormGroup = new FormGroup({});
-  async doRefresh(event){
+  async doRefresh(event) {
     await this.refreshFilter(event);
   }
   ngAfterViewInit() {
-    
+
     //const cardArray = this.cards.toArray();
     //this.useLongPress(cardArray);
   }
-  public checkboxChange(item:any){
-    if (item.__isChecked == false){
+  public checkboxChange(item: any) {
+    if (item.__isChecked == false) {
       this.selection.deselect(item);
-      
-    }else{
+
+    } else {
       this.selection.select(item);
-      
+
     }
   }
-  public longPress(event:any, item:any, num:any){
-  
+  public longPress(event: any, item: any, num: any) {
+
     item.__isChecked = true;
     this.selection.select(item);
 
   }
-  
-  
-  
+
+
+
   public async openMassiveActions() {
     let actions = this.actionSheetCtrl.create(
       {
@@ -71,15 +71,15 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     const expansionIndicatorClass = 'mat-expansion-indicator';
     return (target.classList && target.classList.contains(expansionIndicatorClass));
   }
-  selectItem( event: Event, item:any){
-    if (!event.target["classList"].contains("checkbox-icon") && event.type != "ionChange"){
+  selectItem(event: Event, item: any) {
+    if (!event.target["classList"].contains("checkbox-icon") && event.type != "ionChange") {
       this.edit(item);
     }
     console.log("checkbox", event);
   }
-  expand(matExpansionPanel: MatExpansionPanel, event: Event, item:any): void {
+  expand(matExpansionPanel: MatExpansionPanel, event: Event, item: any): void {
     event.preventDefault(); // Preventing event bubbling
-   
+
     if (!this._isExpansionIndicator(event.target)) {
       //this.edit(item);
       matExpansionPanel.close(); // Here's the magic
@@ -87,10 +87,10 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   }
   public async scrollTo(content, id, index,) {
 
-    let customOffset = index * this.averageItemHeight;
+    //let customOffset = index * this.averageItemHeight;
 
     // Se hace el scroll hasta el punto especificado
-    content.scrollToPoint(0, customOffset, 250);
+   // content.scrollToPoint(0, customOffset, 250);
   }
 
 
@@ -114,10 +114,10 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   entityModel: any = null;
 
   @ViewChildren(IonItem, { read: ElementRef }) cards: QueryList<ElementRef>;
-  longPressActivate=false;
+  longPressActivate = false;
   constructor(public injector: Injector, private activatedRoute: ActivatedRoute, public sfsService: sfsService,
     public gestureCtrl: GestureController,
-    private zone:NgZone
+    private zone: NgZone
   ) {
     super(injector);
     this.entityName = this.activatedRoute.snapshot.paramMap.get('catalog');
@@ -204,16 +204,16 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
         //   SortBy: 'UpdatedDate',
         //   SortDirection: 'desc',
 
-        
+
         // };
         this.serviceData.PageSize = 15;
-        this.serviceData.EntitySet =  this.entityModel._EntitySetName;
-        this.serviceData.Fields =  Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p => !p.startsWith("Fk")).join(",");
+        this.serviceData.EntitySet = this.entityModel._EntitySetName;
+        this.serviceData.Fields = Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p => !p.startsWith("Fk")).join(",");
         this.serviceData.AllFields = true;
 
-        this.serviceData.SortBy= 'UpdatedDate';
+        this.serviceData.SortBy = 'UpdatedDate';
 
-        this.serviceData.SortDirection= 'desc';
+        this.serviceData.SortDirection = 'desc';
 
         console.log("ubiCustomer ngOnInit");
         //this.userData = await this.userService.getUserData();
@@ -225,11 +225,15 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
         this.setOrder({ Name: "Id" });
 
 
-        this.setOrder({ Name: "Title" });
+        // add default column
+        if (this.entityModel._DefaultProperty != null) {
+          this.setOrder({ Name: this.entityModel._DefaultProperty });
+        }
 
         this.setOrder({ Name: "UpdatedDate", Label: "" });
         this.setOrder({ Name: 'actions' });
 
+        this.numOrder = 0;
         if (this.GenericListCustom == null) {
           import(
             /* webpackMode: "eager" */
@@ -241,10 +245,13 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
                 this.userData = result;
                 this.GenericListCustom = _import[this.entityName + "ListCustom"];
                 if (this.GenericListCustom != null) {
+                  
                   this.GenericListCustom["OnShowing"](this);
                   this.externalCustomFileChecked = true;
                   this.bindDisplayColumns();
                   this.bindData();
+                  // this.columnsForMobile = this.getColumnsForMobile();
+                  // this.primaryColumn = this.getPrimaryColumn();
                 }
               }).catch((error) => {
                 this.externalCustomFileChecked = true;
@@ -257,6 +264,8 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
               console.log("error", error);
               this.bindDisplayColumns();
               this.bindData();
+              // this.columnsForMobile = this.getColumnsForMobile();
+              // this.primaryColumn = this.getPrimaryColumn();
             });
         }
 
@@ -273,13 +282,13 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
   }
   routeAdd: string = "/catalog/" + this.entityName + "/form";
- 
+
   async addItem() {
     this.navCtrl.navigateForward(this.routeAdd, { animated: true });
   }
 
-  getPrimaryColumn(item: any) {
-    let fieldname = this.pageService.getPrimaryColumn(this.tableColumns);
+  getItemPrimaryColumn(item?: any) {
+    let fieldname = this.pageService.getPrimaryColumn(this.tableColumns, this.entityModel._DefaultProperty);
     if (fieldname != null) {
       return item[fieldname.prop];
     } else {
@@ -287,7 +296,29 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     }
 
   }
-  getColumnsForMobile(item: any) {
+  existValueColum?: boolean = null;
+  valueColumn?:any=null;
+  getItemValueColumn(item?: any) {
+    
+    if(this.existValueColum == null){
+      this.valueColumn = this.tableColumns.find(p=>p.place == 2 );
+      if (this.valueColumn != null){
+        this.existValueColum = true;
+      }
+    }
+
+    if (this.existValueColum == true && this.valueColumn != null) {
+      let fieldname = this.pageService.getValueColumn(this.tableColumns, this.valueColumn.prop);
+      if (fieldname != null) {
+        return item[fieldname.prop];
+      } else {
+        return null;
+      }
+    }
+  }
+  public primaryColumn: any = null;
+  public columnsForMobile: Array<any> = [];
+  getItemColumnsForMobile(item?: any) {
     let values: Array<any> = [];
     this.noSysColumns.forEach(col => {
       let nameProp = col.prop;
@@ -381,8 +412,8 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       this.GenericListCustom["OnItems"](this, data);
     }
 
-    
-  
+
+
   }
 
   action(row: any, actionKey: string) {

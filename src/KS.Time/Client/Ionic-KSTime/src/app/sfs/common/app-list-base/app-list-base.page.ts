@@ -1,6 +1,6 @@
 import { Component, Injector } from '@angular/core';
 import { ListPage, UserDataModel, Pagination, TableColumn, uiSettings, titlePlace } from 'sfscommon';
-import { FieldSettings } from '../../models/common/page.model';
+import { FieldSettings, MobileFieldPlace } from '../../models/common/page.model';
 import { PageService } from '../../services/page.service';
 
 
@@ -61,15 +61,20 @@ export class AppListBasePage extends ListPage {
 
   addNewTitle:string="Agregar";
 
-  
+  numOrder:number=0;
   setOrder(settings: FieldSettings) {
-
+      this.numOrder = this.numOrder + 1;
+      if (settings.Place == null && this.numOrder == 2){
+        settings.Place = MobileFieldPlace.Value;
+      }
 
       let finded = this.backtableColumns.find(p => p.prop == settings.Name);
       if (finded != null) {
           if (settings.Label != null ){
             finded.name = settings.Label;
           }
+          
+          finded.place = settings.Place;
           this.tableColumns.push(finded);
       }
   }

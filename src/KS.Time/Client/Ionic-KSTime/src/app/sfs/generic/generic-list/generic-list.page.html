@@ -214,12 +214,13 @@
                  
                       <ion-label  class="ion-margin-start " (tap)="selectItem($event, item)"
                         (press)="longPress($event, item, 2)">
-                        {{getPrimaryColumn(item)}}
+                        {{getItemPrimaryColumn(item)}}
                       </ion-label>
                  
                       
                       <div slot="end">
-                        Test
+                        <ion-badge>{{getItemValueColumn(item)}}</ion-badge>
+                        
                       </div>
                   
               </ion-item>
@@ -239,7 +240,7 @@
         </mat-expansion-panel-header>
 
 
-        <div class="row-content" *ngFor="let prop of getColumnsForMobile(item)">
+        <div class="row-content" *ngFor="let prop of getItemColumnsForMobile(item)">
           <span class="label">{{prop.text}}</span>
           <span class="value">{{prop.value}}</span>
         </div>
@@ -247,8 +248,7 @@
 
         <!-- Acciones -->
         <div style="text-align: end;">
-          <ion-button size="small" (touchstart)="longPress($event, item, 77)" (tap)="longPress($event, item, 1)"
-            (press)="longPress($event, item, 2)" (pressup)="longPress($event, item, 3)">
+          <ion-button size="small" (tap)="selectItem($event, item)">
             Abrir
           </ion-button>
 
