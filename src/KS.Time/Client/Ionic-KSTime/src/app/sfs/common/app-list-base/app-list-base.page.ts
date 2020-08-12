@@ -9,6 +9,16 @@ export class AppListBasePage extends ListPage {
   backtableColumns:Array<TableColumn> = [];
   private _pageService: PageService;
 
+ public  setComponentColor(item:any, color:string){
+    item["__elementcolor"] = color;
+  }
+  public  setComponentVisibility(item:any, visible:boolean){
+    item["__visible"] = visible;
+  }
+  public  setActions(item:any, actions:Array<ActionModel>){
+    item["__actions"] = actions;
+  }
+
   public get uiSettings(): uiSettings{
     if ((this.currentMediaQuery != undefined && (this.currentMediaQuery =='xs' || this.currentMediaQuery =='sm'))
      ||  this.systemService.isMobile()
@@ -36,7 +46,11 @@ export class AppListBasePage extends ListPage {
   constructor(public injector:Injector) {
     super(injector);
     this.actions.push({ Text: "Agregar nuevo", ActionKey:"add" });
-    this.actions.push({ Text: "Eliminar", ActionKey:"delete" });
+    this.actions.push({ Icon: "trash", Text: "Eliminar", ActionKey:"delete" });
+
+    this.actions.push({ Icon: "eye", Text:"Detalles", ActionKey: "edit"});
+   
+    
     this.listSettings = { 
       listMobile: listMobile.CardMin,
       goToDetailsMobile: goToDetailsMobile.primaryColumn,
@@ -80,37 +94,52 @@ export class AppListBasePage extends ListPage {
   }
 
   actions:Array<ActionModel>=[];
-  
-  getActions(row:any, contextType?:any ){
+  addActions(actions:Array<ActionModel>){
+    if (this.localActions == null ){
+      this.localActions = this.getDefaultItemActions(null, null);
+     
+    }
+    this.localActions = this.localActions.concat(actions);
+  }
+  public localActions: Array<ActionModel> = null;
+  public getItemsActions(row:any, contextType?:any ):Array<any>{
+    let itemActions = this.getDefaultItemActions(null, null);
+    return itemActions;
+  }
+  public getDefaultItemActions(row:any, contextType?:any ){
+    if (this.localActions == null ){
+      this.localActions = [];
+      this.actions.forEach(item=> {
+        this.localActions.push(item);
+      });
+    }
+    //let localActions: Array<ActionModel> = [];
     
-    let localActions: Array<ActionModel> = [];
-    localActions.push({ Icon: "edit", Text:"Detalles", ActionKey: "edit"});
-    //console.log("adresd");
-    localActions.push({ Icon: "delete", Text:"Eliminar",   ActionKey: "delete"});
-    return localActions;
+    return this.localActions;
   }
   routeForm:string=null;
   public userData: UserDataModel;
   public defaultHref: string;
   public tempPagination: Pagination;
-    public  async showConfirm(selectedRows?:Number):Promise<boolean>{
+    public  async showConfirm(settings:confirmSettings){
       
+
         const alert = await this.alertCtrl.create({
         cssClass: 'my-custom-class',
-        header: 'Confirm!',
-        message: 'Message <strong>text</strong>!!!',
+        header: 'Confirmar',
+        message: `¿ Desea eliminar los <strong>${settings.numSelected}</strong> elementos seleccionados?`,
         buttons: [
           {
-            text: 'Cancel',
+            text: 'Cancelar',
             role: 'cancel',
             cssClass: 'secondary',
-            handler: (blah) => {
+            handler: () => {
               console.log('Confirm Cancel: blah');
             }
           }, {
-            text: 'Okay',
+            text: 'Sí, eliminar',
             handler: () => {
-              console.log('Confirm Okay');
+             settings.onOk();
             }
           }
         ]
@@ -118,7 +147,7 @@ export class AppListBasePage extends ListPage {
   
        alert.present();
       
-       return true;
+       //return true;
     }
     public listSettings?:listSettings=null;
 
@@ -137,6 +166,12 @@ export class listSettings{
    showIconExpand?:boolean=true;
 
  }
+ export class confirmSettings{
+  text?:string=null;
+  numSelected?:number=null;
+  onOk? = ()=>{};
+
+}
 export enum listMobile{
   CardMin=1,
   CardMax=2,

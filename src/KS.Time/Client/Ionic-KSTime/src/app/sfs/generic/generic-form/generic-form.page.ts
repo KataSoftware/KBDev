@@ -1,5 +1,5 @@
 import { sfsService } from './../../services/sfs.service';
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { ActivatedRoute } from '@angular/router';
@@ -13,12 +13,15 @@ import { BackToListSettings } from '../../models/common/page.model';
   styleUrls: ['./generic-form.page.scss'],
 })
 export class GenericFormPage extends AppFormBasePage implements OnInit {
+ // @Input() entityName: string;
+  @Input() filterProperties: Array<string>;
+
   item:any = null;
   guidItem: string = null;
   fields: Array<FormlyFieldConfig> = [];
   KstEmailTemplateFormCustom:any = null;
   customClass = 'KstEmailTemplate-form.custom';
-  entityName:string=null;
+  @Input() entityName:string;
   entityModel:any=null;
   constructor(
     public injector: Injector,
@@ -29,17 +32,22 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
   ) { 
 
     super(injector);
-    this.title = this.route.snapshot.paramMap.get("catalog");
-    this.entityName = this.activatedRoute.snapshot.paramMap.get('catalog');
 
     
+    if (this.activatedRoute.snapshot.paramMap.get('catalog') != null){
+      this.entityName = this.activatedRoute.snapshot.paramMap.get('catalog');
+    }
     
-    this.defaultHref = 'catalog/' + this.entityName;
+    
+    
    
-    this.guidItem = this.route.snapshot.paramMap.get("Id");
+    this.guidItem = this.route.snapshot.paramMap.get("id");
   }
   
-  async ngOnInit() {
+   ngOnInit() {
+    this.title = this.entityName;
+    this.defaultHref = 'catalog/' + this.entityName;
+    console.log("---entityName----",this.entityName);
     import(
       /* webpackMode: "lazy-once" */
       /* webpackPrefetch: true */
@@ -83,7 +91,7 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
       let result = await this.bizAppService.GetItem(this.guidItem, this.entityModel._EntitySetName, Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p=>   !p.startsWith("Fk")).join(","));
       if (result.status == "success") {
         this.item = result.data;
-        this.guidItem = this.item.GuidEmailTemplate;
+        this.guidItem = this.item.Id;
 
 
         if (this.item != null) {

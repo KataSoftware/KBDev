@@ -6,14 +6,21 @@
         <ion-toolbar [ngStyle]="{ 'display': showSearchBar ? 'none' : '' }">
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
-            <ion-back-button></ion-back-button>
+           
+            <!-- <ion-back-button></ion-back-button> -->
           </ion-buttons>
-          <ion-title *ngIf="this.uiSettings.titlePlace == 1">
+          <ion-title class="ion-text-left ion-no-padding" *ngIf="this.uiSettings.titlePlace == 1">
             {{title}}
           </ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="showSearchBar = !showSearchBar">
-              <ion-icon name="search" slot="icon-only"></ion-icon>
+            <ion-button size="small" (click)="showSearchBar = !showSearchBar">
+              <ion-icon name="search-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+            <ion-button size="small">
+              <ion-icon name="notifications-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+            <ion-button size="small" (click)="showFilter()">
+              <ion-icon name="options-outline" slot="icon-only"></ion-icon>
             </ion-button>
             <app-user-menu *ngIf="currentMediaQuery =='lg' || currentMediaQuery =='xl' || currentMediaQuery =='md' ">
             </app-user-menu>
@@ -182,7 +189,7 @@
     {{row?.UpdatedDate + "Z"| timeAgo}}
   </ng-template>
   <ng-template #actionsTmpl let-row="row" let-prop="prop">
-    <button *ngIf="row['_actions'] != null" mat-button [matMenuTriggerFor]="beforeMenu">
+    <button *ngIf="row['__actions'] != null" mat-button [matMenuTriggerFor]="beforeMenu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
@@ -219,13 +226,13 @@
                  
                       
                       <div slot="end">
-                        <ion-badge>{{getItemValueColumn(item)}}</ion-badge>
+                        <ion-badge *ngIf="item.__visible == true" [color]="item.__elementcolor ? item.__elementcolor : 'primary'" >{{getItemValueColumn(item)}}</ion-badge>
                         
                       </div>
                   
               </ion-item>
               <ion-item-options side="start">
-                <ion-item-option color="danger">
+                <ion-item-option color="danger" (click)="delete(item)">
                   <ion-icon slot="icon-only" name="trash"></ion-icon>
 
                 </ion-item-option>
@@ -248,7 +255,10 @@
 
         <!-- Acciones -->
         <div style="text-align: end;">
-          <ion-button size="small" (tap)="selectItem($event, item)">
+          <ion-button size="small" fill="clear"  (tap)="openMassiveActions(item)">
+            <ion-icon name="ellipsis-horizontal-circle" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button  size="small" (tap)="selectItem($event, item)">
             Abrir
           </ion-button>
 
@@ -292,9 +302,27 @@
 
 <ion-footer *ngIf=" selection.isEmpty() == false && (currentMediaQuery =='xs' || currentMediaQuery =='sm') ">
   <ion-toolbar>
-    <ion-button icon-start size="small" fill="clear" (click)="openMassiveActions()">
-      <ion-icon name="ellipsis-vertical"></ion-icon> selecciona la acción
+    <ion-buttons slot="start">
+    <ion-button icon-start fill="clear">
+      <ion-checkbox (ionChange)="$event ? selectAll() : null" [(ngModel)]="selectedAll"></ion-checkbox>
+     
     </ion-button>
+  <div>
+    {{selection.selected.length}} Seleccionados
+  </div>
+  </ion-buttons>
+   
+   
+ 
+    <ion-buttons slot="end">
+      <ion-button icon-only  fill="clear" (click)="openMassiveActions()">
+        <ion-icon color="danger" name="trash"></ion-icon>
+      </ion-button>
+    <ion-button icon-start  fill="clear" (click)="openMassiveActions()">
+      <ion-icon name="ellipsis-horizontal-circle"></ion-icon> Acción
+    </ion-button>
+    </ion-buttons>
+    
 
     <!-- <ion-button icon-start size="small">
       <ion-icon name="trash"></ion-icon> Eliminar

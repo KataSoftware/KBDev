@@ -14,10 +14,25 @@ mat-expansion-panel-header{
     padding-left: 0px;
     padding-right: 0px;
 }
+ion-footer ion-title{
+  color:grey;
+  font-weight: normal;
+  font-size: 90%;
+}
+.mat-expansion-panel:not([class*='mat-expanded']) {
+  box-shadow: none;
+  border-bottom-color: lavender;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
 mat-expansion-panel  mat-panel-title{
     margin-right: 0px;
     width: 100%;
 }
+mat-expansion-panel  .mat-content{
+  margin-bottom: 2px;
+}
+
 .overflow-ellipsis {
     text-overflow: ellipsis;
   }

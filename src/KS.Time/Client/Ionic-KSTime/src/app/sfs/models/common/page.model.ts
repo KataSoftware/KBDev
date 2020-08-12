@@ -47,7 +47,7 @@ export enum FieldTypes {
     public Label?: string;
     public LabelHtml?: string;
     public Hooks?: any;
-  
+    public AttColor?:any;
     public OnChange?= (field, event) => { };
     public OnKeyUp?= (field, event) => { }
     public PlaceHolder?: string;

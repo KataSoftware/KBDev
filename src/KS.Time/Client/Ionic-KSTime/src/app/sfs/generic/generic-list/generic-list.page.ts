@@ -1,4 +1,5 @@
-﻿import { NgZone } from '@angular/core';
+﻿import { GenericFormPage } from './../generic-form/generic-form.page';
+import { NgZone } from '@angular/core';
 import { Component, OnInit, Injector, ViewChild, TemplateRef, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
 import { DataService, TableColumn, SystemCore, titlePlace, addButtonPlace } from 'sfscommon';
 //import swal from 'sweetalert';
@@ -26,6 +27,11 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   bindedData: boolean = false;
   formFilter: FormGroup = new FormGroup({});
   async doRefresh(event) {
+    this.selection.clear();
+    this.selectedAll = false;
+    this.data.forEach(e => {
+      e._isChecked = false;
+    });
     await this.refreshFilter(event);
   }
   ngAfterViewInit() {
@@ -50,16 +56,45 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   }
 
 
+  actionsForSheet(item: any): any {
+    let role = item.ActionKey;
 
-  public async openMassiveActions() {
+    if (item.ActionKey == "delete") {
+      role = "destructive";
+
+    }
+    let action: any = {
+      text: item.Text,
+      role: role,
+
+    };
+    if (item.ActionKey == "delete") {
+      action.handler = () => {
+        this.delete(null);
+      }
+    }
+
+    return action;
+  }
+  public async openMassiveActions(itemAction?: any) {
+    let actionsList = [];
+    if (itemAction == null) {
+      this.localActions.forEach(item => {
+        if (item.ActionKey != "add") {
+          actionsList.push(this.actionsForSheet(item));
+        }
+      });
+    } else {
+      itemAction.__actions.forEach(item => {
+        if (item.ActionKey != "add") {
+          actionsList.push(this.actionsForSheet(item));
+        }
+      });
+    }
     let actions = this.actionSheetCtrl.create(
       {
-        header: 'Selecionados',
-        buttons: [
-          { text: 'Delete', role: 'destructive' },
-
-          { text: 'Cancel', role: 'cancel' }
-        ]
+        header: 'Selecciona la acción',
+        buttons: actionsList
       }
 
     );
@@ -90,7 +125,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     //let customOffset = index * this.averageItemHeight;
 
     // Se hace el scroll hasta el punto especificado
-   // content.scrollToPoint(0, customOffset, 250);
+    // content.scrollToPoint(0, customOffset, 250);
   }
 
 
@@ -172,16 +207,51 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     event.target.complete();
   }
 
-  showFilter() {
-    if (this.hideFilter == true) {
-      this.hideFilter = false;
+  async showFilter() {
+    if (this.currentMediaQuery == 'xs' || this.currentMediaQuery == 'sm') {
+      const modal = this.modalCtrl.create({
+          component: GenericFormPage,
+          componentProps: {
+            entityName : this.entityName
+          
+          }
+
+      });
+
+       (await modal).present();
+
     } else {
-      this.hideFilter = true;
+      if (this.hideFilter == true) {
+        this.hideFilter = false;
+      } else {
+        this.hideFilter = true;
+      }
+    }
+  }
+
+  selectedAll?: boolean = false;
+  selectAll() {
+    if (this.selectedAll == null || this.selectedAll == false) {
+
+      this.data.forEach(element => {
+        element.__isChecked = false;
+        this.selection.deselect(element);
+
+      });
+    } else {
+
+      this.data.forEach(element => {
+        element.__isChecked = true;
+        this.selection.select(element);
+
+      });
     }
   }
 
 
+
   async ngOnInit() {
+
     this.routeAdd = "/catalog/" + this.entityName + "/form";
 
     import(
@@ -245,11 +315,12 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
                 this.userData = result;
                 this.GenericListCustom = _import[this.entityName + "ListCustom"];
                 if (this.GenericListCustom != null) {
-                  
+
                   this.GenericListCustom["OnShowing"](this);
                   this.externalCustomFileChecked = true;
                   this.bindDisplayColumns();
                   this.bindData();
+
                   // this.columnsForMobile = this.getColumnsForMobile();
                   // this.primaryColumn = this.getPrimaryColumn();
                 }
@@ -297,12 +368,12 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
   }
   existValueColum?: boolean = null;
-  valueColumn?:any=null;
+  valueColumn?: any = null;
   getItemValueColumn(item?: any) {
-    
-    if(this.existValueColum == null){
-      this.valueColumn = this.tableColumns.find(p=>p.place == 2 );
-      if (this.valueColumn != null){
+
+    if (this.existValueColum == null) {
+      this.valueColumn = this.tableColumns.find(p => p.place == 2);
+      if (this.valueColumn != null) {
         this.existValueColum = true;
       }
     }
@@ -405,7 +476,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
 
     data.forEach((p) => {
-      p['_actions'] = this.getActions(p);
+      p['__actions'] = this.getDefaultItemActions(p);
     });
 
     if (this.GenericListCustom != null && this.GenericListCustom["OnItems"] != null) {
@@ -456,17 +527,20 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       this.selection.clear();
       this.selection.select(row);
     }
-    let modalResponse = await this.showConfirm(this.selection.selected.length);
 
-    if (modalResponse == true) {
-      let response = await this.bizAppService.Delete(this.selection.selected.map(({ Id }) => Id), GenericModel._EntitySetName);
-      //swal.close();
-      this.selection.clear();
 
-      this.bindData();
-    } else {
-      //swal.close();
-    }
+    let modalResponse = await this.showConfirm({
+      numSelected: this.selection.selected.length,
+      onOk: async () => {
+        let response = await this.bizAppService.Delete(this.selection.selected.map(({ Id }) => Id), this.entityModel._EntitySetName);
+        //swal.close();
+        this.selection.clear();
+
+        this.bindData();
+      }
+    });
+
+
   }
 
 }
