@@ -209,16 +209,16 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
   async showFilter() {
     if (this.currentMediaQuery == 'xs' || this.currentMediaQuery == 'sm') {
-      const modal = this.modalCtrl.create({
+      const modal = await this.modalCtrl.create({
           component: GenericFormPage,
           componentProps: {
-            entityName : this.entityName
-          
+            entityName : this.entityName,
+            isFilter : true
           }
 
       });
 
-       (await modal).present();
+       await modal.present();
 
     } else {
       if (this.hideFilter == true) {
@@ -280,7 +280,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
         this.serviceData.EntitySet = this.entityModel._EntitySetName;
         this.serviceData.Fields = Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p => !p.startsWith("Fk")).join(",");
         this.serviceData.AllFields = true;
-
+       // this.serviceData.Query = "NumActivities > 0";
         this.serviceData.SortBy = 'UpdatedDate';
 
         this.serviceData.SortDirection = 'desc';

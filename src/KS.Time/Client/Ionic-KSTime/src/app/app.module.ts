@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { FormlyWrapperAddons } from './sfs/components/business/components/addons-extension/addons-extension.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicGestureConfig } from './sfs/utils/IonicGestureConfig';
@@ -39,6 +40,7 @@ import { IonicGestureConfig } from './sfs/utils/IonicGestureConfig';
     // RecaptchaModule,
     // RecaptchaFormsModule,
     ReactiveFormsModule,
+    FormlyBootstrapModule,
     FormlyModule.forRoot(),
     FormlyMaterialModule
   ],

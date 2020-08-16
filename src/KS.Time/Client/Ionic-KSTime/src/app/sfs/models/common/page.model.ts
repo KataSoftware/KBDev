@@ -61,6 +61,8 @@ export enum FieldTypes {
     public Min?: number = null;
     public Max?: number = null;
     public Wrapper?: string = null;
+    public IsFilter?:boolean=null;
+    public IsFilterRange?:boolean=null;
   }
   
   export class SeparatorSettings {

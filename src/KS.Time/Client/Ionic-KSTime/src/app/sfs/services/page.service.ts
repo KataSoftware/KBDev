@@ -14,7 +14,8 @@ export class PageService {
   fieldsBack: Array<FormlyFieldConfig> = null;
 
   private colsSum = 0;
-
+  public isFilter:boolean = false;
+  public isFilterRange:boolean = false;
   rowGroup: Array<FormlyFieldConfig> = null
   setSeparator(settings: SeparatorSettings, fields: Array<FormlyFieldConfig>) {
     if (this.fieldsBack == null) {
@@ -69,7 +70,55 @@ export class PageService {
   visibleFields: Array<string> = [];
   propertyChanges: Array<string> = [];
   propertiesForUpdate: Array<string> = [];
-  setOrder(settings: FieldSettings, fields: Array<FormlyFieldConfig>) {
+
+  private setOrderForRange(settings: FieldSettings, fieldName:string, fields: Array<FormlyFieldConfig>){
+    //this.setOrder(settings, fields, true);
+    
+    // agregar dos nuevos campos
+    // start
+    let field = fields.find(p=> p.key == fieldName);
+    
+    let startField =  JSON.parse(JSON.stringify(field));  //Object.assign({}, field);
+    let startSettings:FieldSettings = JSON.parse(JSON.stringify(settings));//Object.assign({}, settings);
+    startField.key = "__start" + startField.key;
+    if (startField.templateOptions != null){
+      startField.templateOptions.label =  startField.templateOptions.label + " (desde)";
+    }
+    this.fieldsBack.push(startField);
+    startSettings.PlaceHolder = startSettings.PlaceHolder + " (from)";
+    startSettings.Columns = 6;
+    startSettings.Name = startField.key;
+    this.setOrder(startSettings, fields, true);
+
+    // end
+    let endField = JSON.parse(JSON.stringify(field));
+    let endSettings:FieldSettings = JSON.parse(JSON.stringify(settings));
+    endField.key = "__end" + endField.key;
+    if (endField.templateOptions != null){
+      endField.templateOptions.label =   endField.templateOptions.label + " (hasta)";
+    }
+    this.fieldsBack.push(endField);
+    endSettings.PlaceHolder = endSettings.PlaceHolder + " (to)";
+    endSettings.Name = endField.key;
+    endSettings.Columns = 6;
+    this.setOrder(endSettings, fields, true);
+  }
+  setOrder(settings: FieldSettings, fields: Array<FormlyFieldConfig>, preventFilterSettings?:boolean) {
+    
+    if (preventFilterSettings != true){
+      if (this.isFilter == true){
+       
+        const fieldFinded = this.fieldsBack.find(p=> p.key == settings.Name);
+        if (fieldFinded.templateOptions != null &&
+            fieldFinded.templateOptions.type == "number"
+          ){
+              this.setOrderForRange(settings, fieldFinded.key, this.fieldsBack);
+              
+          }
+
+      }
+    }
+
     if (settings.Id == null ){
       settings.Id = settings.Name;
     }
@@ -77,7 +126,9 @@ export class PageService {
     //console.log("currentMediaQuery: ", this.currentMediaQuery);
 
     if (window.innerWidth < 570){
-      settings.Columns = 12;
+      if (this.isFilter == false || (this.isFilter == true && !settings.Name.startsWith("__start") && !settings.Name.startsWith("__end"))){
+        settings.Columns = 12;
+      }
     }
 
 
@@ -210,6 +261,7 @@ export class PageService {
           field.type = "checkbox";
         } else {
           field.type = settings.ControlType.toString();
+
           //console.log("number xsz" , field.type);
         }
 

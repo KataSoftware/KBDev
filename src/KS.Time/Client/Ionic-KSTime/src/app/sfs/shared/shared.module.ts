@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { ModalPage } from '../common/modal/modal.page';
 import { HideHeaderDirective } from '../directives/hide-header.directive';
+import { GenericFormPage } from '../generic/generic-form/generic-form.page';
 
 
 @NgModule({
@@ -32,9 +33,10 @@ import { HideHeaderDirective } from '../directives/hide-header.directive';
     RatingWrapperComponent,
     DatepickerTypeComponent,
     ModalPage,
+    GenericFormPage,
     HideHeaderDirective
   ],
-  entryComponents: [ModalPage],
+  entryComponents: [ModalPage, GenericFormPage],
   providers: [
     AuthGuardService,
     { provide: MAT_DATE_LOCALE, useValue: 'es-MX'}
@@ -69,6 +71,7 @@ import { HideHeaderDirective } from '../directives/hide-header.directive';
       wrappers: [
         { name: 'checkbox-wrapper', component: CheckboxWrapperComponent },
         { name: 'rating-wrapper', component: RatingWrapperComponent },
+   
       ],
     }),
     FormlyMaterialModule,

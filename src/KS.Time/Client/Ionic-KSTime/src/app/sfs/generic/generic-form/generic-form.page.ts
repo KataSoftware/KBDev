@@ -45,6 +45,7 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
   }
   
    ngOnInit() {
+     this.pageService.isFilter = this.isFilter;
     this.title = this.entityName;
     this.defaultHref = 'catalog/' + this.entityName;
     console.log("---entityName----",this.entityName);
