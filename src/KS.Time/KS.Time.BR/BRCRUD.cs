@@ -13954,6 +13954,7 @@ public class SinglentonContext
 					contextRequest.CustomQuery.SpecificProperties.Add(KstWorkTime.PropertyNames.CreatedDate);
 					contextRequest.CustomQuery.SpecificProperties.Add(KstWorkTime.PropertyNames.UpdatedDate);
 					contextRequest.CustomQuery.SpecificProperties.Add(KstWorkTime.PropertyNames.Bytes);
+					contextRequest.CustomQuery.SpecificProperties.Add(KstWorkTime.PropertyNames.DueDate);
 					contextRequest.CustomQuery.SpecificProperties.Add(KstWorkTime.PropertyNames.KstActivity);
 					contextRequest.CustomQuery.SpecificProperties.Add(KstWorkTime.PropertyNames.KstProject);
   
@@ -14157,6 +14158,8 @@ public class SinglentonContext
 					sbSpec.Append(string.Format(@"BizKeyEngine.Contains(""{0}"")", word));
 					
 
+					
+	
 					
 	
 					
@@ -14432,6 +14435,8 @@ public class SinglentonContext
 
 			itemForSave.Bytes = entity.Bytes;
 
+			itemForSave.DueDate = entity.DueDate;
+
 				
 				con.KstWorkTimes.Add(itemForSave);
 
@@ -14598,6 +14603,8 @@ public class SinglentonContext
 			//entity.UpdatedDate = entity.UpdatedDate;
 
 			//entity.Bytes = entity.Bytes;
+
+			//entity.DueDate = entity.DueDate;
 
 				
 				

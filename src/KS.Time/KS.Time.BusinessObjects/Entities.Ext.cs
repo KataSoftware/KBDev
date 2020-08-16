@@ -2201,6 +2201,19 @@ set{
 			
 		}
 	 }
+	private DateTime? __DueDate;
+	[DataMember]
+	[Column(TypeName = "datetime")]
+	public DateTime? DueDate  { 
+		get{
+			return __DueDate;
+		}
+		set{
+
+			__DueDate = value;
+			
+		}
+	 }
     #endregion    
 	
 	//[DataMember]
@@ -2233,6 +2246,7 @@ set{
             public static readonly string CreatedDate = "CreatedDate";
             public static readonly string UpdatedDate = "UpdatedDate";
             public static readonly string Bytes = "Bytes";
+            public static readonly string DueDate = "DueDate";
             public static readonly string KstActivity = "KstActivity";
             public static readonly string KstProject = "KstProject";
             public static readonly string KstWorkTimeFiles = "KstWorkTimeFiles";

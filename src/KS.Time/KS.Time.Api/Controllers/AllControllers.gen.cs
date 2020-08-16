@@ -7166,7 +7166,7 @@ if (visibleProperty || specificProperties.Contains("UpdatedDate"))
         //	{
 				results.Add(new PropertyDefinition()
                 {
-					Order = 127,
+					Order = 128,
 																	
 					CustomProperties = customProperties,
 
@@ -7226,6 +7226,39 @@ if (visibleProperty || specificProperties.Contains("Bytes"))
 	
 	}
 visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("DueDate"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        
+	
+	//Null
+		//if (this.Request.QueryString["fk"] != "DueDate")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 112,
+																	
+					CustomProperties = customProperties,
+
+                    PropertyName = "DueDate",
+
+					 MaxLength = 0,
+					 Nullable = true,
+					IsDefaultProperty = false,
+                    SortBy = "DueDate",
+					
+	
+                    TypeName = "DateTime",
+                    IsNavigationProperty = false,
+					IsNavigationPropertyMany = false,
+                    PathName = "KSTime/"
+                    /*,PropertyDisplayName = Resources.KstWorkTimeResources.DUEDATE*/
+                });
+		//	}
+	
+	}
+visibleProperty =allProperties;
 if (visibleProperty || specificProperties.Contains("KstActivity"))
 {				
     customProperties = new List<CustomProperty>();
@@ -7242,7 +7275,7 @@ if (visibleProperty || specificProperties.Contains("KstActivity"))
         //	{
 				results.Add(new PropertyDefinition()
                 {
-					Order = 112,
+					Order = 113,
 																
 					
 					ModuleKey = "KSTime",
@@ -7292,7 +7325,7 @@ if (visibleProperty || specificProperties.Contains("KstProject"))
         //	{
 				results.Add(new PropertyDefinition()
                 {
-					Order = 113,
+					Order = 114,
 																
 					
 					ModuleKey = "KSTime",
@@ -7342,7 +7375,7 @@ if (visibleProperty || specificProperties.Contains("KstWorkTimeFiles"))
         //	{
 				results.Add(new PropertyDefinition()
                 {
-					Order = 114,
+					Order = 115,
 																
 					//Link = VirtualPathUtility.ToAbsolute("~/") + "KSTime/KstWorkTimeFiles/ListViewGen?overrideModule=" + GetOverrideApp()  + "&pal=False&es=False&pag=10&filterlinks=1&idTab=KstWorkTimeFiles&fk=KstWorkTime&startFilter="+ (new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext)).Encode("it.KstWorkTime.GuidWorkTime = Guid(\"" + idKstWorkTime +"\")")+ "&fkValue=" + idKstWorkTime,
 					ModuleKey = "KSTime",

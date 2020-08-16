@@ -224,6 +224,7 @@ namespace KS.Time
 			 entity.Property(e => e.CreatedDate);
 			 entity.Property(e => e.UpdatedDate);
 			 entity.Property(e => e.Bytes);
+			 entity.Property(e => e.DueDate);
 
 		entity.HasOne(d => d.KstActivity)
                     .WithMany(p => p.KstWorkTimes)
