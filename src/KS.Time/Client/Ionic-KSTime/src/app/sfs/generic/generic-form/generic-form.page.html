@@ -1,12 +1,20 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-          <ion-back-button icon="arrow-round-back" [defaultHref]="defaultHref" (click)="goBack()">
 
+          <ion-back-button *ngIf="isFilter == false" icon="arrow-round-back" [defaultHref]="defaultHref" (click)="goBack()">
           </ion-back-button>
+      
+          <ion-button (click)="close()">Close</ion-button>
+
         </ion-buttons>
 
     <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="end">
+      Con rango
+      <ion-toggle  (click)="switchFilterRange($event)"></ion-toggle>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 

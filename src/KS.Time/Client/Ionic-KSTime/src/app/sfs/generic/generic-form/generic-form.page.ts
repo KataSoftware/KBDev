@@ -29,6 +29,7 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
     public storage: StorageService,
     public userService: UserService,
 	public sfsService: sfsService
+
   ) { 
 
     super(injector);
@@ -44,6 +45,21 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
     this.guidItem = this.route.snapshot.paramMap.get("id");
   }
   
+
+
+    switchFilterRange(event: any){
+      if (this.isFilterRange == false){
+        this.isFilterRange = true;
+      }else{
+        this.isFilterRange = false;
+      }
+      
+      this.pageService.isFilterRange = this.isFilterRange;
+      this.pageService.fieldsBack = this.entityModel.GetFields();
+      this.fields = [];
+      this.pageService.temp = null;
+      this.showForm();
+    }
    ngOnInit() {
      this.pageService.isFilter = this.isFilter;
     this.title = this.entityName;
@@ -112,6 +128,9 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
     }
     this.sfsService.SetNavigationData(settings);
     this.navCtrl.navigateBack(settings.Route, { animated: true });
+  }
+  async close(){
+    this.modalCtrl.dismiss();
   }
  
   async saveData() {
