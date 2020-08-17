@@ -199,6 +199,7 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="Bytes" Type="int" />
+          <Property Name="DueDate" Type="datetime" />
         </EntityType>
         <EntityType Name="KstWorkTimeFile">
           <Key>
@@ -717,6 +718,7 @@
           <NavigationProperty Name="KstActivity" Relationship="KSTimeModel.fk_KstWorkTime_KstActivity" FromRole="KstWorkTime" ToRole="KstActivity" />
           <NavigationProperty Name="KstProject" Relationship="KSTimeModel.fk_KstWorkTime_KstProject" FromRole="KstWorkTime" ToRole="KstProject" />
           <NavigationProperty Name="KstWorkTimeFiles" Relationship="KSTimeModel.fk_KstWorkTimeFile_KstWorkTime" FromRole="KstWorkTime" ToRole="KstWorkTimeFile" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="fk_KstActivity_KstProject">
           <End Type="KSTimeModel.KstProject" Role="KstProject" Multiplicity="0..1" />
@@ -1083,6 +1085,7 @@
           <EntitySetMapping Name="KstWorkTimes">
             <EntityTypeMapping TypeName="KSTimeModel.KstWorkTime">
               <MappingFragment StoreEntitySet="KstWorkTime">
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
                 <ScalarProperty Name="Bytes" ColumnName="Bytes" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />

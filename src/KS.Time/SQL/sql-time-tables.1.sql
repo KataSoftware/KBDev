@@ -58,6 +58,7 @@ CREATE TABLE Kst.KstWorkTime
 	Title VARCHAR(255) NULL,
 	Comments VARCHAR(500) NULL,
 	Hours DECIMAL(10, 2) NULL,
+    DueDate DATETIME NULL,
 	GuidProject UniqueIdentifier NULL,
 	GuidActivity UniqueIdentifier NULL
 );

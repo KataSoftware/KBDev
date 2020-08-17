@@ -61,6 +61,10 @@ import { KstProjectModel } from './KstProject.model';
 
 				 
 				 
+	DueDate:string = "DueDate";	
+
+				 
+				 
 		FkKstActivity:string = "FkKstActivity";
 		KstActivity:string = "KstActivity"; //test
 				 
@@ -143,6 +147,17 @@ return [
 		
     }
 },
+{
+    key: KstWorkTimeModel.PropertyNames.DueDate,
+    type: 'datepicker',
+
+    templateOptions: {
+	        label: KstWorkTimeModel.PropertyNames.DueDate,
+        placeholder: '',
+        required: false,
+		
+    }
+},
 	];
     }
 	Id?:string;
@@ -186,6 +201,9 @@ return [
 	UpdatedDate?:string;	
 
 		 
+	DueDate?:string;	
+
+		 
 		FkKstActivity:string ;
 
 		FkKstActivityText:any;
@@ -206,7 +224,7 @@ return [
 	public static _EntitySetName:string =  "KstWorkTimes";
 	public static _EntityName:string =  "KstWorkTime";
 	public static PropertyNames: KstWorkTimePropertyNames = new KstWorkTimePropertyNames();
-	public static _PropertyNamesForUpdate: string = "GuidWorkTime,Title,Comments,Hours,GuidProject,GuidActivity,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes";
+	public static _PropertyNamesForUpdate: string = "GuidWorkTime,Title,Comments,Hours,GuidProject,GuidActivity,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes,DueDate";
 
 
 	public get getSetName() : string {

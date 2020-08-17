@@ -2314,6 +2314,27 @@ using KS.Time.BusinessObjects;
 	
 ///[Exportable()]
 		
+	//[RelationFilterable()] 
+	//[DateTime(true, false, null)]	
+	//[LocalizedDisplayName("DUEDATE"/*, NameResourceType=typeof(KstWorkTimeResources)*/)]
+	public DateTime  ? DueDate { get; set; }
+	public string DueDateText {
+        get {
+            if (DueDate != null)
+				return ((DateTime)DueDate).ToShortDateString() ;
+            else
+                return String.Empty;
+        }
+				set{
+					if (!string.IsNullOrEmpty(value))
+						this.DueDate = Convert.ToDateTime(value);
+    }
+		}
+		
+		
+	
+///[Exportable()]
+		
 	//[RelationFilterable(DataClassProvider = typeof(Controllers.KstActivitiesController), GetByKeyMethod="GetByKey", GetAllMethod = "GetAll", DataPropertyText = "Name", DataPropertyValue = "GuidActivity", FiltrablePropertyPathName="KstActivity.GuidActivity")]	
 
 	//[DateTime(true, false, null)]	
@@ -2361,6 +2382,7 @@ using KS.Time.BusinessObjects;
 		this.CreatedDate = model.CreatedDate;
 		this.UpdatedDate = model.UpdatedDate;
 		this.Bytes = model.Bytes;
+		this.DueDate = model.DueDate;
         }
 
         public BusinessObjects.KstWorkTime GetBusinessObject()
@@ -2412,6 +2434,10 @@ using KS.Time.BusinessObjects;
 				
 	if (this.Bytes != null )
 				result.Bytes = (Int32)this.Bytes;
+				
+				if(this.DueDate != null)
+					if (this.DueDate != null)
+				result.DueDate = (DateTime)this.DueDate;		
 				
 			
 			if(this.FkKstActivity != null || this.GuidActivity != null){
@@ -2476,6 +2502,8 @@ using KS.Time.BusinessObjects;
 				
 	if (businessObject.Bytes != null )
 				this.Bytes = (Int32)businessObject.Bytes;
+				if (businessObject.DueDate != null )
+				this.DueDate = (DateTime)businessObject.DueDate;
 	        if (businessObject.KstActivity != null){
 	                	this.FkKstActivityText = businessObject.KstActivity.Name != null ? businessObject.KstActivity.Name.ToString() : "";; 
 										

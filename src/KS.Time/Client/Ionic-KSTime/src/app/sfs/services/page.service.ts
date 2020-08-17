@@ -244,6 +244,7 @@ export class PageService {
     }
     return fields;
   }
+  
   public getFieldsForm(fields: Array<FormlyFieldConfig>) {
     if (this.rowGroup != null && this.temp != null) {
       this.temp.push({ fieldGroupClassName: 'row', fieldGroup: this.rowGroup });
@@ -417,6 +418,18 @@ export class PageService {
     return result;
   }
 
+  public getQueryFilter(itemFilter:any){
+    let queryBuilder:Array<string> = [];
+
+    for (const prop in itemFilter) {
+      // if (prop != ""){
+      //     if (prop.startsWith("__start") )
+      // }
+    }
+    
+
+    return queryBuilder.join(" AND ");
+  }
 
   public getColumnsFromFields(fields: Array<FormlyFieldConfig>): Array<any> {
     let result: Array<any> = [];
