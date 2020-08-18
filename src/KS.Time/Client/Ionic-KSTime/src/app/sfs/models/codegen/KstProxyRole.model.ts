@@ -89,6 +89,7 @@ return [
 	public static PropertyNames: KstProxyRolePropertyNames = new KstProxyRolePropertyNames();
 	public static _PropertyNamesForUpdate: string = "GuidRole,RoleName,NameKey,UpdatedDate,IsDeleted,CreatedDate";
 
+	public static _DefaultProperty: string= "RoleName";
 
 	public get getSetName() : string {
 		return KstProxyRoleModel._EntitySetName;

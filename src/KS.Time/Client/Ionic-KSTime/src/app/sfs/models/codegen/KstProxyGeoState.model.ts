@@ -92,6 +92,7 @@ return [
 	public static PropertyNames: KstProxyGeoStatePropertyNames = new KstProxyGeoStatePropertyNames();
 	public static _PropertyNamesForUpdate: string = "GuidState,Name,IsDeleted,GuidCountry";
 
+	public static _DefaultProperty: string= "Name";
 
 	public get getSetName() : string {
 		return KstProxyGeoStateModel._EntitySetName;

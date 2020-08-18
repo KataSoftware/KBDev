@@ -183,6 +183,7 @@ return [
 #>
 	public static _PropertyNamesForUpdate: string = "<#= sbProps.ToString() #>";
 
+	public static _DefaultProperty: string= "<#=entity.DefaultProperty#>";
 
 	public get getSetName() : string {
 		return <#= entity.Name #>Model._EntitySetName;

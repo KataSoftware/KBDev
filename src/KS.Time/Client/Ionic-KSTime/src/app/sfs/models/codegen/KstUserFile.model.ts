@@ -171,6 +171,7 @@ return [
 	public static PropertyNames: KstUserFilePropertyNames = new KstUserFilePropertyNames();
 	public static _PropertyNamesForUpdate: string = "GuidUserFile,GuidUser,GuidFile,IsProfileDefault,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes";
 
+	public static _DefaultProperty: string= "BizKeyEngine";
 
 	public get getSetName() : string {
 		return KstUserFileModel._EntitySetName;

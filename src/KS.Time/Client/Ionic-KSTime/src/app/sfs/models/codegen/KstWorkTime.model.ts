@@ -229,6 +229,7 @@ return [
 	public static PropertyNames: KstWorkTimePropertyNames = new KstWorkTimePropertyNames();
 	public static _PropertyNamesForUpdate: string = "GuidWorkTime,Title,Comments,Hours,GuidProject,GuidActivity,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes,DueDate";
 
+	public static _DefaultProperty: string= "Title";
 
 	public get getSetName() : string {
 		return KstWorkTimeModel._EntitySetName;

@@ -221,6 +221,7 @@ return [
 	public static PropertyNames: KstProxyUserPropertyNames = new KstProxyUserPropertyNames();
 	public static _PropertyNamesForUpdate: string = "GuidUser,DisplayName,Username,Password,FirstName,LastName,Email,GuidRole,UpdatedDate,IsDeleted,CreatedDate,Disabled";
 
+	public static _DefaultProperty: string= "DisplayName";
 
 	public get getSetName() : string {
 		return KstProxyUserModel._EntitySetName;

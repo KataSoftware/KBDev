@@ -154,6 +154,7 @@ return [
 	public static PropertyNames: KstActivityPropertyNames = new KstActivityPropertyNames();
 	public static _PropertyNamesForUpdate: string = "GuidActivity,Name,GuidProject,IsCustomByUser,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes";
 
+	public static _DefaultProperty: string= "Name";
 
 	public get getSetName() : string {
 		return KstActivityModel._EntitySetName;

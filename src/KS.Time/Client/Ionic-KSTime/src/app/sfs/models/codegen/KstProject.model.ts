@@ -60,7 +60,7 @@ return [
 {
     key: KstProjectModel.PropertyNames.Name,
     type: 'input',
-	
+
     templateOptions: {
 	        label: KstProjectModel.PropertyNames.Name,
         placeholder: '',
@@ -137,7 +137,7 @@ return [
 	public static _PropertyNamesForUpdate: string = "GuidProject,Name,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes,NumActivities,NumUsers";
 
 	public static _DefaultProperty: string= "Name";
-	
+
 	public get getSetName() : string {
 		return KstProjectModel._EntitySetName;
 	}

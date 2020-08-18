@@ -151,6 +151,7 @@ return [
 	public static PropertyNames: KstProjectFilePropertyNames = new KstProjectFilePropertyNames();
 	public static _PropertyNamesForUpdate: string = "GuidProjectFile,GuidProject,GuidFile,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes";
 
+	public static _DefaultProperty: string= "BizKeyEngine";
 
 	public get getSetName() : string {
 		return KstProjectFileModel._EntitySetName;
