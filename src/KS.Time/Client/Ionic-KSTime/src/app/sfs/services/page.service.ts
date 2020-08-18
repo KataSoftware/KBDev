@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpService, DataService, EntityWrapper, ApiResponse, ServiceData, IGeoData } from 'sfscommon';
+import { HttpService, DataService, EntityWrapper, ApiResponse, ServiceData, IGeoData, TableColumn } from 'sfscommon';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ServiceDataOptions } from './sfs.service';
 import { SeparatorSettings, FieldSettings, ControlTypes, FieldTypes } from '../models/common/page.model';
 import { bizAppService } from './business.service';
+import { table } from 'console';
 @Injectable({ providedIn: 'root' })
 export class PageService {
-  constructor(public http: HttpService, public dataService: DataService, public bizAppService:bizAppService) {
+  constructor(public http: HttpService, public dataService: DataService, public bizAppService: bizAppService) {
     //this.url = http.generateUrl();
   }
   temp: Array<FormlyFieldConfig> = null;
   fieldsBack: Array<FormlyFieldConfig> = null;
 
   private colsSum = 0;
-
+  public isFilter: boolean = false;
+  public isFilterRange: boolean = false;
   rowGroup: Array<FormlyFieldConfig> = null
   setSeparator(settings: SeparatorSettings, fields: Array<FormlyFieldConfig>) {
     if (this.fieldsBack == null) {
@@ -35,25 +37,25 @@ export class PageService {
       if (response.isSuccess() == true) {
         settings.Data = response.data;
       }
-    
-      
+
+
     } else {
       // settings.Data 
-      if (settings.Data != null && Array.isArray(settings.Data)  && (settings.DataValue == null && settings.DataText == null)){
+      if (settings.Data != null && Array.isArray(settings.Data) && (settings.DataValue == null && settings.DataText == null)) {
         // data si hay, pero no propiedades
         field.templateOptions.options = settings.Data;
-        let dataArray:Array<any> =[];
+        let dataArray: Array<any> = [];
         for (let index = 0; index < settings.Data.length; index++) {
           const element = settings.Data[index];
-          dataArray.push({ value: element, text: element});
+          dataArray.push({ value: element, text: element });
         }
-        
+
         settings.Data = dataArray;
         settings.DataValue = "value";
         settings.DataText = "text";
-      }else{
+      } else {
         // hay datos y propiedades
-      
+
       }
 
     }
@@ -68,82 +70,149 @@ export class PageService {
   visibleFields: Array<string> = [];
   propertyChanges: Array<string> = [];
   propertiesForUpdate: Array<string> = [];
-  setOrder(settings: FieldSettings, fields: Array<FormlyFieldConfig>) {
-    if (settings.Id == null ){
-      settings.Id = settings.Name;
+
+  private setOrderForRange(settings: FieldSettings, fieldName: string, fields: Array<FormlyFieldConfig>) {
+    //this.setOrder(settings, fields, true);
+
+    // agregar dos nuevos campos
+    // start
+   
+
+    let field = fields.find(p => p.key == fieldName);
+    if (settings.Label == null ){
+      settings.Label = settings.Name;
     }
-    
-    //console.log("currentMediaQuery: ", this.currentMediaQuery);
+    this.setOrder({ Content: settings.Label, Columns: 12
+    }, fields, true);
 
-    if (window.innerWidth < 570){
-      settings.Columns = 12;
+    let startField = JSON.parse(JSON.stringify(field));  //Object.assign({}, field);
+    let startSettings: FieldSettings = JSON.parse(JSON.stringify(settings));//Object.assign({}, settings);
+    startField.key = "__start" + startField.key;
+    if (startField.templateOptions != null) {
+      startField.templateOptions.label =  "Desde";
+    }
+    this.fieldsBack.push(startField);
+    //startSettings.PlaceHolder = startSettings.PlaceHolder + " (from)";
+    startSettings.Columns = 6;
+    startSettings.Name = startField.key;
+    startSettings.Label = "Desde";
+    this.setOrder(startSettings, fields, true);
+
+    // end
+    let endField = JSON.parse(JSON.stringify(field));
+    let endSettings: FieldSettings = JSON.parse(JSON.stringify(settings));
+    endField.key = "__end" + endField.key;
+    if (endField.templateOptions != null) {
+      endField.templateOptions.label = "Hasta";
+    }
+    this.fieldsBack.push(endField);
+    //endSettings.PlaceHolder = endSettings.PlaceHolder + " (to)";
+    endSettings.Name = endField.key;
+    endSettings.Label = "Hasta";
+    endSettings.Columns = 6;
+    this.setOrder(endSettings, fields, true);
+  }
+  setOrder(settings: FieldSettings, fields: Array<FormlyFieldConfig>, preventFilterSettings?: boolean) {
+
+    let addField: boolean = true;
+    if (preventFilterSettings != true) {
+      if (this.isFilter == true && this.isFilterRange == true) {
+
+        
+        const fieldFinded = this.fieldsBack.find(p => p.key == settings.Name);
+        if (fieldFinded.templateOptions != null) {
+          fieldFinded.templateOptions.required = false;
+        }
+        if (fieldFinded.templateOptions != null &&
+          fieldFinded.templateOptions.type == "number"
+        ) {
+          addField = false;
+          this.setOrderForRange(settings, fieldFinded.key, this.fieldsBack);
+
+        }
+
+      }
     }
 
+    if (addField == true) {
+      if (settings.Id == null) {
+        settings.Id = settings.Name;
+      }
 
-    // verificar si termina una fila
-    // si el colsSum anterior es menor a 12, se entiende que sí
+      //console.log("currentMediaQuery: ", this.currentMediaQuery);
 
-    let isMultiColumn = false;
-    if (this.colsSum >= 12) {
-      this.colsSum = 0;
-    }
-    if (settings.Columns != null && settings.Columns != 12) {
-      this.colsSum = this.colsSum + settings.Columns;
-      // let futureCols = this.colsSum +  settings.Columns;
-      // if (futureCols <= 12){
+      if (window.innerWidth < 570) {
+        if (this.isFilter == false || (this.isFilter == true && !settings.Name?.startsWith("__start") && !settings.Name?.startsWith("__end"))) {
+          settings.Columns = 12;
+        }
+      }
 
-      // }
-      if (this.colsSum < 12 && this.rowGroup == null) {
+
+      // verificar si termina una fila
+      // si el colsSum anterior es menor a 12, se entiende que sí
+
+      let isMultiColumn = false;
+      if (this.colsSum >= 12) {
+        this.colsSum = 0;
+      }
+      if (settings.Columns != null && settings.Columns != 12) {
+        this.colsSum = this.colsSum + settings.Columns;
+        // let futureCols = this.colsSum +  settings.Columns;
+        // if (futureCols <= 12){
+
+        // }
+        if (this.colsSum < 12 && this.rowGroup == null) {
+          this.rowGroup = new Array<FormlyFieldConfig>();
+        }
+      } else {
+        settings.Columns = 12;
+        this.colsSum = 12;
+        //if (this.colsSum == 12){
+        this.rowGroup = new Array<FormlyFieldConfig>();
+        //}
+      }
+
+      if (this.rowGroup == null) {
         this.rowGroup = new Array<FormlyFieldConfig>();
       }
-    } else {
-      settings.Columns = 12;
-      this.colsSum = 12;
-      //if (this.colsSum == 12){
-      this.rowGroup = new Array<FormlyFieldConfig>();
-      //}
-    }
-
-    if (this.rowGroup == null) {
-      this.rowGroup = new Array<FormlyFieldConfig>();
-    }
-    if (this.fieldsBack == null) {
-      this.fieldsBack = settings.Fields == null ? fields : settings.Fields;
-    }
-
-    if (this.temp == null) {
-      this.temp = new Array<FormlyFieldConfig>();
-    }
-
-
-
-    if (settings.Name != null) {
-      //propertiesForUpdate
-      this.visibleFields.push(settings.Name);
-      this.propertiesForUpdate.push(settings.Name);
-      let finded = this.fieldsBack.find(p => p.key == settings.Name);
-      if (finded != null) {
-        this.applySettingsField(settings, finded);
-        //this.temp.push(finded);
-        this.rowGroup.push(finded);
+      if (this.fieldsBack == null) {
+        this.fieldsBack = settings.Fields == null ? fields : settings.Fields;
       }
-    } else {
-      let field: FormlyFieldConfig = { className: '', template: settings.Content };
-      this.applySettingsField(settings, field);
-      this.rowGroup.push(field);
-    }
 
-    if (this.colsSum == 12) {
-      let classNames = "";
-      if (settings.ClassNameGroup != null) {
-        classNames = settings.ClassNameGroup;
+      if (this.temp == null) {
+        this.temp = new Array<FormlyFieldConfig>();
       }
-      this.temp.push({ fieldGroupClassName: 'row ' + classNames, fieldGroup: this.rowGroup });
-      this.rowGroup = null;
+
+
+
+      if (settings.Name != null) {
+        //propertiesForUpdate
+        this.visibleFields.push(settings.Name);
+        this.propertiesForUpdate.push(settings.Name);
+        let finded = this.fieldsBack.find(p => p.key == settings.Name);
+        if (finded != null) {
+          this.applySettingsField(settings, finded);
+          //this.temp.push(finded);
+          this.rowGroup.push(finded);
+        }
+      } else {
+        let field: FormlyFieldConfig = { className: '', template: settings.Content };
+        this.applySettingsField(settings, field);
+        this.rowGroup.push(field);
+      }
+
+      if (this.colsSum == 12) {
+        let classNames = "";
+        if (settings.ClassNameGroup != null) {
+          classNames = settings.ClassNameGroup;
+        }
+        this.temp.push({ fieldGroupClassName: 'row ' + classNames, fieldGroup: this.rowGroup });
+        this.rowGroup = null;
+      }
     }
   }
 
-  public showForm(fields: Array<FormlyFieldConfig>):Array<any> {
+  public showForm(fields: Array<FormlyFieldConfig>): Array<any> {
     //this.propertiesForUpdate. = this.visibleFields;
 
     if (this.temp == null) {
@@ -167,7 +236,7 @@ export class PageService {
 
     return fields;
   }
-  public resetFieldsForm(fields: Array<FormlyFieldConfig>):Array<any> {
+  public resetFieldsForm(fields: Array<FormlyFieldConfig>): Array<any> {
     this.temp = null;
     this.colsSum = 0;
     if (this.fieldsBack != null) {
@@ -175,20 +244,21 @@ export class PageService {
     }
     return fields;
   }
+  
   public getFieldsForm(fields: Array<FormlyFieldConfig>) {
     if (this.rowGroup != null && this.temp != null) {
       this.temp.push({ fieldGroupClassName: 'row', fieldGroup: this.rowGroup });
       this.rowGroup = null;
     }
     if (this.temp != null) {
-       fields = this.temp;
-       fields["type"] = "flex-layout";
-       fields["templateOptions"] = {
+      fields = this.temp;
+      fields["type"] = "flex-layout";
+      fields["templateOptions"] = {
         fxLayout: 'row',
       };
     }
 
-    return  fields;
+    return fields;
   }
   private applySettingsField(settings: FieldSettings, field: FormlyFieldConfig) {
     if (settings.Columns != null) {
@@ -209,6 +279,7 @@ export class PageService {
           field.type = "checkbox";
         } else {
           field.type = settings.ControlType.toString();
+
           //console.log("number xsz" , field.type);
         }
 
@@ -231,18 +302,18 @@ export class PageService {
             field["templateOptions"]["type"] = "password";
           } else if (settings.Type == FieldTypes.Time) {
             field["templateOptions"]["type"] = "time";
-          }else if (settings.Type == FieldTypes.Number) {
+          } else if (settings.Type == FieldTypes.Number) {
             field["templateOptions"]["type"] = "number";
-           
+
           }
 
         }
 
-        if (field["templateOptions"]["type"] == "number"){
-          if (settings.Min != null ){
+        if (field["templateOptions"]["type"] == "number") {
+          if (settings.Min != null) {
             field["templateOptions"]["min"] = settings.Min;
           }
-          if (settings.Max != null ){
+          if (settings.Max != null) {
             field["templateOptions"]["max"] = settings.Max;
           }
 
@@ -274,7 +345,7 @@ export class PageService {
         field.templateOptions.placeholder = settings.PlaceHolder;
 
       }
-      if (settings.Required != null) {
+      if (settings.Required != null && this.isFilter == false) {
         field.templateOptions.required = settings.Required;
       }
 
@@ -297,17 +368,17 @@ export class PageService {
       if (settings.AsyncValidators != null) {
         field["asyncValidators"] = settings.AsyncValidators;
       }
-      if (settings.EntityModel != null || (settings.Data != null))  {
+      if (settings.EntityModel != null || (settings.Data != null)) {
         field.type = "select";
         this.addRelatedData(settings, field);
       } else {
         if (field.templateOptions != null && field.templateOptions["relation"] != null) {
 
           settings.EntityModel = field.templateOptions["relation"].EntityModel;
-          if (settings.DataValue == null ){
+          if (settings.DataValue == null) {
             settings.DataValue = field.templateOptions["relation"].DataValue;
           }
-          if (settings.DataText ==  null){
+          if (settings.DataText == null) {
             settings.DataText = field.templateOptions["relation"].DataText;
           }
           this.addRelatedData(settings, field);
@@ -332,34 +403,57 @@ export class PageService {
     });
 
   }
-  public getPrimaryColumn(tableColumns: Array<FormlyFieldConfig>):any
-  {
-    return tableColumns[0];
+  public getPrimaryColumn(tableColumns: Array<any>, defaultProperty?: string): any {
+    let result = tableColumns[0];
+    if (defaultProperty != null) {
+      result = tableColumns.find(p => p.prop == defaultProperty);
+    }
+    return result;
   }
- 
+  public getValueColumn(tableColumns: Array<any>, valueColumn: string): any {
 
-  public getColumnsFromFields(fields: Array<FormlyFieldConfig>):Array<any>{
-    let result:Array<any> = [];
+    let result = null;
+
+    result = tableColumns.find(p => p.prop == valueColumn);
+    return result;
+  }
+
+  public getQueryFilter(itemFilter:any){
+    let queryBuilder:Array<string> = [];
+
+    for (const prop in itemFilter) {
+      // if (prop != ""){
+      //     if (prop.startsWith("__start") )
+      // }
+    }
+    
+
+    return queryBuilder.join(" AND ");
+  }
+
+  public getColumnsFromFields(fields: Array<FormlyFieldConfig>): Array<any> {
+    let result: Array<any> = [];
 
     fields.forEach(element => {
       let isFk = false;
       let prop = element.key;
-    
-      if (element.templateOptions != null && element.templateOptions.relation != null ){
+
+      if (element.templateOptions != null && element.templateOptions.relation != null) {
         isFk = true;
-        prop = `Fk${element.key}Text`;
+        prop = `Fk${element.templateOptions.relation.PropertyRelationName}Text`;
       }
       result.push(
         {
           name: element.key,
-          prop: element.key,
+          prop: prop,
           sortable: element.key,
           isFk: isFk,
+
           headerClass: 'title-cell'
         }
       );
     });
-    
+
     return result;
   }
 }

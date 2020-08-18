@@ -1,5 +1,5 @@
 import { sfsService } from './../../services/sfs.service';
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { ActivatedRoute } from '@angular/router';
@@ -13,12 +13,15 @@ import { BackToListSettings } from '../../models/common/page.model';
   styleUrls: ['./generic-form.page.scss'],
 })
 export class GenericFormPage extends AppFormBasePage implements OnInit {
+ // @Input() entityName: string;
+  @Input() filterProperties: Array<string>;
+
   item:any = null;
   guidItem: string = null;
   fields: Array<FormlyFieldConfig> = [];
   KstEmailTemplateFormCustom:any = null;
   customClass = 'KstEmailTemplate-form.custom';
-  entityName:string=null;
+  @Input() entityName:string;
   entityModel:any=null;
   constructor(
     public injector: Injector,
@@ -26,19 +29,42 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
     public storage: StorageService,
     public userService: UserService,
 	public sfsService: sfsService
+
   ) { 
 
     super(injector);
-    this.title = this.route.snapshot.paramMap.get("catalog");
-    this.entityName = this.activatedRoute.snapshot.paramMap.get('catalog');
 
     
-    this.defaultHref = 'catalog/' + this.entityName;
+    if (this.activatedRoute.snapshot.paramMap.get('catalog') != null){
+      this.entityName = this.activatedRoute.snapshot.paramMap.get('catalog');
+    }
+    
+    
+    
    
-    this.guidItem = this.route.snapshot.paramMap.get("Id");
+    this.guidItem = this.route.snapshot.paramMap.get("id");
   }
   
-  async ngOnInit() {
+
+
+    switchFilterRange(event: any){
+      if (this.isFilterRange == false){
+        this.isFilterRange = true;
+      }else{
+        this.isFilterRange = false;
+      }
+      
+      this.pageService.isFilterRange = this.isFilterRange;
+      this.pageService.fieldsBack = this.entityModel.GetFields();
+      this.fields = [];
+      this.pageService.temp = null;
+      this.showForm();
+    }
+   ngOnInit() {
+     this.pageService.isFilter = this.isFilter;
+    this.title = this.entityName;
+    this.defaultHref = 'catalog/' + this.entityName;
+    console.log("---entityName----",this.entityName);
     import(
       /* webpackMode: "lazy-once" */
       /* webpackPrefetch: true */
@@ -47,7 +73,7 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
 `../../models/codegen/${this.entityName}.model`).then((_model)=> {
     this.entityModel = _model[this.entityName +"Model"]
 	  this.pageService.fieldsBack = this.entityModel.GetFields();
-   
+    this.item = new  this.entityModel();
 	import(
                 /* webpackMode: "eager" */
                 /* webpackPrefetch: true */
@@ -82,7 +108,7 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
       let result = await this.bizAppService.GetItem(this.guidItem, this.entityModel._EntitySetName, Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p=>   !p.startsWith("Fk")).join(","));
       if (result.status == "success") {
         this.item = result.data;
-        this.guidItem = this.item.GuidEmailTemplate;
+        this.guidItem = this.item.Id;
 
 
         if (this.item != null) {
@@ -103,6 +129,9 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
     this.sfsService.SetNavigationData(settings);
     this.navCtrl.navigateBack(settings.Route, { animated: true });
   }
+  async close(){
+    this.modalCtrl.dismiss();
+  }
  
   async saveData() {
     this.savingStart();
@@ -113,7 +142,7 @@ export class GenericFormPage extends AppFormBasePage implements OnInit {
 	     this.item = new  this.entityModel();
 	  }
 	  Object.assign(this.item, this.form.value);
-      this.item.GuidEmailTemplate = this.guidItem;
+      //this.item.Id = this.guidItem;
       
       let apiResponse: ApiResponse<any> = null;
       console.log("after create or save", this.guidItem);

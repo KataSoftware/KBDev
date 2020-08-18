@@ -2,7 +2,7 @@
 import { ModalPage } from './../modal/modal.page';
 import { ServiceDataOptions, sfsService } from './../../services/sfs.service';
 import { BasePage, DataService } from 'sfscommon';
-import { OnInit, Injector, Component } from '@angular/core';
+import { OnInit, Injector, Component, Input } from '@angular/core';
 
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyTemplateOptions } from '@ngx-formly/core';
@@ -14,6 +14,8 @@ import { DialogSettings, DialogButton, SeparatorSettings, FieldSettings } from '
  
 export class AppFormBasePage extends BasePage implements OnInit {
 
+  @Input() public isFilter:boolean=false;
+  public isFilterRange:boolean=false;
 
   private _bizAppService: bizAppService;
 
@@ -167,8 +169,37 @@ export class AppFormBasePage extends BasePage implements OnInit {
     this.pageService.addRelatedData(settings, field);
   }
 
-  setOrder(settings: FieldSettings) {
+  private setOrderForRange(settings: FieldSettings, fieldName:string){
     this.pageService.setOrder(settings, this.fields);
+    
+    // agregar dos nuevos campos
+    // start
+    let field = this.fields.find(p=> p.key == fieldName);
+    let startField = Object.assign({}, field);
+    let startSettings = Object.assign({}, settings);
+    startField.key = "__start" + startField.name;
+    this.pageService.fieldsBack.push(startField);
+    
+    this.pageService.setOrder(startSettings, this.fields);
+    // let endField = Object.assign({}, field);
+    // this.fields.push(endField);
+    // endField.key = "__end" + startField.name;
+    // this.pageService.setOrder(settings, this.fields);
+    
+    // // agregar settings
+
+    // settings.Name = "__start" + settings.Name;
+  }
+  setOrder(settings: FieldSettings) {
+    // settings.IsFilter = this.isFilter;
+    
+   
+    // if (settings.IsFilterRange == true ){
+
+    // }else{
+      this.pageService.setOrder(settings, this.fields);
+
+    //}
   }
   public showForm() {
     this.fields = this.pageService.showForm(this.fields);

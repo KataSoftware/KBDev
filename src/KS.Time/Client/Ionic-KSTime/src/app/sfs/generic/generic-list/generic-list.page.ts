@@ -1,4 +1,6 @@
-﻿import { Component, OnInit, Injector, ViewChild, TemplateRef } from '@angular/core';
+﻿import { GenericFormPage } from './../generic-form/generic-form.page';
+import { NgZone } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild, TemplateRef, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
 import { DataService, TableColumn, SystemCore, titlePlace, addButtonPlace } from 'sfscommon';
 //import swal from 'sweetalert';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -9,6 +11,8 @@ import { bizAppService } from '../../services/business.service';
 import { GenericModel } from '../../models/common/models';
 import { sfsService } from '../../services/sfs.service';
 import { BindListSettings } from '../../common/app-list-base/app-list-base.page';
+import { MatExpansionPanel, MatExpansionPanelTitle } from '@angular/material/expansion';
+import { GestureController, IonItem } from '@ionic/angular';
 
 
 
@@ -17,23 +21,111 @@ import { BindListSettings } from '../../common/app-list-base/app-list-base.page'
   templateUrl: './generic-list.page.html',
   styleUrls: ['./generic-list.page.scss'],
 })
-export class GenericListPage extends AppListBaseTypedPage<GenericModel> implements OnInit {
+export class GenericListPage extends AppListBaseTypedPage<GenericModel> implements OnInit, AfterViewInit {
 
   fields: Array<FormlyFieldConfig> = null;
   bindedData: boolean = false;
   formFilter: FormGroup = new FormGroup({});
+  async doRefresh(event) {
+    this.selection.clear();
+    this.selectedAll = false;
+    this.data.forEach(e => {
+      e._isChecked = false;
+    });
+    await this.refreshFilter(event);
+  }
   ngAfterViewInit() {
 
+    //const cardArray = this.cards.toArray();
+    //this.useLongPress(cardArray);
+  }
+  public checkboxChange(item: any) {
+    if (item.__isChecked == false) {
+      this.selection.deselect(item);
 
+    } else {
+      this.selection.select(item);
 
+    }
+  }
+  public longPress(event: any, item: any, num: any) {
+
+    item.__isChecked = true;
+    this.selection.select(item);
 
   }
-  public async scrollTo(content, id, index) {
 
-    let customOffset = index * this.averageItemHeight;
+
+  actionsForSheet(item: any): any {
+    let role = item.ActionKey;
+
+    if (item.ActionKey == "delete") {
+      role = "destructive";
+
+    }
+    let action: any = {
+      text: item.Text,
+      role: role,
+
+    };
+    if (item.ActionKey == "delete") {
+      action.handler = () => {
+        this.delete(null);
+      }
+    }
+
+    return action;
+  }
+  public async openMassiveActions(itemAction?: any) {
+    let actionsList = [];
+    if (itemAction == null) {
+      this.localActions.forEach(item => {
+        if (item.ActionKey != "add") {
+          actionsList.push(this.actionsForSheet(item));
+        }
+      });
+    } else {
+      itemAction.__actions.forEach(item => {
+        if (item.ActionKey != "add") {
+          actionsList.push(this.actionsForSheet(item));
+        }
+      });
+    }
+    let actions = this.actionSheetCtrl.create(
+      {
+        header: 'Selecciona la acción',
+        buttons: actionsList
+      }
+
+    );
+
+    (await actions).present();
+  }
+  private _isExpansionIndicator(target: any): boolean {
+    console.log(target);
+    const expansionIndicatorClass = 'mat-expansion-indicator';
+    return (target.classList && target.classList.contains(expansionIndicatorClass));
+  }
+  selectItem(event: Event, item: any) {
+    if (!event.target["classList"].contains("checkbox-icon") && event.type != "ionChange") {
+      this.edit(item);
+    }
+    console.log("checkbox", event);
+  }
+  expand(matExpansionPanel: MatExpansionPanel, event: Event, item: any): void {
+    event.preventDefault(); // Preventing event bubbling
+
+    if (!this._isExpansionIndicator(event.target)) {
+      //this.edit(item);
+      matExpansionPanel.close(); // Here's the magic
+    }
+  }
+  public async scrollTo(content, id, index,) {
+
+    //let customOffset = index * this.averageItemHeight;
 
     // Se hace el scroll hasta el punto especificado
-    content.scrollToPoint(0, customOffset, 250);
+    // content.scrollToPoint(0, customOffset, 250);
   }
 
 
@@ -51,14 +143,25 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   public set bizAppService(value: bizAppService) { this._bizAppService = value; }
   GenericListCustom: any = null;
 
-  noSysColumns:Array<TableColumn> = [];
+  noSysColumns: Array<TableColumn> = [];
   customClass: string;
   entityName: string = "Generic";
   entityModel: any = null;
-  constructor(public injector: Injector, private activatedRoute: ActivatedRoute, public sfsService: sfsService) {
+
+  @ViewChildren(IonItem, { read: ElementRef }) cards: QueryList<ElementRef>;
+  longPressActivate = false;
+  constructor(public injector: Injector, private activatedRoute: ActivatedRoute, public sfsService: sfsService,
+    public gestureCtrl: GestureController,
+    private zone: NgZone
+  ) {
     super(injector);
     this.entityName = this.activatedRoute.snapshot.paramMap.get('catalog');
-
+    // const gesture: Gesture = this.gestureCtrl.create({
+    //   el: this.element.nativeElement,
+    //   threshold: 15,
+    //   gestureName: 'my-gesture',
+    //   onMove: ev => this.onMoveHandler(ev)
+    // }, true);
     /*
     import(`./${this.customClass}`).then(p=>{
       this.GenericListCustom = p["GenericListCustom"];
@@ -70,7 +173,6 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       });*/
 
   }
-
   async ionViewWillEnter() {
     let navData = this.sfsService.GetNavigationData();
     console.log("ionViewWillEnter navData", navData);
@@ -98,22 +200,59 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   hideFilter: boolean = true;
 
   itemFilter: any = null;
-  refreshFilter() {
+  async refreshFilter(event) {
     this.itemFilter = new this.entityModel();
     this.serviceData.Query = "";
-    this.bindData();
+    await this.bindData();
+    event.target.complete();
   }
 
-  showFilter() {
-    if (this.hideFilter == true) {
-      this.hideFilter = false;
+  async showFilter() {
+    if (this.currentMediaQuery == 'xs' || this.currentMediaQuery == 'sm') {
+      const modal = await this.modalCtrl.create({
+          component: GenericFormPage,
+          componentProps: {
+            entityName : this.entityName,
+            isFilter : true
+          }
+
+      });
+
+       await modal.present();
+
     } else {
-      this.hideFilter = true;
+      if (this.hideFilter == true) {
+        this.hideFilter = false;
+      } else {
+        this.hideFilter = true;
+      }
+    }
+  }
+
+  selectedAll?: boolean = false;
+  selectAll() {
+    if (this.selectedAll == null || this.selectedAll == false) {
+
+      this.data.forEach(element => {
+        element.__isChecked = false;
+        this.selection.deselect(element);
+
+      });
+    } else {
+
+      this.data.forEach(element => {
+        element.__isChecked = true;
+        this.selection.select(element);
+
+      });
     }
   }
 
 
+
   async ngOnInit() {
+
+    this.routeAdd = "/catalog/" + this.entityName + "/form";
 
     import(
       /* webpackMode: "lazy-once" */
@@ -125,17 +264,26 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
         this.itemFilter = new this.entityModel();
         //this.title = "KstEmailTemplates";
-        this.serviceData = {
+        // this.serviceData = {
 
-          Page: 1,
-          PageSize: 7,
-          EntitySet: this.entityModel._EntitySetName,
-          Fields: Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p => !p.startsWith("Fk")).join(","),
-          AllFields: true,
-          SortBy: 'UpdatedDate',
-          SortDirection: 'desc',
+        //   Page: 1,
+        //   PageSize: 7,
+        //   EntitySet: this.entityModel._EntitySetName,
+        //   Fields: Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p => !p.startsWith("Fk")).join(","),
+        //   AllFields: true,
+        //   SortBy: 'UpdatedDate',
+        //   SortDirection: 'desc',
 
-        };
+
+        // };
+        this.serviceData.PageSize = 15;
+        this.serviceData.EntitySet = this.entityModel._EntitySetName;
+        this.serviceData.Fields = Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p => !p.startsWith("Fk")).join(",");
+        this.serviceData.AllFields = true;
+       // this.serviceData.Query = "NumActivities > 0";
+        this.serviceData.SortBy = 'UpdatedDate';
+
+        this.serviceData.SortDirection = 'desc';
 
         console.log("ubiCustomer ngOnInit");
         //this.userData = await this.userService.getUserData();
@@ -144,14 +292,18 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
         this.getColumns();
 
-        this.setOrder({ Name: "GuidEmailTemplate" });
+        this.setOrder({ Name: "Id" });
 
 
-        this.setOrder({ Name: "Title" });
+        // add default column
+        if (this.entityModel._DefaultProperty != null) {
+          this.setOrder({ Name: this.entityModel._DefaultProperty });
+        }
 
         this.setOrder({ Name: "UpdatedDate", Label: "" });
         this.setOrder({ Name: 'actions' });
 
+        this.numOrder = 0;
         if (this.GenericListCustom == null) {
           import(
             /* webpackMode: "eager" */
@@ -163,10 +315,14 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
                 this.userData = result;
                 this.GenericListCustom = _import[this.entityName + "ListCustom"];
                 if (this.GenericListCustom != null) {
+
                   this.GenericListCustom["OnShowing"](this);
                   this.externalCustomFileChecked = true;
                   this.bindDisplayColumns();
                   this.bindData();
+
+                  // this.columnsForMobile = this.getColumnsForMobile();
+                  // this.primaryColumn = this.getPrimaryColumn();
                 }
               }).catch((error) => {
                 this.externalCustomFileChecked = true;
@@ -179,6 +335,8 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
               console.log("error", error);
               this.bindDisplayColumns();
               this.bindData();
+              // this.columnsForMobile = this.getColumnsForMobile();
+              // this.primaryColumn = this.getPrimaryColumn();
             });
         }
 
@@ -194,28 +352,48 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     for (let column of this.tableColumns) { this.displayedColumns.push(column.prop); }
 
   }
-  routeAdd: string;
+  routeAdd: string = "/catalog/" + this.entityName + "/form";
+
   async addItem() {
-    this.routeAdd = "/catalog/" + this.entityName + "/form";
     this.navCtrl.navigateForward(this.routeAdd, { animated: true });
   }
 
-  getPrimaryColumn(item: any) {
-    let fieldname = this.pageService.getPrimaryColumn(this.tableColumns);
+  getItemPrimaryColumn(item?: any) {
+    let fieldname = this.pageService.getPrimaryColumn(this.tableColumns, this.entityModel._DefaultProperty);
     if (fieldname != null) {
       return item[fieldname.prop];
     } else {
       return null;
     }
-  
+
   }
-  getColumnsForMobile(item:any) {
-    let values:Array<any> =[];
+  existValueColum?: boolean = null;
+  valueColumn?: any = null;
+  getItemValueColumn(item?: any) {
+
+    if (this.existValueColum == null) {
+      this.valueColumn = this.tableColumns.find(p => p.place == 2);
+      if (this.valueColumn != null) {
+        this.existValueColum = true;
+      }
+    }
+
+    if (this.existValueColum == true && this.valueColumn != null) {
+      let fieldname = this.pageService.getValueColumn(this.tableColumns, this.valueColumn.prop);
+      if (fieldname != null) {
+        return item[fieldname.prop];
+      } else {
+        return null;
+      }
+    }
+  }
+  public primaryColumn: any = null;
+  public columnsForMobile: Array<any> = [];
+  getItemColumnsForMobile(item?: any) {
+    let values: Array<any> = [];
     this.noSysColumns.forEach(col => {
       let nameProp = col.prop;
-      if (col["isFk"] == true){
-        nameProp = `Fk${col.prop}Text` ;
-      }
+
       values.push({ text: col.name, value: item[nameProp] });
     });
     return values;
@@ -298,12 +476,15 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
 
     data.forEach((p) => {
-      p['_actions'] = this.getActions(p);
+      p['__actions'] = this.getDefaultItemActions(p);
     });
 
     if (this.GenericListCustom != null && this.GenericListCustom["OnItems"] != null) {
       this.GenericListCustom["OnItems"](this, data);
     }
+
+
+
   }
 
   action(row: any, actionKey: string) {
@@ -346,17 +527,20 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       this.selection.clear();
       this.selection.select(row);
     }
-    let modalResponse = await this.showConfirm(this.selection.selected.length);
 
-    if (modalResponse == true) {
-      let response = await this.bizAppService.Delete(this.selection.selected.map(({ Id }) => Id), GenericModel._EntitySetName);
-      //swal.close();
-      this.selection.clear();
 
-      this.bindData();
-    } else {
-      //swal.close();
-    }
+    let modalResponse = await this.showConfirm({
+      numSelected: this.selection.selected.length,
+      onOk: async () => {
+        let response = await this.bizAppService.Delete(this.selection.selected.map(({ Id }) => Id), this.entityModel._EntitySetName);
+        //swal.close();
+        this.selection.clear();
+
+        this.bindData();
+      }
+    });
+
+
   }
 
 }

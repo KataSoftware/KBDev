@@ -16,9 +16,17 @@ export enum FieldTypes {
     
   
   }
+  export enum MobileFieldPlace{
+    Principal=1,
+    Value=2,
+    Secondary=3,
+    Summary=4
+  }
   export class FieldSettings {
     public Fields?: Array<FormlyFieldConfig> = null;
     public Id?: string = null;
+    public Place?:MobileFieldPlace = null; 
+    public Num?: number = null;
     public Name?: string = null;
     public Content?: string = null;
     public ClassName?: string = null;
@@ -39,7 +47,7 @@ export enum FieldTypes {
     public Label?: string;
     public LabelHtml?: string;
     public Hooks?: any;
-  
+    public AttColor?:any;
     public OnChange?= (field, event) => { };
     public OnKeyUp?= (field, event) => { }
     public PlaceHolder?: string;
@@ -53,6 +61,8 @@ export enum FieldTypes {
     public Min?: number = null;
     public Max?: number = null;
     public Wrapper?: string = null;
+    public IsFilter?:boolean=null;
+    public IsFilterRange?:boolean=null;
   }
   
   export class SeparatorSettings {

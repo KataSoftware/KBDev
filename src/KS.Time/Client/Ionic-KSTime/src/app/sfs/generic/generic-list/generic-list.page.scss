@@ -6,3 +6,54 @@
     display: block;
     margin-bottom: 10px;
 }
+// .mat-expansion-panel-header{
+//     padding: 0 5px;
+// }
+
+mat-expansion-panel-header{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+ion-footer ion-title{
+  color:grey;
+  font-weight: normal;
+  font-size: 90%;
+}
+.mat-expansion-panel:not([class*='mat-expanded']) {
+  box-shadow: none;
+  border-bottom-color: lavender;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+mat-expansion-panel  mat-panel-title{
+    margin-right: 0px;
+    width: 100%;
+}
+mat-expansion-panel  .mat-content{
+  margin-bottom: 2px;
+}
+
+.overflow-ellipsis {
+    text-overflow: ellipsis;
+  }
+.td{
+    white-space: nowrap;
+  overflow: hidden;
+}  
+ion-item{
+    touch-action: pan-y !important;
+    --inner-padding-start: 0px;
+    --padding-start:0px
+}
+ion-refresher-content {
+    //padding-bottom: 200px;
+    background-color: white;
+  
+    .refresher-pulling {
+    //  position: fixed;
+   //   top: 150px;
+    }
+  }
+.refresher-pulling-icon{
+  //  margin-top: 150px;
+}

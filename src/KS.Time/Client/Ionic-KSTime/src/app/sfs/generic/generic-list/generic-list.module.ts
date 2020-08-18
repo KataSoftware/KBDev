@@ -17,6 +17,7 @@ import { FormlyConfig } from '../../shared/common/formly';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { MatExpansionModule } from '@angular/material/expansion';
 
+
 const routes: Routes = [
   {
     path: '',
@@ -38,8 +39,10 @@ const routes: Routes = [
     MatExpansionModule,
 	MatMenuModule,
     timeagoModule,
+    
     RouterModule.forChild(routes)
   ],
+
   declarations: [GenericListPage]
 })
 export class GenericListPageModule {}
