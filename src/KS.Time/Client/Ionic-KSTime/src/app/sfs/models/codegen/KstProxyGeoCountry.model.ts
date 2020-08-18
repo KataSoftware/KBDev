@@ -56,6 +56,7 @@ return [
 	public static PropertyNames: KstProxyGeoCountryPropertyNames = new KstProxyGeoCountryPropertyNames();
 	public static _PropertyNamesForUpdate: string = "GuidCountry,Name,IsDeleted";
 
+	public static _DefaultProperty: string= "Name";
 
 	public get getSetName() : string {
 		return KstProxyGeoCountryModel._EntitySetName;

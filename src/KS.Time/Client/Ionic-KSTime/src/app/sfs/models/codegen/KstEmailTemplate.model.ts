@@ -141,6 +141,7 @@ return [
 	public static PropertyNames: KstEmailTemplatePropertyNames = new KstEmailTemplatePropertyNames();
 	public static _PropertyNamesForUpdate: string = "GuidEmailTemplate,Title,TitleKey,Content,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes";
 
+	public static _DefaultProperty: string= "Title";
 
 	public get getSetName() : string {
 		return KstEmailTemplateModel._EntitySetName;

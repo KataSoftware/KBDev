@@ -151,6 +151,7 @@ return [
 	public static PropertyNames: KstWorkTimeFilePropertyNames = new KstWorkTimeFilePropertyNames();
 	public static _PropertyNamesForUpdate: string = "GuidWorkTimeFile,GuidWorkTime,GuidFile,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes";
 
+	public static _DefaultProperty: string= "BizKeyEngine";
 
 	public get getSetName() : string {
 		return KstWorkTimeFileModel._EntitySetName;

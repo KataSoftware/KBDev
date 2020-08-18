@@ -87,6 +87,7 @@ return [
 	public static PropertyNames: unProxyBusinessObjectPropertyNames = new unProxyBusinessObjectPropertyNames();
 	public static _PropertyNamesForUpdate: string = "GuidBusinessObject,Name,BusinessObjectKey,EntitySetName";
 
+	public static _DefaultProperty: string= "Name";
 
 	public get getSetName() : string {
 		return unProxyBusinessObjectModel._EntitySetName;

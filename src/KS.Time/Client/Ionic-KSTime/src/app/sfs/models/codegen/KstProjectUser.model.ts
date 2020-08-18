@@ -187,6 +187,7 @@ return [
 	public static PropertyNames: KstProjectUserPropertyNames = new KstProjectUserPropertyNames();
 	public static _PropertyNamesForUpdate: string = "GuidProjectUser,GuidProject,GuidUser,StartDate,EndDate,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes";
 
+	public static _DefaultProperty: string= "BizKeyEngine";
 
 	public get getSetName() : string {
 		return KstProjectUserModel._EntitySetName;

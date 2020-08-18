@@ -113,6 +113,7 @@ return [
 	public static PropertyNames: unProxyEventPropertyNames = new unProxyEventPropertyNames();
 	public static _PropertyNamesForUpdate: string = "GuidUnProxyEvent,Title,Message,TypeEvent,IsException,UpdatedDate";
 
+	public static _DefaultProperty: string= "Title";
 
 	public get getSetName() : string {
 		return unProxyEventModel._EntitySetName;

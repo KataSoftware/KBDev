@@ -211,6 +211,7 @@ return [
 	public static PropertyNames: KstFilePropertyNames = new KstFilePropertyNames();
 	public static _PropertyNamesForUpdate: string = "GuidFile,FileName,FileType,FileData,FileStorage,ContainerStorage,FileThumbSizes,FileSize,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes";
 
+	public static _DefaultProperty: string= "FileName";
 
 	public get getSetName() : string {
 		return KstFileModel._EntitySetName;
