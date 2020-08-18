@@ -40,6 +40,9 @@
 </ion-header>
 
 <ion-content padding class="page-list" #content scrollEvents="true" appHideHeader [header]="header">
+<div>
+  test
+</div>
 
   <ion-refresher *ngIf="currentMediaQuery =='xs' || currentMediaQuery =='sm'" slot="fixed"
     (ionRefresh)="doRefresh($event)">

@@ -204,7 +204,17 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     this.itemFilter = new this.entityModel();
     this.serviceData.Query = "";
     await this.bindData();
-    event.target.complete();
+    if (event != null){
+      event.target.complete();
+    }
+  }
+  async refreshList(event?:any) {
+    this.itemFilter = new this.entityModel();
+    //this.serviceData.Query = "";
+    await this.bindData();
+    if (event != null){
+      event.target.complete();
+    }
   }
 
   async showFilter() {
@@ -217,7 +227,13 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
           }
 
       });
-
+      modal.onDidDismiss()
+      .then((data) => {
+        console.log("modal data", data);
+        this.serviceData.Query = data.data;
+        this.refreshList(null);
+        //this.bindData({ RestartPaging: navData.RestartPaging });
+      });
        await modal.present();
 
     } else {

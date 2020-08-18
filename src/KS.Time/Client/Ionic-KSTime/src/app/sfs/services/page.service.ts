@@ -76,20 +76,22 @@ export class PageService {
 
     // agregar dos nuevos campos
     // start
-   
+
 
     let field = fields.find(p => p.key == fieldName);
-    if (settings.Label == null ){
+    if (settings.Label == null) {
       settings.Label = settings.Name;
     }
-    this.setOrder({ Content: settings.Label, Columns: 12
+    this.setOrder({
+      Content: settings.Label, Columns: 12
     }, fields, true);
 
     let startField = JSON.parse(JSON.stringify(field));  //Object.assign({}, field);
     let startSettings: FieldSettings = JSON.parse(JSON.stringify(settings));//Object.assign({}, settings);
     startField.key = "__start" + startField.key;
     if (startField.templateOptions != null) {
-      startField.templateOptions.label =  "Desde";
+      startField.templateOptions.label = "Desde";
+
     }
     this.fieldsBack.push(startField);
     //startSettings.PlaceHolder = startSettings.PlaceHolder + " (from)";
@@ -104,10 +106,12 @@ export class PageService {
     endField.key = "__end" + endField.key;
     if (endField.templateOptions != null) {
       endField.templateOptions.label = "Hasta";
+      // endField.expressionProperties = { 'templateOptions.datepickerOptions.min': 'model.__startDueDate', };
     }
     this.fieldsBack.push(endField);
     //endSettings.PlaceHolder = endSettings.PlaceHolder + " (to)";
     endSettings.Name = endField.key;
+    // endSettings.ExpressionProperties = { 'templateOptions.datepickerOptions.min': 'model.__startDueDate', };
     endSettings.Label = "Hasta";
     endSettings.Columns = 6;
     this.setOrder(endSettings, fields, true);
@@ -118,13 +122,17 @@ export class PageService {
     if (preventFilterSettings != true) {
       if (this.isFilter == true && this.isFilterRange == true) {
 
-        
+
         const fieldFinded = this.fieldsBack.find(p => p.key == settings.Name);
         if (fieldFinded.templateOptions != null) {
           fieldFinded.templateOptions.required = false;
         }
-        if (fieldFinded.templateOptions != null &&
+
+
+        if ((fieldFinded.templateOptions != null &&
           fieldFinded.templateOptions.type == "number"
+        ) || fieldFinded.type == "datepicker"
+
         ) {
           addField = false;
           this.setOrderForRange(settings, fieldFinded.key, this.fieldsBack);
@@ -244,7 +252,7 @@ export class PageService {
     }
     return fields;
   }
-  
+
   public getFieldsForm(fields: Array<FormlyFieldConfig>) {
     if (this.rowGroup != null && this.temp != null) {
       this.temp.push({ fieldGroupClassName: 'row', fieldGroup: this.rowGroup });
@@ -418,15 +426,86 @@ export class PageService {
     return result;
   }
 
-  public getQueryFilter(itemFilter:any){
-    let queryBuilder:Array<string> = [];
+  private getDateValue(date:Date, startOrEnd?:string){
+    let result:Array<string> = [];
+    result.push("Date(");
+    result.push(date.getFullYear().toString()+ ",");
+
+    result.push((date.getMonth() + 1).toString() + ",");
+    if (startOrEnd ==null || startOrEnd == "start"){
+      result.push(date.getDate().toString() + ",0,0,0");
+    }else{
+      result.push(date.getDate().toString() + ",23,59,59");
+    }
+    result.push(")");
+
+    return result.join("");
+  }
+  public getQueryFilter(itemFilter: any, fields?: Array<FormlyFieldConfig>, withRange?:boolean) {
+    let queryBuilder: Array<string> = [];
+
+    // Asegurarse que las propiedades simples existen
+    for (const prop in itemFilter) {
+      if (prop.startsWith("__start") || prop.startsWith("__end")){
+        itemFilter[prop.replace("__start","").replace("__end", "")] = null ;
+      }
+    }
 
     for (const prop in itemFilter) {
-      // if (prop != ""){
-      //     if (prop.startsWith("__start") )
-      // }
+      if (prop != "IsDeleted" &&
+      (!prop.startsWith("__start") && !prop.startsWith("__end"))
+      ) {
+        let fieldFinded:FormlyFieldConfig = fields.find(p=> p.key == prop);
+        let fieldType:string;
+        if (fieldFinded.type.indexOf("date") != -1){
+          fieldType = "date";
+        }else if (fieldFinded.templateOptions != null && fieldFinded.templateOptions.type == "number"){
+          fieldType = "number";
+        }
+
+        if (withRange ==  true) {
+            
+          let queryRange:Array<string>=[];
+          //queryBuilder.push("(");
+          let existStart:boolean = false;
+          // verificamos tipo
+        
+          if (itemFilter["__start" + prop] != null && itemFilter["__start" + prop] != ""){
+            // start si tiene
+            existStart = true;
+            if (fieldType == "number") {
+              queryRange.push(`${prop} >=  ${itemFilter["__start" + prop]}`);
+            } else if (fieldType == "date") {
+              queryRange.push(`${prop} >= ${this.getDateValue(itemFilter["__start" + prop], 'start')}`);
+            }
+          }
+          // if (existStart == true ){
+          //   queryBuilder.push(" AND ");
+          // }
+          if (itemFilter["__end" + prop] != null && itemFilter["__end" + prop] != ""){
+            // start si tiene
+            if (fieldType == "number") {
+              queryRange.push(`${prop} <=  ${itemFilter["__end" + prop]}`);
+            } else if (fieldType == "date") {
+              queryRange.push(`${prop} <= ${this.getDateValue(itemFilter["__end" + prop], 'end')}`);
+            }
+          }
+          if (queryRange.length > 0){
+            queryBuilder.push("(" + queryRange.join(" AND ") + ")");
+          }
+         // queryBuilder.push(")");
+        } else {
+          if (fieldType == "number") {
+            queryBuilder.push(`${prop} =  ${itemFilter[prop]}`);
+          } else if (fieldType == "date") {
+            queryBuilder.push(`${prop} =  ${this.getDateValue(itemFilter[prop], 'start')}`);
+          }else{
+            queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
+          }
+        }
+      }
     }
-    
+
 
     return queryBuilder.join(" AND ");
   }

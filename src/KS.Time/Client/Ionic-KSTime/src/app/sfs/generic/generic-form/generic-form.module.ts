@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { GenericFormPageRoutingModule } from './generic-form-routing.module';
 
-import { GenericFormPage } from './generic-form.page';
+//import { GenericFormPage } from './generic-form.page';
 import { SFSCommonModule } from 'sfscommon';
 import { SharedModule } from '../../shared/shared.module';
 import { FormlyModule } from '@ngx-formly/core';
@@ -25,6 +25,6 @@ import { FormlyConfig } from '../../shared/common/formly';
     FormlyModule.forRoot(FormlyConfig),
     FormlyMaterialModule,
   ],
-  declarations: [GenericFormPage]
+  declarations: []
 })
 export class GenericFormPageModule {}

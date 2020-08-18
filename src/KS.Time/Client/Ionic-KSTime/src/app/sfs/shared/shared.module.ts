@@ -22,6 +22,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ModalPage } from '../common/modal/modal.page';
 import { HideHeaderDirective } from '../directives/hide-header.directive';
 import { GenericFormPage } from '../generic/generic-form/generic-form.page';
+import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { GenericFormPage } from '../generic/generic-form/generic-form.page';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    FormlyMatDatepickerModule,
     ReactiveFormsModule,
     MatIconModule,
     FormlyModule.forRoot({
