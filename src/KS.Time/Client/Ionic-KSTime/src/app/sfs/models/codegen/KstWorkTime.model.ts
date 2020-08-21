@@ -154,10 +154,7 @@ return [
     templateOptions: {
 	        label: KstWorkTimeModel.PropertyNames.DueDate,
         placeholder: '',
-		required: false,
-		datepickerOptions: {
-			min: '2019-09-10'
-		  },
+		required: false
 		
     }
 },
@@ -204,7 +201,7 @@ return [
 	UpdatedDate?:string;	
 
 		 
-	DueDate?:string;	
+	DueDate?:Date = null;	
 
 		 
 		FkKstActivity:string ;

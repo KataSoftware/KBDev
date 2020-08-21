@@ -1,3 +1,4 @@
+import { GenericModalComponent } from './../generic/generic-modal/generic-modal.component';
 import { UserMenuComponent } from './../components/business/user-menu/user-menu.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormlyModule } from '@ngx-formly/core';
@@ -12,7 +13,6 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { AuthGuardService } from '../services/AuthGuard.service';
 import { FormlyFieldRatingComponent } from './common/FormlyFieldRating';
 import { RatingWrapperComponent } from './common/material/rating-wrapper';
-import { CommonModule } from '@angular/common';
 
 import { DatepickerTypeComponent } from './common/material/datepicker-type';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
@@ -21,7 +21,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { ModalPage } from '../common/modal/modal.page';
 import { HideHeaderDirective } from '../directives/hide-header.directive';
-import { GenericFormPage } from '../generic/generic-form/generic-form.page';
 import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 
 
@@ -34,10 +33,10 @@ import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
     RatingWrapperComponent,
     DatepickerTypeComponent,
     ModalPage,
-    GenericFormPage,
+    GenericModalComponent,
     HideHeaderDirective
   ],
-  entryComponents: [ModalPage, GenericFormPage],
+  entryComponents: [ModalPage, GenericModalComponent],
   providers: [
     AuthGuardService,
     { provide: MAT_DATE_LOCALE, useValue: 'es-MX'}
@@ -82,6 +81,7 @@ import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
     CheckboxWrapperComponent,
     UserMenuComponent,
     HideHeaderDirective,
+    GenericModalComponent
   ]
 
 })

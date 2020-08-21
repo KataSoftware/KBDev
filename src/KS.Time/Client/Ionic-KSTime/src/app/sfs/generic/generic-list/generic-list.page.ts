@@ -1,4 +1,5 @@
-﻿import { GenericFormPage } from './../generic-form/generic-form.page';
+﻿import { GenericModalComponent } from './../generic-modal/generic-modal.component';
+import { GenericFormPage } from './../generic-form/generic-form.page';
 import { NgZone } from '@angular/core';
 import { Component, OnInit, Injector, ViewChild, TemplateRef, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
 import { DataService, TableColumn, SystemCore, titlePlace, addButtonPlace } from 'sfscommon';
@@ -201,7 +202,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
   itemFilter: any = null;
   async refreshFilter(event) {
-    this.itemFilter = new this.entityModel();
+    //this.itemFilter = new this.entityModel();
     this.serviceData.Query = "";
     await this.bindData();
     if (event != null){
@@ -209,29 +210,41 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     }
   }
   async refreshList(event?:any) {
-    this.itemFilter = new this.entityModel();
+    //this.itemFilter = new this.entityModel();
     //this.serviceData.Query = "";
     await this.bindData();
     if (event != null){
       event.target.complete();
     }
   }
+async removeFilter(){
+  this.itemFilter = null;
+  this.serviceData.Query = "";
+  this.refreshList(null);
+  
+}
 
   async showFilter() {
     if (this.currentMediaQuery == 'xs' || this.currentMediaQuery == 'sm') {
       const modal = await this.modalCtrl.create({
-          component: GenericFormPage,
+          component: GenericModalComponent,
           componentProps: {
             entityName : this.entityName,
-            isFilter : true
+            isFilter : true,
+            item: this.itemFilter
           }
 
       });
       modal.onDidDismiss()
-      .then((data) => {
+      .then((data:any) => {
         console.log("modal data", data);
-        this.serviceData.Query = data.data;
-        this.refreshList(null);
+          if (data != null && data.query != null && data.itemFilter != null ){
+          this.serviceData.Query = data.data.query;
+          this.itemFilter = data.data.itemFilter;
+          this.refreshList(null);
+        }else{
+
+        }
         //this.bindData({ RestartPaging: navData.RestartPaging });
       });
        await modal.present();
@@ -278,7 +291,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       `../../models/codegen/${this.entityName}.model`).then((_model) => {
         this.entityModel = _model[this.entityName + "Model"]
 
-        this.itemFilter = new this.entityModel();
+        //this.itemFilter = new this.entityModel();
         //this.title = "KstEmailTemplates";
         // this.serviceData = {
 

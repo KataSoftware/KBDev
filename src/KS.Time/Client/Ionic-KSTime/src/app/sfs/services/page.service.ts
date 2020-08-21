@@ -428,7 +428,7 @@ export class PageService {
 
   private getDateValue(date:Date, startOrEnd?:string){
     let result:Array<string> = [];
-    result.push("Date(");
+    result.push("DateTime(");
     result.push(date.getFullYear().toString()+ ",");
 
     result.push((date.getMonth() + 1).toString() + ",");
@@ -456,7 +456,7 @@ export class PageService {
       (!prop.startsWith("__start") && !prop.startsWith("__end"))
       ) {
         let fieldFinded:FormlyFieldConfig = fields.find(p=> p.key == prop);
-        let fieldType:string;
+        let fieldType:string="";
         if (fieldFinded.type.indexOf("date") != -1){
           fieldType = "date";
         }else if (fieldFinded.templateOptions != null && fieldFinded.templateOptions.type == "number"){
@@ -477,7 +477,13 @@ export class PageService {
               queryRange.push(`${prop} >=  ${itemFilter["__start" + prop]}`);
             } else if (fieldType == "date") {
               queryRange.push(`${prop} >= ${this.getDateValue(itemFilter["__start" + prop], 'start')}`);
+            }else{
+              queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
+
             }
+          }else{
+            queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
+
           }
           // if (existStart == true ){
           //   queryBuilder.push(" AND ");
@@ -503,6 +509,8 @@ export class PageService {
             queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
           }
         }
+      }else{
+
       }
     }
 

@@ -57,3 +57,13 @@ ion-refresher-content {
 .refresher-pulling-icon{
   //  margin-top: 150px;
 }
+div.filter-enabled ion-item{
+  --background: var(--primary);
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+div.filter-enabled  .button-native{
+  padding-right: 0px;
+}
+

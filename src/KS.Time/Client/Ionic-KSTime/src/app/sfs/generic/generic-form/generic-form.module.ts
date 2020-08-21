@@ -12,6 +12,9 @@ import { SharedModule } from '../../shared/shared.module';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormlyConfig } from '../../shared/common/formly';
+import { GenericFormPage } from './generic-form.page';
+
+
 
 @NgModule({
   imports: [
@@ -25,6 +28,6 @@ import { FormlyConfig } from '../../shared/common/formly';
     FormlyModule.forRoot(FormlyConfig),
     FormlyMaterialModule,
   ],
-  declarations: []
+  declarations: [ GenericFormPage ]
 })
 export class GenericFormPageModule {}
