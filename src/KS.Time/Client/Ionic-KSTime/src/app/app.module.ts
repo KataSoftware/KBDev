@@ -1,3 +1,4 @@
+import { GenericModalComponent } from './sfs/generic/generic-modal/generic-modal.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -24,8 +25,10 @@ import { IonicGestureConfig } from './sfs/utils/IonicGestureConfig';
 
 @NgModule({
   declarations: [AppComponent,
-    FormlyWrapperAddons],
-  entryComponents: [],
+    FormlyWrapperAddons,
+    GenericModalComponent
+  ],
+  entryComponents: [GenericModalComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

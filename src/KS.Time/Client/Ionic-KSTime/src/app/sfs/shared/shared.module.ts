@@ -33,10 +33,10 @@ import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
     RatingWrapperComponent,
     DatepickerTypeComponent,
     ModalPage,
-    GenericModalComponent,
+    
     HideHeaderDirective
   ],
-  entryComponents: [ModalPage, GenericModalComponent],
+  entryComponents: [ModalPage],
   providers: [
     AuthGuardService,
     { provide: MAT_DATE_LOCALE, useValue: 'es-MX'}
@@ -80,8 +80,7 @@ import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
   exports: [
     CheckboxWrapperComponent,
     UserMenuComponent,
-    HideHeaderDirective,
-    GenericModalComponent
+    HideHeaderDirective
   ]
 
 })

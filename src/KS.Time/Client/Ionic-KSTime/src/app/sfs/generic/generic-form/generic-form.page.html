@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
 
-          <ion-back-button *ngIf="isFilter == false" icon="arrow-round-back" [defaultHref]="defaultHref" (click)="goBack()">
+          <ion-back-button  [defaultHref]="defaultHref" (click)="goBack()">
           </ion-back-button>
       
           <ion-button (click)="close()"  *ngIf="isFilter == true">Close</ion-button>
@@ -16,7 +16,7 @@
       <!-- <ion-toggle  (click)="switchFilterRange($event)" [(ngModel)]="isFilterRange"></ion-toggle> -->
       
       
-    
+     
       
       
 
@@ -40,7 +40,7 @@
           
          <div style="float: left;">
          
-            <ion-button (click)="delete()" size="default" class=" sfs-button secondary" fill="clear">
+            <ion-button *ngIf="item != null" (click)="delete()" size="default" class=" sfs-button secondary" fill="clear">
               <ion-icon slot="icon-only" name="trash"></ion-icon>
                         </ion-button>
 
@@ -65,12 +65,5 @@
 
     </ion-grid>
   </form>
-  <div #div *ngIf="isX == true">
-    <ion-icon  slot="icon-only" name="trash"></ion-icon>
-   
-  </div>
-  <div #div  *ngIf="isX == false">
-    <ion-icon  slot="icon-only" name="barcode"></ion-icon>
-   
-  </div>
+  
 </ion-content>

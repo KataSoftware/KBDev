@@ -2,23 +2,23 @@
   <ion-toolbar>
     <ion-buttons slot="start">
 
-          <ion-back-button *ngIf="isFilter == false" icon="arrow-round-back" [defaultHref]="defaultHref" (click)="goBack()">
-          </ion-back-button>
-      
-          <ion-button (click)="close()"  *ngIf="isFilter == true">Close</ion-button>
+      <ion-back-button *ngIf="isFilter == false" icon="arrow-round-back" [defaultHref]="defaultHref" (click)="goBack()">
+      </ion-back-button>
 
-        </ion-buttons>
+      <ion-button (click)="close()" *ngIf="isFilter == true">Close</ion-button>
+
+    </ion-buttons>
 
     <ion-title>{{title}}</ion-title>
     <ion-buttons slot="end">
-     
+
       <!-- <ion-checkbox (ionChange)="switchFilterRange($event)" [(ngModel)]="isFilterRange"></ion-checkbox> -->
-      <!-- <ion-toggle  (click)="switchFilterRange($event)" [(ngModel)]="isFilterRange"></ion-toggle> -->
-      
-      
-    
-      
-      
+    <ion-toggle  [checked]="isFilterRange" [(ngModel)]="isFilterRange" (ionChange)="switchFilterRange($event)" ></ion-toggle>
+
+
+
+
+
 
     </ion-buttons>
 
@@ -26,7 +26,7 @@
 </ion-header>
 
 <ion-content padding>
-  
+
   <form [formGroup]="form">
     <ion-grid>
       <ion-row>
@@ -36,41 +36,35 @@
       </ion-row>
       <ion-row>
         <ion-col class="ion-text-right">
-          
-          
-         <div style="float: left;">
-         
-            <ion-button (click)="delete()" size="default" class=" sfs-button secondary" fill="clear">
-              <ion-icon slot="icon-only" name="trash"></ion-icon>
-                        </ion-button>
 
-                      </div>
+
+          <div style="float: left;">
+
+            <ion-button *ngIf="item != null" (click)="delete()" size="default" class=" sfs-button secondary"
+              fill="clear">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+
+          </div>
           <div>
-                
-               <ion-button (click)="goBack()" size="default" class=" sfs-button secondary" fill="clear">
-            Cancelar
-          </ion-button>
-          <ion-button [disabled]="this.form.invalid == true || disabledButton == true"
-            (click)="saveData()" size="default"  color="primary">
-            {{textSave}}
-          </ion-button>
-        </div>
-    
+
+            <ion-button (click)="goBack()" size="default" class=" sfs-button secondary" fill="clear">
+              Cancelar
+            </ion-button>
+            <ion-button [disabled]="this.form.invalid == true || disabledButton == true" (click)="saveData()"
+              size="default" color="primary">
+              {{textSave}}
+            </ion-button>
+          </div>
+
         </ion-col>
 
-      
+
 
 
       </ion-row>
 
     </ion-grid>
   </form>
-  <div #div *ngIf="isX == true">
-    <ion-icon  slot="icon-only" name="barcode"></ion-icon>
-   
-  </div>
-  <div #div  *ngIf="isX == false">
-    <ion-icon  slot="icon-only" name="trash"></ion-icon>
-   
-  </div>
+
 </ion-content>

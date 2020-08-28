@@ -10,7 +10,6 @@ import { BackToListSettings } from '../../models/common/page.model';
 export class GenericFormBasePage extends AppFormBasePage implements OnInit {
   // @Input() entityName: string;
   @Input() filterProperties: Array<string>;
-  public isX:boolean=false;
   @Input() item: any = null;
   guidItem: string = null;
   fields: Array<FormlyFieldConfig> = [];
@@ -44,17 +43,24 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
 
 
   switchFilterRange(event: any) {
-    if (this.isFilterRange == false) {
+    //setTimeout(function(){
+
+   if (this.isFilterRange == false) {
       this.isFilterRange = true;
     } else {
       this.isFilterRange = false;
     }
-
     this.pageService.isFilterRange = this.isFilterRange;
     this.pageService.fieldsBack = this.entityModel.GetFields();
     this.fields = [];
     this.pageService.temp = null;
     this.showForm();
+
+//  }, 500);
+
+
+  
+ 
   }
   async ngOnInit() {
     this.pageService.isFilter = this.isFilter;
@@ -63,7 +69,7 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
     console.log("---entityName----", this.entityName);
 
     if (this.isFilter == true ){
-      this.isX = true;
+     // this.isX = true;
       this.title = "Filtro";
       this.textSave = "Aplicar";
     if (this.item != null){
@@ -73,8 +79,47 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
       }
     }
   }
-  
-  
+    import(
+      /* webpackMode: "lazy-once" */
+      /* webpackPrefetch: true */
+      /* webpackInclude: /\.ts$/ */
+      /* webpackPreload: true */
+      `../../models/codegen/${this.entityName}.model`).then((_model) => {
+        this.entityModel = _model[this.entityName + "Model"]
+        this.pageService.fieldsBack = this.entityModel.GetFields();
+        if (this.isFilter == true && this.item != null) {
+          console.log("data open filter", this.item);
+        } else {
+          //console.log("new item", this.item);
+          //this.item = new this.entityModel();
+        }
+        import(
+          /* webpackMode: "eager" */
+          /* webpackPrefetch: true */
+          /* webpackInclude: /\.ts$/ */
+          /* webpackPreload: true */
+          `../../../pages/catalogs/${this.entityName}Form.custom`).then(async (_import) => {
+            this.KstEmailTemplateFormCustom = _import[this.entityName + "FormCustom"];
+            if (this.KstEmailTemplateFormCustom != null) {
+              if (this.KstEmailTemplateFormCustom["OnShowing"] != null) {
+                this.KstEmailTemplateFormCustom["OnShowing"](this);
+              }
+              if (this.KstEmailTemplateFormCustom["OnShowingAsync"] != null) {
+                await (<Promise<void>>(this.KstEmailTemplateFormCustom["OnShowingAsync"](this)));
+              }
+            }
+            this.showForm();
+            this.getData();
+          }).catch((error) => {
+            console.log("error load partial File", error);
+            this.showForm();
+            this.getData();
+          });
+
+      }).catch((error) => {
+        //  this.externalCustomFileChecked = true;
+        console.log("error ", error);
+      });
   }
 
   async getData() {
