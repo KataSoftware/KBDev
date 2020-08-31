@@ -32,32 +32,49 @@ export class PageService {
     if (settings.DataQuery != null) {
       serviceData.Query = settings.DataQuery;
     }
-    if (settings.Data == null) {
-      let response = await this.bizAppService.Get(serviceData);
-      if (response.isSuccess() == true) {
-        settings.Data = response.data;
-      }
-
-
-    } else {
-      // settings.Data 
-      if (settings.Data != null && Array.isArray(settings.Data) && (settings.DataValue == null && settings.DataText == null)) {
-        // data si hay, pero no propiedades
-        field.templateOptions.options = settings.Data;
-        let dataArray: Array<any> = [];
-        for (let index = 0; index < settings.Data.length; index++) {
-          const element = settings.Data[index];
-          dataArray.push({ value: element, text: element });
+    if (field.templateOptions["parents"] == null) {
+      if (settings.Data == null) {
+        let response = await this.bizAppService.Get(serviceData);
+        if (response.isSuccess() == true) {
+          settings.Data = response.data;
         }
 
-        settings.Data = dataArray;
-        settings.DataValue = "value";
-        settings.DataText = "text";
+
       } else {
-        // hay datos y propiedades
+        // settings.Data 
+        if (settings.Data != null && Array.isArray(settings.Data) && (settings.DataValue == null && settings.DataText == null)) {
+          // data si hay, pero no propiedades
+          field.templateOptions.options = settings.Data;
+          let dataArray: Array<any> = [];
+          for (let index = 0; index < settings.Data.length; index++) {
+            const element = settings.Data[index];
+            dataArray.push({ value: element, text: element });
+          }
+
+          settings.Data = dataArray;
+          settings.DataValue = "value";
+          settings.DataText = "text";
+        } else {
+          // hay datos y propiedades
+
+        }
 
       }
-
+    } else {
+      //parents
+      field.hooks = {
+        onInit: field => {
+          console.log("onInit hooks");
+          // obtener campos con relación parent
+          const parents:string = field.templateOptions["parents"];
+          if (parents != null && parents.length > 0){
+            const relations:Array<string> = parents.split(";");
+            relations.forEach(rel => {
+              
+            });
+          }
+        }
+      }
     }
 
     field.templateOptions.options = settings.Data;
@@ -372,6 +389,8 @@ export class PageService {
       }
       if (settings.Hooks != null) {
         field["hooks"] = settings.Hooks;
+      } else {
+      //  console.log("hooks", field["hooks"]);
       }
       if (settings.AsyncValidators != null) {
         field["asyncValidators"] = settings.AsyncValidators;
@@ -443,7 +462,7 @@ export class PageService {
   }
   public getQueryFilter(itemFilter: any, fields?: Array<FormlyFieldConfig>, withRange?: boolean) {
     let queryBuilder: Array<string> = [];
-    
+
     // Asegurarse que las propiedades simples existen
     for (const prop in itemFilter) {
       if (prop.startsWith("__start") || prop.startsWith("__end")) {
@@ -482,17 +501,17 @@ export class PageService {
               queryRange.push(`${prop} >= ${this.getDateValue(itemFilter["__start" + prop], 'start')}`);
             } else if (fieldType == "guid" && itemFilter[prop] != null && itemFilter[prop] != "") {
               queryBuilder.push(`${prop} = "${itemFilter[prop]}"`);
-            } else if (itemFilter[prop] != null && itemFilter[prop] != ""){
+            } else if (itemFilter[prop] != null && itemFilter[prop] != "") {
               queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
             }
           } else {
 
             if (fieldType == "guid" && itemFilter[prop] != null && itemFilter[prop] != "") {
               queryBuilder.push(`${prop} = "${itemFilter[prop]}"`);
-            } else if (itemFilter[prop] != null && itemFilter[prop] != ""){
+            } else if (itemFilter[prop] != null && itemFilter[prop] != "") {
               queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
             }
-            
+
           }
 
 

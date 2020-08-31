@@ -133,8 +133,8 @@ return [
 {
     key: KstWorkTimeModel.PropertyNames.GuidActivity,
     type: 'select',
-
     templateOptions: {
+		  "parents": "GuidProject:KstProject;GuidActivityType:KstActivityType",
 		  "relation": {
 			PropertyRelationName: "KstActivity",
 			EntityModel: KstActivityModel,  
