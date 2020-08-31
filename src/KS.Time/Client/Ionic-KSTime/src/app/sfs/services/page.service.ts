@@ -443,7 +443,7 @@ export class PageService {
   }
   public getQueryFilter(itemFilter: any, fields?: Array<FormlyFieldConfig>, withRange?: boolean) {
     let queryBuilder: Array<string> = [];
-
+    
     // Asegurarse que las propiedades simples existen
     for (const prop in itemFilter) {
       if (prop.startsWith("__start") || prop.startsWith("__end")) {
@@ -452,76 +452,80 @@ export class PageService {
     }
 
     for (const prop in itemFilter) {
-      if (itemFilter[prop] != null && itemFilter[prop] != "") {
-        if (prop != "IsDeleted" &&
-          (!prop.startsWith("__start") && !prop.startsWith("__end"))
-        ) {
-          let fieldFinded: FormlyFieldConfig = fields.find(p => p.key == prop);
-          let fieldType: string = "";
-          if (fieldFinded.type.indexOf("date") != -1) {
-            fieldType = "date";
-          } else if (fieldFinded.templateOptions != null && fieldFinded.templateOptions.type == "number") {
-            fieldType = "number";
-          } else if (fieldFinded.templateOptions != null && fieldFinded.templateOptions.relation != null) {
-            fieldType = "guid";
+      // if (itemFilter[prop] != null && itemFilter[prop] != "") {
+      if (prop != "IsDeleted" &&
+        (!prop.startsWith("__start") && !prop.startsWith("__end"))
+      ) {
+        let fieldFinded: FormlyFieldConfig = fields.find(p => p.key == prop);
+        let fieldType: string = "";
+        if (fieldFinded.type.indexOf("date") != -1) {
+          fieldType = "date";
+        } else if (fieldFinded.templateOptions != null && fieldFinded.templateOptions.type == "number") {
+          fieldType = "number";
+        } else if (fieldFinded.templateOptions != null && fieldFinded.templateOptions.relation != null) {
+          fieldType = "guid";
+        }
+
+        if (withRange == true) {
+
+          let queryRange: Array<string> = [];
+          //queryBuilder.push("(");
+          let existStart: boolean = false;
+          // verificamos tipo
+
+          if (itemFilter["__start" + prop] != null && itemFilter["__start" + prop] != "") {
+            // start si tiene
+            existStart = true;
+            if (fieldType == "number") {
+              queryRange.push(`${prop} >=  ${itemFilter["__start" + prop]}`);
+            } else if (fieldType == "date") {
+              queryRange.push(`${prop} >= ${this.getDateValue(itemFilter["__start" + prop], 'start')}`);
+            } else if (fieldType == "guid" && itemFilter[prop] != null && itemFilter[prop] != "") {
+              queryBuilder.push(`${prop} = "${itemFilter[prop]}"`);
+            } else if (itemFilter[prop] != null && itemFilter[prop] != ""){
+              queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
+            }
+          } else {
+
+            if (fieldType == "guid" && itemFilter[prop] != null && itemFilter[prop] != "") {
+              queryBuilder.push(`${prop} = "${itemFilter[prop]}"`);
+            } else if (itemFilter[prop] != null && itemFilter[prop] != ""){
+              queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
+            }
+            
           }
 
-          if (withRange == true) {
 
-            let queryRange: Array<string> = [];
-            //queryBuilder.push("(");
-            let existStart: boolean = false;
-            // verificamos tipo
-
-            if (itemFilter["__start" + prop] != null && itemFilter["__start" + prop] != "") {
-              // start si tiene
-              existStart = true;
-              if (fieldType == "number") {
-                queryRange.push(`${prop} >=  ${itemFilter["__start" + prop]}`);
-              } else if (fieldType == "date") {
-                queryRange.push(`${prop} >= ${this.getDateValue(itemFilter["__start" + prop], 'start')}`);
-              } else if (fieldType == "guid") {
-                queryBuilder.push(`${prop} = "${itemFilter[prop]}"`);
-              } else {
-                queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
-              }
-            } else {
-              if (fieldType == "guid") {
-                queryBuilder.push(`${prop} = "${itemFilter[prop]}"`);
-              } else {
-                queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
-              }
+          if (itemFilter["__end" + prop] != null && itemFilter["__end" + prop] != "") {
+            // start si tiene
+            if (fieldType == "number") {
+              queryRange.push(`${prop} <=  ${itemFilter["__end" + prop]}`);
+            } else if (fieldType == "date") {
+              queryRange.push(`${prop} <= ${this.getDateValue(itemFilter["__end" + prop], 'end')}`);
             }
-            
-            
-            if (itemFilter["__end" + prop] != null && itemFilter["__end" + prop] != "") {
-              // start si tiene
-              if (fieldType == "number") {
-                queryRange.push(`${prop} <=  ${itemFilter["__end" + prop]}`);
-              } else if (fieldType == "date") {
-                queryRange.push(`${prop} <= ${this.getDateValue(itemFilter["__end" + prop], 'end')}`);
-              }
-            }
-            if (queryRange.length > 0) {
-              queryBuilder.push("(" + queryRange.join(" AND ") + ")");
-            }
-            // queryBuilder.push(")");
-          } else {
+          }
+          if (queryRange.length > 0) {
+            queryBuilder.push("(" + queryRange.join(" AND ") + ")");
+          }
+          // queryBuilder.push(")");
+        } else {
+          if (itemFilter[prop] != null && itemFilter[prop] != "") {
             if (fieldType == "number") {
               queryBuilder.push(`${prop} =  ${itemFilter[prop]}`);
             } else if (fieldType == "date") {
               queryBuilder.push(`${prop} =  ${this.getDateValue(itemFilter[prop], 'start')}`);
-            }if (fieldType == "guid") {
+            } if (fieldType == "guid") {
               queryBuilder.push(`${prop} = "${itemFilter[prop]}"`);
-            }  
+            }
             else {
               queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
             }
           }
-        } else {
-
         }
+      } else {
+
       }
+      //    }
     }
 
     return queryBuilder.join(" AND ");

@@ -89,7 +89,9 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
           console.log("data open filter", this.item);
         } else {
           //console.log("new item", this.item);
-           this.item = {};// new this.entityModel();
+           /*if (this.isFilter == true ){
+              this.item = new this.entityModel();
+           }*/
         }
         import(
           /* webpackMode: "eager" */
@@ -156,7 +158,7 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
   }
   async delete() {
     if (this.isFilter == true) {
-
+      this.modalCtrl.dismiss({ delete:true });
     } else {
 
       let modalResponse = await this.showConfirm({
@@ -172,6 +174,10 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
   async saveData() {
 
     if (this.isFilter) {
+      if (this.item == null) {
+        this.item = new this.entityModel();
+      }
+      Object.assign(this.item, this.form.value);
       this.modalCtrl.dismiss({ query: this.pageService.getQueryFilter(this.item, this.entityModel.GetFields(), this.isFilterRange), itemFilter: this.item });
 
     } else {

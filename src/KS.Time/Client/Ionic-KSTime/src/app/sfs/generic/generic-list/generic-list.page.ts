@@ -205,49 +205,53 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     //this.itemFilter = new this.entityModel();
     this.serviceData.Query = "";
     await this.bindData();
-    if (event != null){
+    if (event != null) {
       event.target.complete();
     }
   }
-  async refreshList(event?:any) {
+  async refreshList(event?: any) {
     //this.itemFilter = new this.entityModel();
     //this.serviceData.Query = "";
     await this.bindData();
-    if (event != null){
+    if (event != null) {
       event.target.complete();
     }
   }
-async removeFilter(){
-  this.itemFilter = null;
-  this.serviceData.Query = "";
-  this.refreshList(null);
-  
-}
+  async removeFilter() {
+    this.itemFilter = null;
+    this.serviceData.Query = "";
+    this.refreshList(null);
+
+  }
 
   async showFilter() {
     if (this.currentMediaQuery == 'xs' || this.currentMediaQuery == 'sm') {
       const modal = await this.modalCtrl.create({
-          component: GenericModalComponent,
-          componentProps: {
-            entityName : this.entityName,
-            isFilter : true,
-            item: this.itemFilter
-          }
+        component: GenericModalComponent,
+        componentProps: {
+          entityName: this.entityName,
+          isFilter: true,
+          item: this.itemFilter
+        }
 
       });
       modal.onDidDismiss()
-      .then((data:any) => {
-        console.log("modal data", data);
-          if (data != null && data.data != null && data.data.query != null && data.data.itemFilter != null ){
-          this.serviceData.Query = data.data.query;
-          this.itemFilter = data.data.itemFilter;
-          this.refreshList(null);
-        }else{
-
-        }
-        //this.bindData({ RestartPaging: navData.RestartPaging });
-      });
-       await modal.present();
+        .then((data: any) => {
+          console.log("modal data", data);
+          if (data != null && data.data != null) {
+            if (data.data.query != null && data.data.itemFilter != null) {
+              this.serviceData.Query = data.data.query;
+              this.itemFilter = data.data.itemFilter;
+              this.refreshList(null);
+            } else if (data.data.delete == true) {
+              this.serviceData.Query = null;
+              this.itemFilter = null;
+              this.refreshList(null);
+            }
+          }
+          //this.bindData({ RestartPaging: navData.RestartPaging });
+        });
+      await modal.present();
 
     } else {
       if (this.hideFilter == true) {
@@ -309,7 +313,7 @@ async removeFilter(){
         this.serviceData.EntitySet = this.entityModel._EntitySetName;
         this.serviceData.Fields = Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p => !p.startsWith("Fk")).join(",");
         this.serviceData.AllFields = true;
-       // this.serviceData.Query = "NumActivities > 0";
+        // this.serviceData.Query = "NumActivities > 0";
         this.serviceData.SortBy = 'UpdatedDate';
 
         this.serviceData.SortDirection = 'desc';
