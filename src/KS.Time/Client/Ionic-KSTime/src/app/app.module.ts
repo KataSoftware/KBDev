@@ -1,3 +1,4 @@
+import { GenericModalComponent } from './sfs/generic/generic-modal/generic-modal.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -13,7 +14,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SFSCommonModule, EntityListPageModule } from 'sfscommon';
 import { environment } from 'src/environments/environment';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
@@ -24,8 +25,10 @@ import { IonicGestureConfig } from './sfs/utils/IonicGestureConfig';
 
 @NgModule({
   declarations: [AppComponent,
-    FormlyWrapperAddons],
-  entryComponents: [],
+    FormlyWrapperAddons,
+    GenericModalComponent
+  ],
+  entryComponents: [GenericModalComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -40,6 +43,7 @@ import { IonicGestureConfig } from './sfs/utils/IonicGestureConfig';
     // RecaptchaModule,
     // RecaptchaFormsModule,
     ReactiveFormsModule,
+    FormsModule,
     FormlyBootstrapModule,
     FormlyModule.forRoot(),
     FormlyMaterialModule

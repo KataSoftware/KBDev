@@ -1,4 +1,5 @@
-﻿import { GenericFormPage } from './../generic-form/generic-form.page';
+﻿import { GenericModalComponent } from './../generic-modal/generic-modal.component';
+import { GenericFormPage } from './../generic-form/generic-form.page';
 import { NgZone } from '@angular/core';
 import { Component, OnInit, Injector, ViewChild, TemplateRef, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
 import { DataService, TableColumn, SystemCore, titlePlace, addButtonPlace } from 'sfscommon';
@@ -201,24 +202,56 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
   itemFilter: any = null;
   async refreshFilter(event) {
-    this.itemFilter = new this.entityModel();
+    //this.itemFilter = new this.entityModel();
     this.serviceData.Query = "";
     await this.bindData();
-    event.target.complete();
+    if (event != null) {
+      event.target.complete();
+    }
+  }
+  async refreshList(event?: any) {
+    //this.itemFilter = new this.entityModel();
+    //this.serviceData.Query = "";
+    await this.bindData();
+    if (event != null) {
+      event.target.complete();
+    }
+  }
+  async removeFilter() {
+    this.itemFilter = null;
+    this.serviceData.Query = "";
+    this.refreshList(null);
+
   }
 
   async showFilter() {
     if (this.currentMediaQuery == 'xs' || this.currentMediaQuery == 'sm') {
       const modal = await this.modalCtrl.create({
-          component: GenericFormPage,
-          componentProps: {
-            entityName : this.entityName,
-            isFilter : true
-          }
+        component: GenericModalComponent,
+        componentProps: {
+          entityName: this.entityName,
+          isFilter: true,
+          item: this.itemFilter
+        }
 
       });
-
-       await modal.present();
+      modal.onDidDismiss()
+        .then((data: any) => {
+          console.log("modal data", data);
+          if (data != null && data.data != null) {
+            if (data.data.query != null && data.data.itemFilter != null) {
+              this.serviceData.Query = data.data.query;
+              this.itemFilter = data.data.itemFilter;
+              this.refreshList(null);
+            } else if (data.data.delete == true) {
+              this.serviceData.Query = null;
+              this.itemFilter = null;
+              this.refreshList(null);
+            }
+          }
+          //this.bindData({ RestartPaging: navData.RestartPaging });
+        });
+      await modal.present();
 
     } else {
       if (this.hideFilter == true) {
@@ -262,7 +295,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       `../../models/codegen/${this.entityName}.model`).then((_model) => {
         this.entityModel = _model[this.entityName + "Model"]
 
-        this.itemFilter = new this.entityModel();
+        //this.itemFilter = new this.entityModel();
         //this.title = "KstEmailTemplates";
         // this.serviceData = {
 
@@ -280,7 +313,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
         this.serviceData.EntitySet = this.entityModel._EntitySetName;
         this.serviceData.Fields = Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p => !p.startsWith("Fk")).join(",");
         this.serviceData.AllFields = true;
-       // this.serviceData.Query = "NumActivities > 0";
+        // this.serviceData.Query = "NumActivities > 0";
         this.serviceData.SortBy = 'UpdatedDate';
 
         this.serviceData.SortDirection = 'desc';

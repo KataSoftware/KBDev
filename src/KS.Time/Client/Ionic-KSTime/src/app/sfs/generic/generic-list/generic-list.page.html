@@ -38,8 +38,30 @@
   </ion-grid>
   <ion-progress-bar type="indeterminate" *ngIf="loadingData == true"></ion-progress-bar>
 </ion-header>
+<div class="filter-enabled" *ngIf="itemFilter != null">
+  <ion-item class="ion-padding-start">
+    <ion-label> Existe un filtro aplicado</ion-label>
+    <div slot="end">
+      <ion-button color="light" class=" ion-no-padding" (click)="showFilter()" Fill="clear" aria-label="Limpiar filtro" data-microtip-position="up"
+      role="tooltip">
 
+      <ion-icon slot="icon-only"  name="create-outline"></ion-icon>
+     
+    </ion-button>
+      <ion-button class="remove-filter ion-no-padding" color="light" (click)="removeFilter()" Fill="clear" aria-label="Limpiar filtro" data-microtip-position="up"
+                role="tooltip">
+                <ion-icon slot="icon-only"  name="close-circle"></ion-icon>
+               
+              </ion-button>
+    
+  
+    </div>
+  </ion-item>
+ 
+ 
+</div>
 <ion-content padding class="page-list" #content scrollEvents="true" appHideHeader [header]="header">
+
 
   <ion-refresher *ngIf="currentMediaQuery =='xs' || currentMediaQuery =='sm'" slot="fixed"
     (ionRefresh)="doRefresh($event)">
@@ -298,6 +320,8 @@
     </ion-fab-button>
   </ion-fab>
 
+   
+  
 </ion-content>
 
 <ion-footer *ngIf=" selection.isEmpty() == false && (currentMediaQuery =='xs' || currentMediaQuery =='sm') ">

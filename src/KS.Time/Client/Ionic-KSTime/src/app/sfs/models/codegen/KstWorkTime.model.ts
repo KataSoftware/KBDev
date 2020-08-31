@@ -158,11 +158,11 @@ return [
 {
     key: KstWorkTimeModel.PropertyNames.DueDate,
     type: 'datepicker',
-
+	defaultValue: "",
     templateOptions: {
 	        label: KstWorkTimeModel.PropertyNames.DueDate,
         placeholder: '',
-        required: false,
+		required: false
 		
     }
 },
@@ -226,7 +226,7 @@ return [
 	UpdatedDate?:string;	
 
 		 
-	DueDate?:string;	
+	DueDate?:Date = null;	
 
 		 
 	GuidActivityType?:string;	

@@ -11,6 +11,7 @@ import { bizAppService } from '../../services/business.service';
 import { Button } from 'protractor';
 import { PageService } from '../../services/page.service';
 import { DialogSettings, DialogButton, SeparatorSettings, FieldSettings } from '../../models/common/page.model';
+import { confirmSettings } from '../app-list-base/app-list-base.page';
  
 export class AppFormBasePage extends BasePage implements OnInit {
 
@@ -140,15 +141,39 @@ export class AppFormBasePage extends BasePage implements OnInit {
     }
   }
   public async showOk(title?: string, message?: string, buttons?: Array<any>) {
-    return await this.showConfirm();
+    return await this.showConfirm({ text:message });
   }
   public async showWarning(title?: string, message?: string, buttons?: Array<any>) {
     return await this.showDialog({ Message: message, Title: title, Buttons: buttons, Type: "warning" });
   }
-  public async showConfirm(message?: string): Promise<Boolean> {
-    return true;
-    
-  }
+  public  async showConfirm(settings:confirmSettings){
+      
+
+    const alert = await this.alertCtrl.create({
+    cssClass: 'my-custom-class',
+    header: 'Confirmar',
+    message: `¿ Desea eliminar el registro actual?`,
+    buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: () => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Sí, eliminar',
+        handler: () => {
+         settings.onOk();
+        }
+      }
+    ]
+  });
+
+   alert.present();
+  
+   //return true;
+}
   ngOnInit(): void {
 
   }

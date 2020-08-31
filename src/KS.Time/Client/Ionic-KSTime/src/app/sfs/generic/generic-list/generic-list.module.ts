@@ -8,7 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { GenericListPage } from './generic-list.page';
 import { SFSCommonModule } from 'sfscommon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { TimeAgoPipe } from '../../pipes/common/timeago';
 import { timeagoModule } from '../../pipes/common/timeago.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -16,6 +16,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyConfig } from '../../shared/common/formly';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { GenericModalComponent } from '../generic-modal/generic-modal.component';
 
 
 const routes: Routes = [
@@ -26,25 +27,26 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [  ],
   imports: [
     CommonModule,
     FormsModule,
-	SharedModule,
-	FormlyModule.forRoot(FormlyConfig),
+    SharedModule,
+    FormlyModule.forRoot(FormlyConfig),
     FormlyMaterialModule,
     IonicModule,
-	MatIconModule,
+    MatIconModule,
     SFSCommonModule,
     MatCheckboxModule,
     MatExpansionModule,
-	MatMenuModule,
+    MatMenuModule,
     timeagoModule,
-    
+
     RouterModule.forChild(routes)
   ],
 
   declarations: [GenericListPage]
 })
-export class GenericListPageModule {}
+export class GenericListPageModule { }
 
 
