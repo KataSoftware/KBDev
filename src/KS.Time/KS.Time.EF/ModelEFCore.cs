@@ -40,6 +40,7 @@ namespace KS.Time
         public virtual DbSet<KstWorkTimeFile> KstWorkTimeFiles { get; set; }
         public virtual DbSet<KstProxyRole> KstProxyRoles { get; set; }
         public virtual DbSet<KstProxyUser> KstProxyUsers { get; set; }
+        public virtual DbSet<KstActivityType> KstActivityTypes { get; set; }
 #endregion
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -145,10 +146,16 @@ namespace KS.Time
 			 entity.Property(e => e.CreatedDate);
 			 entity.Property(e => e.UpdatedDate);
 			 entity.Property(e => e.Bytes);
+			 entity.Property(e => e.GuidActivityType);
 
 		entity.HasOne(d => d.KstProject)
                     .WithMany(p => p.KstActivities)
                     .HasForeignKey(d => d.GuidProject)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+		entity.HasOne(d => d.KstActivityType)
+                    .WithMany(p => p.KstActivities)
+                    .HasForeignKey(d => d.GuidActivityType)
                     .OnDelete(DeleteBehavior.ClientSetNull);
 
 
@@ -225,6 +232,7 @@ namespace KS.Time
 			 entity.Property(e => e.UpdatedDate);
 			 entity.Property(e => e.Bytes);
 			 entity.Property(e => e.DueDate);
+			 entity.Property(e => e.GuidActivityType);
 
 		entity.HasOne(d => d.KstActivity)
                     .WithMany(p => p.KstWorkTimes)
@@ -234,6 +242,11 @@ namespace KS.Time
 		entity.HasOne(d => d.KstProject)
                     .WithMany(p => p.KstWorkTimes)
                     .HasForeignKey(d => d.GuidProject)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+		entity.HasOne(d => d.KstActivityType)
+                    .WithMany(p => p.KstWorkTimes)
+                    .HasForeignKey(d => d.GuidActivityType)
                     .OnDelete(DeleteBehavior.ClientSetNull);
 
 
@@ -392,6 +405,25 @@ namespace KS.Time
                     .WithMany(p => p.KstProxyUsers)
                     .HasForeignKey(d => d.GuidRole)
                     .OnDelete(DeleteBehavior.ClientSetNull);
+
+
+		});
+			modelBuilder.Entity<KstActivityType>(entity =>
+            {
+			entity.HasKey(e => new { e.GuidActivityType});
+
+			
+			 entity.ToTable("KstActivityType");
+			 entity.Property(e => e.GuidActivityType);
+			 entity.Property(e => e.Name);
+			 entity.Property(e => e.GuidCompany);
+			 entity.Property(e => e.CreatedBy);
+			 entity.Property(e => e.UpdatedBy);
+			 entity.Property(e => e.IsDeleted);
+			 entity.Property(e => e.BizKeyEngine);
+			 entity.Property(e => e.CreatedDate);
+			 entity.Property(e => e.UpdatedDate);
+			 entity.Property(e => e.Bytes);
 
 
 		});

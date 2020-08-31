@@ -7604,7 +7604,7 @@ public class SinglentonContext
 		{
             using (EFContext con = new EFContext()) {
 				
-				string fkIncludes = "KstProject";
+				string fkIncludes = "KstProject,KstActivityType";
                 List<string> multilangProperties = new List<string>();
 				if (predicate == null) predicate = PredicateBuilder.True<KstActivity>();
                 var notDeletedExpression = predicate.And(p => p.IsDeleted != true || p.IsDeleted ==null );
@@ -7645,7 +7645,7 @@ public class SinglentonContext
 			
 
                 if (predicate == null) predicate = PredicateBuilder.True<KstActivity>();
- 				string fkIncludes = "KstProject";
+ 				string fkIncludes = "KstProject,KstActivityType";
                 if(contextRequest!=null){
 					if (contextRequest.CustomQuery != null)
 					{
@@ -7724,7 +7724,7 @@ public class SinglentonContext
 
 
 				string computedFields = "";
-				string fkIncludes = "KstProject";
+				string fkIncludes = "KstProject,KstActivityType";
                 List<string> multilangProperties = new List<string>();
 				//if (predicate == null) predicate = PredicateBuilder.True<KstActivity>();
                 var notDeletedExpression = "(IsDeleted != true OR IsDeleted = null)";
@@ -7801,7 +7801,7 @@ public class SinglentonContext
 
 
                 //if (predicate == null) predicate = PredicateBuilder.True<KstActivity>();
- 				string fkIncludes = "KstProject";
+ 				string fkIncludes = "KstProject,KstActivityType";
                 if(contextRequest!=null){
 					if (contextRequest.CustomQuery != null)
 					{
@@ -7971,7 +7971,9 @@ public class SinglentonContext
 					contextRequest.CustomQuery.SpecificProperties.Add(KstActivity.PropertyNames.CreatedDate);
 					contextRequest.CustomQuery.SpecificProperties.Add(KstActivity.PropertyNames.UpdatedDate);
 					contextRequest.CustomQuery.SpecificProperties.Add(KstActivity.PropertyNames.Bytes);
+					contextRequest.CustomQuery.SpecificProperties.Add(KstActivity.PropertyNames.GuidActivityType);
 					contextRequest.CustomQuery.SpecificProperties.Add(KstActivity.PropertyNames.KstProject);
+					contextRequest.CustomQuery.SpecificProperties.Add(KstActivity.PropertyNames.KstActivityType);
   
 
                   
@@ -8022,6 +8024,13 @@ public class SinglentonContext
 					}
                     else
 						linq = "iif(it.KstProject != null, KstProject(it.KstProject.GuidProject, it.KstProject.Name), null) as KstProject";
+ 					break;
+					case "KstActivityType":
+					if (includesList.Contains(selected)){
+                        linq = "it.KstActivityType as KstActivityType";
+					}
+                    else
+						linq = "iif(it.KstActivityType != null, KstActivityType(it.KstActivityType.GuidActivityType, it.KstActivityType.Name), null) as KstActivityType";
  					break;
 					 
 						
@@ -8165,11 +8174,15 @@ public class SinglentonContext
 					
 	
 					
+	
+					
+	
+					
 								sbSpec.Append(" OR ");
 					
 					//if (sbSpec.Length > 2)
 					//	sbSpec.Append(" OR "); // test
-					sbSpec.Append(string.Format(@"it.KstProject.Name.Contains(""{0}"")", word));
+					sbSpec.Append(string.Format(@"it.KstProject.Name.Contains(""{0}"")", word)+" OR "+string.Format(@"it.KstActivityType.Name.Contains(""{0}"")", word));
 								 //sbSpec.Append("*extraFreeText*");
 
                     /*if (words.Length > 1) sbSpec.Append(")");
@@ -8425,6 +8438,8 @@ public class SinglentonContext
 
 			itemForSave.Bytes = entity.Bytes;
 
+			itemForSave.GuidActivityType = entity.GuidActivityType;
+
 				
 				con.KstActivities.Add(itemForSave);
 
@@ -8440,6 +8455,18 @@ public class SinglentonContext
 					//}
 
 
+
+
+
+
+					//if (entity.KstActivityType != null)
+					//{
+					//	var kstActivityType = new KstActivityType();
+					//	kstActivityType.GuidActivityType = entity.KstActivityType.GuidActivityType;
+					//	itemForSave.KstActivityType = kstActivityType;
+					//	SFS.Core.BR.Utils.TryAttachFKRelation<KstActivityType>(con, itemForSave.KstActivityType);
+			
+					//}
 
 
 
@@ -8593,6 +8620,18 @@ public class SinglentonContext
 					}
 
 
+
+
+
+
+				    if (entity.KstActivityType != null)
+					{
+						//var kstActivityType = new KstActivityType();
+						entity.GuidActivityType = entity.KstActivityType.GuidActivityType;
+						//entity.KstActivityType = kstActivityType;
+						//SFS.Core.BR.Utils.TryAttachFKRelation<KstActivityType>(con, itemForSave.KstActivityType);
+			
+					}
 
 
 
@@ -8766,6 +8805,18 @@ public class SinglentonContext
 
 
 
+
+				    if (entity.KstActivityType != null)
+					{
+						//var kstActivityType = new KstActivityType();
+						entity.GuidActivityType = entity.KstActivityType.GuidActivityType;
+						//entity.KstActivityType = kstActivityType;
+						//SFS.Core.BR.Utils.TryAttachFKRelation<KstActivityType>(con, itemForSave.KstActivityType);
+			
+					}
+
+
+
 				}
 				using (EFContext con = new EFContext())
 				{
@@ -8868,6 +8919,9 @@ public class SinglentonContext
 
 
 					
+					
+
+
 					
 
 				
@@ -9146,7 +9200,7 @@ public class SinglentonContext
 
 		using (EFContext con = new EFContext()) {
 				string computedFields = "";
-				string fkIncludes = "KstProject";
+				string fkIncludes = "KstProject,KstActivityType";
                 List<string> multilangProperties = new List<string>();
 				//if (predicate == null) predicate = PredicateBuilder.True<KstActivity>();
                 var notDeletedExpression = "(IsDeleted != true OR IsDeleted = null)";
@@ -13585,7 +13639,7 @@ public class SinglentonContext
 		{
             using (EFContext con = new EFContext()) {
 				
-				string fkIncludes = "KstActivity,KstProject";
+				string fkIncludes = "KstActivity,KstProject,KstActivityType";
                 List<string> multilangProperties = new List<string>();
 				if (predicate == null) predicate = PredicateBuilder.True<KstWorkTime>();
                 var notDeletedExpression = predicate.And(p => p.IsDeleted != true || p.IsDeleted ==null );
@@ -13626,7 +13680,7 @@ public class SinglentonContext
 			
 
                 if (predicate == null) predicate = PredicateBuilder.True<KstWorkTime>();
- 				string fkIncludes = "KstActivity,KstProject";
+ 				string fkIncludes = "KstActivity,KstProject,KstActivityType";
                 if(contextRequest!=null){
 					if (contextRequest.CustomQuery != null)
 					{
@@ -13705,7 +13759,7 @@ public class SinglentonContext
 
 
 				string computedFields = "";
-				string fkIncludes = "KstActivity,KstProject";
+				string fkIncludes = "KstActivity,KstProject,KstActivityType";
                 List<string> multilangProperties = new List<string>();
 				//if (predicate == null) predicate = PredicateBuilder.True<KstWorkTime>();
                 var notDeletedExpression = "(IsDeleted != true OR IsDeleted = null)";
@@ -13782,7 +13836,7 @@ public class SinglentonContext
 
 
                 //if (predicate == null) predicate = PredicateBuilder.True<KstWorkTime>();
- 				string fkIncludes = "KstActivity,KstProject";
+ 				string fkIncludes = "KstActivity,KstProject,KstActivityType";
                 if(contextRequest!=null){
 					if (contextRequest.CustomQuery != null)
 					{
@@ -13955,8 +14009,10 @@ public class SinglentonContext
 					contextRequest.CustomQuery.SpecificProperties.Add(KstWorkTime.PropertyNames.UpdatedDate);
 					contextRequest.CustomQuery.SpecificProperties.Add(KstWorkTime.PropertyNames.Bytes);
 					contextRequest.CustomQuery.SpecificProperties.Add(KstWorkTime.PropertyNames.DueDate);
+					contextRequest.CustomQuery.SpecificProperties.Add(KstWorkTime.PropertyNames.GuidActivityType);
 					contextRequest.CustomQuery.SpecificProperties.Add(KstWorkTime.PropertyNames.KstActivity);
 					contextRequest.CustomQuery.SpecificProperties.Add(KstWorkTime.PropertyNames.KstProject);
+					contextRequest.CustomQuery.SpecificProperties.Add(KstWorkTime.PropertyNames.KstActivityType);
   
 
                   
@@ -14014,6 +14070,13 @@ public class SinglentonContext
 					}
                     else
 						linq = "iif(it.KstProject != null, KstProject(it.KstProject.GuidProject, it.KstProject.Name), null) as KstProject";
+ 					break;
+					case "KstActivityType":
+					if (includesList.Contains(selected)){
+                        linq = "it.KstActivityType as KstActivityType";
+					}
+                    else
+						linq = "iif(it.KstActivityType != null, KstActivityType(it.KstActivityType.GuidActivityType, it.KstActivityType.Name), null) as KstActivityType";
  					break;
 					 
 						
@@ -14171,11 +14234,15 @@ public class SinglentonContext
 					
 	
 					
+	
+					
+	
+					
 								sbSpec.Append(" OR ");
 					
 					//if (sbSpec.Length > 2)
 					//	sbSpec.Append(" OR "); // test
-					sbSpec.Append(string.Format(@"it.KstActivity.Name.Contains(""{0}"")", word)+" OR "+string.Format(@"it.KstProject.Name.Contains(""{0}"")", word));
+					sbSpec.Append(string.Format(@"it.KstActivity.Name.Contains(""{0}"")", word)+" OR "+string.Format(@"it.KstProject.Name.Contains(""{0}"")", word)+" OR "+string.Format(@"it.KstActivityType.Name.Contains(""{0}"")", word));
 								 //sbSpec.Append("*extraFreeText*");
 
                     /*if (words.Length > 1) sbSpec.Append(")");
@@ -14437,6 +14504,8 @@ public class SinglentonContext
 
 			itemForSave.DueDate = entity.DueDate;
 
+			itemForSave.GuidActivityType = entity.GuidActivityType;
+
 				
 				con.KstWorkTimes.Add(itemForSave);
 
@@ -14464,6 +14533,18 @@ public class SinglentonContext
 					//}
 
 
+
+
+
+
+					//if (entity.KstActivityType != null)
+					//{
+					//	var kstActivityType = new KstActivityType();
+					//	kstActivityType.GuidActivityType = entity.KstActivityType.GuidActivityType;
+					//	itemForSave.KstActivityType = kstActivityType;
+					//	SFS.Core.BR.Utils.TryAttachFKRelation<KstActivityType>(con, itemForSave.KstActivityType);
+			
+					//}
 
 
 
@@ -14633,6 +14714,18 @@ public class SinglentonContext
 					}
 
 
+
+
+
+
+				    if (entity.KstActivityType != null)
+					{
+						//var kstActivityType = new KstActivityType();
+						entity.GuidActivityType = entity.KstActivityType.GuidActivityType;
+						//entity.KstActivityType = kstActivityType;
+						//SFS.Core.BR.Utils.TryAttachFKRelation<KstActivityType>(con, itemForSave.KstActivityType);
+			
+					}
 
 
 
@@ -14818,6 +14911,18 @@ public class SinglentonContext
 
 
 
+
+				    if (entity.KstActivityType != null)
+					{
+						//var kstActivityType = new KstActivityType();
+						entity.GuidActivityType = entity.KstActivityType.GuidActivityType;
+						//entity.KstActivityType = kstActivityType;
+						//SFS.Core.BR.Utils.TryAttachFKRelation<KstActivityType>(con, itemForSave.KstActivityType);
+			
+					}
+
+
+
 				}
 				using (EFContext con = new EFContext())
 				{
@@ -14923,6 +15028,9 @@ public class SinglentonContext
 
 
 					
+					
+
+
 					
 
 				
@@ -15201,7 +15309,7 @@ public class SinglentonContext
 
 		using (EFContext con = new EFContext()) {
 				string computedFields = "";
-				string fkIncludes = "KstActivity,KstProject";
+				string fkIncludes = "KstActivity,KstProject,KstActivityType";
                 List<string> multilangProperties = new List<string>();
 				//if (predicate == null) predicate = PredicateBuilder.True<KstWorkTime>();
                 var notDeletedExpression = "(IsDeleted != true OR IsDeleted = null)";
@@ -26993,6 +27101,1907 @@ public class SinglentonContext
 					
                 }else
                     return con.KstProxyUsers.Count();
+					
+			}*/
+			#endregion
+
+		}
+         public int GetCount()
+        {
+            return GetCount(p => true);
+        }
+        #endregion
+        
+         
+
+
+     
+
+		 public void UpdateAssociation(string relation, string relationValue, string query, Guid[] ids, ContextRequest contextRequest)
+        {
+            var items = GetBy(query, null, null, null, null, null, contextRequest, ids);
+			 var module = SFS.Core.Cache.Caching.SystemObjects.GetModuleByKey(SFS.Core.Web.Utils.GetRouteDataOrQueryParam(contextRequest.ContextAccessor, "area"));
+           
+            foreach (var item in items)
+            {
+			  Guid ? guidRelationValue = null ;
+                if (!string.IsNullOrEmpty(relationValue)){
+                    guidRelationValue = Guid.Parse(relationValue );
+                }
+
+				 if (relation.Contains("."))
+                {
+                    var partsWithOtherProp = relation.Split(char.Parse("|"));
+                    var parts = partsWithOtherProp[0].Split(char.Parse("."));
+
+                    string proxyRelName = parts[0];
+                    string proxyProperty = parts[1];
+                    string proxyPropertyKeyNameFromOther = partsWithOtherProp[1];
+                    //string proxyPropertyThis = parts[2];
+
+                    var prop = item.GetType().GetProperty(proxyRelName);
+                    //var entityInfo = //SFS.Core.
+                    // descubrir el tipo de entidad dentro de la colección
+                    Type typeEntityInList = SFS.Core.Entities.Utils.GetTypeFromList(prop);
+                    var newProxyItem = Activator.CreateInstance(typeEntityInList);
+                    var propThisForSet = newProxyItem.GetType().GetProperty(proxyProperty);
+                    var entityInfoOfProxy = SFS.Core.Common.Entities.Metadata.MetadataAttributes.GetMyAttribute<SFS.Core.Common.Entities.Metadata.EntityInfoAttribute>(typeEntityInList);
+                    var propOther = newProxyItem.GetType().GetProperty(proxyPropertyKeyNameFromOther);
+
+                    if (propThisForSet != null && entityInfoOfProxy != null && propOther != null )
+                    {
+                        var entityInfoThis = SFS.Core.Common.Entities.Metadata.MetadataAttributes.GetMyAttribute<SFS.Core.Common.Entities.Metadata.EntityInfoAttribute>(item.GetType());
+                        var valueThisId = item.GetType().GetProperty(entityInfoThis.PropertyKeyName).GetValue(item);
+                        if (valueThisId != null)
+                            propThisForSet.SetValue(newProxyItem, valueThisId);
+                        propOther.SetValue(newProxyItem, Guid.Parse(relationValue));
+                        
+                        var entityNameProp = newProxyItem.GetType().GetField("EntityName").GetValue(null);
+                        var entitySetNameProp = newProxyItem.GetType().GetField("EntitySetName").GetValue(null);
+
+                        SFS.Core.Apps.Integration.CreateItemFromApp(entityNameProp.ToString(), entitySetNameProp.ToString(), module.ModuleNamespace, newProxyItem, contextRequest);
+
+                    }
+
+                    // crear una instancia del tipo de entidad
+                    // llenar los datos y registrar nuevo
+
+
+                }
+                else
+                {
+                var prop = item.GetType().GetProperty(relation);
+                var entityInfo = SFS.Core.Common.Entities.Metadata.MetadataAttributes.GetMyAttribute<SFS.Core.Common.Entities.Metadata.EntityInfoAttribute>(prop.PropertyType);
+                if (entityInfo != null)
+                {
+                    var ins = Activator.CreateInstance(prop.PropertyType);
+                   if (guidRelationValue != null)
+                    {
+                        prop.PropertyType.GetProperty(entityInfo.PropertyKeyName).SetValue(ins, guidRelationValue);
+                        item.GetType().GetProperty(relation).SetValue(item, ins);
+                    }
+                    else
+                    {
+                        item.GetType().GetProperty(relation).SetValue(item, null);
+                    }
+
+                    Update(item, contextRequest);
+                }
+
+				}
+            }
+        }
+	
+
+				
+	}
+		public partial class KstActivityTypesBR:BRBase<KstActivityType>{
+	 	
+           
+		 #region Partial methods
+
+           partial void OnUpdating(object sender, BusinessRulesEventArgs<KstActivityType> e);
+
+            partial void OnUpdated(object sender, BusinessRulesEventArgs<KstActivityType> e);
+			partial void OnUpdatedAgile(object sender, BusinessRulesEventArgs<KstActivityType> e);
+				partial void OnUpdatingAgile(object sender, BusinessRulesEventArgs<KstActivityType> e);
+
+            partial void OnCreating(object sender, BusinessRulesEventArgs<KstActivityType> e);
+            partial void OnCreated(object sender, BusinessRulesEventArgs<KstActivityType> e);
+
+            partial void OnDeleting(object sender, BusinessRulesEventArgs<KstActivityType> e);
+            partial void OnDeleted(object sender, BusinessRulesEventArgs<KstActivityType> e);
+
+            partial void OnGetting(object sender, BusinessRulesEventArgs<KstActivityType> e);
+            protected override void OnVirtualGetting(object sender, BusinessRulesEventArgs<KstActivityType> e)
+            {
+                OnGetting(sender, e);
+            }
+			protected override void OnVirtualCounting(object sender, BusinessRulesEventArgs<KstActivityType> e)
+            {
+                OnCounting(sender, e);
+            }
+			partial void OnTaken(object sender, BusinessRulesEventArgs<KstActivityType> e);
+			protected override void OnVirtualTaken(object sender, BusinessRulesEventArgs<KstActivityType> e)
+            {
+                OnTaken(sender, e);
+            }
+			protected override void OnVirtualSummaryOperation(object sender,  BusinessRulesEventArgs<KstActivityType> e)
+			{
+				OnSummaryOperation(sender, e);
+			}
+            partial void OnCounting(object sender, BusinessRulesEventArgs<KstActivityType> e);
+			partial void OnSummaryOperation(object sender, BusinessRulesEventArgs<KstActivityType> e);
+ 
+			partial void OnQuerySettings(object sender, BusinessRulesEventArgs<KstActivityType> e);
+          
+            #endregion
+			
+		private static KstActivityTypesBR singlenton =null;
+				public static KstActivityTypesBR NewInstance(){
+					return  new KstActivityTypesBR();
+					
+				}
+		public static KstActivityTypesBR Instance{
+			get{
+				if (singlenton == null)
+					singlenton = new KstActivityTypesBR();
+				return singlenton;
+			}
+		}
+		//private bool preventSecurityRestrictions = false;
+		 public bool PreventAuditTrail { get; set;  }
+		#region Fields
+        EFContext context = null;
+        #endregion
+        #region Constructor
+        public KstActivityTypesBR()
+        {
+
+			this.AppNameKey = "KSTime";
+            this.EntityKey = "KstActivityType";
+
+            context = new EFContext();
+        }
+		 public KstActivityTypesBR(bool preventSecurity)
+            {
+				this.AppNameKey = "KSTime";
+				this.EntityKey = "KstActivityType";
+
+                this.preventSecurityRestrictions = preventSecurity;
+				context = new EFContext();
+            }
+        #endregion
+		
+		#region Get
+
+ 		public IQueryable<KstActivityType> Get()
+        {
+            using (EFContext con = new EFContext())
+            {
+				
+				var query = con.KstActivityTypes.AsQueryable();
+                //con.Configuration.ProxyCreationEnabled = false;
+
+                //query = ContextQueryBuilder<Nutrient>.ApplyContextQuery(query, contextRequest);
+
+                return query;
+
+
+
+
+            }
+
+        }
+		
+
+
+
+ 	
+		public List<KstActivityType> GetAll()
+        {
+            return this.GetBy(p => true);
+        }
+        public List<KstActivityType> GetAll(string includes)
+        {
+            return this.GetBy(p => true, includes);
+        }
+        public KstActivityType GetByKey(Guid guidActivityType)
+        {
+            return GetByKey(guidActivityType, true);
+        }
+        public KstActivityType GetByKey(Guid guidActivityType, bool loadIncludes)
+        {
+            KstActivityType item = null;
+			var query = PredicateBuilder.True<KstActivityType>();
+                    
+			string strWhere = @"GuidActivityType = Guid(""" + guidActivityType.ToString()+@""")";
+            Expression<Func<KstActivityType, bool>> predicate = null;
+            //if (!string.IsNullOrEmpty(strWhere))
+            //    predicate = System.Linq.Dynamic.DynamicExpression.ParseLambda<KstActivityType, bool>(strWhere.Replace("*extraFreeText*", "").Replace("()",""));
+			
+			 ContextRequest contextRequest = new ContextRequest();
+            contextRequest.CustomQuery = new CustomQuery();
+            contextRequest.CustomQuery.FilterExpressionString = strWhere;
+
+			//item = GetBy(predicate, loadIncludes, contextRequest).FirstOrDefault();
+			item = GetBy(strWhere,loadIncludes,contextRequest).FirstOrDefault();
+            return item;
+        }
+         public List<KstActivityType> GetBy(string strWhere, bool loadRelations, ContextRequest contextRequest)
+        {
+            if (!loadRelations)
+                return GetBy(strWhere, contextRequest);
+            else
+                return GetBy(strWhere, contextRequest, "");
+
+        }
+		  public List<KstActivityType> GetBy(string strWhere, bool loadRelations)
+        {
+              if (!loadRelations)
+                return GetBy(strWhere, new ContextRequest());
+            else
+                return GetBy(strWhere, new ContextRequest(), "");
+
+        }
+		         public KstActivityType GetByKey(Guid guidActivityType, params Expression<Func<KstActivityType, object>>[] includes)
+        {
+            KstActivityType item = null;
+			string strWhere = @"GuidActivityType = Guid(""" + guidActivityType.ToString()+@""")";
+          Expression<Func<KstActivityType, bool>> predicate = p=> p.GuidActivityType == guidActivityType;
+           // if (!string.IsNullOrEmpty(strWhere))
+           //     predicate = System.Linq.Dynamic.DynamicExpression.ParseLambda<KstActivityType, bool>(strWhere.Replace("*extraFreeText*", "").Replace("()",""));
+			
+        item = GetBy(predicate, includes).FirstOrDefault();
+         ////   item = GetBy(strWhere,includes).FirstOrDefault();
+			return item;
+
+        }
+        public KstActivityType GetByKey(Guid guidActivityType, string includes)
+        {
+            KstActivityType item = null;
+			string strWhere = @"GuidActivityType = Guid(""" + guidActivityType.ToString()+@""")";
+            
+			
+            item = GetBy(strWhere, includes).FirstOrDefault();
+            return item;
+
+        }
+		 public KstActivityType GetByKey(Guid guidActivityType, string usemode, string includes)
+		{
+			return GetByKey(guidActivityType, usemode, null, includes);
+
+		 }
+		 public KstActivityType GetByKey(Guid guidActivityType, string usemode, ContextRequest context,  string includes)
+        {
+            KstActivityType item = null;
+			string strWhere = @"GuidActivityType = Guid(""" + guidActivityType.ToString()+@""")";
+			if (context == null){
+				context = new ContextRequest();
+				context.CustomQuery = new CustomQuery();
+				context.CustomQuery.IsByKey = true;
+				context.CustomQuery.FilterExpressionString = strWhere;
+				context.UseMode = usemode;
+			}
+            item = GetBy(strWhere,context , includes).FirstOrDefault();
+            return item;
+
+        }
+
+        #region Dynamic Predicate
+        public List<KstActivityType> GetBy(Expression<Func<KstActivityType, bool>> predicate, int? pageSize, int? page)
+        {
+            return this.GetBy(predicate, pageSize, page, null, null);
+        }
+        public List<KstActivityType> GetBy(Expression<Func<KstActivityType, bool>> predicate, ContextRequest contextRequest)
+        {
+
+            return GetBy(predicate, contextRequest,"");
+        }
+        
+        public List<KstActivityType> GetBy(Expression<Func<KstActivityType, bool>> predicate, ContextRequest contextRequest, params Expression<Func<KstActivityType, object>>[] includes)
+        {
+            StringBuilder sb = new StringBuilder();
+           if (includes != null)
+            {
+                foreach (var path in includes)
+                {
+
+						if (sb.Length > 0) sb.Append(",");
+						sb.Append(SFS.Core.Linq.Utils.IncludeToString<KstActivityType>(path));
+
+               }
+            }
+            return GetBy(predicate, contextRequest, sb.ToString());
+        }
+        
+        
+        public List<KstActivityType> GetBy(Expression<Func<KstActivityType, bool>> predicate, string includes)
+        {
+			ContextRequest context = new ContextRequest();
+            context.CustomQuery = new CustomQuery();
+            context.CustomQuery.FilterExpressionString = "";
+
+            return GetBy(predicate, context, includes);
+        }
+
+        public List<KstActivityType> GetBy(Expression<Func<KstActivityType, bool>> predicate, params Expression<Func<KstActivityType, object>>[] includes)
+        {
+		ContextRequest context = new ContextRequest();
+		 context.CustomQuery = new CustomQuery();
+			if (!preventSecurityRestrictions)
+				{
+			/*if (System.Web.HttpContext.Current == null || System.Web.HttpContext.Current.Session == null)
+            {
+                throw new Exception("Please, specific the contextRequest parameter in the method: GetBy");
+            }*/
+			//ContextRequest context = new ContextRequest();
+			            context.User = SFS.Core.My.Context.CurrentContext.User;
+            context.Company = SFS.Core.My.Context.CurrentContext.Company;
+			}
+
+            context.CustomQuery.FilterExpressionString = "";
+            return GetBy(predicate, context, includes);
+        }
+
+      
+		public bool DisableCache { get; set; }
+		public List<KstActivityType> GetBy(Expression<Func<KstActivityType, bool>> predicate, ContextRequest contextRequest, string includes)
+		{
+            using (EFContext con = new EFContext()) {
+				
+				string fkIncludes = "";
+                List<string> multilangProperties = new List<string>();
+				if (predicate == null) predicate = PredicateBuilder.True<KstActivityType>();
+                var notDeletedExpression = predicate.And(p => p.IsDeleted != true || p.IsDeleted ==null );
+				string isDeletedField = "IsDeleted";
+	
+					bool sharedAndMultiTenant = false;
+					Expression<Func<KstActivityType,bool>> multitenantExpression  = null;
+					if (contextRequest != null && contextRequest.Company != null){	
+                        	
+						multitenantExpression = predicate.And(p => p.GuidCompany == contextRequest.Company.GuidCompany); //todo: multiempresa
+					}
+					 									
+					string multiTenantField = "GuidCompany";
+
+                
+                return GetBy(con, predicate, contextRequest, includes, fkIncludes, multilangProperties, multiTenantField, isDeletedField, sharedAndMultiTenant, notDeletedExpression, multitenantExpression);
+
+#region Old code
+/*
+				List<KstActivityType> result = null;
+               BusinessRulesEventArgs<KstActivityType>  e = null;
+	
+				OnGetting(con, e = new BusinessRulesEventArgs<KstActivityType>() {  FilterExpression = predicate, ContextRequest = contextRequest, FilterExpressionString = (contextRequest != null ? (contextRequest.CustomQuery != null ? contextRequest.CustomQuery.FilterExpressionString : null) : null) });
+
+               // OnGetting(con,e = new BusinessRulesEventArgs<KstActivityType>() { FilterExpression = predicate, ContextRequest = contextRequest, FilterExpressionString = contextRequest.CustomQuery.FilterExpressionString});
+				   if (e != null) {
+				    predicate = e.FilterExpression;
+						if (e.Cancel)
+						{
+							context = null;
+							 if (e.Items == null) e.Items = new List<KstActivityType>();
+							return e.Items;
+
+						}
+						if (!string.IsNullOrEmpty(e.StringIncludes))
+                            includes = e.StringIncludes;
+					}
+			
+
+                if (predicate == null) predicate = PredicateBuilder.True<KstActivityType>();
+                
+                //var es = _repository.Queryable;
+
+                IQueryable<KstActivityType> query =  con.KstActivityTypes.AsQueryable();
+
+                                if (!string.IsNullOrEmpty(includes))
+                {
+                    foreach (string include in includes.Split(char.Parse(",")))
+                    {
+						if (!string.IsNullOrEmpty(include))
+                            query = query.Include(include);
+                    }
+                }
+                    predicate = predicate.And(p => p.IsDeleted != true || p.IsDeleted ==null );
+					 	if (!preventSecurityRestrictions)
+						{
+							if (contextRequest != null )
+		                    	if (contextRequest.User !=null )
+		                        	if (contextRequest.Company != null){
+		                        	
+										predicate = predicate.And(p => p.GuidCompany == contextRequest.Company.GuidCompany); //todo: multiempresa
+ 									
+									}
+						}
+						if (preventSecurityRestrictions) preventSecurityRestrictions= false;
+				query =query.AsExpandable().Where(predicate);
+                query = ContextQueryBuilder<KstActivityType>.ApplyContextQuery(query, contextRequest);
+
+                result = query.AsNoTracking().ToList<KstActivityType>();
+				  
+                if (e != null)
+                {
+                    e.Items = result;
+                }
+				//if (contextRequest != null ){
+				//	 contextRequest = SFS.Core.My.Context.BuildContextRequestCopySafe(contextRequest);
+					contextRequest.CustomQuery = new CustomQuery();
+
+				//}
+				OnTaken(this, e == null ? e =  new BusinessRulesEventArgs<KstActivityType>() { Items= result, IncludingComputedLinq = false, ContextRequest = contextRequest,  FilterExpression = predicate } :  e);
+  
+			
+
+                if (e != null) {
+                    //if (e.ReplaceResult)
+                        result = e.Items;
+                }
+                return result;
+				*/
+#endregion
+            }
+        }
+
+
+		
+		
+
+        public List<KstActivityType> GetBy(string predicateString, ContextRequest contextRequest, string includes)
+        {
+            using (EFContext con = new EFContext(contextRequest))
+            {
+				
+
+
+				string computedFields = "";
+				string fkIncludes = "";
+                List<string> multilangProperties = new List<string>();
+				//if (predicate == null) predicate = PredicateBuilder.True<KstActivityType>();
+                var notDeletedExpression = "(IsDeleted != true OR IsDeleted = null)";
+				string isDeletedField = "IsDeleted";
+	
+					bool sharedAndMultiTenant = false;	  
+					string multitenantExpression = null;
+					if (contextRequest != null && contextRequest.Company != null){   
+                   	
+						 multitenantExpression = @"(GuidCompany = Guid(""" + contextRequest.Company.GuidCompany + @"""))";
+					}
+					 									
+					string multiTenantField = "GuidCompany";
+
+                
+                return GetBy(con, predicateString, contextRequest, includes, fkIncludes, multilangProperties, multiTenantField, isDeletedField, sharedAndMultiTenant, notDeletedExpression, multitenantExpression,computedFields);
+
+
+	#region Old Code
+	/*
+				BusinessRulesEventArgs<KstActivityType> e = null;
+
+				Filter filter = new Filter();
+                if (predicateString.Contains("|"))
+                {
+                    string ft = GetSpecificFilter(predicateString, contextRequest);
+                    if (!string.IsNullOrEmpty(ft))
+                        filter.SetFilterPart("ft", ft);
+                   
+                    contextRequest.FreeText = predicateString.Split(char.Parse("|"))[1];
+                    var q1 = predicateString.Split(char.Parse("|"))[0];
+                    if (!string.IsNullOrEmpty(q1))
+                    {
+                        filter.ProcessText(q1);
+                    }
+                }
+                else {
+                    filter.ProcessText(predicateString);
+                }
+				 var includesList = (new List<string>());
+                 if (!string.IsNullOrEmpty(includes))
+                 {
+                     includesList = includes.Split(char.Parse(",")).ToList();
+                 }
+
+				List<KstActivityType> result = new List<KstActivityType>();
+         
+			QueryBuild(predicateString, filter, con, contextRequest, "getby", includesList);
+			 if (e != null)
+                {
+                    contextRequest = e.ContextRequest;
+                }
+				
+				
+					OnGetting(con, e == null ? e = new BusinessRulesEventArgs<KstActivityType>() { Filter = filter, ContextRequest = contextRequest  } : e );
+
+                  //OnGetting(con,e = new BusinessRulesEventArgs<KstActivityType>() {  ContextRequest = contextRequest, FilterExpressionString = predicateString });
+			   	if (e != null) {
+				    //predicateString = e.GetQueryString();
+						if (e.Cancel)
+						{
+							context = null;
+							return e.Items;
+
+						}
+						if (!string.IsNullOrEmpty(e.StringIncludes))
+                            includes = e.StringIncludes;
+					}
+				//	 else {
+                //      predicateString = predicateString.Replace("*extraFreeText*", "").Replace("()","");
+                //  }
+				//con.EnableChangeTrackingUsingProxies = false;
+				
+
+
+                //if (predicate == null) predicate = PredicateBuilder.True<KstActivityType>();
+                
+                //var es = _repository.Queryable;
+				IQueryable<KstActivityType> query = con.KstActivityTypes.AsQueryable();
+		
+				// include relations FK
+				if(string.IsNullOrEmpty(includes) ){
+					includes ="";
+				}
+				StringBuilder sbQuerySystem = new StringBuilder();
+                    //predicate = predicate.And(p => p.IsDeleted != true || p.IsDeleted ==null );
+				
+
+				//if (!string.IsNullOrEmpty(predicateString))
+                //      sbQuerySystem.Append(" And ");
+                //sbQuerySystem.Append(" (IsDeleted != true Or IsDeleted = null) ");
+				 filter.SetFilterPart("de", "(IsDeleted != true OR IsDeleted = null)");
+
+
+					if (!preventSecurityRestrictions)
+						{
+						if (contextRequest != null )
+	                    	if (contextRequest.User !=null )
+	                        	if (contextRequest.Company != null ){
+	                        		//if (sbQuerySystem.Length > 0)
+	                        		//	    			sbQuerySystem.Append( " And ");	
+									//sbQuerySystem.Append(@" (GuidCompany = Guid(""" + contextRequest.Company.GuidCompany + @""")) "); //todo: multiempresa
+
+									filter.SetFilterPart("co",@"(GuidCompany = Guid(""" + contextRequest.Company.GuidCompany + @"""))");
+
+								}
+						}	
+						if (preventSecurityRestrictions) preventSecurityRestrictions= false;
+				//string predicateString = predicate.ToDynamicLinq<KstActivityType>();
+				//predicateString += sbQuerySystem.ToString();
+				filter.CleanAndProcess("");
+
+				string predicateWithFKAndComputed = filter.GetFilterParentAndCoumputed(); //SFS.Core.Linq.Utils.ExtractSpecificProperties("", ref predicateString );               
+                string predicateWithManyRelations = filter.GetFilterChildren(); //SFS.Core.Linq.Utils.CleanPartExpression(predicateString);
+
+                //QueryUtils.BreakeQuery1(predicateString, ref predicateWithManyRelations, ref predicateWithFKAndComputed);
+                var _queryable = query.AsQueryable();
+				bool includeAll = true; 
+                if (!string.IsNullOrEmpty(predicateWithManyRelations))
+                    _queryable = _queryable.Where(predicateWithManyRelations, contextRequest.CustomQuery.ExtraParams);
+				if (contextRequest.CustomQuery.SpecificProperties.Count > 0)
+                {
+
+				includeAll = false; 
+                }
+
+				StringBuilder sbSelect = new StringBuilder();
+                sbSelect.Append("new (");
+                bool existPrev = false;
+                foreach (var selected in contextRequest.CustomQuery.SelectedFields.Where(p=> !string.IsNullOrEmpty(p.Linq)))
+                {
+                    if (existPrev) sbSelect.Append(", ");
+                    if (!selected.Linq.Contains(".") && !selected.Linq.StartsWith("it."))
+                        sbSelect.Append("it." + selected.Linq);
+                    else
+                        sbSelect.Append(selected.Linq);
+                    existPrev = true;
+                }
+                sbSelect.Append(")");
+                var queryable = _queryable.Select(sbSelect.ToString());                    
+
+
+     				
+                 if (!string.IsNullOrEmpty(predicateWithFKAndComputed))
+                    queryable = queryable.Where(predicateWithFKAndComputed, contextRequest.CustomQuery.ExtraParams);
+
+				QueryComplementOptions queryOps = ContextQueryBuilder.ApplyContextQuery(contextRequest);
+            	if (!string.IsNullOrEmpty(queryOps.OrderByAndSort)){
+					if (queryOps.OrderBy.Contains(".") && !queryOps.OrderBy.StartsWith("it.")) queryOps.OrderBy = "it." + queryOps.OrderBy;
+					queryable = queryable.OrderBy(queryOps.OrderByAndSort);
+					}
+               	if (queryOps.Skip != null)
+                {
+                    queryable = queryable.Skip(queryOps.Skip.Value);
+                }
+                if (queryOps.PageSize != null)
+                {
+                    queryable = queryable.Take (queryOps.PageSize.Value);
+                }
+
+
+                var resultTemp = queryable.AsQueryable().ToListAsync().Result;
+                foreach (var item in resultTemp)
+                {
+
+				   result.Add(SFS.Core.BR.Utils.GetConverted<KstActivityType,dynamic>(item, contextRequest.CustomQuery.SelectedFields.Select(p=>p.Name).ToArray()));
+                }
+
+			 if (e != null)
+                {
+                    e.Items = result;
+                }
+				 contextRequest.CustomQuery = new CustomQuery();
+				OnTaken(this, e == null ? e = new BusinessRulesEventArgs<KstActivityType>() { Items= result, IncludingComputedLinq = true, ContextRequest = contextRequest, FilterExpressionString  = predicateString } :  e);
+  
+			
+  
+                if (e != null) {
+                    //if (e.ReplaceResult)
+                        result = e.Items;
+                }
+                return result;
+	
+	*/
+	#endregion
+
+            }
+        }
+		public KstActivityType GetFromOperation(string function, string filterString, string usemode, string fields, ContextRequest contextRequest)
+        {
+            using (EFContext con = new EFContext(contextRequest))
+            {
+                string computedFields = "";
+               // string fkIncludes = "accContpaqiClassification,accProjectConcept,accProjectType,accProxyUser";
+                List<string> multilangProperties = new List<string>();
+                var notDeletedExpression = "(IsDeleted != true OR IsDeleted = null)";
+				string isDeletedField = "IsDeleted";
+	
+					bool sharedAndMultiTenant = false;	  
+					string multitenantExpression = null;
+					if (contextRequest != null && contextRequest.Company != null)
+					{
+						multitenantExpression = @"(GuidCompany = @GuidCompanyMultiTenant)";
+						contextRequest.CustomQuery.SetParam("GuidCompanyMultiTenant", new Nullable<Guid>(contextRequest.Company.GuidCompany));
+					}
+					 									
+					string multiTenantField = "GuidCompany";
+
+
+                return GetSummaryOperation(con, new KstActivityType(), function, filterString, usemode, multiTenantField, isDeletedField, sharedAndMultiTenant, notDeletedExpression, multitenantExpression, computedFields, contextRequest, fields.Split(char.Parse(",")).ToArray());
+            }
+        }
+
+   protected override void QueryBuild(string predicate, Filter filter, DbContext efContext, ContextRequest contextRequest, string method, List<string> includesList)
+      	{
+				if (contextRequest.CustomQuery.SpecificProperties.Count == 0)
+                {
+					contextRequest.CustomQuery.SpecificProperties.Add(KstActivityType.PropertyNames.Name);
+					contextRequest.CustomQuery.SpecificProperties.Add(KstActivityType.PropertyNames.GuidCompany);
+					contextRequest.CustomQuery.SpecificProperties.Add(KstActivityType.PropertyNames.CreatedBy);
+					contextRequest.CustomQuery.SpecificProperties.Add(KstActivityType.PropertyNames.UpdatedBy);
+					contextRequest.CustomQuery.SpecificProperties.Add(KstActivityType.PropertyNames.IsDeleted);
+					contextRequest.CustomQuery.SpecificProperties.Add(KstActivityType.PropertyNames.BizKeyEngine);
+					contextRequest.CustomQuery.SpecificProperties.Add(KstActivityType.PropertyNames.CreatedDate);
+					contextRequest.CustomQuery.SpecificProperties.Add(KstActivityType.PropertyNames.UpdatedDate);
+					contextRequest.CustomQuery.SpecificProperties.Add(KstActivityType.PropertyNames.Bytes);
+  
+
+                  
+				}
+
+				if (method == "getby" || method == "sum")
+				{
+					if (!contextRequest.CustomQuery.SpecificProperties.Contains("GuidActivityType")){
+						contextRequest.CustomQuery.SpecificProperties.Add("GuidActivityType");
+					}
+
+					 if (!string.IsNullOrEmpty(contextRequest.CustomQuery.OrderBy))
+					{
+						string existPropertyOrderBy = contextRequest.CustomQuery.OrderBy;
+						if (contextRequest.CustomQuery.OrderBy.Contains("."))
+						{
+							existPropertyOrderBy = contextRequest.CustomQuery.OrderBy.Split(char.Parse("."))[0];
+						}
+						if (!contextRequest.CustomQuery.SpecificProperties.Exists(p => p == existPropertyOrderBy))
+						{
+							contextRequest.CustomQuery.SpecificProperties.Add(existPropertyOrderBy);
+						}
+					}
+
+				}
+				
+	bool isFullDetails = contextRequest.IsFromUI("KstActivityTypes", UIActions.GetForDetails,  contextRequest);
+	string filterForTest = predicate  + filter.GetFilterComplete();
+
+				if (isFullDetails || !string.IsNullOrEmpty(predicate))
+            {
+            } 
+
+			if (method == "sum")
+            {
+            } 
+			if (contextRequest.CustomQuery.SelectedFields.Count == 0)
+            {
+				foreach (var selected in contextRequest.CustomQuery.SpecificProperties)
+                {
+					string linq = selected;
+					switch (selected)
+                    {
+
+					 
+						
+					 default:
+                            break;
+                    }
+					contextRequest.CustomQuery.SelectedFields.Add(new SelectedField() { Name=selected, Linq=linq});
+					if (method == "getby" || method == "sum")
+					{
+						if (includesList.Contains(selected))
+							includesList.Remove(selected);
+
+					}
+
+				}
+			}
+				if (method == "getby" || method == "sum")
+				{
+					foreach (var otherInclude in includesList.Where(p=> !string.IsNullOrEmpty(p)))
+					{
+						contextRequest.CustomQuery.SelectedFields.Add(new SelectedField() { Name = otherInclude, Linq = "it." + otherInclude +" as " + otherInclude });
+					}
+				}
+				BusinessRulesEventArgs<KstActivityType> e = null;
+				if (contextRequest.PreventInterceptors == false)
+					OnQuerySettings(efContext, e = new BusinessRulesEventArgs<KstActivityType>() { Filter = filter, ContextRequest = contextRequest /*, FilterExpressionString = (contextRequest != null ? (contextRequest.CustomQuery != null ? contextRequest.CustomQuery.FilterExpressionString : null) : null)*/ });
+
+				//List<KstActivityType> result = new List<KstActivityType>();
+                 if (e != null)
+                {
+                    contextRequest = e.ContextRequest;
+                }
+
+}
+		public List<KstActivityType> GetBy(Expression<Func<KstActivityType, bool>> predicate, bool loadRelations, ContextRequest contextRequest)
+        {
+			if(!loadRelations)
+				return GetBy(predicate, contextRequest);
+			else
+				return GetBy(predicate, contextRequest, "KstActivities,KstWorkTimes");
+
+        }
+
+        public List<KstActivityType> GetBy(Expression<Func<KstActivityType, bool>> predicate, int? pageSize, int? page, string orderBy, SFS.Core.Data.SortDirection? sortDirection)
+        {
+            return GetBy(predicate, new ContextRequest() { CustomQuery = new CustomQuery() { Page = page, PageSize = pageSize, OrderBy = orderBy, SortDirection = sortDirection } });
+        }
+        public List<KstActivityType> GetBy(Expression<Func<KstActivityType, bool>> predicate)
+        {
+			ContextRequest contextRequest = new ContextRequest();
+			contextRequest.CustomQuery = new CustomQuery();
+			if (!preventSecurityRestrictions)
+			{
+			//if (System.Web.HttpContext.Current == null || System.Web.HttpContext.Current.Session == null)
+            //{
+              //  throw new Exception("Please, specific the contextRequest parameter in the method: GetBy");
+            //}
+			contextRequest.CurrentContext = SFS.Core.My.Context.CurrentContext;
+			            contextRequest.User = SFS.Core.My.Context.CurrentContext.User;
+            contextRequest.Company = SFS.Core.My.Context.CurrentContext.Company;
+			}
+
+            contextRequest.CustomQuery.FilterExpressionString = null;
+            return this.GetBy(predicate, contextRequest, "");
+        }
+        #endregion
+        #region Dynamic String
+		protected override string GetSpecificFilter(string filter, ContextRequest contextRequest) {
+            string result = "";
+		    //string linqFilter = String.Empty;
+            string freeTextFilter = String.Empty;
+            if (filter.Contains("|"))
+            {
+               // linqFilter = filter.Split(char.Parse("|"))[0];
+                freeTextFilter = filter.Split(char.Parse("|"))[1];
+            }
+            //else {
+            //    freeTextFilter = filter;
+            //}
+            //else {
+            //    linqFilter = filter;
+            //}
+			// linqFilter = SFS.Core.Linq.Utils.ReplaceCustomDateFilters(linqFilter);
+            //string specificFilter = linqFilter;
+            if (!string.IsNullOrEmpty(freeTextFilter))
+            {
+                System.Text.StringBuilder sbCont = new System.Text.StringBuilder();
+                /*if (specificFilter.Length > 0)
+                {
+                    sbCont.Append(" AND ");
+                    sbCont.Append(" ({0})");
+                }
+                else
+                {
+                    sbCont.Append("{0}");
+                }*/
+                //var words = freeTextFilter.Split(char.Parse(" "));
+				var word = freeTextFilter;
+                System.Text.StringBuilder sbSpec = new System.Text.StringBuilder();
+                 int nWords = 1;
+				/*foreach (var word in words)
+                {
+					if (word.Length > 0){
+                    if (sbSpec.Length > 0) sbSpec.Append(" AND ");
+					if (words.Length > 1) sbSpec.Append("("); */
+					
+	
+					
+					
+					
+									
+					sbSpec.Append(string.Format(@"Name.Contains(""{0}"")", word));
+					
+
+					
+	
+					
+	
+					
+	
+					
+	
+					
+					
+										sbSpec.Append(" OR ");
+					
+									
+					sbSpec.Append(string.Format(@"BizKeyEngine.Contains(""{0}"")", word));
+					
+
+					
+	
+					
+	
+					
+	
+					
+								 //sbSpec.Append("*extraFreeText*");
+
+                    /*if (words.Length > 1) sbSpec.Append(")");
+					
+					nWords++;
+
+					}
+
+                }*/
+                //specificFilter = string.Format("{0}{1}", specificFilter, string.Format(sbCont.ToString(), sbSpec.ToString()));
+                                 result = sbSpec.ToString();  
+            }
+			//result = specificFilter;
+			
+			return result;
+
+		}
+	
+			public List<KstActivityType> GetBy(string filter, int? pageSize, int? page, string orderBy, string orderDir,  params object[] extraParams)
+        {
+			return GetBy(filter, pageSize, page, orderBy, orderDir,  null, extraParams);
+		}
+           public List<KstActivityType> GetBy(string filter, int? pageSize, int? page, string orderBy, string orderDir, string usemode, params object[] extraParams)
+            { 
+                return GetBy(filter, pageSize, page, orderBy, orderDir, usemode, null, extraParams);
+            }
+
+
+		public List<KstActivityType> GetBy(string filter, int? pageSize, int? page, string orderBy, string orderDir,  string usemode, ContextRequest context, params object[] extraParams)
+
+        {
+
+            // string freetext = null;
+            //if (filter.Contains("|"))
+            //{
+            //    int parts = filter.Split(char.Parse("|")).Count();
+            //    if (parts > 1)
+            //    {
+
+            //        freetext = filter.Split(char.Parse("|"))[1];
+            //    }
+            //}
+		
+            //string specificFilter = "";
+            //if (!string.IsNullOrEmpty(filter))
+            //  specificFilter=  GetSpecificFilter(filter);
+            if (string.IsNullOrEmpty(orderBy))
+            {
+			                orderBy = "UpdatedDate";
+            }
+			//orderDir = "desc";
+			SFS.Core.Data.SortDirection direction = SFS.Core.Data.SortDirection.Ascending;
+            if (!string.IsNullOrEmpty(orderDir))
+            {
+                if (orderDir == "desc")
+                    direction = SFS.Core.Data.SortDirection.Descending;
+            }
+            if (context == null)
+                context = new ContextRequest();
+			
+			if (context.UseMode == null  && usemode != null )
+             context.UseMode = usemode;
+             if (context.CustomQuery == null )
+                context.CustomQuery =new SFS.Core.My.CustomQuery();
+
+ 
+                context.CustomQuery.ExtraParams = extraParams;
+
+                    context.CustomQuery.OrderBy = orderBy;
+                   context.CustomQuery.SortDirection = direction;
+                   context.CustomQuery.Page = page;
+                  context.CustomQuery.PageSize = pageSize;
+               
+
+            
+
+            if (!preventSecurityRestrictions) {
+			 if (context.CurrentContext == null)
+                {
+					if (SFS.Core.My.Context.CurrentContext != null &&  SFS.Core.My.Context.CurrentContext.Company != null && SFS.Core.My.Context.CurrentContext.User != null)
+					{
+						context.User = SFS.Core.My.Context.CurrentContext.User;
+						context.Company = SFS.Core.My.Context.CurrentContext.Company;
+
+					}
+					else {
+						throw new Exception("The security rule require a specific user and company");
+					}
+				}
+            }
+            return GetBy(filter, context);
+  
+        }
+
+
+        public List<KstActivityType> GetBy(string strWhere, ContextRequest contextRequest)
+        {
+        	#region old code
+				
+				 //Expression<Func<tvsReservationTransport, bool>> predicate = null;
+				string strWhereClean = strWhere.Replace("*extraFreeText*", "").Replace("()", "");
+                //if (!string.IsNullOrEmpty(strWhereClean)){
+
+                //    object[] extraParams = null;
+                //    //if (contextRequest != null )
+                //    //    if (contextRequest.CustomQuery != null )
+                //    //        extraParams = contextRequest.CustomQuery.ExtraParams;
+                //    //predicate = System.Linq.Dynamic.DynamicExpression.ParseLambda<tvsReservationTransport, bool>(strWhereClean, extraParams != null? extraParams.Cast<Guid>(): null);				
+                //}
+				 if (contextRequest == null)
+                {
+                    contextRequest = new ContextRequest();
+                    if (contextRequest.CustomQuery == null)
+                        contextRequest.CustomQuery = new CustomQuery();
+                }
+                  if (!preventSecurityRestrictions) {
+					if (contextRequest.User == null || contextRequest.Company == null)
+                      {
+                     if (SFS.Core.My.Context.CurrentContext.Company != null && SFS.Core.My.Context.CurrentContext.User != null)
+                     {
+                         contextRequest.User = SFS.Core.My.Context.CurrentContext.User;
+                         contextRequest.Company = SFS.Core.My.Context.CurrentContext.Company;
+
+                     }
+                     else {
+                         throw new Exception("The security rule require a specific User and Company ");
+                     }
+					 }
+                 }
+            contextRequest.CustomQuery.FilterExpressionString = strWhere;
+				//return GetBy(predicate, contextRequest);  
+
+			#endregion				
+				
+                    return GetBy(strWhere, contextRequest, "");  
+
+
+        }
+       public List<KstActivityType> GetBy(string strWhere)
+        {
+		 	ContextRequest context = new ContextRequest();
+            context.CustomQuery = new CustomQuery();
+            context.CustomQuery.FilterExpressionString = strWhere;
+			
+            return GetBy(strWhere, context, null);
+        }
+
+        public List<KstActivityType> GetBy(string strWhere, string includes)
+        {
+		 	ContextRequest context = new ContextRequest();
+            context.CustomQuery = new CustomQuery();
+            context.CustomQuery.FilterExpressionString = strWhere;
+            return GetBy(strWhere, context, includes);
+        }
+
+        #endregion
+        #endregion
+		
+		  #region SaveOrUpdate
+        
+ 		 public KstActivityType Create(KstActivityType entity)
+        {
+				//ObjectContext context = null;
+				////    if (System.Web.HttpContext.Current == null || System.Web.HttpContext.Current.Session  == null){
+                  //  throw new Exception("Please, specific the contextRequest parameter in the method: Create");
+               // }
+
+                ContextRequest contextRequest = new ContextRequest();
+                contextRequest.User = SFS.Core.My.Context.CurrentContext.User;
+                contextRequest.Company = SFS.Core.My.Context.CurrentContext.Company;
+
+				return this.Create(entity, contextRequest);
+
+
+        }
+        
+       
+        public KstActivityType Create(KstActivityType entity, ContextRequest contextRequest)
+        {
+		
+		bool graph = false;
+	
+				bool preventPartial = false;
+                if (contextRequest != null && contextRequest.PreventInterceptors == true )
+                {
+                    preventPartial = true;
+                } 
+               
+			using (EFContext con = new EFContext()) {
+
+				KstActivityType itemForSave = new KstActivityType();
+#region Autos
+		if(!preventSecurityRestrictions){
+
+				if (entity.CreatedDate == null )
+			entity.CreatedDate = DateTime.Now.ToUniversalTime();
+		if(contextRequest.User != null)
+			entity.CreatedBy = contextRequest.User.GuidUser;
+				if (entity.UpdatedDate == null )
+			entity.UpdatedDate = DateTime.Now.ToUniversalTime();
+		if(contextRequest.User != null)
+			entity.UpdatedBy = contextRequest.User.GuidUser;
+	
+		
+					if (contextRequest?.Company != null)
+						entity.GuidCompany = contextRequest.Company.GuidCompany;
+	
+
+
+			}
+#endregion
+               BusinessRulesEventArgs<KstActivityType> e = null;
+			    if (preventPartial == false )
+                OnCreating(this,e = new BusinessRulesEventArgs<KstActivityType>() { ContextRequest = contextRequest, Item=entity });
+				   if (e != null) {
+						if (e.Cancel)
+						{
+							context = null;
+							return e.Item;
+
+						}
+					}
+
+                    if (entity.GuidActivityType == Guid.Empty)
+                   {
+                       entity.GuidActivityType = SFS.Core.Utilities.UUID.NewSequential();
+					   
+                   }
+				   itemForSave.GuidActivityType = entity.GuidActivityType;
+				  
+		
+			itemForSave.GuidActivityType = entity.GuidActivityType;
+
+			itemForSave.Name = entity.Name;
+
+			itemForSave.GuidCompany = entity.GuidCompany;
+
+			itemForSave.CreatedBy = entity.CreatedBy;
+
+			itemForSave.UpdatedBy = entity.UpdatedBy;
+
+			itemForSave.IsDeleted = entity.IsDeleted;
+
+			itemForSave.BizKeyEngine = entity.BizKeyEngine;
+
+			itemForSave.CreatedDate = entity.CreatedDate;
+
+			itemForSave.UpdatedDate = entity.UpdatedDate;
+
+			itemForSave.Bytes = entity.Bytes;
+
+				
+				con.KstActivityTypes.Add(itemForSave);
+
+
+
+
+
+
+                
+				//con.ChangeTracker.Entries().Where(p => p.Entity != itemForSave && p.State != EntityState.Unchanged).ForEach(p => p.State = EntityState.Detached);
+
+				//con.Entry<KstActivityType>(itemForSave).State = EntityState.Added;
+
+				//con.SaveChanges();
+			
+
+				 this.Create(itemForSave, con, "KstActivityType", "KSTime", contextRequest); 
+			
+					 
+				
+
+				//itemResult = entity;
+                //if (e != null)
+                //{
+                 //   e.Item = itemResult;
+                //}
+				if (contextRequest != null && contextRequest.PreventInterceptors == true )
+                {
+                    preventPartial = true;
+                } 
+				if (preventPartial == false )
+                OnCreated(this, e == null ? e = new BusinessRulesEventArgs<KstActivityType>() { ContextRequest = contextRequest, Item = entity } : e);
+
+
+
+                if (e != null && e.Item != null )
+                {
+                    return e.Item;
+                }
+                              return entity;
+			}
+            
+        }
+        //BusinessRulesEventArgs<KstActivityType> e = null;
+        public void Create(List<KstActivityType> entities)
+        {
+			//	if (System.Web.HttpContext.Current == null || System.Web.HttpContext.Current.Session == null)
+        //    {
+          //      throw new Exception("Please, specific the contextRequest parameter in the method: Create");
+            //}
+
+            ContextRequest contextRequest = new ContextRequest();
+            contextRequest.User = SFS.Core.My.Context.CurrentContext.User;
+            contextRequest.Company = SFS.Core.My.Context.CurrentContext.Company;
+            Create(entities, contextRequest);
+        }
+        public void Create(List<KstActivityType> entities, ContextRequest contextRequest)
+        
+        {
+			//ObjectContext context = null;
+            	foreach (KstActivityType entity in entities)
+				{
+					this.Create(entity, contextRequest);
+				}
+        }
+		  public void CreateOrUpdateBulk(List<KstActivityType> entities, ContextRequest contextRequest)
+        {
+            CreateOrUpdateBulk(entities, "cu", contextRequest);
+        }
+
+        private void CreateOrUpdateBulk(List<KstActivityType> entities, string actionKey, ContextRequest contextRequest)
+        {
+			if (entities.Count() > 0){
+            bool graph = false;
+
+            bool preventPartial = false;
+            if (contextRequest != null && contextRequest.PreventInterceptors == true)
+            {
+                preventPartial = true;
+            }
+            foreach (var entity in entities)
+            {
+                    if (entity.GuidActivityType == Guid.Empty)
+                   {
+                       entity.GuidActivityType = SFS.Core.Utilities.UUID.NewSequential();
+					   
+                   }
+				   
+				  
+
+
+#region Autos
+		if(!preventSecurityRestrictions){
+
+
+ if (actionKey != "u")
+                        {
+				if (entity.CreatedDate == null )
+			entity.CreatedDate = DateTime.Now.ToUniversalTime();
+		if(contextRequest.User != null)
+			entity.CreatedBy = contextRequest.User.GuidUser;
+
+
+}
+				if (entity.UpdatedDate == null )
+			entity.UpdatedDate = DateTime.Now.ToUniversalTime();
+		if(contextRequest.User != null)
+			entity.UpdatedBy = contextRequest.User.GuidUser;
+	
+			if (contextRequest != null)
+				if(contextRequest.User != null)
+					if (contextRequest.Company != null)
+						entity.GuidCompany = contextRequest.Company.GuidCompany;
+	
+
+
+			}
+#endregion
+
+
+		
+			//entity.GuidActivityType = entity.GuidActivityType;
+
+			//entity.Name = entity.Name;
+
+			//entity.GuidCompany = entity.GuidCompany;
+
+			//entity.CreatedBy = entity.CreatedBy;
+
+			//entity.UpdatedBy = entity.UpdatedBy;
+
+			//entity.IsDeleted = entity.IsDeleted;
+
+			//entity.BizKeyEngine = entity.BizKeyEngine;
+
+			//entity.CreatedDate = entity.CreatedDate;
+
+			//entity.UpdatedDate = entity.UpdatedDate;
+
+			//entity.Bytes = entity.Bytes;
+
+				
+				
+
+
+
+
+
+
+                
+				
+
+					 
+				
+
+				//itemResult = entity;
+            }
+            using (EFContext con = new EFContext())
+            {
+                 if (actionKey == "c")
+                    {
+                        context.BulkInsert(entities);
+                    }else if ( actionKey == "u")
+                    {
+                        context.BulkUpdate(entities);
+                    }else
+                    {
+                        context.BulkInsertOrUpdate(entities);
+                    }
+            }
+
+			}
+        }
+	
+		public void CreateBulk(List<KstActivityType> entities, ContextRequest contextRequest)
+        {
+            CreateOrUpdateBulk(entities, "c", contextRequest);
+        }
+
+
+		public void UpdateAgile(KstActivityType item, params string[] fields)
+         {
+			UpdateAgile(item, null, fields);
+        }
+		public void UpdateAgile(KstActivityType item, ContextRequest contextRequest, params string[] fields)
+         {
+            
+             ContextRequest contextNew = null;
+             if (contextRequest != null)
+             {
+                 contextNew = SFS.Core.My.Context.BuildContextRequestCopySafe(contextRequest);
+               
+             }
+
+			 bool preventInterceptors = false;
+            if (contextRequest?.PreventInterceptors == true)
+            {
+                preventInterceptors = true;
+            }
+			 BusinessRulesEventArgs<KstActivityType> e = null;
+            if (preventInterceptors == false)
+            {
+
+			OnUpdatingAgile(this, e = new BusinessRulesEventArgs<KstActivityType>() { Item = item, ContextRequest = contextNew  });
+			}
+			 if (e != null)
+            {
+               
+              
+                if (e.Cancel)
+                {
+                    //context = null;
+                    return ;
+
+                }
+            }
+		   using (EFContext con = new EFContext())
+            {
+				//if (entity.UpdatedDate == null || (contextRequest != null && contextRequest.IsFromUI("KstActivityTypes", UIActions.Updating)))
+			item.UpdatedDate = DateTime.Now.ToUniversalTime();
+			 
+                if (contextNew.CustomQuery.SpecificProperties.Count() > 0)
+                    if (!contextNew.CustomQuery.SpecificProperties.Contains("UpdatedDate"))
+                        contextNew.CustomQuery.SpecificProperties.Add("UpdatedDate");
+
+           
+              
+				
+                   
+
+			if(contextRequest.User != null){
+					item.UpdatedBy = contextRequest.User.GuidUser;
+				  if (contextNew.CustomQuery.SpecificProperties.Count() > 0)
+                        if (!contextNew.CustomQuery.SpecificProperties.Contains("UpdatedBy"))
+                            contextNew.CustomQuery.SpecificProperties.Add("UpdatedBy");
+	
+			}
+
+
+                UpdateAgile(item, con, contextNew, fields.ToList());
+               
+            }
+			if (preventInterceptors == false)
+            {
+			OnUpdatedAgile(this, new BusinessRulesEventArgs<KstActivityType>() { Item = item, ContextRequest = contextNew  });
+			}
+         }
+		public void UpdateBulk(List<KstActivityType>  items, params string[] fields)
+         {
+             SFS.Core.My.ContextRequest req = new SFS.Core.My.ContextRequest();
+             req.CustomQuery = new SFS.Core.My.CustomQuery();
+             foreach (var field in fields)
+             {
+                 req.CustomQuery.SpecificProperties.Add(field);
+             }
+             UpdateBulk(items, req);
+
+         }
+
+		 public void DeleteBulk(List<KstActivityType> entities, ContextRequest contextRequest = null)
+        {
+
+            using (EFContext con = new EFContext())
+            {
+                foreach (var entity in entities)
+                {
+					var entityProxy = new KstActivityType() { GuidActivityType = entity.GuidActivityType };
+
+                    con.Entry<KstActivityType>(entityProxy).State = EntityState.Deleted;
+
+                }
+
+                int result = con.SaveChanges();
+                if (result != entities.Count)
+                {
+                    SFS.Core.My.EventLog.Error("Has been changed " + result.ToString() + " items but the expected value is: " + entities.Count.ToString());
+                }
+            }
+
+        }
+
+        public void UpdateBulk(List<KstActivityType> items, ContextRequest contextRequest)
+        {
+            if (items.Count() > 0){
+
+			 foreach (var entity in items)
+            {
+
+
+#region Autos
+		if(!preventSecurityRestrictions){
+
+				if (entity.UpdatedDate == null )
+			entity.UpdatedDate = DateTime.Now.ToUniversalTime();
+		if(contextRequest.User != null)
+			entity.UpdatedBy = contextRequest.User.GuidUser;
+	
+
+
+
+			}
+#endregion
+
+
+
+
+
+
+
+				}
+				using (EFContext con = new EFContext())
+				{
+
+                    
+                
+                   con.BulkUpdate(items);
+
+				}
+             
+			}	  
+        }
+
+         public KstActivityType Update(KstActivityType entity)
+        {
+           // if (System.Web.HttpContext.Current == null || System.Web.HttpContext.Current.Session == null)
+            //{
+           //     throw new Exception("Please, specific the contextRequest parameter in the method: Create");
+//            }
+
+            ContextRequest contextRequest = new ContextRequest();
+            contextRequest.User = SFS.Core.My.Context.CurrentContext.User;
+            contextRequest.Company = SFS.Core.My.Context.CurrentContext.Company;
+            return Update(entity, contextRequest);
+        }
+       
+         public KstActivityType Update(KstActivityType entity, ContextRequest contextRequest)
+        {
+		 //if ((System.Web.HttpContext.Current == null || System.Web.HttpContext.Current.Session == null) && contextRequest == null)
+           // {
+             //   throw new Exception("Please, specific the contextRequest parameter in the method: Update");
+            //}
+            if (contextRequest == null)
+            {
+                contextRequest = new ContextRequest();
+                contextRequest.User = SFS.Core.My.Context.CurrentContext.User;
+                contextRequest.Company = SFS.Core.My.Context.CurrentContext.Company;
+            }
+
+			
+				KstActivityType  itemResult = null;
+
+	
+			//entity.UpdatedDate = DateTime.Now.ToUniversalTime();
+			//if(contextRequest.User != null)
+				//entity.UpdatedBy = contextRequest.User.GuidUser;
+
+//	    var oldentity = GetBy(p => p.GuidActivityType == entity.GuidActivityType, contextRequest).FirstOrDefault();
+	//	if (oldentity != null) {
+		
+          //  entity.CreatedDate = oldentity.CreatedDate;
+    //        entity.CreatedBy = oldentity.CreatedBy;
+	
+      //      entity.GuidCompany = oldentity.GuidCompany;
+	
+			
+
+	
+		//}
+
+			 using( EFContext con = new EFContext()){
+				BusinessRulesEventArgs<KstActivityType> e = null;
+				bool preventPartial = false; 
+				if (contextRequest != null && contextRequest.PreventInterceptors == true )
+                {
+                    preventPartial = true;
+                } 
+				if (preventPartial == false)
+                OnUpdating(this,e = new BusinessRulesEventArgs<KstActivityType>() { ContextRequest = contextRequest, Item=entity});
+				   if (e != null) {
+						if (e.Cancel)
+						{
+							//outcontext = null;
+							return e.Item;
+
+						}
+					}
+
+				var contextForGet = contextRequest.CopySafe();
+                contextForGet.CustomQuery.IncludeDeleted = true;
+                contextForGet.CustomQuery.IncludeAllCompanies = true;
+				contextForGet.PreventInterceptors = true ;
+                KstActivityTypesBR br = new KstActivityTypesBR(true );
+               // var oldentity = br.GetBy("GuidActivityType = Guid(\"" + entity.GuidActivityType + "\")", contextForGet).FirstOrDefault();
+				var oldentity = con.KstActivityTypes.FirstOrDefault(p=> p.GuidActivityType == entity.GuidActivityType);
+               
+
+			     con.Entry(oldentity).CurrentValues.SetValues(entity);
+
+				//if (entity.UpdatedDate == null || (contextRequest != null && contextRequest.IsFromUI("KstActivityTypes", UIActions.Updating)))
+			oldentity.UpdatedDate = DateTime.Now.ToUniversalTime();
+			//oldentity.UpdatedDate = DateTime.Now.ToUniversalTime();
+			//properties.Add(KstActivityType.PropertyNames.UpdatedDate);
+			if(contextRequest.User != null){
+					oldentity.UpdatedBy = contextRequest.User.GuidUser;
+				//	properties.Add(KstActivityType.PropertyNames.UpdatedBy);
+				}
+
+           
+					
+					
+
+				
+		  
+                con.Entry(oldentity).Property(x => x.GuidCompany).IsModified = false;
+                con.Entry(oldentity).Property(x => x.CreatedDate).IsModified = false;
+                con.Entry(oldentity).Property(x => x.CreatedBy).IsModified = false;
+				 
+                
+				con.Entry(oldentity).Property(x => x.IsDeleted).IsModified = false;
+				con.Entry(oldentity).Property(x => x.Bytes).IsModified = false;
+               
+
+               
+               
+
+
+                con.SaveChanges();
+
+              //  UpdateAgile(oldentity, con, contextRequest, properties);
+                
+            
+				//UpdateAgile(oldentity, contextRequest
+        
+					 
+					
+               
+				itemResult = entity;
+				if(preventPartial == false)
+					OnUpdated(this, e = new BusinessRulesEventArgs<KstActivityType>() { ContextRequest = contextRequest, Item=itemResult });
+
+              	return itemResult;
+			}
+			  
+        }
+        public KstActivityType Save(KstActivityType entity)
+        {
+			return Create(entity);
+        }
+        public int Save(List<KstActivityType> entities)
+        {
+			 Create(entities);
+            return entities.Count;
+
+        }
+        #endregion
+        #region Delete
+        public void Delete(KstActivityType entity)
+        {
+				this.Delete(entity, null);
+			
+        }
+		 public void Delete(KstActivityType entity, ContextRequest contextRequest)
+        {
+				
+				  List<KstActivityType> entities = new List<KstActivityType>();
+				   entities.Add(entity);
+				this.Delete(entities, contextRequest);
+			
+        }
+
+         public void Delete(string query, Guid[] guids, ContextRequest contextRequest)
+        {
+			var br = new KstActivityTypesBR();
+            var items = br.GetBy(query, null, null, null, null, null, contextRequest, guids);
+            
+            Delete(items, contextRequest);
+
+        }
+        public void Delete(KstActivityType entity,  ContextRequest contextRequest, BusinessRulesEventArgs<KstActivityType> e = null)
+        {
+			
+				using(EFContext con = new EFContext())
+                 {
+				
+               	BusinessRulesEventArgs<KstActivityType> _e = null;
+               List<KstActivityType> _items = new List<KstActivityType>();
+                _items.Add(entity);
+                if (e == null || e.PreventPartialPropagate == false)
+                {
+					if (e != null)
+                    {
+                        e.Item = entity;
+                    }
+                    OnDeleting(this, _e = (e == null ? new BusinessRulesEventArgs<KstActivityType>() { ContextRequest = contextRequest, Item = entity, Items = null  } : e));
+                }
+                if (_e != null)
+                {
+                    if (_e.Cancel)
+						{
+							context = null;
+							return;
+
+						}
+					}
+
+
+				
+									//IsDeleted
+					bool logicDelete = true;
+					if (entity.IsDeleted != null)
+					{
+						if (entity.IsDeleted.Value)
+							logicDelete = false;
+					}
+					if (logicDelete)
+					{
+											//entity = GetBy(p =>, contextRequest).FirstOrDefault();
+						entity.IsDeleted = true;
+						if (contextRequest != null && contextRequest.User != null)
+							entity.UpdatedBy = contextRequest.User.GuidUser;
+                        entity.UpdatedDate = DateTime.UtcNow;
+						contextRequest.PreventInterceptors = true;
+						UpdateAgile(entity, contextRequest, "IsDeleted","UpdatedBy","UpdatedDate");
+
+						
+					}
+					else {
+					con.Entry<KstActivityType>(entity).State = EntityState.Deleted;
+					con.SaveChanges();
+				
+				 
+					}
+								
+				
+				 
+					
+					
+			if (e == null || e.PreventPartialPropagate == false)
+                {
+
+                    if (_e == null)
+                        _e = new BusinessRulesEventArgs<KstActivityType>() { ContextRequest = contextRequest, Item = entity, Items = null };
+
+                    OnDeleted(this, _e);
+                }
+
+				//return null;
+			}
+        }
+ public void UnDelete(string query, Guid[] guids, ContextRequest contextRequest)
+        {
+            var br = new KstActivityTypesBR(true);
+            contextRequest.CustomQuery.IncludeDeleted = true;
+            var items = br.GetBy(query, null, null, null, null, null, contextRequest, guids);
+
+            foreach (var item in items)
+            {
+                item.IsDeleted = false;
+						if (contextRequest != null && contextRequest.User != null)
+							item.UpdatedBy = contextRequest.User.GuidUser;
+                        item.UpdatedDate = DateTime.UtcNow;
+            }
+
+            UpdateBulk(items, "IsDeleted","UpdatedBy","UpdatedDate");
+        }
+
+         public void Delete(List<KstActivityType> entities,  ContextRequest contextRequest = null )
+        {
+				
+			 BusinessRulesEventArgs<KstActivityType> _e = null;
+
+                OnDeleting(this, _e = new BusinessRulesEventArgs<KstActivityType>() { ContextRequest = contextRequest, Item = null, Items = entities });
+                if (_e != null)
+                {
+                    if (_e.Cancel)
+                    {
+                        context = null;
+                        return;
+
+                    }
+                }
+                bool allSucced = true;
+                BusinessRulesEventArgs<KstActivityType> eToChilds = new BusinessRulesEventArgs<KstActivityType>();
+                if (_e != null)
+                {
+                    eToChilds = _e;
+                }
+                else
+                {
+                    eToChilds = new BusinessRulesEventArgs<KstActivityType>() { ContextRequest = contextRequest, Item = (entities.Count == 1 ? entities[0] : null), Items = entities };
+                }
+				foreach (KstActivityType item in entities)
+				{
+					try
+                    {
+                        this.Delete(item, contextRequest, e: eToChilds);
+                    }
+                    catch (Exception ex)
+                    {
+                        SFS.Core.My.EventLog.Error(ex);
+                        allSucced = false;
+                    }
+				}
+				if (_e == null)
+                    _e = new BusinessRulesEventArgs<KstActivityType>() { ContextRequest = contextRequest, CountResult = entities.Count, Item = null, Items = entities };
+                OnDeleted(this, _e);
+
+			
+        }
+        #endregion
+ 
+        #region GetCount
+		 public int GetCount(Expression<Func<KstActivityType, bool>> predicate)
+        {
+				///if (System.Web.HttpContext.Current == null || System.Web.HttpContext.Current.Session  == null){
+                   // throw new Exception("Please, specific the contextRequest parameter in the method: GetCount");
+                //}
+
+                ContextRequest contextRequest = new ContextRequest();
+                contextRequest.User = SFS.Core.My.Context.CurrentContext.User;
+                contextRequest.Company = SFS.Core.My.Context.CurrentContext.Company;
+
+			return GetCount(predicate, contextRequest);
+		}
+        public int GetCount(Expression<Func<KstActivityType, bool>> predicate, ContextRequest contextRequest)
+        {
+
+
+		
+		 using (EFContext con = new EFContext())
+            {
+
+
+				if (predicate == null) predicate = PredicateBuilder.True<KstActivityType>();
+           		predicate = predicate.And(p => p.IsDeleted != true || p.IsDeleted == null);
+					if (!preventSecurityRestrictions)
+						{
+						if (contextRequest != null )
+                    		if (contextRequest.User !=null )
+                        		if (contextRequest.Company != null && contextRequest.CustomQuery.IncludeAllCompanies == false){
+                        	
+									predicate = predicate.And(p => p.GuidCompany == contextRequest.Company.GuidCompany); //todo: multiempresa
+						//			predicate = predicate.And(p => p.GuidCompany == contextRequest.Company.GuidCompany); //todo: multiempresa
+
+								}
+						}
+						if (preventSecurityRestrictions) preventSecurityRestrictions= false;
+				
+				IQueryable<KstActivityType> query = con.KstActivityTypes.AsQueryable();
+                return query.AsExpandable().Count(predicate);
+
+			
+				}
+			
+
+        }
+		  public int GetCount(string predicate,  ContextRequest contextRequest)
+         {
+             return GetCount(predicate, null, contextRequest);
+         }
+
+         public int GetCount(string predicate)
+        {
+		/*		if (System.Web.HttpContext.Current == null || System.Web.HttpContext.Current.Session  == null){
+                    throw new Exception("Please, specific the contextRequest parameter in the method: GetCount");
+                }
+				*/
+                ContextRequest contextRequest = new ContextRequest();
+                contextRequest.User = SFS.Core.My.Context.CurrentContext.User;
+                contextRequest.Company = SFS.Core.My.Context.CurrentContext.Company;
+            return GetCount(predicate, contextRequest);
+        }
+		 public int GetCount(string predicate, string usemode){
+		 /*
+				if (System.Web.HttpContext.Current == null || System.Web.HttpContext.Current.Session  == null){
+                    throw new Exception("Please, specific the contextRequest parameter in the method: GetCount");
+                }*/
+
+                ContextRequest contextRequest = new ContextRequest();
+                contextRequest.User = SFS.Core.My.Context.CurrentContext.User;
+                contextRequest.Company = SFS.Core.My.Context.CurrentContext.Company;
+				return GetCount( predicate,  usemode,  contextRequest);
+		 }
+        public int GetCount(string predicate, string usemode, ContextRequest contextRequest){
+
+		using (EFContext con = new EFContext()) {
+				string computedFields = "";
+				string fkIncludes = "";
+                List<string> multilangProperties = new List<string>();
+				//if (predicate == null) predicate = PredicateBuilder.True<KstActivityType>();
+                var notDeletedExpression = "(IsDeleted != true OR IsDeleted = null)";
+				string isDeletedField = "IsDeleted";
+	
+					bool sharedAndMultiTenant = false;	  
+					string multitenantExpression = null;
+				if (contextRequest != null && contextRequest.Company != null)
+                   	
+						 multitenantExpression = @"(GuidCompany = Guid(""" + contextRequest.Company.GuidCompany + @"""))";
+					 									
+					string multiTenantField = "GuidCompany";
+
+                
+                return GetCount(con, predicate, usemode, contextRequest, multilangProperties, multiTenantField, isDeletedField, sharedAndMultiTenant, notDeletedExpression, multitenantExpression, computedFields);
+
+			}
+			#region old code
+			 /* string freetext = null;
+            Filter filter = new Filter();
+
+              if (predicate.Contains("|"))
+              {
+                 
+                  filter.SetFilterPart("ft", GetSpecificFilter(predicate, contextRequest));
+                 
+                  filter.ProcessText(predicate.Split(char.Parse("|"))[0]);
+                  freetext = predicate.Split(char.Parse("|"))[1];
+
+				  if (!string.IsNullOrEmpty(freetext) && string.IsNullOrEmpty(contextRequest.FreeText))
+                  {
+                      contextRequest.FreeText = freetext;
+                  }
+              }
+              else {
+                  filter.ProcessText(predicate);
+              }
+			   predicate = filter.GetFilterComplete();
+			// BusinessRulesEventArgs<KstActivityType>  e = null;
+           	using (EFContext con = new EFContext())
+			{
+			
+			
+
+			 QueryBuild(predicate, filter, con, contextRequest, "count", new List<string>());
+
+
+			
+			BusinessRulesEventArgs<KstActivityType> e = null;
+
+			contextRequest.FreeText = freetext;
+			contextRequest.UseMode = usemode;
+            OnCounting(this, e = new BusinessRulesEventArgs<KstActivityType>() {  Filter =filter, ContextRequest = contextRequest });
+            if (e != null)
+            {
+                if (e.Cancel)
+                {
+                    context = null;
+                    return e.CountResult;
+
+                }
+
+            
+
+            }
+			
+			StringBuilder sbQuerySystem = new StringBuilder();
+		
+					
+                    filter.SetFilterPart("de","(IsDeleted != true OR IsDeleted == null)");
+			
+					if (!preventSecurityRestrictions)
+						{
+						if (contextRequest != null )
+                    	if (contextRequest.User !=null )
+                        	if (contextRequest.Company != null && contextRequest.CustomQuery.IncludeAllCompanies == false){
+                        		
+								filter.SetFilterPart("co", @"(GuidCompany = Guid(""" + contextRequest.Company.GuidCompany + @""")) "); //todo: multiempresa
+						
+						
+							}
+							
+							}
+							if (preventSecurityRestrictions) preventSecurityRestrictions= false;
+		
+				   
+                 filter.CleanAndProcess("");
+				//string predicateWithFKAndComputed = SFS.Core.Linq.Utils.ExtractSpecificProperties("", ref predicate );               
+				string predicateWithFKAndComputed = filter.GetFilterParentAndCoumputed();
+               string predicateWithManyRelations = filter.GetFilterChildren();
+			   ///QueryUtils.BreakeQuery1(predicate, ref predicateWithManyRelations, ref predicateWithFKAndComputed);
+			   predicate = filter.GetFilterComplete();
+               if (!string.IsNullOrEmpty(predicate))
+               {
+				
+					
+                    return con.KstActivityTypes.Where(predicate).Count();
+					
+                }else
+                    return con.KstActivityTypes.Count();
 					
 			}*/
 			#endregion

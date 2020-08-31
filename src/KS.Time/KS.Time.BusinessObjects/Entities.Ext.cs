@@ -964,6 +964,25 @@ set{
 	}
 	
 
+	private KstActivityType __KstActivityType;
+	[DataMember]
+	public virtual KstActivityType KstActivityType {
+		get{
+			return __KstActivityType;
+		}
+		set{
+			__KstActivityType = value;
+				if (value != null)
+                {
+                   this.__GuidActivityType = value.GuidActivityType;
+                }else
+                {
+					                    this.__GuidActivityType = null;
+					                }
+		}
+	}
+	
+
 
 	#endregion
 
@@ -1144,6 +1163,39 @@ set{
 			
 		}
 	 }
+	private Guid? __GuidActivityType;
+	[DataMember]
+	
+	public Guid? GuidActivityType  { 
+		get{
+			return __GuidActivityType;
+		}
+		set{
+
+			__GuidActivityType = value;
+				if (value == null)
+                {
+                    this.__KstActivityType = null;
+                }else
+                {
+											if (this.__KstActivityType != null && this.__KstActivityType.GuidActivityType != value.Value)
+						{
+							this.__KstActivityType = new KstActivityType() { GuidActivityType = value.Value };
+
+						}
+                    //this.__KstActivityType = new KstActivityType() { GuidActivityType = value.Value };
+					  // if (this.__KstActivityType == null )
+                      //      this.__KstActivityType = new KstActivityType() {  GuidActivityType = value.Value };
+                      //  else {
+                       //     if (this.__KstActivityType.GuidActivityType != value)
+                       //     {
+                       //     this.__KstActivityType = new KstActivityType() {  GuidActivityType = value.Value };
+					//		}
+                     //   }
+					                }
+			
+		}
+	 }
     #endregion    
 	
 	//[DataMember]
@@ -1174,8 +1226,10 @@ set{
             public static readonly string CreatedDate = "CreatedDate";
             public static readonly string UpdatedDate = "UpdatedDate";
             public static readonly string Bytes = "Bytes";
+            public static readonly string GuidActivityType = "GuidActivityType";
             public static readonly string KstProject = "KstProject";
             public static readonly string KstWorkTimes = "KstWorkTimes";
+            public static readonly string KstActivityType = "KstActivityType";
 		}
 		#endregion
 	}
@@ -1975,6 +2029,25 @@ set{
 	}
 	
 
+	private KstActivityType __KstActivityType;
+	[DataMember]
+	public virtual KstActivityType KstActivityType {
+		get{
+			return __KstActivityType;
+		}
+		set{
+			__KstActivityType = value;
+				if (value != null)
+                {
+                   this.__GuidActivityType = value.GuidActivityType;
+                }else
+                {
+					                    this.__GuidActivityType = null;
+					                }
+		}
+	}
+	
+
 
 	#endregion
 
@@ -2214,6 +2287,39 @@ set{
 			
 		}
 	 }
+	private Guid? __GuidActivityType;
+	[DataMember]
+	
+	public Guid? GuidActivityType  { 
+		get{
+			return __GuidActivityType;
+		}
+		set{
+
+			__GuidActivityType = value;
+				if (value == null)
+                {
+                    this.__KstActivityType = null;
+                }else
+                {
+											if (this.__KstActivityType != null && this.__KstActivityType.GuidActivityType != value.Value)
+						{
+							this.__KstActivityType = new KstActivityType() { GuidActivityType = value.Value };
+
+						}
+                    //this.__KstActivityType = new KstActivityType() { GuidActivityType = value.Value };
+					  // if (this.__KstActivityType == null )
+                      //      this.__KstActivityType = new KstActivityType() {  GuidActivityType = value.Value };
+                      //  else {
+                       //     if (this.__KstActivityType.GuidActivityType != value)
+                       //     {
+                       //     this.__KstActivityType = new KstActivityType() {  GuidActivityType = value.Value };
+					//		}
+                     //   }
+					                }
+			
+		}
+	 }
     #endregion    
 	
 	//[DataMember]
@@ -2247,9 +2353,11 @@ set{
             public static readonly string UpdatedDate = "UpdatedDate";
             public static readonly string Bytes = "Bytes";
             public static readonly string DueDate = "DueDate";
+            public static readonly string GuidActivityType = "GuidActivityType";
             public static readonly string KstActivity = "KstActivity";
             public static readonly string KstProject = "KstProject";
             public static readonly string KstWorkTimeFiles = "KstWorkTimeFiles";
+            public static readonly string KstActivityType = "KstActivityType";
 		}
 		#endregion
 	}
@@ -4190,6 +4298,273 @@ set{
             public static readonly string KstProjectUsers = "KstProjectUsers";
             public static readonly string KstProxyRole = "KstProxyRole";
             public static readonly string KstUserFiles = "KstUserFiles";
+		}
+		#endregion
+	}
+		  [Serializable()]
+	  [EntityInfo(PropertyKeyName="GuidActivityType",PropertyDefaultText="Name", CompanyPropertyName = "GuidCompany",CreatedByPropertyName="CreatedBy",UpdatedByPropertyName="UpdatedBy",CreatedDatePropertyName="CreatedDate",UpdatedDatePropertyName="UpdatedDate",DeletedPropertyName="IsDeleted")]
+	  [Table("KstActivityType", Schema = "Kst")]
+	  [DynamicLinqType]
+	  [JsonObject(IsReference = true)]
+      [DataContract(IsReference = true, Namespace = "http://schemas.datacontract.org/2004/07/TrackableEntities.Models")]
+	  public partial class KstActivityType:  ITrackable, IMyEntity{
+	   public  KstActivityType(Guid? guidActivityType, String name)
+        {
+			if (guidActivityType != null ){
+            this.GuidActivityType = guidActivityType.Value;
+            this.Name = name;
+
+			}
+        }
+      [NotMapped]
+	  public string Key { 
+                  get {
+                      StringBuilder sb = new StringBuilder();
+					sb.Append(this.GuidActivityType.ToString());
+                      return sb.ToString();
+                } 
+set{
+	this.GuidActivityType = Guid.Parse(value);
+}
+		}
+
+			[NotMapped]
+            public double? _UpdatedDateTS
+            {
+                get
+                {
+                    if (this.UpdatedDate != null)
+                    {
+                        return (this.UpdatedDate.Value - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+                    }else
+                    {
+                        return null;
+                    }
+                }
+            }
+			[NotMapped]
+            public double? _CreatedDateTS
+            {
+                get
+                {
+                    if (this.CreatedDate != null)
+                    {
+                        return (this.CreatedDate.Value - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+                    }else
+                    {
+                        return null;
+                    }
+                }
+            }
+		[NotMapped]
+		public SFS.Core.Common.GlobalObjects.UserInfo CreatedByUser { get; set; }
+
+			public override string ToString()
+            {
+	
+				if (this.Name != null )		
+            		return this.Name.ToString();
+				else
+					return String.Empty;
+			}
+
+		//public KstActivityType()
+        //  {
+
+        //  }
+
+	  #region Composite Key
+	  
+        #endregion
+
+		public KstActivityType(){
+		#region 
+			this.ModifiedProperties = new List<string>();
+	this.KstActivities = new HashSet<KstActivity>();
+
+
+	this.KstWorkTimes = new HashSet<KstWorkTime>();
+
+
+		#endregion
+		}
+		#region
+	
+	//[DataMember]
+	public virtual ICollection<KstActivity> KstActivities { get; set; }
+	
+
+	
+	//[DataMember]
+	public virtual ICollection<KstWorkTime> KstWorkTimes { get; set; }
+	
+
+
+//x1
+
+	#endregion
+
+	#region
+	private Guid __GuidActivityType;
+	[DataMember]
+	
+	public Guid GuidActivityType  { 
+		get{
+			return __GuidActivityType;
+		}
+		set{
+
+			__GuidActivityType = value;
+			
+		}
+	 }
+	private String __Name;
+	[DataMember]
+	
+	public String Name  { 
+		get{
+			return __Name;
+		}
+		set{
+
+			__Name = value;
+			
+		}
+	 }
+	private Guid? __GuidCompany;
+	[DataMember]
+	
+	public Guid? GuidCompany  { 
+		get{
+			return __GuidCompany;
+		}
+		set{
+
+			__GuidCompany = value;
+			
+		}
+	 }
+	private Guid? __CreatedBy;
+	[DataMember]
+	
+	public Guid? CreatedBy  { 
+		get{
+			return __CreatedBy;
+		}
+		set{
+
+			__CreatedBy = value;
+			
+		}
+	 }
+	private Guid? __UpdatedBy;
+	[DataMember]
+	
+	public Guid? UpdatedBy  { 
+		get{
+			return __UpdatedBy;
+		}
+		set{
+
+			__UpdatedBy = value;
+			
+		}
+	 }
+	private Boolean? __IsDeleted;
+	[DataMember]
+	
+	public Boolean? IsDeleted  { 
+		get{
+			return __IsDeleted;
+		}
+		set{
+
+			__IsDeleted = value;
+			
+		}
+	 }
+	private String __BizKeyEngine;
+	[DataMember]
+	
+	public String BizKeyEngine  { 
+		get{
+			return __BizKeyEngine;
+		}
+		set{
+
+			__BizKeyEngine = value;
+			
+		}
+	 }
+	private DateTime? __CreatedDate;
+	[DataMember]
+	[Column(TypeName = "datetime")]
+	public DateTime? CreatedDate  { 
+		get{
+			return __CreatedDate;
+		}
+		set{
+
+			__CreatedDate = value;
+			
+		}
+	 }
+	private DateTime? __UpdatedDate;
+	[DataMember]
+	[Column(TypeName = "datetime")]
+	public DateTime? UpdatedDate  { 
+		get{
+			return __UpdatedDate;
+		}
+		set{
+
+			__UpdatedDate = value;
+			
+		}
+	 }
+	private Int32? __Bytes;
+	[DataMember]
+	
+	public Int32? Bytes  { 
+		get{
+			return __Bytes;
+		}
+		set{
+
+			__Bytes = value;
+			
+		}
+	 }
+    #endregion    
+	
+	//[DataMember]
+	[NotMapped]
+    public TrackingState TrackingState { get; set; }
+    //[DataMember]
+	[NotMapped]
+   public ICollection<string> ModifiedProperties { get; set; }
+   // [JsonProperty, DataMember]
+   // private Guid EntityIdentifier { get; set; }
+
+      
+
+
+	      #region propertyNames
+		public static readonly string EntityName = "KstActivityType";
+		public static readonly string EntitySetName = "KstActivityTypes";
+        public struct PropertyNames {
+            public static readonly string GuidActivityType = "GuidActivityType";
+            public static readonly string Name = "Name";
+            public static readonly string GuidCompany = "GuidCompany";
+            public static readonly string CreatedBy = "CreatedBy";
+            public static readonly string UpdatedBy = "UpdatedBy";
+            public static readonly string IsDeleted = "IsDeleted";
+            public static readonly string BizKeyEngine = "BizKeyEngine";
+            public static readonly string CreatedDate = "CreatedDate";
+            public static readonly string UpdatedDate = "UpdatedDate";
+            public static readonly string Bytes = "Bytes";
+            public static readonly string KstActivities = "KstActivities";
+            public static readonly string KstWorkTimes = "KstWorkTimes";
 		}
 		#endregion
 	}

@@ -2,6 +2,7 @@
 
 import { KstActivityModel } from './KstActivity.model';
 import { KstProjectModel } from './KstProject.model';
+import { KstActivityTypeModel } from './KstActivityType.model';
 	
 
 
@@ -65,11 +66,18 @@ import { KstProjectModel } from './KstProject.model';
 
 				 
 				 
+	GuidActivityType:string = "GuidActivityType";	
+
+				 
+				 
 		FkKstActivity:string = "FkKstActivity";
 		KstActivity:string = "KstActivity"; //test
 				 
 		FkKstProject:string = "FkKstProject";
 		KstProject:string = "KstProject"; //test
+				 
+		FkKstActivityType:string = "FkKstActivityType";
+		KstActivityType:string = "KstActivityType"; //test
 				 
 }
 
@@ -158,6 +166,23 @@ return [
 		
     }
 },
+{
+    key: KstWorkTimeModel.PropertyNames.GuidActivityType,
+    type: 'select',
+
+    templateOptions: {
+		  "relation": {
+			PropertyRelationName: "KstActivityType",
+			EntityModel: KstActivityTypeModel,  
+			DataValue: KstActivityTypeModel.PropertyNames.GuidActivityType,
+            DataText: KstActivityTypeModel.PropertyNames.Name 
+			},
+        label: KstWorkTimeModel.PropertyNames.GuidActivityType,
+        placeholder: '',
+        required: false,
+		
+    }
+},
 	];
     }
 	Id?:string;
@@ -204,6 +229,9 @@ return [
 	DueDate?:string;	
 
 		 
+	GuidActivityType?:string;	
+
+		 
 		FkKstActivity:string ;
 
 		FkKstActivityText:any;
@@ -220,11 +248,19 @@ return [
 		
 			 
 		 
+		FkKstActivityType:string ;
+
+		FkKstActivityTypeText:any;
+
+		KstActivityType:string;
+		
+			 
+		 
 
 	public static _EntitySetName:string =  "KstWorkTimes";
 	public static _EntityName:string =  "KstWorkTime";
 	public static PropertyNames: KstWorkTimePropertyNames = new KstWorkTimePropertyNames();
-	public static _PropertyNamesForUpdate: string = "GuidWorkTime,Title,Comments,Hours,GuidProject,GuidActivity,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes,DueDate";
+	public static _PropertyNamesForUpdate: string = "GuidWorkTime,Title,Comments,Hours,GuidProject,GuidActivity,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes,DueDate,GuidActivityType";
 
 	public static _DefaultProperty: string= "Title";
 

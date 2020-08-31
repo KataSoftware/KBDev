@@ -1,6 +1,7 @@
 ﻿import { FormlyFieldConfig } from '@ngx-formly/core';
 
 import { KstProjectModel } from './KstProject.model';
+import { KstActivityTypeModel } from './KstActivityType.model';
 	
 
 
@@ -52,8 +53,15 @@ import { KstProjectModel } from './KstProject.model';
 
 				 
 				 
+	GuidActivityType:string = "GuidActivityType";	
+
+				 
+				 
 		FkKstProject:string = "FkKstProject";
 		KstProject:string = "KstProject"; //test
+				 
+		FkKstActivityType:string = "FkKstActivityType";
+		KstActivityType:string = "KstActivityType"; //test
 				 
 }
 
@@ -103,6 +111,23 @@ return [
 		
     }
 },
+{
+    key: KstActivityModel.PropertyNames.GuidActivityType,
+    type: 'select',
+
+    templateOptions: {
+		  "relation": {
+			PropertyRelationName: "KstActivityType",
+			EntityModel: KstActivityTypeModel,  
+			DataValue: KstActivityTypeModel.PropertyNames.GuidActivityType,
+            DataText: KstActivityTypeModel.PropertyNames.Name 
+			},
+        label: KstActivityModel.PropertyNames.GuidActivityType,
+        placeholder: '',
+        required: false,
+		
+    }
+},
 	];
     }
 	Id?:string;
@@ -140,6 +165,9 @@ return [
 	UpdatedDate?:string;	
 
 		 
+	GuidActivityType?:string;	
+
+		 
 		FkKstProject:string ;
 
 		FkKstProjectText:any;
@@ -148,11 +176,19 @@ return [
 		
 			 
 		 
+		FkKstActivityType:string ;
+
+		FkKstActivityTypeText:any;
+
+		KstActivityType:string;
+		
+			 
+		 
 
 	public static _EntitySetName:string =  "KstActivities";
 	public static _EntityName:string =  "KstActivity";
 	public static PropertyNames: KstActivityPropertyNames = new KstActivityPropertyNames();
-	public static _PropertyNamesForUpdate: string = "GuidActivity,Name,GuidProject,IsCustomByUser,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes";
+	public static _PropertyNamesForUpdate: string = "GuidActivity,Name,GuidProject,IsCustomByUser,GuidCompany,CreatedBy,UpdatedBy,IsDeleted,BizKeyEngine,CreatedDate,UpdatedDate,Bytes,GuidActivityType";
 
 	public static _DefaultProperty: string= "Name";
 

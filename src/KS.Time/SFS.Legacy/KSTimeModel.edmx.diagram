@@ -33,6 +33,9 @@
         <AssociationConnector Association="KSTimeModel.fk_KstProjectUser_KstProxyUser" />
         <AssociationConnector Association="KSTimeModel.fk_KstProxyUser_KstProxyRole" />
         <AssociationConnector Association="KSTimeModel.fk_KstUserFile_KstProxyUser" />
+        <EntityTypeShape EntityType="KSTimeModel.KstActivityType" Width="1.5" PointX="0.75" PointY="4.875" />
+        <AssociationConnector Association="KSTimeModel.fk_KstActivity_KstActivityType" />
+        <AssociationConnector Association="KSTimeModel.fk_KstWorkTime_KstActivityType" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

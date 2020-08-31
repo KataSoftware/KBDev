@@ -612,4 +612,72 @@ GO
 
 
 
+PRINT 'Table KstActivityType, entity KstActivityType'
+-- GuidCompany
+if COLUMNPROPERTY(OBJECT_ID(N'Kst.KstActivityType', N'U'),'GuidCompany','ColumnId') is null
+begin 
+  alter table Kst.KstActivityType 
+  add GuidCompany uniqueidentifier null 
+end
+GO
+
+-- CreatedBy
+if COLUMNPROPERTY(OBJECT_ID(N'Kst.KstActivityType', N'U'),'CreatedBy','ColumnId') is null
+begin 
+  alter table Kst.KstActivityType 
+  add CreatedBy uniqueidentifier null 
+end
+GO
+-- UpdatedBy
+if COLUMNPROPERTY(OBJECT_ID(N'Kst.KstActivityType', N'U'),'UpdatedBy','ColumnId') is null
+begin 
+  alter table Kst.KstActivityType 
+  add UpdatedBy uniqueidentifier null 
+end
+GO
+
+-- IsDeleted
+if COLUMNPROPERTY(OBJECT_ID(N'Kst.KstActivityType', N'U'),'IsDeleted','ColumnId') is null
+begin 
+  alter table Kst.KstActivityType 
+  add IsDeleted [bit] null DEFAULT ('false') 
+end
+GO
+
+-- BizKeyEngine
+
+if COLUMNPROPERTY(OBJECT_ID(N'Kst.KstActivityType', N'U'),'BizKeyEngine','ColumnId') is null
+begin 
+  alter table Kst.KstActivityType 
+  add BizKeyEngine VARCHAR(32) null 
+end
+GO
+
+-- CreatedDate
+if COLUMNPROPERTY(OBJECT_ID(N'Kst.KstActivityType', N'U'),'CreatedDate','ColumnId') is null
+begin 
+  alter table Kst.KstActivityType 
+  add CreatedDate DATETIME null 
+end
+GO
+-- UpdatedDate
+if COLUMNPROPERTY(OBJECT_ID(N'Kst.KstActivityType', N'U'),'UpdatedDate','ColumnId') is null
+begin 
+  alter table Kst.KstActivityType 
+  add UpdatedDate DATETIME null 
+end
+GO
+
+-- Bytes
+if COLUMNPROPERTY(OBJECT_ID(N'Kst.KstActivityType', N'U'),'Bytes','ColumnId') is null
+begin 
+  alter table Kst.KstActivityType 
+  add Bytes [int] null 
+end
+GO
+
+
+
+
+
 

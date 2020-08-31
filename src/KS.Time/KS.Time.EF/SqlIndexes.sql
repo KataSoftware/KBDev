@@ -181,4 +181,24 @@ GuidWorkTimeFile
 	
 	INCLUDE(Bytes)
 	WITH (ONLINE = ON)
+IF NOT EXISTS (
+    SELECT * FROM sys.tables t
+    INNER JOIN sys.schemas s ON t.schema_id = s.schema_id
+    INNER JOIN sys.indexes i on i.object_id = t.object_id
+    WHERE s.name = 'Kst' AND t.name = 'KstActivityType' and i.name = 'KstActivityType_FullStatics_Idx'
+) 
+    CREATE NONCLUSTERED INDEX KstActivityType_FullStatics_Idx 
+    on Kst.KstActivityType ( 
+GuidActivityType 
+
+        ,CreatedDate desc 
+
+	,UpdatedDate desc 
+		,CreatedBy 
+		,GuidCompany 
+		,IsDeleted desc
+    ) 
+	
+	INCLUDE(Bytes)
+	WITH (ONLINE = ON)
 
