@@ -62,7 +62,7 @@ import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
           component: DatepickerTypeComponent,
           wrappers: ['form-field'],
           defaultOptions: {
-            defaultValue: new Date(),
+            //defaultValue: new Date(),
             templateOptions: {
               datepickerOptions: {},
             },

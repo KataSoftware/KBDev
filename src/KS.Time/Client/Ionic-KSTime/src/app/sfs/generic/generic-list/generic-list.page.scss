@@ -66,4 +66,13 @@ div.filter-enabled ion-item{
 div.filter-enabled  .button-native{
   padding-right: 0px;
 }
-
+// .mat-expansion-panel:not([class*=mat-elevation-z])
+// {
+//   box-shadow:none;
+// }
+div.mat-expansion-panel-content.ng-trigger-bodyExpansion{
+  //box-shadow: none;
+  border-bottom-color: lavender;
+  border-bottom-width: 1px;
+  border-bottom-style: solid; 
+}

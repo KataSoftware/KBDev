@@ -44,12 +44,10 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
 
   switchFilterRange(event: any) {
     //setTimeout(function(){
-
-   if (this.isFilterRange == false) {
-      this.isFilterRange = true;
-    } else {
-      this.isFilterRange = false;
-    }
+    console.log(event);
+  
+    this.isFilterRange = event.detail.checked;
+    
     this.pageService.isFilterRange = this.isFilterRange;
     this.pageService.fieldsBack = this.entityModel.GetFields();
     this.fields = [];
@@ -91,7 +89,7 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
           console.log("data open filter", this.item);
         } else {
           //console.log("new item", this.item);
-          //this.item = new this.entityModel();
+           this.item = {};// new this.entityModel();
         }
         import(
           /* webpackMode: "eager" */

@@ -150,7 +150,7 @@ return [
 {
     key: KstWorkTimeModel.PropertyNames.DueDate,
     type: 'datepicker',
-
+	defaultValue: "",
     templateOptions: {
 	        label: KstWorkTimeModel.PropertyNames.DueDate,
         placeholder: '',

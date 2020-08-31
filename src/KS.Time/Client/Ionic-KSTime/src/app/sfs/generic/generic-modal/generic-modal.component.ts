@@ -1,3 +1,4 @@
+import { NgModel } from '@angular/forms';
 import { Component, OnInit, Injector } from '@angular/core';
 import { GenericFormPage } from '../generic-form/generic-form.page';
 import { GenericFormBasePage } from '../../common/app-form-base/generic-form-base.page';
@@ -9,6 +10,7 @@ import { sfsService } from './../../services/sfs.service';
   selector: 'app-generic-modal',
   templateUrl: './generic-modal.component.html',
   styleUrls: ['./generic-modal.component.scss'],
+  providers: [NgModel]
 })
 // @Component({
 //   selector: 'app-generic-modal',
@@ -24,7 +26,7 @@ import { sfsService } from './../../services/sfs.service';
     public sfsService: sfsService
 
   ) {
-
+    
     super(injector, activatedRoute, storage, userService, sfsService);
 
 

@@ -238,7 +238,7 @@ async removeFilter(){
       modal.onDidDismiss()
       .then((data:any) => {
         console.log("modal data", data);
-          if (data != null && data.query != null && data.itemFilter != null ){
+          if (data != null && data.data != null && data.data.query != null && data.data.itemFilter != null ){
           this.serviceData.Query = data.data.query;
           this.itemFilter = data.data.itemFilter;
           this.refreshList(null);
