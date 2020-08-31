@@ -62,6 +62,8 @@
       <DependentUpon>KSTimeModel.edmx</DependentUpon>
     </None>
     <None Include="KSTimeModel.sfsedmx" />
+    <None Include="KSTimeModel\KstActivity.sfsedmx" />
+    <None Include="KSTimeModel\KstWorkTime.sfsedmx" />
     <None Include="KSTimeModel\KstProject.sfsedmx" />
     <None Include="KSTimeModel\Model.partial.sfsedmx" />
     <None Include="KSTimeModel\unProxyBusinessObject.sfsedmx" />

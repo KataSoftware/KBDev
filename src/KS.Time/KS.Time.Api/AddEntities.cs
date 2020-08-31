@@ -170,6 +170,16 @@ namespace KS.Time.Api
                     entity = SFS.Core.Security.BR.secBusinessObjectsBR.Instance.Create(entity, context);
                 }
 	
+				if (brObjects.GetCount(p => p.BusinessObjectKey == "KstActivityType" && p.secModule.GuidModule == module.GuidModule, context) == 0)
+                {
+					entity = new secBusinessObject();
+                    entity.GuidModule = module.GuidModule;
+                    entity.Name = "KstActivityType";
+					entity.EntitySetName = "KstActivityTypes";
+                    entity.BusinessObjectKey = "KstActivityType";
+                    entity = SFS.Core.Security.BR.secBusinessObjectsBR.Instance.Create(entity, context);
+                }
+	
 				if (brObjects.GetCount(p => p.BusinessObjectKey == "unProxyBusinessObject" && p.secModule.GuidModule == module.GuidModule, context) == 0)
                 {
 					entity = new secBusinessObject();

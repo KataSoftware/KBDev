@@ -3905,7 +3905,7 @@ if (visibleProperty || specificProperties.Contains("UpdatedDate"))
         //	{
 				results.Add(new PropertyDefinition()
                 {
-					Order = 122,
+					Order = 124,
 																	
 					CustomProperties = customProperties,
 
@@ -3965,6 +3965,41 @@ if (visibleProperty || specificProperties.Contains("Bytes"))
 	
 	}
 visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("GuidActivityType"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        
+	
+	//Null
+		//if (this.Request.QueryString["fk"] != "GuidActivityType")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 110,
+																	IsForeignKey = true,
+
+									
+					CustomProperties = customProperties,
+
+                    PropertyName = "GuidActivityType",
+
+					 MaxLength = 0,
+					 Nullable = true,
+					IsDefaultProperty = false,
+                    SortBy = "GuidActivityType",
+					
+	
+                    TypeName = "Guid",
+                    IsNavigationProperty = false,
+					IsNavigationPropertyMany = false,
+                    PathName = "KSTime/"
+                    /*,PropertyDisplayName = Resources.KstActivityResources.GUIDACTIVITYTYPE*/
+                });
+		//	}
+	
+	}
+visibleProperty =allProperties;
 if (visibleProperty || specificProperties.Contains("KstProject"))
 {				
     customProperties = new List<CustomProperty>();
@@ -3981,7 +4016,7 @@ if (visibleProperty || specificProperties.Contains("KstProject"))
         //	{
 				results.Add(new PropertyDefinition()
                 {
-					Order = 110,
+					Order = 111,
 																
 					
 					ModuleKey = "KSTime",
@@ -4031,7 +4066,7 @@ if (visibleProperty || specificProperties.Contains("KstWorkTimes"))
         //	{
 				results.Add(new PropertyDefinition()
                 {
-					Order = 111,
+					Order = 112,
 																
 					//Link = VirtualPathUtility.ToAbsolute("~/") + "KSTime/KstWorkTimes/ListViewGen?overrideModule=" + GetOverrideApp()  + "&pal=False&es=False&pag=10&filterlinks=1&idTab=KstWorkTimes&fk=KstActivity&startFilter="+ (new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext)).Encode("it.KstActivity.GuidActivity = Guid(\"" + idKstActivity +"\")")+ "&fkValue=" + idKstActivity,
 					ModuleKey = "KSTime",
@@ -4053,6 +4088,56 @@ if (visibleProperty || specificProperties.Contains("KstWorkTimes"))
 					IsNavigationPropertyMany = true,
                     PathName = "KSTime/KstWorkTimes"
                     /*,PropertyDisplayName = Resources.KstActivityResources.KSTWORKTIMES*/
+                });
+		//	}
+	
+	}
+visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("KstActivityType"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        			customProperties.Add(new CustomProperty() { Name="Fk", Value=@"KstActivities" });
+			//[RelationFilterable(DisableFilterableInSubfilter=true, FiltrablePropertyPathName="KstActivityType.GuidActivityType")]		
+			customProperties.Add(new CustomProperty() { Name="FiltrablePropertyPathName", Value=@"KstActivityType.GuidActivityType" });
+			customProperties.Add(new CustomProperty() { Name = "BusinessObjectSetName", Value = @"KstActivityTypes" });
+			
+
+	
+	//fk_KstActivity_KstActivityType
+		//if (this.Request.QueryString["fk"] != "KstActivityType")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 113,
+																
+					
+					ModuleKey = "KSTime",
+				BusinessObjectKey = "KstActivityType",
+					BusinessObjectSet = "KstActivityTypes",
+					PropertyNavigationKey = "GuidActivityType",
+					PropertyNavigationText = "Name",
+					NavigationPropertyType = NavigationPropertyTypes.SimpleDropDown,
+					GetMethodName = "GetAll",
+					GetMethodParameters = "",
+					GetMethodDisplayText ="Name",
+					GetMethodDisplayValue = "GuidActivityType",
+					
+					CustomProperties = customProperties,
+
+                    PropertyName = "KstActivityType",
+
+					 MaxLength = 0,
+					 Nullable = true,
+					IsDefaultProperty = false,
+                    SortBy = "KstActivityType.Name",
+					
+	
+                    TypeName = "KSTimeModel.KstActivityType",
+                    IsNavigationProperty = true,
+					IsNavigationPropertyMany = false,
+                    PathName = "KSTime/KstActivityTypes"
+                    /*,PropertyDisplayName = Resources.KstActivityResources.KSTACTIVITYTYPE*/
                 });
 		//	}
 	
@@ -7166,7 +7251,7 @@ if (visibleProperty || specificProperties.Contains("UpdatedDate"))
         //	{
 				results.Add(new PropertyDefinition()
                 {
-					Order = 128,
+					Order = 130,
 																	
 					CustomProperties = customProperties,
 
@@ -7259,6 +7344,41 @@ if (visibleProperty || specificProperties.Contains("DueDate"))
 	
 	}
 visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("GuidActivityType"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        
+	
+	//Null
+		//if (this.Request.QueryString["fk"] != "GuidActivityType")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 113,
+																	IsForeignKey = true,
+
+									
+					CustomProperties = customProperties,
+
+                    PropertyName = "GuidActivityType",
+
+					 MaxLength = 0,
+					 Nullable = true,
+					IsDefaultProperty = false,
+                    SortBy = "GuidActivityType",
+					
+	
+                    TypeName = "Guid",
+                    IsNavigationProperty = false,
+					IsNavigationPropertyMany = false,
+                    PathName = "KSTime/"
+                    /*,PropertyDisplayName = Resources.KstWorkTimeResources.GUIDACTIVITYTYPE*/
+                });
+		//	}
+	
+	}
+visibleProperty =allProperties;
 if (visibleProperty || specificProperties.Contains("KstActivity"))
 {				
     customProperties = new List<CustomProperty>();
@@ -7275,7 +7395,7 @@ if (visibleProperty || specificProperties.Contains("KstActivity"))
         //	{
 				results.Add(new PropertyDefinition()
                 {
-					Order = 113,
+					Order = 114,
 																
 					
 					ModuleKey = "KSTime",
@@ -7325,7 +7445,7 @@ if (visibleProperty || specificProperties.Contains("KstProject"))
         //	{
 				results.Add(new PropertyDefinition()
                 {
-					Order = 114,
+					Order = 115,
 																
 					
 					ModuleKey = "KSTime",
@@ -7375,7 +7495,7 @@ if (visibleProperty || specificProperties.Contains("KstWorkTimeFiles"))
         //	{
 				results.Add(new PropertyDefinition()
                 {
-					Order = 115,
+					Order = 116,
 																
 					//Link = VirtualPathUtility.ToAbsolute("~/") + "KSTime/KstWorkTimeFiles/ListViewGen?overrideModule=" + GetOverrideApp()  + "&pal=False&es=False&pag=10&filterlinks=1&idTab=KstWorkTimeFiles&fk=KstWorkTime&startFilter="+ (new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext)).Encode("it.KstWorkTime.GuidWorkTime = Guid(\"" + idKstWorkTime +"\")")+ "&fkValue=" + idKstWorkTime,
 					ModuleKey = "KSTime",
@@ -7397,6 +7517,56 @@ if (visibleProperty || specificProperties.Contains("KstWorkTimeFiles"))
 					IsNavigationPropertyMany = true,
                     PathName = "KSTime/KstWorkTimeFiles"
                     /*,PropertyDisplayName = Resources.KstWorkTimeResources.KSTWORKTIMEFILES*/
+                });
+		//	}
+	
+	}
+visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("KstActivityType"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        			customProperties.Add(new CustomProperty() { Name="Fk", Value=@"KstWorkTimes" });
+			//[RelationFilterable(DisableFilterableInSubfilter=true, FiltrablePropertyPathName="KstActivityType.GuidActivityType")]		
+			customProperties.Add(new CustomProperty() { Name="FiltrablePropertyPathName", Value=@"KstActivityType.GuidActivityType" });
+			customProperties.Add(new CustomProperty() { Name = "BusinessObjectSetName", Value = @"KstActivityTypes" });
+			
+
+	
+	//fk_KstWorkTime_KstActivityType
+		//if (this.Request.QueryString["fk"] != "KstActivityType")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 117,
+																
+					
+					ModuleKey = "KSTime",
+				BusinessObjectKey = "KstActivityType",
+					BusinessObjectSet = "KstActivityTypes",
+					PropertyNavigationKey = "GuidActivityType",
+					PropertyNavigationText = "Name",
+					NavigationPropertyType = NavigationPropertyTypes.SimpleDropDown,
+					GetMethodName = "GetAll",
+					GetMethodParameters = "",
+					GetMethodDisplayText ="Name",
+					GetMethodDisplayValue = "GuidActivityType",
+					
+					CustomProperties = customProperties,
+
+                    PropertyName = "KstActivityType",
+
+					 MaxLength = 0,
+					 Nullable = true,
+					IsDefaultProperty = false,
+                    SortBy = "KstActivityType.Name",
+					
+	
+                    TypeName = "KSTimeModel.KstActivityType",
+                    IsNavigationProperty = true,
+					IsNavigationPropertyMany = false,
+                    PathName = "KSTime/KstActivityTypes"
+                    /*,PropertyDisplayName = Resources.KstWorkTimeResources.KSTACTIVITYTYPE*/
                 });
 		//	}
 	
@@ -13727,6 +13897,953 @@ if (visibleProperty || specificProperties.Contains("GuidActividadEconomica"))
 
 						 if (me.Properties.Find(p => p.PropertyName == "GuidUser") != null){
 						me.Properties.Find(p => p.PropertyName == "GuidUser").IsHidden = false;
+					 }
+					 
+                    
+					
+
+				
+
+                    break;
+                case UIModelContextTypes.ListForm:
+	
+
+                    break;
+                default:
+                    break;
+            }
+            	this.SetDefaultProperties(me);
+			
+			
+			return me;
+        }
+		
+
+		
+
+		
+
+
+	
+    }
+}
+namespace KS.Time.Api.Controllers
+{
+	using KS.Time.Api.Models.KstActivityTypes;
+
+	[Area("KSTime")]
+    [Route("[area]/[controller]")]
+    [ApiController]
+    public partial class KstActivityTypesController : KS.Time.Api.ControllerBase<Models.KstActivityTypes.KstActivityTypeModel>
+    {
+	/* [HttpGet()]
+	 [Route("[action]")]
+        public IActionResult Puff(string abc)
+        {
+            return Ok("Hola desde areaaaaa! " + abc );
+        }*/
+
+       
+
+
+	#region partial methods
+        ControllerEventArgs<Models.KstActivityTypes.KstActivityTypeModel> e = null;
+        partial void OnValidating(object sender, ControllerEventArgs<Models.KstActivityTypes.KstActivityTypeModel> e);
+        partial void OnGettingExtraData(object sender, MyEventArgs<UIModel<Models.KstActivityTypes.KstActivityTypeModel>> e);
+        partial void OnCreating(object sender, ControllerEventArgs<Models.KstActivityTypes.KstActivityTypeModel> e);
+        partial void OnCreated(object sender, ControllerEventArgs<Models.KstActivityTypes.KstActivityTypeModel> e);
+        partial void OnEditing(object sender, ControllerEventArgs<Models.KstActivityTypes.KstActivityTypeModel> e);
+        partial void OnEdited(object sender, ControllerEventArgs<Models.KstActivityTypes.KstActivityTypeModel> e);
+        partial void OnDeleting(object sender, ControllerEventArgs<Models.KstActivityTypes.KstActivityTypeModel> e);
+        partial void OnDeleted(object sender, ControllerEventArgs<Models.KstActivityTypes.KstActivityTypeModel> e);
+    	partial void OnShowing(object sender, MyEventArgs<UIModel<Models.KstActivityTypes.KstActivityTypeModel>> e);
+    	partial void OnUISettings(object sender, MyEventArgs<UIModel<Models.KstActivityTypes.KstActivityTypeModel>> e);
+    	partial void OnGettingByKey(object sender, ControllerEventArgs<Models.KstActivityTypes.KstActivityTypeModel> e);
+        partial void OnTaken(object sender, ControllerEventArgs<Models.KstActivityTypes.KstActivityTypeModel> e);
+       	partial void OnCreateShowing(object sender, ControllerEventArgs<Models.KstActivityTypes.KstActivityTypeModel> e);
+		partial void OnEditShowing(object sender, ControllerEventArgs<Models.KstActivityTypes.KstActivityTypeModel> e);
+		partial void OnDetailsShowing(object sender, ControllerEventArgs<Models.KstActivityTypes.KstActivityTypeModel> e);
+ 		partial void OnActionsCreated(object sender, MyEventArgs<UIModel<Models.KstActivityTypes.KstActivityTypeModel >> e);
+		partial void OnCustomActionExecuting(object sender, MyEventArgs<ContextActionModel<Models.KstActivityTypes.KstActivityTypeModel>> e);
+		partial void OnCustomActionExecutingBackground(object sender, MyEventArgs<ContextActionModel<Models.KstActivityTypes.KstActivityTypeModel>> e);
+        partial void OnDownloading(object sender, MyEventArgs<ContextActionModel<Models.KstActivityTypes.KstActivityTypeModel>> e);
+      	partial void OnAuthorization(object sender, object context);
+		 partial void OnFilterShowing(object sender, MyEventArgs<UIModel<Models.KstActivityTypes.KstActivityTypeModel >> e);
+         partial void OnSummaryOperationShowing(object sender, MyEventArgs<UIModel<Models.KstActivityTypes.KstActivityTypeModel>> e);
+
+        partial void OnExportActionsCreated(object sender, MyEventArgs<UIModel<Models.KstActivityTypes.KstActivityTypeModel>> e);
+
+		 [ApiExplorerSettings(IgnoreApi = true)]
+		protected override void OnVirtualFilterShowing(object sender, MyEventArgs<UIModel<KstActivityTypeModel>> e)
+        {
+            OnFilterShowing(sender, e);
+        }
+		 [ApiExplorerSettings(IgnoreApi = true)]
+		 protected  override void OnVirtualExportActionsCreated(object sender, MyEventArgs<UIModel<KstActivityTypeModel>> e)
+        {
+            OnExportActionsCreated(sender, e);
+        }
+		 [ApiExplorerSettings(IgnoreApi = true)]
+        protected override void OnVirtualDownloading(object sender, MyEventArgs<ContextActionModel<KstActivityTypeModel>> e)
+        {
+            OnDownloading(sender, e);
+        }
+		 [ApiExplorerSettings(IgnoreApi = true)]
+        protected override void OnVirtualShowing(object sender, MyEventArgs<UIModel<KstActivityTypeModel>> e)
+        {
+            OnShowing(sender, e);
+        }
+		 [ApiExplorerSettings(IgnoreApi = true)]
+		 protected override void OnVirtualUISettings(object sender, MyEventArgs<UIModel<KstActivityTypeModel>> e)
+        {
+            OnUISettings(sender, e);
+        }
+
+	#endregion
+	#region API
+	 partial void OnAuthorization(AuthorizationEventArgs e);
+	  [ApiExplorerSettings(IgnoreApi = true)]
+	  protected override bool? OnAuthorizationBase(AuthorizationEventArgs e)
+        {
+			 
+			 this.OnAuthorization(e);
+			 return e.ValidResult;
+        }
+		 [ApiExplorerSettings(IgnoreApi = true)]
+	 protected override ActionResult ApiCreateGen(ApiWrapperCreate<KstActivityTypeModel> data, ContextRequest contextRequest)
+        {
+            var result = BR.KstActivityTypesBR.Instance.Create(data.Item.GetBusinessObject(), contextRequest);
+ 
+           if ( data.ReturnType != null)
+            {
+                KstActivityTypeModel model = new KstActivityTypeModel(result);
+                if (data.ReturnType == "key")
+                {
+
+                    return ResolveApiResponse("success", null, null, model.Id);
+                }else
+                {
+                    return ResolveApiResponse("success", null, null, model);
+                }
+
+            }
+            else
+            {
+                return ResolveApiResponse("success", null, null, null );
+            }
+        }
+        [ApiExplorerSettings(IgnoreApi = true)]
+        protected override ActionResult ApiCreateBulkGen(ApiWrapperCreate<KstActivityTypeModel> data, ContextRequest contextRequest)
+        {
+            List<KstActivityType> items = new  List<KstActivityType>();
+
+            foreach (var item in data.Items)
+            {
+                items.Add(item.GetBusinessObject());
+            }
+            BR.KstActivityTypesBR.Instance.CreateBulk(items, contextRequest);
+            return ResolveApiResponse("success", null, null, null);
+        }
+		[ApiExplorerSettings(IgnoreApi = true)]
+              protected override ActionResult ApiGetByJson(string filter, int? pageSize, int? page, string orderBy, string orderDir, ContextRequest contextRequest, object[] extraParams)
+        {
+            return GetByJson(filter, pageSize, page, orderBy, orderDir, contextRequest, extraParams);
+        }
+        [ApiExplorerSettings(IgnoreApi = true)]
+	   // [MyAuthorize("r", "KstActivityType", "KSTime", typeof(KstActivityTypesController))]
+		protected ActionResult GetByJson(string filter, int? pageSize, int? page, string orderBy, string orderDir,ContextRequest contextRequest,  object[] extraParams)
+        {
+			if (contextRequest == null || contextRequest.Company == null || contextRequest.User == null )
+            {
+                contextRequest = GetContextRequest();
+            }
+
+			 
+			 if (this.IsRESTRequest == false)
+            {
+                return GetByJsonBase(filter, pageSize, page, orderBy, orderDir, contextRequest, extraParams);
+            }else
+            {
+                try
+                {
+                    return GetByJsonBase(filter, pageSize, page, orderBy, orderDir, contextRequest, extraParams);
+
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { status = "error", reason = "exception", message = ex.ToString() });
+
+                }
+            }
+        }
+       [ApiExplorerSettings(IgnoreApi = true)]
+		 protected override ActionResult ApiGetByCount(string filter, ContextRequest contextRequest)
+        {
+              var result  =  BR.KstActivityTypesBR.Instance.GetCount(filter,  contextRequest);
+
+            return ResolveApiResponse("success", null, null, result);
+        }
+
+		 [ApiExplorerSettings(IgnoreApi = true)]
+        protected override ActionResult ApiGetByKeyJson(string id, ContextRequest contextRequest)
+        {
+            var result = GetByKey(id, contextRequest, true);
+			  UIModel<KstActivityTypeModel> uiModel = GetContextModel(UIModelContextTypes.Items, null);
+            uiModel.Items = new List<KstActivityTypeModel>();
+            uiModel.Items.Add(result);
+
+
+            Showing(ref uiModel);
+
+            return ResolveApiResponse("success", null, null, uiModel.Items[0]);
+        }
+		 [ApiExplorerSettings(IgnoreApi = true)]
+         protected override ActionResult ApiDeleteGen(List<KstActivityTypeModel> models, ContextRequest contextRequest)
+        {
+            List<KstActivityType> objs = new List<KstActivityType>();
+            foreach (var model in models)
+            {
+                objs.Add(model.GetBusinessObject());
+            }
+            try
+            {
+                BR.KstActivityTypesBR.Instance.Delete(objs, contextRequest);
+                if (this.IsRESTRequest == true)
+                {
+                    
+					return ResolveApiResponse("success", null, null, null);
+
+                }
+                else
+                {
+                    return Content("ok");
+
+                }
+            }
+            catch (Exception ex)
+            {
+               if (this.IsRESTRequest == true)
+                {
+                    //return Json(new { status = "error", reason = "error", message= ex.ToString() }, JsonRequestBehavior.AllowGet);
+					return ResolveApiResponse("error", "exception", ex.ToString(), null );
+
+                }
+                else
+                {
+                    return Json(ex.ToString());
+
+                }
+            }
+        }
+		 [ApiExplorerSettings(IgnoreApi = true)]
+        protected override ActionResult ApiUpdateGen(List<KstActivityTypeModel> models, ContextRequest contextRequest)
+        {
+            List<KstActivityType> objs = new List<KstActivityType>();
+            foreach (var model in models)
+            {
+                objs.Add(model.GetBusinessObject());
+            }
+            try
+            {
+			if (contextRequest.CustomQuery.SpecificProperties.Count > 0)
+                {
+                    foreach (var obj in objs)
+                    {
+
+                        BR.KstActivityTypesBR.Instance.UpdateAgile(obj, contextRequest);
+
+                    }
+                }
+                else
+                {
+					foreach (var obj in objs)
+					{
+						BR.KstActivityTypesBR.Instance.Update(obj, contextRequest);
+
+					}
+				}
+				if (this.IsRESTRequest == true)
+                {
+                    //return Json(new { status = "success" }, JsonRequestBehavior.AllowGet);
+					return ResolveApiResponse("success", null, null, null);
+
+                }
+                else
+                {
+                    return Content("ok");
+
+                }
+              
+            }
+            catch (Exception ex)
+            {
+                if (this.IsRESTRequest == true)
+                {
+                    //return Json(new { status = "error", reason = "error", message= ex.ToString() }, JsonRequestBehavior.AllowGet);
+					return ResolveApiResponse("error", "exception", ex.ToString(), null );
+
+                }
+                else
+                {
+                    return Json(ex.ToString());
+
+                }
+            }
+        }
+
+
+	#endregion
+#region Validation methods	
+	    private void Validations(KstActivityTypeModel model) { 
+            #region Remote validations
+
+            #endregion
+		}
+
+#endregion
+		[ApiExplorerSettings(IgnoreApi = true)]
+ 		public object Authorization(object context)
+        {
+            OnAuthorization(this,  context );
+            return context ;
+        }
+		[ApiExplorerSettings(IgnoreApi = true)]
+		public List<KstActivityTypeModel> GetAll() {
+            			var bos = BR.KstActivityTypesBR.Instance.GetBy("",
+					new SFS.Core.My.ContextRequest()
+					{
+						CustomQuery = new SFS.Core.My.CustomQuery()
+						{
+							OrderBy = "Name",
+							SortDirection = SFS.Core.Data.SortDirection.Ascending
+						}
+					});
+            			List<KstActivityTypeModel> results = new List<KstActivityTypeModel>();
+            KstActivityTypeModel model = null;
+            foreach (var bo in bos)
+            {
+                model = new KstActivityTypeModel();
+                model.Bind(bo);
+                results.Add(model);
+            }
+            return results;
+
+        }
+      
+
+		List<PropertyDefinition> _properties = null;
+		[ApiExplorerSettings(IgnoreApi = true)]
+		 protected override List<PropertyDefinition> GetProperties(UIModel uiModel,  params string[] specificProperties)
+        { 
+            return GetProperties(uiModel, false, null, specificProperties);
+        }
+		[ApiExplorerSettings(IgnoreApi = true)]
+		protected override List<PropertyDefinition> GetProperties(UIModel uiModel, bool decripted, Guid? id, params string[] specificProperties)
+            {
+
+			bool allProperties = true;    
+                if (specificProperties != null && specificProperties.Length > 0)
+                {
+                    allProperties = false;
+                }
+
+
+			List<CustomProperty> customProperties = new List<CustomProperty>();
+			if (_properties == null)
+                {
+                List<PropertyDefinition> results = new List<PropertyDefinition>();
+
+			string idKstActivityType = GetRouteDataOrQueryParam("id");
+			if (idKstActivityType != null)
+			{
+				if (!decripted)
+                {
+					idKstActivityType = SFS.Core.Entities.Utils.GetPropertyKey(idKstActivityType.Replace("-","/"), "GuidActivityType");
+				}else{
+					if (id != null )
+						idKstActivityType = id.Value.ToString();                
+
+				}
+			}
+
+			bool visibleProperty = true;	
+			 bool conditionalshow =false;
+                if (uiModel.ContextType == UIModelContextTypes.EditForm || uiModel.ContextType == UIModelContextTypes.DisplayForm ||  uiModel.ContextType == UIModelContextTypes.GenericForm )
+                    conditionalshow = true;
+visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("GuidActivityType"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        
+	
+	//Null
+		//if (this.Request.QueryString["fk"] != "GuidActivityType")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 100,
+																	
+					CustomProperties = customProperties,
+
+                    PropertyName = "GuidActivityType",
+
+					 MaxLength = 0,
+					IsRequired = true ,
+					IsHidden = true,
+                    SystemProperty =  SystemProperties.Identifier ,
+					IsDefaultProperty = false,
+                    SortBy = "GuidActivityType",
+					
+	
+                    TypeName = "Guid",
+                    IsNavigationProperty = false,
+					IsNavigationPropertyMany = false,
+                    PathName = "KSTime/"
+                    /*,PropertyDisplayName = Resources.KstActivityTypeResources.GUIDACTIVITYTYPE*/
+                });
+		//	}
+	
+	}
+visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("Name"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        
+	
+	//Null
+		//if (this.Request.QueryString["fk"] != "Name")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 101,
+																	
+					CustomProperties = customProperties,
+
+                    PropertyName = "Name",
+
+					 MaxLength = 255,
+					 Nullable = true,
+					IsDefaultProperty = true,
+                    SortBy = "Name",
+					
+	
+                    TypeName = "String",
+                    IsNavigationProperty = false,
+					IsNavigationPropertyMany = false,
+                    PathName = "KSTime/"
+                    /*,PropertyDisplayName = Resources.KstActivityTypeResources.NAME*/
+                });
+		//	}
+	
+	}
+visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("CreatedBy"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        
+	
+	//Null
+		//if (this.Request.QueryString["fk"] != "CreatedBy")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 102,
+																	
+					CustomProperties = customProperties,
+
+                    PropertyName = "CreatedBy",
+
+					 MaxLength = 0,
+					 Nullable = true,
+					IsDefaultProperty = false,
+                    SortBy = "CreatedBy",
+					
+	
+				SystemProperty = SystemProperties.CreatedUser,
+                    TypeName = "Guid",
+                    IsNavigationProperty = false,
+					IsNavigationPropertyMany = false,
+                    PathName = "KSTime/"
+                    /*,PropertyDisplayName = Resources.KstActivityTypeResources.CREATEDBY*/
+                });
+		//	}
+	
+	}
+visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("UpdatedBy"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        
+	
+	//Null
+		//if (this.Request.QueryString["fk"] != "UpdatedBy")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 103,
+																	
+					CustomProperties = customProperties,
+
+                    PropertyName = "UpdatedBy",
+
+					 MaxLength = 0,
+					 Nullable = true,
+					IsDefaultProperty = false,
+                    SortBy = "UpdatedBy",
+					
+	
+				SystemProperty = SystemProperties.UpdatedUser,
+                    TypeName = "Guid",
+                    IsNavigationProperty = false,
+					IsNavigationPropertyMany = false,
+                    PathName = "KSTime/"
+                    /*,PropertyDisplayName = Resources.KstActivityTypeResources.UPDATEDBY*/
+                });
+		//	}
+	
+	}
+visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("BizKeyEngine"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        
+	
+	//Null
+		//if (this.Request.QueryString["fk"] != "BizKeyEngine")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 104,
+																	
+					CustomProperties = customProperties,
+
+                    PropertyName = "BizKeyEngine",
+
+					 MaxLength = 32,
+					 Nullable = true,
+					IsDefaultProperty = false,
+                    SortBy = "BizKeyEngine",
+					
+	
+                    TypeName = "String",
+                    IsNavigationProperty = false,
+					IsNavigationPropertyMany = false,
+                    PathName = "KSTime/"
+                    /*,PropertyDisplayName = Resources.KstActivityTypeResources.BIZKEYENGINE*/
+                });
+		//	}
+	
+	}
+visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("CreatedDate"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        
+	
+	//Null
+		//if (this.Request.QueryString["fk"] != "CreatedDate")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 105,
+																	
+					CustomProperties = customProperties,
+
+                    PropertyName = "CreatedDate",
+
+					 MaxLength = 0,
+					 Nullable = true,
+					IsDefaultProperty = false,
+                    SortBy = "CreatedDate",
+					
+	
+				SystemProperty = SystemProperties.CreatedDate ,
+                    TypeName = "DateTime",
+                    IsNavigationProperty = false,
+					IsNavigationPropertyMany = false,
+                    PathName = "KSTime/"
+                    /*,PropertyDisplayName = Resources.KstActivityTypeResources.CREATEDDATE*/
+                });
+		//	}
+	
+	}
+visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("UpdatedDate"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        
+	
+	//Null
+		//if (this.Request.QueryString["fk"] != "UpdatedDate")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 118,
+																	
+					CustomProperties = customProperties,
+
+                    PropertyName = "UpdatedDate",
+
+					 MaxLength = 0,
+					 Nullable = true,
+					IsDefaultProperty = false,
+                    SortBy = "UpdatedDate",
+					
+	
+					IsUpdatedDate = true,
+					SystemProperty = SystemProperties.UpdatedDate ,
+	
+                    TypeName = "DateTime",
+                    IsNavigationProperty = false,
+					IsNavigationPropertyMany = false,
+                    PathName = "KSTime/"
+                    //,PropertyDisplayName = SFS.Core.Web.Mvc.Resources.GlobalMessages.UPDATED
+
+                });
+		//	}
+	
+	}
+visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("Bytes"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        
+	
+	//Null
+		//if (this.Request.QueryString["fk"] != "Bytes")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 107,
+																	
+					CustomProperties = customProperties,
+
+                    PropertyName = "Bytes",
+
+					 MaxLength = 0,
+					 Nullable = true,
+					IsDefaultProperty = false,
+                    SortBy = "Bytes",
+					
+	
+				SystemProperty = SystemProperties.SizeBytes,
+                    TypeName = "Int32",
+                    IsNavigationProperty = false,
+					IsNavigationPropertyMany = false,
+                    PathName = "KSTime/"
+                    /*,PropertyDisplayName = Resources.KstActivityTypeResources.BYTES*/
+                });
+		//	}
+	
+	}
+visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("KstActivities"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        			customProperties.Add(new CustomProperty() { Name="Fk", Value=@"KstActivityType" });
+			//[RelationFilterable(DisableFilterableInSubfilter=true, FiltrablePropertyPathName="KstActivities.GuidActivity")]		
+			customProperties.Add(new CustomProperty() { Name="FiltrablePropertyPathName", Value=@"KstActivities.GuidActivity" });
+			customProperties.Add(new CustomProperty() { Name = "BusinessObjectSetName", Value = @"KstActivities" });
+			
+
+	
+	//fk_KstActivity_KstActivityType
+		//if (this.Request.QueryString["fk"] != "KstActivities")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 108,
+																
+					//Link = VirtualPathUtility.ToAbsolute("~/") + "KSTime/KstActivities/ListViewGen?overrideModule=" + GetOverrideApp()  + "&pal=False&es=False&pag=10&filterlinks=1&idTab=KstActivities&fk=KstActivityType&startFilter="+ (new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext)).Encode("it.KstActivityType.GuidActivityType = Guid(\"" + idKstActivityType +"\")")+ "&fkValue=" + idKstActivityType,
+					ModuleKey = "KSTime",
+					BusinessObjectKey = "KstActivity",
+					BusinessObjectSet = "KstActivities",
+					
+					CustomProperties = customProperties,
+
+                    PropertyName = "KstActivities",
+
+					 MaxLength = 0,
+					 Nullable = true,
+					IsDefaultProperty = false,
+                    SortBy = "KstActivities.Name",
+					
+	
+                    TypeName = "KSTimeModel.KstActivity",
+                    IsNavigationProperty = true,
+					IsNavigationPropertyMany = true,
+                    PathName = "KSTime/KstActivities"
+                    /*,PropertyDisplayName = Resources.KstActivityTypeResources.KSTACTIVITIES*/
+                });
+		//	}
+	
+	}
+visibleProperty =allProperties;
+if (visibleProperty || specificProperties.Contains("KstWorkTimes"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        			customProperties.Add(new CustomProperty() { Name="Fk", Value=@"KstActivityType" });
+			//[RelationFilterable(DisableFilterableInSubfilter=true, FiltrablePropertyPathName="KstWorkTimes.GuidWorkTime")]		
+			customProperties.Add(new CustomProperty() { Name="FiltrablePropertyPathName", Value=@"KstWorkTimes.GuidWorkTime" });
+			customProperties.Add(new CustomProperty() { Name = "BusinessObjectSetName", Value = @"KstWorkTimes" });
+			
+
+	
+	//fk_KstWorkTime_KstActivityType
+		//if (this.Request.QueryString["fk"] != "KstWorkTimes")
+        //	{
+				results.Add(new PropertyDefinition()
+                {
+					Order = 109,
+																
+					//Link = VirtualPathUtility.ToAbsolute("~/") + "KSTime/KstWorkTimes/ListViewGen?overrideModule=" + GetOverrideApp()  + "&pal=False&es=False&pag=10&filterlinks=1&idTab=KstWorkTimes&fk=KstActivityType&startFilter="+ (new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext)).Encode("it.KstActivityType.GuidActivityType = Guid(\"" + idKstActivityType +"\")")+ "&fkValue=" + idKstActivityType,
+					ModuleKey = "KSTime",
+					BusinessObjectKey = "KstWorkTime",
+					BusinessObjectSet = "KstWorkTimes",
+					
+					CustomProperties = customProperties,
+
+                    PropertyName = "KstWorkTimes",
+
+					 MaxLength = 0,
+					 Nullable = true,
+					IsDefaultProperty = false,
+                    SortBy = "KstWorkTimes.Title",
+					
+	
+                    TypeName = "KSTimeModel.KstWorkTime",
+                    IsNavigationProperty = true,
+					IsNavigationPropertyMany = true,
+                    PathName = "KSTime/KstWorkTimes"
+                    /*,PropertyDisplayName = Resources.KstActivityTypeResources.KSTWORKTIMES*/
+                });
+		//	}
+	
+	}
+	
+				
+
+if (visibleProperty || specificProperties.Contains("GuidActividadEconomica"))
+{				
+    customProperties = new List<CustomProperty>();
+
+        
+	}
+                    _properties = results;
+                    return _properties;
+                }
+                else {
+                    return _properties;
+                }
+            }
+			[ApiExplorerSettings(IgnoreApi = true)]
+		private void Showing(ref UIModel<KstActivityTypeModel> uiModel) {
+          	
+			MyEventArgs<UIModel<KstActivityTypeModel>> me = new MyEventArgs<UIModel<KstActivityTypeModel>>() { UIModel = uiModel };
+			 OnVirtualLayoutSettings(this, me);
+
+            OnShowing(this, me);
+
+			
+			if (this.ContextRequest != null && this.ContextRequest.ApiWrapper != null && this.ContextRequest.ApiWrapper.AllFields == true )
+			{
+				me.UIModel.Properties.ForEach(p=> p.IsHidden = false);
+            }
+            if (me != null)
+            {
+                uiModel = me.UIModel;
+            }
+
+        }
+		[ApiExplorerSettings(IgnoreApi = true)]
+		protected override  UIModel<KstActivityTypeModel> GetByForShow(string filter, int? pageSize, int? page, string orderBy, string orderDir, ContextRequest contextRequest, params  object[] extraParams)
+        {
+			if (Request != null )
+				if (!string.IsNullOrEmpty(Request.Query["q"].ToString()))
+					filter = filter + HttpUtility.UrlDecode(Request.Query["q"].ToString());
+ if (contextRequest == null)
+            {
+                contextRequest = new ContextRequest();
+                contextRequest.CurrentContext = SFS.Core.My.Context.CurrentContext;
+            }
+            var bos = BR.KstActivityTypesBR.Instance.GetBy(HttpUtility.UrlDecode(filter), pageSize, page, orderBy, orderDir, GetUseMode(), contextRequest, extraParams);
+			//var bos = BR.KstActivityTypesBR.Instance.GetBy(HttpUtility.UrlDecode(filter), pageSize, page, orderBy, orderDir, GetUseMode(), context, extraParams);
+            KstActivityTypeModel model = null;
+            List<KstActivityTypeModel> results = new List<KstActivityTypeModel>();
+            foreach (var item in bos)
+            {
+                model = new KstActivityTypeModel();
+				model.Bind(item);
+				results.Add(model);
+            }
+            //return results;
+			UIModel<KstActivityTypeModel> uiModel = GetContextModel(UIModelContextTypes.Items, null);
+            uiModel.Items = results;
+			/*if (Request != null){
+				if (SFS.Core.Web.Utils.GetRouteDataOrQueryParam(Request.RequestContext, "action") == "Download")
+				{
+					uiModel.ContextType = UIModelContextTypes.ExportDownload;
+				}
+			}*/
+            Showing(ref uiModel);
+            return uiModel;
+		}			
+	
+		
+		[ApiExplorerSettings(IgnoreApi = true)]
+		protected override List<KstActivityTypeModel> GetBy(string filter, int? pageSize, int? page, string orderBy, string orderDir, ContextRequest contextRequest,  params  object[] extraParams)
+        {
+            var uiModel = GetByForShow(filter, pageSize, page, orderBy, orderDir, contextRequest, extraParams);
+           
+            return uiModel.Items;
+		
+        }
+		
+      
+
+
+
+		[ApiExplorerSettings(IgnoreApi = true)]
+		protected  KstActivityTypeModel GetByKey(string id, ContextRequest contextRequest, bool dec)
+        {
+            return GetByKey(id, null, contextRequest, dec);
+        }
+		[ApiExplorerSettings(IgnoreApi = true)]
+        protected KstActivityTypeModel GetByKey(string id, string  includes, bool dec)
+        {
+            return GetByKey(id, includes, null, dec);
+        }
+		[ApiExplorerSettings(IgnoreApi = true)]
+        protected KstActivityTypeModel GetByKey(string id, string includes, ContextRequest contextRequest, bool dec) {
+		             KstActivityTypeModel model = null;
+            ControllerEventArgs<KstActivityTypeModel> e = null;
+			string objectKey = id.Replace("-","/");
+             OnGettingByKey(this, e=  new ControllerEventArgs<KstActivityTypeModel>() { Id = objectKey  });
+             bool cancel = false;
+             KstActivityTypeModel eItem = null;
+             if (e != null)
+             {
+                 cancel = e.Cancel;
+                 eItem = e.Item;
+             }
+			if (cancel == false && eItem == null)
+             {
+			Guid guidActivityType = Guid.Empty; //new Guid(SFS.Core.Entities.Utils.GetPropertyKey(objectKey, "GuidActivityType"));
+			if (dec)
+                 {
+                     guidActivityType = new Guid(id);
+                 }
+                 else
+                 {
+                     guidActivityType = new Guid(SFS.Core.Entities.Utils.GetPropertyKey(objectKey, null));
+                 }
+			
+            
+				model = new KstActivityTypeModel();
+                  if (contextRequest == null)
+                {
+                    contextRequest = GetContextRequest();
+                }
+				var bo = BR.KstActivityTypesBR.Instance.GetByKey(guidActivityType, GetUseMode(), contextRequest,  includes);
+				 if (bo != null)
+                    model.Bind(bo);
+                else
+                    return null;
+			}
+             else {
+                 model = eItem;
+             }
+			model.IsNew = false;
+
+            return model;
+        }
+  
+
+        
+
+			[ApiExplorerSettings(IgnoreApi = true)]
+		protected override UIModel<KstActivityTypeModel> GetContextModel(UIModelContextTypes formMode, KstActivityTypeModel model)
+        {
+            return GetContextModel(formMode, model, false, null);
+        }
+			[ApiExplorerSettings(IgnoreApi = true)]
+		 private UIModel<KstActivityTypeModel> GetContextModel(UIModelContextTypes formMode, KstActivityTypeModel model, bool decript, Guid ? id) {
+            UIModel<KstActivityTypeModel> me = new UIModel<KstActivityTypeModel>(true, "KstActivityTypes");
+			me.UseMode = GetUseMode();
+			me.Controller = this;
+			me.OverrideApp = GetOverrideApp();
+			me.ContextType = formMode ;
+			me.Id = "KstActivityType";
+			
+            me.ModuleKey = "KSTime";
+
+			me.ModuleNamespace = "KS.Time";
+            me.EntityKey = "KstActivityType";
+            me.EntitySetName = "KstActivityTypes";
+
+			me.AreaAction = "KSTime";
+            me.ControllerAction = "KstActivityTypes";
+            me.PropertyKeyName = "GuidActivityType";
+
+            me.Properties = GetProperties(me, decript, id);
+
+			me.SortBy = "UpdatedDate";
+			me.SortDirection = UIModelSortDirection.DESC;
+
+ 			
+			 
+         
+            switch (formMode)
+            {
+                case UIModelContextTypes.DisplayForm:
+					//me.TitleForm = KstActivityTypeResources.KSTACTIVITYTYPES_DETAILS;
+                   // me.ActionButtons.First(p => p.ActionKey == "u").Title = GlobalMessages.MODIFY_DATA;
+					 me.Properties.Where(p=>p.PropertyName  != "Id" && p.IsForeignKey == false).ToList().ForEach(p => p.IsHidden = false);
+
+					 me.Properties.Where(p => (p.SystemProperty != null && p.SystemProperty != SystemProperties.Identifier) ).ToList().ForEach(p=> me.SetHide(p.PropertyName));
+
+                    break;
+                case UIModelContextTypes.EditForm:
+				  me.Properties.Where(p=>p.SystemProperty != SystemProperties.Identifier && p.IsForeignKey == false && p.PropertyName != "Id").ToList().ForEach(p => p.IsHidden = false);
+
+					if (model != null)
+                    {
+						
+
+					
+					}
+                    break;
+                case UIModelContextTypes.FilterFields:
+                    break;
+                case UIModelContextTypes.GenericForm:
+                    break;
+                case UIModelContextTypes.Items:
+		//if (Request.QueryString["allFields"] != "1"){
+					 if (me.Properties.Find(p => p.PropertyName == "Name") != null){
+						me.Properties.Find(p => p.PropertyName == "Name").IsHidden = false;
+					 }
+					 
+                    
+					
+					 if (me.Properties.Find(p => p.PropertyName == "UpdatedDate") != null){
+						me.Properties.Find(p => p.PropertyName == "UpdatedDate").IsHidden = false;
+					 }
+					 
+                    
+					
+
+						 if (me.Properties.Find(p => p.PropertyName == "GuidActivityType") != null){
+						me.Properties.Find(p => p.PropertyName == "GuidActivityType").IsHidden = false;
 					 }
 					 
                     

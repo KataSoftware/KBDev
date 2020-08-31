@@ -21,6 +21,22 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="Bytes" Type="int" />
+          <Property Name="GuidActivityType" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="KstActivityType">
+          <Key>
+            <PropertyRef Name="GuidActivityType" />
+          </Key>
+          <Property Name="GuidActivityType" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="GuidCompany" Type="uniqueidentifier" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="BizKeyEngine" Type="varchar" MaxLength="32" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Bytes" Type="int" />
         </EntityType>
         <EntityType Name="KstEmailTemplate">
           <Key>
@@ -200,6 +216,7 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="Bytes" Type="int" />
           <Property Name="DueDate" Type="datetime" />
+          <Property Name="GuidActivityType" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="KstWorkTimeFile">
           <Key>
@@ -217,6 +234,18 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="Bytes" Type="int" />
         </EntityType>
+        <Association Name="fk_KstActivity_KstActivityType">
+          <End Role="KstActivityType" Type="Self.KstActivityType" Multiplicity="0..1" />
+          <End Role="KstActivity" Type="Self.KstActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstActivityType">
+              <PropertyRef Name="GuidActivityType" />
+            </Principal>
+            <Dependent Role="KstActivity">
+              <PropertyRef Name="GuidActivityType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_KstActivity_KstProject">
           <End Role="KstProject" Type="Self.KstProject" Multiplicity="0..1" />
           <End Role="KstActivity" Type="Self.KstActivity" Multiplicity="*" />
@@ -361,6 +390,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_KstWorkTime_KstActivityType">
+          <End Role="KstActivityType" Type="Self.KstActivityType" Multiplicity="0..1" />
+          <End Role="KstWorkTime" Type="Self.KstWorkTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstActivityType">
+              <PropertyRef Name="GuidActivityType" />
+            </Principal>
+            <Dependent Role="KstWorkTime">
+              <PropertyRef Name="GuidActivityType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_KstWorkTime_KstProject">
           <End Role="KstProject" Type="Self.KstProject" Multiplicity="0..1" />
           <End Role="KstWorkTime" Type="Self.KstWorkTime" Multiplicity="*" />
@@ -399,6 +440,7 @@
         </Association>
         <EntityContainer Name="KSTimeModelStoreContainer">
           <EntitySet Name="KstActivity" EntityType="Self.KstActivity" Schema="Kst" store:Type="Tables" />
+          <EntitySet Name="KstActivityType" EntityType="Self.KstActivityType" Schema="Kst" store:Type="Tables" />
           <EntitySet Name="KstEmailTemplate" EntityType="Self.KstEmailTemplate" Schema="Kst" store:Type="Tables" />
           <EntitySet Name="KstFile" EntityType="Self.KstFile" Schema="Kst" store:Type="Tables" />
           <EntitySet Name="KstProject" EntityType="Self.KstProject" Schema="Kst" store:Type="Tables" />
@@ -412,6 +454,10 @@
           <EntitySet Name="KstUserFile" EntityType="Self.KstUserFile" Schema="Kst" store:Type="Tables" />
           <EntitySet Name="KstWorkTime" EntityType="Self.KstWorkTime" Schema="Kst" store:Type="Tables" />
           <EntitySet Name="KstWorkTimeFile" EntityType="Self.KstWorkTimeFile" Schema="Kst" store:Type="Tables" />
+          <AssociationSet Name="fk_KstActivity_KstActivityType" Association="Self.fk_KstActivity_KstActivityType">
+            <End Role="KstActivityType" EntitySet="KstActivityType" />
+            <End Role="KstActivity" EntitySet="KstActivity" />
+          </AssociationSet>
           <AssociationSet Name="fk_KstActivity_KstProject" Association="Self.fk_KstActivity_KstProject">
             <End Role="KstProject" EntitySet="KstProject" />
             <End Role="KstActivity" EntitySet="KstActivity" />
@@ -458,6 +504,10 @@
           </AssociationSet>
           <AssociationSet Name="fk_KstWorkTime_KstActivity" Association="Self.fk_KstWorkTime_KstActivity">
             <End Role="KstActivity" EntitySet="KstActivity" />
+            <End Role="KstWorkTime" EntitySet="KstWorkTime" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstWorkTime_KstActivityType" Association="Self.fk_KstWorkTime_KstActivityType">
+            <End Role="KstActivityType" EntitySet="KstActivityType" />
             <End Role="KstWorkTime" EntitySet="KstWorkTime" />
           </AssociationSet>
           <AssociationSet Name="fk_KstWorkTime_KstProject" Association="Self.fk_KstWorkTime_KstProject">
@@ -551,6 +601,15 @@
           <AssociationSet Name="fk_KstUserFile_KstProxyUser" Association="KSTimeModel.fk_KstUserFile_KstProxyUser">
             <End Role="KstProxyUser" EntitySet="KstProxyUsers" />
             <End Role="KstUserFile" EntitySet="KstUserFiles" />
+          </AssociationSet>
+          <EntitySet Name="KstActivityTypes" EntityType="KSTimeModel.KstActivityType" />
+          <AssociationSet Name="fk_KstActivity_KstActivityType" Association="KSTimeModel.fk_KstActivity_KstActivityType">
+            <End Role="KstActivityType" EntitySet="KstActivityTypes" />
+            <End Role="KstActivity" EntitySet="KstActivities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_KstWorkTime_KstActivityType" Association="KSTimeModel.fk_KstWorkTime_KstActivityType">
+            <End Role="KstActivityType" EntitySet="KstActivityTypes" />
+            <End Role="KstWorkTime" EntitySet="KstWorkTimes" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="KstEmailTemplate">
@@ -657,6 +716,8 @@
           <Property Name="Bytes" Type="Int32" />
           <NavigationProperty Name="KstProject" Relationship="KSTimeModel.fk_KstActivity_KstProject" FromRole="KstActivity" ToRole="KstProject" />
           <NavigationProperty Name="KstWorkTimes" Relationship="KSTimeModel.fk_KstWorkTime_KstActivity" FromRole="KstActivity" ToRole="KstWorkTime" />
+          <Property Name="GuidActivityType" Type="Guid" />
+          <NavigationProperty Name="KstActivityType" Relationship="KSTimeModel.fk_KstActivity_KstActivityType" FromRole="KstActivity" ToRole="KstActivityType" />
         </EntityType>
         <EntityType Name="KstProject">
           <Key>
@@ -719,6 +780,8 @@
           <NavigationProperty Name="KstProject" Relationship="KSTimeModel.fk_KstWorkTime_KstProject" FromRole="KstWorkTime" ToRole="KstProject" />
           <NavigationProperty Name="KstWorkTimeFiles" Relationship="KSTimeModel.fk_KstWorkTimeFile_KstWorkTime" FromRole="KstWorkTime" ToRole="KstWorkTimeFile" />
           <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <Property Name="GuidActivityType" Type="Guid" />
+          <NavigationProperty Name="KstActivityType" Relationship="KSTimeModel.fk_KstWorkTime_KstActivityType" FromRole="KstWorkTime" ToRole="KstActivityType" />
         </EntityType>
         <Association Name="fk_KstActivity_KstProject">
           <End Type="KSTimeModel.KstProject" Role="KstProject" Multiplicity="0..1" />
@@ -975,6 +1038,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="KstActivityType">
+          <Key>
+            <PropertyRef Name="GuidActivityType" />
+          </Key>
+          <Property Name="GuidActivityType" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="KstActivities" Relationship="KSTimeModel.fk_KstActivity_KstActivityType" FromRole="KstActivityType" ToRole="KstActivity" />
+          <NavigationProperty Name="KstWorkTimes" Relationship="KSTimeModel.fk_KstWorkTime_KstActivityType" FromRole="KstActivityType" ToRole="KstWorkTime" />
+          <Property Name="GuidCompany" Type="Guid" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="BizKeyEngine" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Bytes" Type="Int32" />
+        </EntityType>
+        <Association Name="fk_KstActivity_KstActivityType">
+          <End Type="KSTimeModel.KstActivityType" Role="KstActivityType" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstActivity" Role="KstActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstActivityType">
+              <PropertyRef Name="GuidActivityType" />
+            </Principal>
+            <Dependent Role="KstActivity">
+              <PropertyRef Name="GuidActivityType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_KstWorkTime_KstActivityType">
+          <End Type="KSTimeModel.KstActivityType" Role="KstActivityType" Multiplicity="0..1" />
+          <End Type="KSTimeModel.KstWorkTime" Role="KstWorkTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KstActivityType">
+              <PropertyRef Name="GuidActivityType" />
+            </Principal>
+            <Dependent Role="KstWorkTime">
+              <PropertyRef Name="GuidActivityType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1032,6 +1136,7 @@
           <EntitySetMapping Name="KstActivities">
             <EntityTypeMapping TypeName="KSTimeModel.KstActivity">
               <MappingFragment StoreEntitySet="KstActivity">
+                <ScalarProperty Name="GuidActivityType" ColumnName="GuidActivityType" />
                 <ScalarProperty Name="Bytes" ColumnName="Bytes" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -1085,6 +1190,7 @@
           <EntitySetMapping Name="KstWorkTimes">
             <EntityTypeMapping TypeName="KSTimeModel.KstWorkTime">
               <MappingFragment StoreEntitySet="KstWorkTime">
+                <ScalarProperty Name="GuidActivityType" ColumnName="GuidActivityType" />
                 <ScalarProperty Name="DueDate" ColumnName="DueDate" />
                 <ScalarProperty Name="Bytes" ColumnName="Bytes" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
@@ -1204,6 +1310,22 @@
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="GuidUser" ColumnName="GuidUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KstActivityTypes">
+            <EntityTypeMapping TypeName="KSTimeModel.KstActivityType">
+              <MappingFragment StoreEntitySet="KstActivityType">
+                <ScalarProperty Name="Bytes" ColumnName="Bytes" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="BizKeyEngine" ColumnName="BizKeyEngine" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="GuidCompany" ColumnName="GuidCompany" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GuidActivityType" ColumnName="GuidActivityType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1117,6 +1117,14 @@ using KS.Time.BusinessObjects;
 	
 ///[Exportable()]
 		
+	//[RelationFilterable()] 
+	//[LocalizedDisplayName("GUIDACTIVITYTYPE"/*, NameResourceType=typeof(KstActivityResources)*/)]
+	public Guid  ? GuidActivityType { get; set; }
+		
+		
+	
+///[Exportable()]
+		
 	//[RelationFilterable(DataClassProvider = typeof(Controllers.KstProjectsController), GetByKeyMethod="GetByKey", GetAllMethod = "GetAll", DataPropertyText = "Name", DataPropertyValue = "GuidProject", FiltrablePropertyPathName="KstProject.GuidProject")]	
 
 	//[DateTime(true, false, null)]	
@@ -1126,6 +1134,21 @@ using KS.Time.BusinessObjects;
 	//[Exportable()]
 	public string  FkKstProjectText { get; set; }
    // public string FkKstProjectSafeKey { get; set; }
+
+	
+		
+	
+///[Exportable()]
+		
+	//[RelationFilterable(DataClassProvider = typeof(Controllers.KstActivityTypesController), GetByKeyMethod="GetByKey", GetAllMethod = "GetAll", DataPropertyText = "Name", DataPropertyValue = "GuidActivityType", FiltrablePropertyPathName="KstActivityType.GuidActivityType")]	
+
+	//[DateTime(true, false, null)]	
+	//[LocalizedDisplayName("KSTACTIVITYTYPE"/*, NameResourceType=typeof(KstActivityResources)*/)]
+	public Guid  ? FkKstActivityType { get; set; }
+		//[LocalizedDisplayName("KSTACTIVITYTYPE"/*, NameResourceType=typeof(KstActivityResources)*/)]
+	//[Exportable()]
+	public string  FkKstActivityTypeText { get; set; }
+   // public string FkKstActivityTypeSafeKey { get; set; }
 
 	
 		
@@ -1147,6 +1170,7 @@ using KS.Time.BusinessObjects;
 		this.CreatedDate = model.CreatedDate;
 		this.UpdatedDate = model.UpdatedDate;
 		this.Bytes = model.Bytes;
+		this.GuidActivityType = model.GuidActivityType;
         }
 
         public BusinessObjects.KstActivity GetBusinessObject()
@@ -1193,10 +1217,21 @@ using KS.Time.BusinessObjects;
 	if (this.Bytes != null )
 				result.Bytes = (Int32)this.Bytes;
 				
+	if (this.GuidActivityType != null )
+				result.GuidActivityType = (Guid)this.GuidActivityType;
+				
 			
 			if(this.FkKstProject != null || this.GuidProject != null){
 			if (GuidProject != null) this.FkKstProject = GuidProject; 
 			result.KstProject = new BusinessObjects.KstProject() { GuidProject= (Guid)this.FkKstProject };
+
+			
+			}
+				
+			
+			if(this.FkKstActivityType != null || this.GuidActivityType != null){
+			if (GuidActivityType != null) this.FkKstActivityType = GuidActivityType; 
+			result.KstActivityType = new BusinessObjects.KstActivityType() { GuidActivityType= (Guid)this.FkKstActivityType };
 
 			
 			}
@@ -1241,12 +1276,22 @@ using KS.Time.BusinessObjects;
 				
 	if (businessObject.Bytes != null )
 				this.Bytes = (Int32)businessObject.Bytes;
+				
+	if (businessObject.GuidActivityType != null )
+				this.GuidActivityType = (Guid)businessObject.GuidActivityType;
 	        if (businessObject.KstProject != null){
 	                	this.FkKstProjectText = businessObject.KstProject.Name != null ? businessObject.KstProject.Name.ToString() : "";; 
 										
 										
 				this.FkKstProject = businessObject.KstProject.GuidProject;
                 //this.FkKstProjectSafeKey  = SFS.Core.Entities.Utils.GetKey(businessObject.KstProject,"GuidProject").Replace("/","-");
+
+			}
+	        if (businessObject.KstActivityType != null){
+	                	this.FkKstActivityTypeText = businessObject.KstActivityType.Name != null ? businessObject.KstActivityType.Name.ToString() : "";; 
+										
+				this.FkKstActivityType = businessObject.KstActivityType.GuidActivityType;
+                //this.FkKstActivityTypeSafeKey  = SFS.Core.Entities.Utils.GetKey(businessObject.KstActivityType,"GuidActivityType").Replace("/","-");
 
 			}
            
@@ -2335,6 +2380,14 @@ using KS.Time.BusinessObjects;
 	
 ///[Exportable()]
 		
+	//[RelationFilterable()] 
+	//[LocalizedDisplayName("GUIDACTIVITYTYPE"/*, NameResourceType=typeof(KstWorkTimeResources)*/)]
+	public Guid  ? GuidActivityType { get; set; }
+		
+		
+	
+///[Exportable()]
+		
 	//[RelationFilterable(DataClassProvider = typeof(Controllers.KstActivitiesController), GetByKeyMethod="GetByKey", GetAllMethod = "GetAll", DataPropertyText = "Name", DataPropertyValue = "GuidActivity", FiltrablePropertyPathName="KstActivity.GuidActivity")]	
 
 	//[DateTime(true, false, null)]	
@@ -2362,6 +2415,21 @@ using KS.Time.BusinessObjects;
 
 	
 		
+	
+///[Exportable()]
+		
+	//[RelationFilterable(DataClassProvider = typeof(Controllers.KstActivityTypesController), GetByKeyMethod="GetByKey", GetAllMethod = "GetAll", DataPropertyText = "Name", DataPropertyValue = "GuidActivityType", FiltrablePropertyPathName="KstActivityType.GuidActivityType")]	
+
+	//[DateTime(true, false, null)]	
+	//[LocalizedDisplayName("KSTACTIVITYTYPE"/*, NameResourceType=typeof(KstWorkTimeResources)*/)]
+	public Guid  ? FkKstActivityType { get; set; }
+		//[LocalizedDisplayName("KSTACTIVITYTYPE"/*, NameResourceType=typeof(KstWorkTimeResources)*/)]
+	//[Exportable()]
+	public string  FkKstActivityTypeText { get; set; }
+   // public string FkKstActivityTypeSafeKey { get; set; }
+
+	
+		
 		
 
 	
@@ -2383,6 +2451,7 @@ using KS.Time.BusinessObjects;
 		this.UpdatedDate = model.UpdatedDate;
 		this.Bytes = model.Bytes;
 		this.DueDate = model.DueDate;
+		this.GuidActivityType = model.GuidActivityType;
         }
 
         public BusinessObjects.KstWorkTime GetBusinessObject()
@@ -2439,6 +2508,9 @@ using KS.Time.BusinessObjects;
 					if (this.DueDate != null)
 				result.DueDate = (DateTime)this.DueDate;		
 				
+	if (this.GuidActivityType != null )
+				result.GuidActivityType = (Guid)this.GuidActivityType;
+				
 			
 			if(this.FkKstActivity != null || this.GuidActivity != null){
 			if (GuidActivity != null) this.FkKstActivity = GuidActivity; 
@@ -2451,6 +2523,14 @@ using KS.Time.BusinessObjects;
 			if(this.FkKstProject != null || this.GuidProject != null){
 			if (GuidProject != null) this.FkKstProject = GuidProject; 
 			result.KstProject = new BusinessObjects.KstProject() { GuidProject= (Guid)this.FkKstProject };
+
+			
+			}
+				
+			
+			if(this.FkKstActivityType != null || this.GuidActivityType != null){
+			if (GuidActivityType != null) this.FkKstActivityType = GuidActivityType; 
+			result.KstActivityType = new BusinessObjects.KstActivityType() { GuidActivityType= (Guid)this.FkKstActivityType };
 
 			
 			}
@@ -2504,6 +2584,9 @@ using KS.Time.BusinessObjects;
 				this.Bytes = (Int32)businessObject.Bytes;
 				if (businessObject.DueDate != null )
 				this.DueDate = (DateTime)businessObject.DueDate;
+				
+	if (businessObject.GuidActivityType != null )
+				this.GuidActivityType = (Guid)businessObject.GuidActivityType;
 	        if (businessObject.KstActivity != null){
 	                	this.FkKstActivityText = businessObject.KstActivity.Name != null ? businessObject.KstActivity.Name.ToString() : "";; 
 										
@@ -2517,6 +2600,13 @@ using KS.Time.BusinessObjects;
 										
 				this.FkKstProject = businessObject.KstProject.GuidProject;
                 //this.FkKstProjectSafeKey  = SFS.Core.Entities.Utils.GetKey(businessObject.KstProject,"GuidProject").Replace("/","-");
+
+			}
+	        if (businessObject.KstActivityType != null){
+	                	this.FkKstActivityTypeText = businessObject.KstActivityType.Name != null ? businessObject.KstActivityType.Name.ToString() : "";; 
+										
+				this.FkKstActivityType = businessObject.KstActivityType.GuidActivityType;
+                //this.FkKstActivityTypeSafeKey  = SFS.Core.Entities.Utils.GetKey(businessObject.KstActivityType,"GuidActivityType").Replace("/","-");
 
 			}
            
@@ -4642,6 +4732,302 @@ using KS.Time.BusinessObjects;
                 //this.FkKstProxyRoleSafeKey  = SFS.Core.Entities.Utils.GetKey(businessObject.KstProxyRole,"GuidRole").Replace("/","-");
 
 			}
+           
+        }
+	}
+}
+	namespace KS.Time.Api.Models.KstActivityTypes 
+	{
+	public partial class KstActivityTypeModel: ModelBase{
+
+	  public KstActivityTypeModel(BO.KstActivityType resultObj)
+        {
+
+            Bind(resultObj);
+        }
+#region Tags		
+#endregion
+		public KstActivityTypeModel()
+        {
+		}
+		public override string Id
+        {
+            get
+            {
+                return this.GuidActivityType.ToString();
+            }
+
+			 set
+            {
+                this.GuidActivityType = Guid.Parse(value);
+            }
+        }
+			
+			
+        public override string ToString()
+        {
+			if (this.Name != null)
+		
+            return this.Name.ToString();
+			else
+				return "";
+		
+        }    
+			
+
+
+       
+	
+		[SystemProperty()]		
+		public Guid? GuidActivityType{ get; set; }
+		
+	
+///[Exportable()]
+		
+	//[RelationFilterable()] 
+	//[LocalizedDisplayName("NAME"/*, NameResourceType=typeof(KstActivityTypeResources)*/)]
+	public String   Name { get; set; }
+		
+		
+	
+///[Exportable()]
+		
+	//[RelationFilterable()] 
+	//[SystemProperty()]
+	//[LocalizedDisplayName("GUIDCOMPANY"/*, NameResourceType=typeof(KstActivityTypeResources)*/)]
+	public Guid  ? GuidCompany { get; set; }
+		
+		
+	
+///[Exportable()]
+		
+//[RelationFilterable(FiltrablePropertyPathName = "CreatedBy", IsExternal =true )]
+//[AutoComplete("SFSdotNetFrameworkSecurity", "secUsers", "FindUsers", "filter", "DisplayName", "GuidUser", true)]	
+
+	//[SystemProperty()]
+	//[LocalizedDisplayName("CREATEDBY"/*, NameResourceType=typeof(KstActivityTypeResources)*/)]
+	public Guid  ? CreatedBy { get; set; }
+		
+		
+	
+///[Exportable()]
+		
+//[RelationFilterable(FiltrablePropertyPathName = "UpdatedBy", IsExternal =true )]
+//[AutoComplete("SFSdotNetFrameworkSecurity", "secUsers", "FindUsers", "filter", "DisplayName", "GuidUser", true)]	
+
+	//[SystemProperty()]
+	//[LocalizedDisplayName("UPDATEDBY"/*, NameResourceType=typeof(KstActivityTypeResources)*/)]
+	public Guid  ? UpdatedBy { get; set; }
+		
+		
+	
+///[Exportable()]
+		
+	//[RelationFilterable()] 
+	//[SystemProperty()]
+	//[LocalizedDisplayName("ISDELETED"/*, NameResourceType=typeof(KstActivityTypeResources)*/)]
+	public Boolean  ? IsDeleted { get; set; }
+	public string _IsDeletedText = null;
+    public string IsDeletedText {
+        get {
+			if (string.IsNullOrEmpty( _IsDeletedText ))
+				{
+	
+            if (IsDeleted != null)
+
+				return IsDeleted.ToString();
+				
+            else
+                return String.Empty;
+	
+			}else{
+				return _IsDeletedText ;
+			}			
+        }
+		set{
+			_IsDeletedText = value;
+		}
+        
+    }
+
+		
+		
+	
+///[Exportable()]
+		
+	//[RelationFilterable()] 
+	//[LocalizedDisplayName("BIZKEYENGINE"/*, NameResourceType=typeof(KstActivityTypeResources)*/)]
+	public String   BizKeyEngine { get; set; }
+		
+		
+	
+///[Exportable()]
+		
+	//[RelationFilterable()] 
+	//[SystemProperty()]
+	//[DateTime(true, false, null)]	
+	//[LocalizedDisplayName("CREATEDDATE"/*, NameResourceType=typeof(KstActivityTypeResources)*/)]
+	public DateTime  ? CreatedDate { get; set; }
+	public string CreatedDateText {
+        get {
+            if (CreatedDate != null)
+				return ((DateTime)CreatedDate).ToShortDateString() ;
+            else
+                return String.Empty;
+        }
+				set{
+					if (!string.IsNullOrEmpty(value))
+						this.CreatedDate = Convert.ToDateTime(value);
+    }
+		}
+		
+		
+	
+///[Exportable()]
+		
+	//[RelationFilterable()] 
+	//[SystemProperty()]
+	//[DateTime(true, false, null)]	
+	//[LocalizedDisplayName("UPDATEDDATE"/*, NameResourceType=typeof(KstActivityTypeResources)*/)]
+	public DateTime  ? UpdatedDate { get; set; }
+	public string UpdatedDateText {
+        get {
+            if (UpdatedDate != null)
+			
+                return ((DateTime)UpdatedDate).ToString("s") ;
+            else
+                return String.Empty;
+        }
+				set{
+					if (!string.IsNullOrEmpty(value))
+						this.UpdatedDate = Convert.ToDateTime(value);
+    }
+		}
+		
+		
+	
+///[Exportable()]
+		
+	//[RelationFilterable()] 
+	//[SystemProperty()]
+	//[DataType("Integer")]
+	//[LocalizedDisplayName("BYTES"/*, NameResourceType=typeof(KstActivityTypeResources)*/)]
+	public Int32  ? Bytes { get; set; }
+	public string _BytesText = null;
+    public string BytesText {
+        get {
+			if (string.IsNullOrEmpty( _BytesText ))
+				{
+	
+            if (Bytes != null)
+				return Bytes.ToString();
+				
+            else
+                return String.Empty;
+	
+			}else{
+				return _BytesText ;
+			}			
+        }
+		set{
+			_BytesText = value;
+		}
+        
+    }
+
+		
+		
+		
+
+	
+	
+		public void Bind(KstActivityTypeModel model){
+            
+		this.GuidActivityType = model.GuidActivityType;
+		this.Name = model.Name;
+		this.GuidCompany = model.GuidCompany;
+		this.CreatedBy = model.CreatedBy;
+		this.UpdatedBy = model.UpdatedBy;
+		this.IsDeleted = model.IsDeleted;
+		this.BizKeyEngine = model.BizKeyEngine;
+		this.CreatedDate = model.CreatedDate;
+		this.UpdatedDate = model.UpdatedDate;
+		this.Bytes = model.Bytes;
+        }
+
+        public BusinessObjects.KstActivityType GetBusinessObject()
+        {
+            BusinessObjects.KstActivityType result = new BusinessObjects.KstActivityType();
+
+
+			       
+	if (this.GuidActivityType != null )
+				result.GuidActivityType = (Guid)this.GuidActivityType;
+				
+	if (this.Name != null )
+				result.Name = (String)this.Name.Trim().Replace("\t", String.Empty);
+				
+	if (this.GuidCompany != null )
+				result.GuidCompany = (Guid)this.GuidCompany;
+				
+	if (this.CreatedBy != null )
+				result.CreatedBy = (Guid)this.CreatedBy;
+				
+	if (this.UpdatedBy != null )
+				result.UpdatedBy = (Guid)this.UpdatedBy;
+				
+	if (this.IsDeleted != null )
+				result.IsDeleted = (Boolean)this.IsDeleted;
+				
+	if (this.BizKeyEngine != null )
+				result.BizKeyEngine = (String)this.BizKeyEngine.Trim().Replace("\t", String.Empty);
+				
+				if(this.CreatedDate != null)
+					if (this.CreatedDate != null)
+				result.CreatedDate = (DateTime)this.CreatedDate;		
+				
+				if(this.UpdatedDate != null)
+					if (this.UpdatedDate != null)
+				result.UpdatedDate = (DateTime)this.UpdatedDate;		
+				
+	if (this.Bytes != null )
+				result.Bytes = (Int32)this.Bytes;
+				
+
+            return result;
+        }
+        public void Bind(BusinessObjects.KstActivityType businessObject)
+        {
+				this.BusinessObjectObject = businessObject;
+
+
+			this.GuidActivityType = businessObject.GuidActivityType;
+				
+				
+	if (businessObject.Name != null )
+				this.Name = (String)businessObject.Name;
+				
+	if (businessObject.GuidCompany != null )
+				this.GuidCompany = (Guid)businessObject.GuidCompany;
+				
+	if (businessObject.CreatedBy != null )
+				this.CreatedBy = (Guid)businessObject.CreatedBy;
+				
+	if (businessObject.UpdatedBy != null )
+				this.UpdatedBy = (Guid)businessObject.UpdatedBy;
+				
+	if (businessObject.IsDeleted != null )
+				this.IsDeleted = (Boolean)businessObject.IsDeleted;
+				
+	if (businessObject.BizKeyEngine != null )
+				this.BizKeyEngine = (String)businessObject.BizKeyEngine;
+				if (businessObject.CreatedDate != null )
+				this.CreatedDate = (DateTime)businessObject.CreatedDate;
+				if (businessObject.UpdatedDate != null )
+				this.UpdatedDate = (DateTime)businessObject.UpdatedDate;
+				
+	if (businessObject.Bytes != null )
+				this.Bytes = (Int32)businessObject.Bytes;
            
         }
 	}
