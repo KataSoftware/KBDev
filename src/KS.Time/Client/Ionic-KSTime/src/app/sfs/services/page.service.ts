@@ -38,7 +38,11 @@ export class PageService {
       if (settings.Data == null) {
         let response = await this.bizAppService.Get(serviceData);
         if (response.isSuccess() == true) {
+          if (response.data.length > 0){
+            response.data.unshift({});
+            }
           settings.Data = response.data;
+        
         }
 
 
@@ -52,7 +56,7 @@ export class PageService {
             const element = settings.Data[index];
             dataArray.push({ value: element, text: element });
           }
-
+          //dataArray.unshift({});
           settings.Data = dataArray;
           settings.DataValue = "value";
           settings.DataText = "text";
@@ -99,6 +103,9 @@ export class PageService {
                 serviceData.Query=  queryBuilder.join(" AND "); //`${entityRelKey} = "${value}"`;
                 let response = await this.bizAppService.Get(serviceData);
                 if (response.isSuccess() == true) {
+                  if (response.data.length > 0){
+                    response.data.unshift({});
+                  }
                   field.templateOptions.options = response.data;
                 }
                 
