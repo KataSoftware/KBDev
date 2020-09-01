@@ -28,7 +28,7 @@ export class PageService {
     }
     this.temp.push({ template: settings.Content });
   }
-  public async addRelatedData(settings: FieldSettings, field: FormlyFieldConfig, page?:any) {
+  public async addRelatedData(settings: FieldSettings, field: FormlyFieldConfig, page?: any) {
     //
     let serviceData: ServiceDataOptions = { EntityModel: settings.EntityModel, Fields: `${settings.DataValue},${settings.DataText}` };
     if (settings.DataQuery != null) {
@@ -38,11 +38,11 @@ export class PageService {
       if (settings.Data == null) {
         let response = await this.bizAppService.Get(serviceData);
         if (response.isSuccess() == true) {
-          if (response.data.length > 0){
+          if (response.data.length > 0) {
             response.data.unshift({});
-            }
+          }
           settings.Data = response.data;
-        
+
         }
 
 
@@ -72,46 +72,22 @@ export class PageService {
         onInit: field => {
           console.log("onInit hooks");
           // obtener campos con relación parent
-          const parents:string = field.templateOptions["parents"];
-          if (parents != null && parents.length > 0){
-            const relations:Array<string> = parents.split(";");
+          const parents: string = field.templateOptions["parents"];
+          if (parents != null && parents.length > 0) {
+            const relations: Array<string> = parents.split(";");
 
             relations.forEach(element => {
               const localPropertyFk = element.split(":")[0];
-             
-              let parentControl:AbstractControl = page.form.get(localPropertyFk);
+
+              let parentControl: AbstractControl = page.form.get(localPropertyFk);
               parentControl.valueChanges.subscribe(async value => {
-                //console.log(value);
-                let queryBuilder:Array<string> =[];
-                relations.forEach(rel=>{
-                  const localProp = rel.split(":")[0];
-                  const entityAndKey = rel.split(":")[1];
-                  const entityRel = entityAndKey.split(".")[0];
-                  // project, ActivityType
-                  const entityRelKey = entityAndKey.split(".")[1];
-                  if (rel == element){
-                    if (value != null && value != ""){
-                      queryBuilder.push(`${entityRelKey} = "${value}"`);
-                    }
-                  }else{
-                    if (page.item[localProp] != null && page.item[localProp] != ""){
-                      queryBuilder.push(`${entityRelKey} = "${page.item[localProp]}"`);
-                    }
-                  }
-                });
-                console.log("queryBuilder", queryBuilder.join(" AND ") );
-                serviceData.Query=  queryBuilder.join(" AND "); //`${entityRelKey} = "${value}"`;
-                let response = await this.bizAppService.Get(serviceData);
-                if (response.isSuccess() == true) {
-                  if (response.data.length > 0){
-                    response.data.unshift({});
-                  }
-                  field.templateOptions.options = response.data;
-                }
-                
+                await this.fillCascading(field, relations, element, value, page, serviceData);
+
               });
 
             });
+            this.fillCascading(field, relations, null, null, page, serviceData);
+
           }
         }
       }
@@ -123,6 +99,40 @@ export class PageService {
 
 
 
+  }
+
+  async fillCascading(field: FormlyFieldConfig, relations: Array<string>, element: string, parentValue: string, page: any, serviceData: ServiceData) {
+    const value: string = parentValue;
+    //console.log(value);
+    let queryBuilder: Array<string> = [];
+    relations.forEach(rel => {
+      const localProp = rel.split(":")[0];
+      const entityAndKey = rel.split(":")[1];
+      const entityRel = entityAndKey.split(".")[0];
+      // project, ActivityType
+      const entityRelKey = entityAndKey.split(".")[1];
+      if (rel == element) {
+        if (value != null && value != "") {
+          queryBuilder.push(`${entityRelKey} = "${value}"`);
+        }
+      } else {
+        if (page.item[localProp] != null && page.item[localProp] != "") {
+          queryBuilder.push(`${entityRelKey} = "${page.item[localProp]}"`);
+        }
+      }
+    });
+
+    console.log("queryBuilder", queryBuilder.join(" AND "));
+    if (queryBuilder.length > 0) {
+      serviceData.Query = queryBuilder.join(" AND "); //`${entityRelKey} = "${value}"`;
+      let response = await this.bizAppService.Get(serviceData);
+      if (response.isSuccess() == true) {
+        if (response.data.length > 0) {
+          response.data.unshift({});
+        }
+        field.templateOptions.options = response.data;
+      }
+    }
   }
   visibleFields: Array<string> = [];
   propertyChanges: Array<string> = [];
@@ -173,7 +183,7 @@ export class PageService {
     endSettings.Columns = 6;
     this.setOrder(endSettings, fields, true);
   }
-  setOrder(settings: FieldSettings, fields: Array<FormlyFieldConfig>, preventFilterSettings?: boolean, page?:any) {
+  setOrder(settings: FieldSettings, fields: Array<FormlyFieldConfig>, preventFilterSettings?: boolean, page?: any) {
 
     let addField: boolean = true;
     if (preventFilterSettings != true) {
@@ -277,7 +287,7 @@ export class PageService {
     }
   }
 
-  public showForm(fields: Array<FormlyFieldConfig>, page?:any): Array<any> {
+  public showForm(fields: Array<FormlyFieldConfig>, page?: any): Array<any> {
     //this.propertiesForUpdate. = this.visibleFields;
 
     if (this.temp == null) {
@@ -325,7 +335,7 @@ export class PageService {
 
     return fields;
   }
-  private applySettingsField(settings: FieldSettings, field: FormlyFieldConfig, page:any) {
+  private applySettingsField(settings: FieldSettings, field: FormlyFieldConfig, page: any) {
     if (settings.Columns != null) {
       field.className = field.className + " col-" + settings.Columns;
     }
@@ -430,7 +440,7 @@ export class PageService {
       if (settings.Hooks != null) {
         field["hooks"] = settings.Hooks;
       } else {
-      //  console.log("hooks", field["hooks"]);
+        //  console.log("hooks", field["hooks"]);
       }
       if (settings.AsyncValidators != null) {
         field["asyncValidators"] = settings.AsyncValidators;

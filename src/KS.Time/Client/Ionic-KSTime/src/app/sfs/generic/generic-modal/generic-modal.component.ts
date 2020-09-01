@@ -1,5 +1,5 @@
 import { NgModel } from '@angular/forms';
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, Input } from '@angular/core';
 import { GenericFormPage } from '../generic-form/generic-form.page';
 import { GenericFormBasePage } from '../../common/app-form-base/generic-form-base.page';
 import { ActivatedRoute } from '@angular/router';
@@ -18,6 +18,7 @@ import { sfsService } from './../../services/sfs.service';
 //   styleUrls: ['./../generic-form/generic-form.page.scss'],
 // })
  export class GenericModalComponent extends GenericFormBasePage  implements OnInit {
+  @Input() existentFilter:boolean=false;
   constructor(
     public injector: Injector,
     public activatedRoute: ActivatedRoute,
@@ -26,7 +27,7 @@ import { sfsService } from './../../services/sfs.service';
     public sfsService: sfsService
 
   ) {
-    
+
     super(injector, activatedRoute, storage, userService, sfsService);
 
 

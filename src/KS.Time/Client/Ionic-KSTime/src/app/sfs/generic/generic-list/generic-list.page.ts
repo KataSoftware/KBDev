@@ -224,6 +224,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
   }
 
+
   async showFilter() {
     if (this.currentMediaQuery == 'xs' || this.currentMediaQuery == 'sm') {
       const modal = await this.modalCtrl.create({
@@ -231,10 +232,12 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
         componentProps: {
           entityName: this.entityName,
           isFilter: true,
-          item: this.itemFilter
+          item: this.itemFilter,
+          existentFilter: this.itemFilter != null
         }
 
       });
+
       modal.onDidDismiss()
         .then((data: any) => {
           console.log("modal data", data);
