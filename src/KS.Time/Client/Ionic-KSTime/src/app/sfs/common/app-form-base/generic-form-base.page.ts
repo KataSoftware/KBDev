@@ -78,26 +78,32 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
     }
   }
     import(
-      /* webpackMode: "lazy-once" */
-      /* webpackPrefetch: true */
-      /* webpackInclude: /\.ts$/ */
-      /* webpackPreload: true */
+               /* webpackMode: "lazy" */
+          /* webpackPrefetch: true */
+          /* webpackInclude: /\.ts$/ */
+          /* webpackPreload: true */
+
+
       `../../models/codegen/${this.entityName}.model`).then((_model) => {
         this.entityModel = _model[this.entityName + "Model"]
         this.pageService.fieldsBack = this.entityModel.GetFields();
+        this.pageService.temp = null;
         if (this.isFilter == true && this.item != null) {
           console.log("data open filter", this.item);
         } else {
           //console.log("new item", this.item);
-           /*if (this.isFilter == true ){
-              this.item = new this.entityModel();
-           }*/
+            //if (this.isFilter == true ){
+              if (this.guidItem == null ){
+                this.item = new this.entityModel();
+              }
+           //}
         }
         import(
-          /* webpackMode: "eager" */
+                  /* webpackMode: "eager" */
           /* webpackPrefetch: true */
           /* webpackInclude: /\.ts$/ */
           /* webpackPreload: true */
+
           `../../../pages/catalogs/${this.entityName}Form.custom`).then(async (_import) => {
             this.KstEmailTemplateFormCustom = _import[this.entityName + "FormCustom"];
             if (this.KstEmailTemplateFormCustom != null) {

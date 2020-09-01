@@ -1,3 +1,5 @@
+import { environment } from 'src/environments/environment';
+import { AbstractControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpService, DataService, EntityWrapper, ApiResponse, ServiceData, IGeoData, TableColumn } from 'sfscommon';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -26,7 +28,7 @@ export class PageService {
     }
     this.temp.push({ template: settings.Content });
   }
-  public async addRelatedData(settings: FieldSettings, field: FormlyFieldConfig) {
+  public async addRelatedData(settings: FieldSettings, field: FormlyFieldConfig, page?:any) {
     //
     let serviceData: ServiceDataOptions = { EntityModel: settings.EntityModel, Fields: `${settings.DataValue},${settings.DataText}` };
     if (settings.DataQuery != null) {
@@ -69,8 +71,39 @@ export class PageService {
           const parents:string = field.templateOptions["parents"];
           if (parents != null && parents.length > 0){
             const relations:Array<string> = parents.split(";");
-            relations.forEach(rel => {
-              
+
+            relations.forEach(element => {
+              const localPropertyFk = element.split(":")[0];
+             
+              let parentControl:AbstractControl = page.form.get(localPropertyFk);
+              parentControl.valueChanges.subscribe(async value => {
+                //console.log(value);
+                let queryBuilder:Array<string> =[];
+                relations.forEach(rel=>{
+                  const localProp = rel.split(":")[0];
+                  const entityAndKey = rel.split(":")[1];
+                  const entityRel = entityAndKey.split(".")[0];
+                  // project, ActivityType
+                  const entityRelKey = entityAndKey.split(".")[1];
+                  if (rel == element){
+                    if (value != null && value != ""){
+                      queryBuilder.push(`${entityRelKey} = "${value}"`);
+                    }
+                  }else{
+                    if (page.item[localProp] != null && page.item[localProp] != ""){
+                      queryBuilder.push(`${entityRelKey} = "${page.item[localProp]}"`);
+                    }
+                  }
+                });
+                console.log("queryBuilder", queryBuilder.join(" AND ") );
+                serviceData.Query=  queryBuilder.join(" AND "); //`${entityRelKey} = "${value}"`;
+                let response = await this.bizAppService.Get(serviceData);
+                if (response.isSuccess() == true) {
+                  field.templateOptions.options = response.data;
+                }
+                
+              });
+
             });
           }
         }
@@ -133,7 +166,7 @@ export class PageService {
     endSettings.Columns = 6;
     this.setOrder(endSettings, fields, true);
   }
-  setOrder(settings: FieldSettings, fields: Array<FormlyFieldConfig>, preventFilterSettings?: boolean) {
+  setOrder(settings: FieldSettings, fields: Array<FormlyFieldConfig>, preventFilterSettings?: boolean, page?:any) {
 
     let addField: boolean = true;
     if (preventFilterSettings != true) {
@@ -216,13 +249,13 @@ export class PageService {
         this.propertiesForUpdate.push(settings.Name);
         let finded = this.fieldsBack.find(p => p.key == settings.Name);
         if (finded != null) {
-          this.applySettingsField(settings, finded);
+          this.applySettingsField(settings, finded, page);
           //this.temp.push(finded);
           this.rowGroup.push(finded);
         }
       } else {
         let field: FormlyFieldConfig = { className: '', template: settings.Content };
-        this.applySettingsField(settings, field);
+        this.applySettingsField(settings, field, page);
         this.rowGroup.push(field);
       }
 
@@ -237,7 +270,7 @@ export class PageService {
     }
   }
 
-  public showForm(fields: Array<FormlyFieldConfig>): Array<any> {
+  public showForm(fields: Array<FormlyFieldConfig>, page?:any): Array<any> {
     //this.propertiesForUpdate. = this.visibleFields;
 
     if (this.temp == null) {
@@ -245,7 +278,7 @@ export class PageService {
 
       if (this.fieldsBack != null) {
         this.fieldsBack.forEach(element => {
-          this.setOrder({ Name: element.key, Columns: 12 }, fields);
+          this.setOrder({ Name: element.key, Columns: 12 }, fields, null, page);
         });
       }
     }
@@ -285,7 +318,7 @@ export class PageService {
 
     return fields;
   }
-  private applySettingsField(settings: FieldSettings, field: FormlyFieldConfig) {
+  private applySettingsField(settings: FieldSettings, field: FormlyFieldConfig, page:any) {
     if (settings.Columns != null) {
       field.className = field.className + " col-" + settings.Columns;
     }
@@ -397,7 +430,7 @@ export class PageService {
       }
       if (settings.EntityModel != null || (settings.Data != null)) {
         field.type = "select";
-        this.addRelatedData(settings, field);
+        this.addRelatedData(settings, field, page);
       } else {
         if (field.templateOptions != null && field.templateOptions["relation"] != null) {
 
@@ -408,7 +441,7 @@ export class PageService {
           if (settings.DataText == null) {
             settings.DataText = field.templateOptions["relation"].DataText;
           }
-          this.addRelatedData(settings, field);
+          this.addRelatedData(settings, field, page);
 
 
         }

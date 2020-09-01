@@ -191,7 +191,7 @@ export class AppFormBasePage extends BasePage implements OnInit {
     this.pageService.setSeparator(settings, this.fields);
   }
   private async addRelatedData(settings: FieldSettings, field: FormlyFieldConfig) {
-    this.pageService.addRelatedData(settings, field);
+    this.pageService.addRelatedData(settings, field, this);
   }
 
   private setOrderForRange(settings: FieldSettings, fieldName:string){
@@ -227,7 +227,7 @@ export class AppFormBasePage extends BasePage implements OnInit {
     //}
   }
   public showForm() {
-    this.fields = this.pageService.showForm(this.fields);
+    this.fields = this.pageService.showForm(this.fields, this);
   }
 
   public resetFieldsForm() {
