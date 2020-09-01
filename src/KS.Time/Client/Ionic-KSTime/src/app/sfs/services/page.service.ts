@@ -262,7 +262,7 @@ export class PageService {
 
       if (settings.Name != null) {
         //propertiesForUpdate
-        this.visibleFields.push(settings.Name);
+        page.visibleFields.push(settings.Name);
         this.propertiesForUpdate.push(settings.Name);
         let finded = this.fieldsBack.find(p => p.key == settings.Name);
         if (finded != null) {

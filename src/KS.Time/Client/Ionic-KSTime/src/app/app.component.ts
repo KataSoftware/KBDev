@@ -36,30 +36,30 @@ export class AppComponent  extends BasePage implements OnInit, AfterViewInit  {
         active: false
       },
       {
-        title: 'Proyectos',
-        url: '/KstProject/list',
+        title: 'Catálogos',
+        url: 'catalog/unProxyBusinessObject',
         icon: 'apps',
         visible: true,
         active: false
       },
-      {
-        title: 'Actividades',
-        url: '/KstActivity/list',
-        icon: 'apps',
-        visible: true,
-        active: false
-      },
+      // {
+      //   title: 'Actividades',
+      //   url: '/KstActivity/list',
+      //   icon: 'apps',
+      //   visible: true,
+      //   active: false
+      // },
       
-      {
-        title: 'Cerrar sesión',
-        url: '/logoff',
-        icon: 'close',
-        visible: true,
-        active: false
-      },
+      // {
+      //   title: 'Cerrar sesión',
+      //   url: '/logoff',
+      //   icon: 'close',
+      //   visible: true,
+      //   active: false
+      // },
     ];
 
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  //public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   visible = false;
   open = false;

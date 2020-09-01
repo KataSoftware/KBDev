@@ -9,8 +9,7 @@ import { sfsService } from './../../services/sfs.service';
 @Component({
   selector: 'app-generic-modal',
   templateUrl: './generic-modal.component.html',
-  styleUrls: ['./generic-modal.component.scss'],
-  providers: [NgModel]
+  styleUrls: ['./generic-modal.component.scss']
 })
 // @Component({
 //   selector: 'app-generic-modal',

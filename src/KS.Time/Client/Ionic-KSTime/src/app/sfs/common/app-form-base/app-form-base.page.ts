@@ -222,7 +222,7 @@ export class AppFormBasePage extends BasePage implements OnInit {
     // if (settings.IsFilterRange == true ){
 
     // }else{
-      this.pageService.setOrder(settings, this.fields);
+      this.pageService.setOrder(settings, this.fields, null, this);
 
     //}
   }
