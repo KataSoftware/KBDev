@@ -22,6 +22,13 @@ export enum FieldTypes {
     Secondary=3,
     Summary=4
   }
+  export class ChildRelation {
+    public PropertyName?:string;
+    public Label?:string;
+    public EntityName?:string;
+    public Order?:number;
+
+  }
   export class FieldSettings {
     public Fields?: Array<FormlyFieldConfig> = null;
     public Id?: string = null;

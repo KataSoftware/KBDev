@@ -35,4 +35,8 @@ export class GenericFormPage extends GenericFormBasePage implements OnInit {
 
     this.guidItem = this.route.snapshot.paramMap.get("id");
   }
+  segment:string="principal";
+  async segmentChanged(event:any){
+    console.log(event);
+  }
 }

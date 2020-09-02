@@ -295,7 +295,7 @@ export class PageService {
 
       if (this.fieldsBack != null) {
         this.fieldsBack.forEach(element => {
-          this.setOrder({ Name: element.key, Columns: 12 }, fields, null, page);
+          this.setOrder({  Name: element.key, Columns: 12 }, fields, null, page);
         });
       }
     }

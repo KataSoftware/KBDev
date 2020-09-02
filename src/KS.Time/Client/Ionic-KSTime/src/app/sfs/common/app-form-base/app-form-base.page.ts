@@ -216,6 +216,7 @@ export class AppFormBasePage extends BasePage implements OnInit {
     // settings.Name = "__start" + settings.Name;
   }
   setOrder(settings: FieldSettings) {
+
     // settings.IsFilter = this.isFilter;
     
    

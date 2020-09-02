@@ -57,7 +57,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   }
 
 
-  actionsForSheet(item: any): any {
+  actionsForSheet(row:any, item: any): any {
     let role = item.ActionKey;
 
     if (item.ActionKey == "delete") {
@@ -73,6 +73,10 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       action.handler = () => {
         this.delete(null);
       }
+    }else{
+      action.handler = () => {
+        this.action(row, item.ActionKey);
+      }
     }
 
     return action;
@@ -82,25 +86,28 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     if (itemAction == null) {
       this.localActions.forEach(item => {
         if (item.ActionKey != "add") {
-          actionsList.push(this.actionsForSheet(item));
+          actionsList.push(this.actionsForSheet(itemAction, item));
         }
       });
     } else {
       itemAction.__actions.forEach(item => {
         if (item.ActionKey != "add") {
-          actionsList.push(this.actionsForSheet(item));
+          actionsList.push(this.actionsForSheet(itemAction, item));
         }
       });
     }
-    let actions = this.actionSheetCtrl.create(
+    let actions = await this.actionSheetCtrl.create(
       {
         header: 'Selecciona la acción',
         buttons: actionsList
       }
 
     );
-
-    (await actions).present();
+    actions.onDidDismiss().then((data)=>{
+      console.log("as", data);
+    });
+    return await actions.present();
+   
   }
   private _isExpansionIndicator(target: any): boolean {
     console.log(target);
@@ -524,13 +531,14 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   }
 
   action(row: any, actionKey: string) {
+    console.log("action", row, actionKey);
     if (actionKey == "edit") {
       this.edit(row);
     } else if (actionKey == "delete") {
       this.delete(row);
     } else {
       if (this.GenericListCustom != null && this.GenericListCustom["OnCustomActionExecute"] != null) {
-        this.GenericListCustom["OnCustomActionExecute"](this, row);
+        this.GenericListCustom["OnCustomActionExecute"](this, row, actionKey);
       }
     }
   }
