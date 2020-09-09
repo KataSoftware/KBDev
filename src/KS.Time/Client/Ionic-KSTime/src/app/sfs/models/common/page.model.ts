@@ -23,7 +23,7 @@ export enum FieldTypes {
     Summary=4
   }
   export class ChildRelation {
-    public PropertyName?:string;
+    public Name?:string;
     public Label?:string;
     public EntityName?:string;
     public Order?:number;

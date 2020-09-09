@@ -116,7 +116,7 @@ export class PageService {
           queryBuilder.push(`${entityRelKey} = "${value}"`);
         }
       } else {
-        if (page.item[localProp] != null && page.item[localProp] != "") {
+        if (page.item != null && page.item[localProp] != null && page.item[localProp] != "") {
           queryBuilder.push(`${entityRelKey} = "${page.item[localProp]}"`);
         }
       }
@@ -182,6 +182,9 @@ export class PageService {
     endSettings.Label = "Hasta";
     endSettings.Columns = 6;
     this.setOrder(endSettings, fields, true);
+  }
+  setOrderRelation(){
+    
   }
   setOrder(settings: FieldSettings, fields: Array<FormlyFieldConfig>, preventFilterSettings?: boolean, page?: any) {
 
@@ -298,6 +301,8 @@ export class PageService {
           this.setOrder({  Name: element.key, Columns: 12 }, fields, null, page);
         });
       }
+      //page.childrenRelations
+      //this.setOrderRelation()
     }
 
     if (this.temp != null) {

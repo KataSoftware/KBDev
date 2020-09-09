@@ -5,16 +5,31 @@
 </ion-header>
 
 <ion-content>
-  <ion-tabs>
+  <ion-tabs #tabs>
     <ion-tab-bar slot="top">
-      <ion-tab-button tab="principal">
+      <ion-tab-button  tab="principal">
         <!-- <ion-icon name="speedometer"></ion-icon> -->
         <ion-label>Principal</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="relations">
+      <ion-tab-button  tab="relations" layout="icon-end">
         <!-- <ion-icon name="list"></ion-icon> -->
-        <ion-label>Listas relacionadas</ion-label>
+        <!-- <div>
+          <ion-label>{{listSelected}}</ion-label>
+        <ion-button size="small" fill="clear">
+          <ion-icon slot="icon-only" name="chevron-down">
+
+          </ion-icon>
+        </ion-button>
+      </div> -->
+      <ion-label>Listas relacionadas</ion-label>
+      <!-- <ion-button size="small" fill="clear" (click)="openMenu($event)">
+        <ion-icon slot="icon-only" name="chevron-down">
+
+        </ion-icon>
+      </ion-button> -->
+
+      <!-- <ion-icon name="person-circle" (click)="openMenu($event)"></ion-icon> -->
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>

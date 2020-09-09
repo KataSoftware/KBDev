@@ -1,4 +1,5 @@
-﻿import { GenericModalComponent } from './../generic-modal/generic-modal.component';
+﻿import { ChildRelation } from './../../models/common/page.model';
+import { GenericModalComponent } from './../generic-modal/generic-modal.component';
 import { GenericFormPage } from './../generic-form/generic-form.page';
 import { NgZone } from '@angular/core';
 import { Component, OnInit, Injector, ViewChild, TemplateRef, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
@@ -14,6 +15,7 @@ import { sfsService } from '../../services/sfs.service';
 import { BindListSettings } from '../../common/app-list-base/app-list-base.page';
 import { MatExpansionPanel, MatExpansionPanelTitle } from '@angular/material/expansion';
 import { GestureController, IonItem } from '@ionic/angular';
+import { PopOverMenuComponent } from '../../common/pop-over-menu/pop-over-menu.component';
 
 
 
@@ -23,7 +25,8 @@ import { GestureController, IonItem } from '@ionic/angular';
   styleUrls: ['./generic-list.page.scss'],
 })
 export class GenericListPage extends AppListBaseTypedPage<GenericModel> implements OnInit, AfterViewInit {
-
+  isFormTabs: boolean = false;
+  idFormTab:string=null;
   fields: Array<FormlyFieldConfig> = null;
   bindedData: boolean = false;
   formFilter: FormGroup = new FormGroup({});
@@ -49,6 +52,42 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
     }
   }
+
+  async openMenu(event) {
+    console.log(event);
+    let options:Array<any> = [];
+    this.relationLists.forEach(elem=> {
+      options.push({ text: elem.Label, value: elem.Name });
+    });
+
+    const popover = await this.popoverCtrl.create({
+      component: PopOverMenuComponent,
+      cssClass: 'my-custom-class',
+      event: event,
+      translucent: true,
+      componentProps: {
+        options: options
+        
+      }
+
+    });
+
+    popover.onDidDismiss()
+    .then((data: any) => {
+      console.log("modal data", data);
+      if (data != null && data.data != null) {
+        this.title = data.data.selected.text;
+         this.entityName = data.data.selected.value;
+         this.GenericListCustom = null;
+         this.initList();
+      }
+      //this.bindData({ RestartPaging: navData.RestartPaging });
+    });
+
+    return await popover.present();
+
+  }
+
   public longPress(event: any, item: any, num: any) {
 
     item.__isChecked = true;
@@ -57,7 +96,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   }
 
 
-  actionsForSheet(row:any, item: any): any {
+  actionsForSheet(row: any, item: any): any {
     let role = item.ActionKey;
 
     if (item.ActionKey == "delete") {
@@ -73,7 +112,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       action.handler = () => {
         this.delete(null);
       }
-    }else{
+    } else {
       action.handler = () => {
         this.action(row, item.ActionKey);
       }
@@ -103,11 +142,11 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       }
 
     );
-    actions.onDidDismiss().then((data)=>{
+    actions.onDidDismiss().then((data) => {
       console.log("as", data);
     });
     return await actions.present();
-   
+
   }
   private _isExpansionIndicator(target: any): boolean {
     console.log(target);
@@ -164,44 +203,47 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   ) {
     super(injector);
     this.entityName = this.activatedRoute.snapshot.paramMap.get('catalog');
-    // const gesture: Gesture = this.gestureCtrl.create({
-    //   el: this.element.nativeElement,
-    //   threshold: 15,
-    //   gestureName: 'my-gesture',
-    //   onMove: ev => this.onMoveHandler(ev)
-    // }, true);
-    /*
-    import(`./${this.customClass}`).then(p=>{
-      this.GenericListCustom = p["GenericListCustom"];
-      if (this.GenericListCustom != null && this.GenericListCustom["OnShowing"] != null){
-        this.GenericListCustom["OnShowing"](this);
-      }
-      }).catch(error=> {
-      console.log(error);
-      });*/
+    this.idFormTab = this.activatedRoute.snapshot.paramMap.get('id');
+
+    if (this.router.url.indexOf("form-tabs") != -1) {
+      this.isFormTabs = true;
+    }
+
+    if (this.isFormTabs == true) {
+      console.log(this.sfsService.GetNavigationData());
+    }
+    console.log("route list", this.route);
 
   }
+  firstLoaded: boolean = false;
   async ionViewWillEnter() {
-    let navData = this.sfsService.GetNavigationData();
-    console.log("ionViewWillEnter navData", navData);
-    if (navData != null) {
-      if (navData.RefreshData == true) {
-        if (this.loadingData == false) {
-          await this.bindData({ RestartPaging: navData.RestartPaging });
-        }
-      } else if (navData.ItemUpdated != null) {
-        let itemFormService = await this.bizAppService.GetItem(navData.ItemUpdated.Id, this.entityModel._EntitySetName, Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p => !p.startsWith("Fk")).join(","));
-        if (itemFormService.status == "success" && itemFormService.data != null) {
+    if (this.firstLoaded = true && this.isFormTabs == true) {
+      this.initRelationLists();
+      //this.events.publish("menu:minimized", true);
 
-          let itemFinded = this.data.find(p => p.Id == navData.ItemUpdated.Id);
-          Object.assign(itemFinded, itemFormService.data);
-          if (this.GenericListCustom != null && this.GenericListCustom["OnItems"] != null) {
-            this.GenericListCustom["OnItems"](this, this.data);
+      this.initList();
+    } else {
+      let navData = this.sfsService.GetNavigationData();
+      console.log("ionViewWillEnter navData", navData);
+      if (navData != null) {
+        if (navData.RefreshData == true) {
+          if (this.loadingData == false) {
+            await this.bindData({ RestartPaging: navData.RestartPaging });
+          }
+        } else if (navData.ItemUpdated != null) {
+          let itemFormService = await this.bizAppService.GetItem(navData.ItemUpdated.Id, this.entityModel._EntitySetName, Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p => !p.startsWith("Fk")).join(","));
+          if (itemFormService.status == "success" && itemFormService.data != null) {
+
+            let itemFinded = this.data.find(p => p.Id == navData.ItemUpdated.Id);
+            Object.assign(itemFinded, itemFormService.data);
+            if (this.GenericListCustom != null && this.GenericListCustom["OnItems"] != null) {
+              this.GenericListCustom["OnItems"](this, this.data);
+            }
           }
         }
+      } else {
+        if (this.loadingData == false) { await this.bindData(); }
       }
-    } else {
-      if (this.loadingData == false) { await this.bindData(); }
     }
   }
 
@@ -290,11 +332,28 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       });
     }
   }
+  relationLists:Array<ChildRelation>=null;
+  async initRelationLists(){
+    const navData = this.sfsService.GetNavigationData();
+    //let relations:Array<ChildRelation> = [];
+    console.log("navData", navData);
+    if (navData != null && navData.children != null && navData.children.length > 0){
+       this.relationLists  = navData.children;
+       this.title = this.relationLists[0].Label;
+       this.entityName = this.relationLists[0].Name;
+    }else{
+      if (navData == null){
+       // this.events.publish("menu:minimized", true);
+
+      }
+    }
 
 
+  }
 
-  async ngOnInit() {
+  async initList() {
 
+    //console.log("relation list data", this.route);
     this.routeAdd = "/catalog/" + this.entityName + "/form";
 
     import(
@@ -346,6 +405,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
         this.setOrder({ Name: "UpdatedDate", Label: "" });
         this.setOrder({ Name: 'actions' });
 
+        //this.setOrder
         this.numOrder = 0;
         if (this.GenericListCustom == null) {
           import(
@@ -390,6 +450,15 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
         console.log("error ", error);
       });
   }
+  async ngOnInit() {
+    
+    if (this.isFormTabs == false) {
+      this.firstLoaded = true;
+      await this.initList();
+
+
+    }
+  }
   bindDisplayColumns() {
     this.displayedColumns = [];
     for (let column of this.tableColumns) { this.displayedColumns.push(column.prop); }
@@ -398,7 +467,40 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   routeAdd: string = "/catalog/" + this.entityName + "/form";
 
   async addItem() {
-    this.navCtrl.navigateForward(this.routeAdd, { animated: true });
+    if (this.isFormTabs == true){
+      const modal = await this.modalCtrl.create({
+        component: GenericModalComponent,
+        componentProps: {
+          entityName: this.entityName,
+          isFilter: false,
+          isModal: true,
+          fk: "GuidProject",
+          fkValue: this.idFormTab
+        }
+
+      });
+
+      modal.onDidDismiss()
+        .then((data: any) => {
+          console.log("modal data", data);
+          if (data != null && data.data != null) {
+            if (data.data.query != null && data.data.itemFilter != null) {
+              this.serviceData.Query = data.data.query;
+              this.itemFilter = data.data.itemFilter;
+              this.refreshList(null);
+            } else if (data.data.delete == true) {
+              this.serviceData.Query = null;
+              this.itemFilter = null;
+              this.refreshList(null);
+            }
+          }
+          //this.bindData({ RestartPaging: navData.RestartPaging });
+        });
+      await modal.present();
+
+    }else{
+      this.navCtrl.navigateForward(this.routeAdd, { animated: true });
+    }
   }
 
   getItemPrimaryColumn(item?: any) {

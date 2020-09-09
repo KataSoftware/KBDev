@@ -10,12 +10,13 @@ import { Observable } from 'rxjs';
 import { bizAppService } from '../../services/business.service';
 import { Button } from 'protractor';
 import { PageService } from '../../services/page.service';
-import { DialogSettings, DialogButton, SeparatorSettings, FieldSettings } from '../../models/common/page.model';
+import { DialogSettings, DialogButton, SeparatorSettings, FieldSettings, ChildRelation } from '../../models/common/page.model';
 import { confirmSettings } from '../app-list-base/app-list-base.page';
  
 export class AppFormBasePage extends BasePage implements OnInit {
 
   @Input() public isFilter:boolean=false;
+  @Input() public isModal:boolean=false;
   public isFilterRange:boolean=false;
 
   private _bizAppService: bizAppService;
@@ -243,7 +244,9 @@ export class AppFormBasePage extends BasePage implements OnInit {
     this.pageService.setOrderFields(fieldNames, this.fields);
   }
 
-
+  public setOrderRelation(setting:ChildRelation){
+     
+  }
 
   
 

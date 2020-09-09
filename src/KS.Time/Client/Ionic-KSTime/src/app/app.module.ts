@@ -21,14 +21,16 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { FormlyWrapperAddons } from './sfs/components/business/components/addons-extension/addons-extension.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicGestureConfig } from './sfs/utils/IonicGestureConfig';
+import { PopOverMenuComponent } from './sfs/common/pop-over-menu/pop-over-menu.component';
 
 
 @NgModule({
   declarations: [AppComponent,
     FormlyWrapperAddons,
-    GenericModalComponent
+    GenericModalComponent,
+    PopOverMenuComponent
   ],
-  entryComponents: [GenericModalComponent],
+  entryComponents: [GenericModalComponent, PopOverMenuComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

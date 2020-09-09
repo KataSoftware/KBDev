@@ -59,12 +59,12 @@ export  class KstProjectModel{
 	public static GetChildren(){
 		let results:Array<ChildRelation> = [];
 		results.push({
-			PropertyName: "KstActivities",
-			Label: "KstActivity",
+			Name: "KstActivity",
+			Label: "KstActivity asdsad asd asdsa dasd adsds",
 			EntityName: "KstActivity"
 		 });
 		 results.push({
-			PropertyName: "KstWorkTimes",
+			Name: "KstWorkTime",
 			Label: "KstWorkTime",
 			EntityName: "KstWorkTime"
 		 });

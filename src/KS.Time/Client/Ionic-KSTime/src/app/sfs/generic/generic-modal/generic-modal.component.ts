@@ -5,6 +5,7 @@ import { GenericFormBasePage } from '../../common/app-form-base/generic-form-bas
 import { ActivatedRoute } from '@angular/router';
 import { StorageService, UserService } from 'sfscommon';
 import { sfsService } from './../../services/sfs.service';
+import { PopOverMenuComponent } from '../../common/pop-over-menu/pop-over-menu.component';
 
 @Component({
   selector: 'app-generic-modal',
@@ -40,11 +41,19 @@ import { sfsService } from './../../services/sfs.service';
     this.guidItem = this.route.snapshot.paramMap.get("id");
     
 
-
-
-
-   // this.guidItem = this.route.snapshot.paramMap.get("id");
   }
 
+  async openMenu(event){
+    console.log(event);
 
+    const popover = await this.popoverCtrl.create({
+      component: PopOverMenuComponent,
+      cssClass: 'my-custom-class',
+      event: event,
+      translucent: true
+    });
+    return await popover.present();
+    
+  }
+  
 }
