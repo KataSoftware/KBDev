@@ -24,6 +24,8 @@ export enum FieldTypes {
   }
   export class ChildRelation {
     public Name?:string;
+    public FkPropertyName?:string;
+    public FkRelationName?:string;
     public Label?:string;
     public EntityName?:string;
     public Order?:number;

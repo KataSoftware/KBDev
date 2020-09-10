@@ -187,7 +187,9 @@ export class PageService {
     
   }
   setOrder(settings: FieldSettings, fields: Array<FormlyFieldConfig>, preventFilterSettings?: boolean, page?: any) {
-
+    if (page != null && page.fk != null && page.fk == settings.Name){
+      return ;
+    }
     let addField: boolean = true;
     if (preventFilterSettings != true) {
       if (this.isFilter == true && this.isFilterRange == true) {

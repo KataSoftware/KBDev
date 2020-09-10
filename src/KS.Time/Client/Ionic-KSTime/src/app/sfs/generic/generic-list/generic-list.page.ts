@@ -28,6 +28,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   isFormTabs: boolean = false;
   idFormTab:string=null;
   fields: Array<FormlyFieldConfig> = null;
+  fkPropertyName?:string=null;
   bindedData: boolean = false;
   formFilter: FormGroup = new FormGroup({});
   async doRefresh(event) {
@@ -76,10 +77,16 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     .then((data: any) => {
       console.log("modal data", data);
       if (data != null && data.data != null) {
-        this.title = data.data.selected.text;
-         this.entityName = data.data.selected.value;
-         this.GenericListCustom = null;
-         this.initList();
+        let relFinded = this.relationLists.find(p=> p.EntityName == data.data.selected.value );
+
+        if (relFinded != null ){
+          this.fkPropertyName = relFinded.FkPropertyName;
+          this.title = data.data.selected.text;
+          this.entityName = data.data.selected.value;
+          this.GenericListCustom = null;
+          this.initList();
+        }
+        
       }
       //this.bindData({ RestartPaging: navData.RestartPaging });
     });
@@ -215,13 +222,16 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     console.log("route list", this.route);
 
   }
-  firstLoaded: boolean = false;
+  firstLoaded: boolean = true;
   async ionViewWillEnter() {
-    if (this.firstLoaded = true && this.isFormTabs == true) {
+    console.log("ionViewWillEnter");
+    if (this.firstLoaded == true && this.isFormTabs == true) {
+      
       this.initRelationLists();
       //this.events.publish("menu:minimized", true);
 
       this.initList();
+      this.firstLoaded = false;
     } else {
       let navData = this.sfsService.GetNavigationData();
       console.log("ionViewWillEnter navData", navData);
@@ -340,7 +350,10 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     if (navData != null && navData.children != null && navData.children.length > 0){
        this.relationLists  = navData.children;
        this.title = this.relationLists[0].Label;
-       this.entityName = this.relationLists[0].Name;
+       this.entityName = this.relationLists[0].EntityName;
+       this.fkPropertyName = this.relationLists[0].FkPropertyName;
+
+       console.log("relation selected" , this.relationLists[0]);
     }else{
       if (navData == null){
        // this.events.publish("menu:minimized", true);
@@ -468,13 +481,15 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
   async addItem() {
     if (this.isFormTabs == true){
+      console.log("addITem", this.fkPropertyName);
       const modal = await this.modalCtrl.create({
         component: GenericModalComponent,
+
         componentProps: {
           entityName: this.entityName,
           isFilter: false,
           isModal: true,
-          fk: "GuidProject",
+          fk: this.fkPropertyName,
           fkValue: this.idFormTab
         }
 
@@ -484,15 +499,17 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
         .then((data: any) => {
           console.log("modal data", data);
           if (data != null && data.data != null) {
-            if (data.data.query != null && data.data.itemFilter != null) {
-              this.serviceData.Query = data.data.query;
-              this.itemFilter = data.data.itemFilter;
-              this.refreshList(null);
-            } else if (data.data.delete == true) {
-              this.serviceData.Query = null;
-              this.itemFilter = null;
-              this.refreshList(null);
-            }
+
+            this.ionViewWillEnter();
+            // if (data.data.query != null && data.data.itemFilter != null) {
+            //   this.serviceData.Query = data.data.query;
+            //   this.itemFilter = data.data.itemFilter;
+            //   this.refreshList(null);
+            // } else if (data.data.delete == true) {
+            //   this.serviceData.Query = null;
+            //   this.itemFilter = null;
+            //   this.refreshList(null);
+            // }
           }
           //this.bindData({ RestartPaging: navData.RestartPaging });
         });

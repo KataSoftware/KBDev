@@ -11,7 +11,7 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
   // @Input() entityName: string;
   @Input() filterProperties: Array<string>;
   @Input() item: any = null;
-  @Input() fk:string=null;
+ 
   @Input() fkValue:string=null;
   guidItem: string = null;
   fields: Array<FormlyFieldConfig> = [];
@@ -108,6 +108,8 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
             this.item = new this.entityModel();
             console.log("fk", this.fk, this.fkValue);
             this.item[this.fk]= this.fkValue; 
+            console.log("fields", this.fields);
+
           }
           //}
         }
@@ -128,10 +130,12 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
               }
             }
             this.showForm();
+
             this.getData();
           }).catch((error) => {
             console.log("error load partial File", error);
             this.showForm();
+
             this.getData();
           });
 
@@ -170,7 +174,7 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
       }
       this.sfsService.SetNavigationData(settings);
       if (this.isModal == true ){
-        this.close();
+        this.modalCtrl.dismiss( settings );
       }else{
         this.navCtrl.navigateBack(settings.Route, { animated: true });
       } 

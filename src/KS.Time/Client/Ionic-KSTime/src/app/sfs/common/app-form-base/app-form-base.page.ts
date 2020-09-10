@@ -14,7 +14,7 @@ import { DialogSettings, DialogButton, SeparatorSettings, FieldSettings, ChildRe
 import { confirmSettings } from '../app-list-base/app-list-base.page';
  
 export class AppFormBasePage extends BasePage implements OnInit {
-
+  @Input() fk:string=null;
   @Input() public isFilter:boolean=false;
   @Input() public isModal:boolean=false;
   public isFilterRange:boolean=false;
@@ -230,6 +230,8 @@ export class AppFormBasePage extends BasePage implements OnInit {
   }
   public showForm() {
     this.fields = this.pageService.showForm(this.fields, this);
+    console.log("showForm", this.fk, this.fields);
+    
   }
 
   public resetFieldsForm() {
