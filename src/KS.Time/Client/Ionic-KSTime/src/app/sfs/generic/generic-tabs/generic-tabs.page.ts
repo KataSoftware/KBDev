@@ -1,3 +1,4 @@
+import { sfsService } from './../../services/sfs.service';
 import { PopOverMenuComponent } from './../../common/pop-over-menu/pop-over-menu.component';
 import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { BasePage } from 'sfscommon';
@@ -11,7 +12,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 })
 export class GenericTabsPage extends BasePage implements OnInit {
 
-  constructor( injector: Injector ) {
+  constructor( injector: Injector ,public  sfsService: sfsService) {
     super(injector);
 
    }
@@ -40,6 +41,9 @@ export class GenericTabsPage extends BasePage implements OnInit {
   }
   firstLoad:boolean = true; 
   ngOnInit() {
+    console.log("ngOnInit tabs");
+    this.sfsService.SetNavigationData(null, "first-principal-form");
+
     const tabSub = this.tabs.ionTabsDidChange.subscribe(() => {
       this.currentTab = this.tabs.outlet.component;
       console.log("subscribe", this.currentTab);
@@ -74,7 +78,18 @@ export class GenericTabsPage extends BasePage implements OnInit {
   ionViewWillLeave() {
     this.currentTab.tabsWillLeave();
   }
+  async tabsChange1(tabs: IonTabs){
+    // ddd
+    //if (tabs.getSelected() == "relations"){
+    
+    this.sfsService.SetNavigationData(tabs.getSelected(), "relations-selected");
+    //}
 
+    console.log("ionTabsWillChange", tabs.getSelected());
+  }
+  async tabsChange2(tabs){
+    console.log("ionTabsDidChange", tabs.getSelected());
+  }
   ionViewDidLeave() {
     this.currentTab.tabsDidLeave();
   }

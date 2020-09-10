@@ -224,7 +224,12 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   }
   firstLoaded: boolean = true;
   async ionViewWillEnter() {
-    console.log("ionViewWillEnter");
+
+    let firstForm = this.sfsService.GetNavigationData("first-principal-form")
+    if (firstForm != true){
+      return;
+    }
+    //console.log("xx ionViewWillEnter" , this.sfsService.GetNavigationData("test-relations"));
     if (this.firstLoaded == true && this.isFormTabs == true) {
 
       this.initRelationLists();
@@ -673,7 +678,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     }
 
     if (this.isFormTabs == true) {
-     // console.log("addITem", this.fkPropertyName);
+      console.log("editr row",row);
       const modal = await this.modalCtrl.create({
         component: GenericModalComponent,
 
@@ -682,6 +687,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
           isFilter: false,
           isModal: true,
           item: row,
+          guidItem: row.Id,
           fk: this.fkPropertyName,
           //fkValue: this.idFormTab
         }

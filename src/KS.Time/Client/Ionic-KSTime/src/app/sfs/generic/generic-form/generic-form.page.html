@@ -63,6 +63,11 @@
             (click)="saveData()" size="default"  color="primary">
             {{textSave}}
           </ion-button>
+          <ion-button *ngIf="formMode == 'read'"
+          (click)="saveData()" size="default"  color="primary">
+          {{textSave}}
+        </ion-button>
+
         </div>
     
         </ion-col>

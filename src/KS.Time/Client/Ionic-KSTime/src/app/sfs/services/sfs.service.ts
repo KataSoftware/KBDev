@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService, DataService, EntityWrapper, ApiResponse, ServiceData, IGeoData, IUserDataModel, SystemCore, UserService } from 'sfscommon';
+import { NullTemplateVisitor } from '@angular/compiler';
 @Injectable({ providedIn: 'root' })
 export class sfsService {
   url: string;
@@ -37,12 +38,34 @@ export class sfsService {
     return response;
   }
   private NavigationData?:any=null;
-  public GetNavigationData():any{
-    return this.NavigationData;
+  private NavigationDataArray?:Array<KeyValue>=[];
+  public GetNavigationData(key?:string):any{
+    if (key != null ){
+      let elem = this.NavigationDataArray.find(p=> p.Key == key);
+      if (elem != null){
+        return elem.Data;
+      }else{
+        return null;
+      }
+    }else{
+      return this.NavigationData;
+    }
   }
-  public SetNavigationData(data:any){
+  public SetNavigationData(data:any, key?:string){
     console.log('SetNavigationData', data);
-    this.NavigationData=data;
+    if (key != null ){
+      let elem = this.NavigationDataArray.find(p=> p.Key == key);
+      if (elem == null ){
+        elem = new KeyValue();
+        elem.Key = key;
+        elem.Data = data;
+        this.NavigationDataArray.push(elem);
+      }else{
+        elem.Data = data;
+      }
+    }else{
+      this.NavigationData=data;
+    }
   }
   public async  Create(entity: any, setName: any) {
 
@@ -171,6 +194,11 @@ export class sfsService {
   
   
 }
+export class KeyValue{
+  Key?:string= null;
+  Data?:any=null;
+}
+
 export class ServiceDataOptions extends ServiceData {
     EntityModel?:any=null;
 }

@@ -13,8 +13,9 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
   @Input() item: any = null;
  
   @Input() fkValue:string=null;
-  guidItem: string = null;
+  @Input() guidItem: string = null;
   fields: Array<FormlyFieldConfig> = [];
+  @Input() formMode:string="read";
   childrenRelations: Array<any> = []; // relaciones muchos
   KstEmailTemplateFormCustom: any = null;
   customClass = 'KstEmailTemplate-form.custom';
@@ -39,8 +40,10 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
 
 
 
+    if (this.route.snapshot.paramMap.get("id") != null ){
+      this.guidItem = this.route.snapshot.paramMap.get("id");
+    }
 
-    this.guidItem = this.route.snapshot.paramMap.get("id");
   }
 
 
@@ -93,6 +96,7 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
         //TODO
         //try{
         if (this.isModal == false) {
+          this.sfsService.SetNavigationData(true, "first-principal-form");
           this.sfsService.SetNavigationData({ children: this.entityModel.GetChildren() });
         }
         //}catch(ex){

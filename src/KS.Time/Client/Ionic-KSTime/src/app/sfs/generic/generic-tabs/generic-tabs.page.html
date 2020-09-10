@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-tabs #tabs>
+  <ion-tabs #tabs (ionTabsWillChange)="tabsChange1(tabs)" (ionTabsDidChange)="tabsChange2(tabs)">
     <ion-tab-bar slot="top">
       <ion-tab-button  tab="principal">
         <!-- <ion-icon name="speedometer"></ion-icon> -->
