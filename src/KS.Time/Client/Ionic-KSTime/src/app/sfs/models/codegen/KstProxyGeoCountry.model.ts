@@ -23,6 +23,17 @@
 
 //test
 export  class KstProxyGeoCountryModel{
+
+    public static GetChildren(){
+		let results:Array<ChildRelation> = [];
+        results.push({
+            Name: "KstProxyGeoStates",
+            FkPropertyName: "GuidCountry",
+            Label: "KstProxyGeoStates",
+            EntityName: "KstProxyGeoState"
+        });
+		return results;
+	}
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {

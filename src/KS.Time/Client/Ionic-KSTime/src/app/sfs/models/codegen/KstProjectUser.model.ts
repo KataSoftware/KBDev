@@ -67,6 +67,11 @@ import { KstProxyUserModel } from './KstProxyUser.model';
 
 //test
 export  class KstProjectUserModel{
+
+    public static GetChildren(){
+		let results:Array<ChildRelation> = [];
+		return results;
+	}
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {

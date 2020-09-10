@@ -31,6 +31,17 @@ import { KstProxyGeoCountryModel } from './KstProxyGeoCountry.model';
 
 //test
 export  class KstProxyGeoStateModel{
+
+    public static GetChildren(){
+		let results:Array<ChildRelation> = [];
+        results.push({
+            Name: "KstProxyGeoCities",
+            FkPropertyName: "GuidState",
+            Label: "KstProxyGeoCities",
+            EntityName: "KstProxyGeoCity"
+        });
+		return results;
+	}
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {

@@ -71,6 +71,29 @@
 
 //test
 export  class KstFileModel{
+
+    public static GetChildren(){
+		let results:Array<ChildRelation> = [];
+        results.push({
+            Name: "KstProjectFiles",
+            FkPropertyName: "GuidFile",
+            Label: "KstProjectFiles",
+            EntityName: "KstProjectFile"
+        });
+        results.push({
+            Name: "KstUserFiles",
+            FkPropertyName: "GuidFile",
+            Label: "KstUserFiles",
+            EntityName: "KstUserFile"
+        });
+        results.push({
+            Name: "KstWorkTimeFiles",
+            FkPropertyName: "GuidFile",
+            Label: "KstWorkTimeFiles",
+            EntityName: "KstWorkTimeFile"
+        });
+		return results;
+	}
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {

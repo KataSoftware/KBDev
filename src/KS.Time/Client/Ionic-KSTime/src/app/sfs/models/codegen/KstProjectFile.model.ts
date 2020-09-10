@@ -59,6 +59,11 @@ import { KstProjectModel } from './KstProject.model';
 
 //test
 export  class KstProjectFileModel{
+
+    public static GetChildren(){
+		let results:Array<ChildRelation> = [];
+		return results;
+	}
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {

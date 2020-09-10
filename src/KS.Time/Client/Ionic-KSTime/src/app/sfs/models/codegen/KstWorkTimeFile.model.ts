@@ -59,6 +59,11 @@ import { KstWorkTimeModel } from './KstWorkTime.model';
 
 //test
 export  class KstWorkTimeFileModel{
+
+    public static GetChildren(){
+		let results:Array<ChildRelation> = [];
+		return results;
+	}
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {

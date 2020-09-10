@@ -35,6 +35,17 @@
 
 //test
 export  class KstProxyRoleModel{
+
+    public static GetChildren(){
+		let results:Array<ChildRelation> = [];
+        results.push({
+            Name: "KstProxyUsers",
+            FkPropertyName: "GuidRole",
+            Label: "KstProxyUsers",
+            EntityName: "KstProxyUser"
+        });
+		return results;
+	}
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {

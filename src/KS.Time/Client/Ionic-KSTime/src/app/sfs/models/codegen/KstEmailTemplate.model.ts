@@ -61,6 +61,11 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 
 //test
 export  class KstEmailTemplateModel{
+
+    public static GetChildren(){
+		let results:Array<ChildRelation> = [];
+		return results;
+	}
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {
