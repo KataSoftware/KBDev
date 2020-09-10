@@ -13,6 +13,7 @@
 
 #>
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { ChildRelation } from '../common/page.model';
 
 <#+ List<String> propModels = new List<String>();
 	
