@@ -1,4 +1,5 @@
 ﻿import { FormlyFieldConfig } from '@ngx-formly/core';
+import { ChildRelation } from '../common/page.model';
 
 import { KstFileModel } from './KstFile.model';
 import { KstProjectModel } from './KstProject.model';

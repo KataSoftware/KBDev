@@ -5,6 +5,7 @@
 
 
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { ChildRelation } from '../common/page.model';
 
 	
 
