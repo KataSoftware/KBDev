@@ -11,13 +11,16 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
   // @Input() entityName: string;
   @Input() filterProperties: Array<string>;
   @Input() item: any = null;
+ 
+  @Input() fkValue:string=null;
   guidItem: string = null;
   fields: Array<FormlyFieldConfig> = [];
+  childrenRelations: Array<any> = []; // relaciones muchos
   KstEmailTemplateFormCustom: any = null;
   customClass = 'KstEmailTemplate-form.custom';
   @Input() entityName: string;
   entityModel: any = null;
-  textSave:string= "Guardar";
+  textSave: string = "Guardar";
   constructor(
     public injector: Injector,
     public activatedRoute: ActivatedRoute,
@@ -45,20 +48,20 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
   switchFilterRange(event: any) {
     //setTimeout(function(){
     console.log(event);
-  
+
     this.isFilterRange = event.detail.checked;
-    
+
     this.pageService.isFilterRange = this.isFilterRange;
     this.pageService.fieldsBack = this.entityModel.GetFields();
     this.fields = [];
     this.pageService.temp = null;
     this.showForm();
 
-//  }, 500);
+    //  }, 500);
 
 
-  
- 
+
+
   }
   async ngOnInit() {
     this.pageService.isFilter = this.isFilter;
@@ -66,38 +69,56 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
     this.defaultHref = 'catalog/' + this.entityName;
     console.log("---entityName----", this.entityName);
 
-    if (this.isFilter == true ){
-     // this.isX = true;
+    if (this.isFilter == true) {
+      // this.isX = true;
       this.title = "Filtro";
       this.textSave = "Aplicar";
-    if (this.item != null){
-      let props = Object.getOwnPropertyNames(this.item);
-      if (props.find(p=> p.startsWith("__")) != null ){
-        this.isFilterRange = true;
+      if (this.item != null) {
+        let props = Object.getOwnPropertyNames(this.item);
+        if (props.find(p => p.startsWith("__")) != null) {
+          this.isFilterRange = true;
+        }
       }
     }
-  }
     import(
-      /* webpackMode: "lazy-once" */
+      /* webpackMode: "lazy" */
       /* webpackPrefetch: true */
       /* webpackInclude: /\.ts$/ */
       /* webpackPreload: true */
+
+
       `../../models/codegen/${this.entityName}.model`).then((_model) => {
         this.entityModel = _model[this.entityName + "Model"]
         this.pageService.fieldsBack = this.entityModel.GetFields();
+        //TODO
+        //try{
+        if (this.isModal == false) {
+          this.sfsService.SetNavigationData({ children: this.entityModel.GetChildren() });
+        }
+        //}catch(ex){
+        //  console.log("ex", ex);
+        //}
+        this.pageService.temp = null;
         if (this.isFilter == true && this.item != null) {
           console.log("data open filter", this.item);
         } else {
           //console.log("new item", this.item);
-           /*if (this.isFilter == true ){
-              this.item = new this.entityModel();
-           }*/
+          //if (this.isFilter == true ){
+          if (this.guidItem == null) {
+            this.item = new this.entityModel();
+            console.log("fk", this.fk, this.fkValue);
+            this.item[this.fk]= this.fkValue; 
+            console.log("fields", this.fields);
+
+          }
+          //}
         }
         import(
           /* webpackMode: "eager" */
           /* webpackPrefetch: true */
           /* webpackInclude: /\.ts$/ */
           /* webpackPreload: true */
+
           `../../../pages/catalogs/${this.entityName}Form.custom`).then(async (_import) => {
             this.KstEmailTemplateFormCustom = _import[this.entityName + "FormCustom"];
             if (this.KstEmailTemplateFormCustom != null) {
@@ -109,10 +130,12 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
               }
             }
             this.showForm();
+
             this.getData();
           }).catch((error) => {
             console.log("error load partial File", error);
             this.showForm();
+
             this.getData();
           });
 
@@ -139,7 +162,7 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
     }
   }
   async goBack(settings?: BackToListSettings) {
-    if (this.isFilter == true) {
+    if (this.isFilter == true ) {
       this.close();
 
     } else {
@@ -150,7 +173,11 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
         settings.Route = this.defaultHref;
       }
       this.sfsService.SetNavigationData(settings);
-      this.navCtrl.navigateBack(settings.Route, { animated: true });
+      if (this.isModal == true ){
+        this.modalCtrl.dismiss( settings );
+      }else{
+        this.navCtrl.navigateBack(settings.Route, { animated: true });
+      } 
     }
   }
   async close() {
@@ -158,7 +185,7 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
   }
   async delete() {
     if (this.isFilter == true) {
-      this.modalCtrl.dismiss({ delete:true });
+      this.modalCtrl.dismiss({ delete: true });
     } else {
 
       let modalResponse = await this.showConfirm({
@@ -181,6 +208,7 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
       this.modalCtrl.dismiss({ query: this.pageService.getQueryFilter(this.item, this.entityModel.GetFields(), this.isFilterRange), itemFilter: this.item });
 
     } else {
+
       this.savingStart();
       if (this.form.valid == true) {
 

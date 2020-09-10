@@ -1,4 +1,5 @@
-﻿import { FormlyFieldConfig } from '@ngx-formly/core';
+﻿import { ChildRelation } from './../common/page.model';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 
 	
 
@@ -55,6 +56,22 @@
 
 //test
 export  class KstProjectModel{
+	public static GetChildren(){
+		let results:Array<ChildRelation> = [];
+		results.push({
+			Name: "KstActivities",
+			FkPropertyName: "GuidProject",
+			Label: "KstActivity asdsad asd asdsa dasd adsds",
+			EntityName: "KstActivity"
+		 });
+		 results.push({
+			Name: "KstWorkTimes",
+			FkPropertyName:"GuidProject",
+			Label: "KstWorkTime",
+			EntityName: "KstWorkTime"
+		 });
+		return results;
+	}
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {

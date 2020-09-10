@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="isFormTabs == false">
   <ion-toolbar>
     <ion-buttons slot="start">
 
@@ -20,7 +20,22 @@
 </ion-header>
 
 <ion-content padding>
-  
+  <!-- Default Segment -->
+  <!-- <ion-segment [(ngModel)]="segment">
+    
+    <ion-segment-button value="principal">
+      Principal
+    </ion-segment-button>
+    <ion-segment-button value="relations">
+      Listas relacionadas
+    </ion-segment-button>
+    
+
+  </ion-segment>
+
+<div [ngSwitch]="segment">
+  <div *ngSwitchCase="'principal'"> -->
+
   <form [formGroup]="form">
     <ion-grid>
       <ion-row>
@@ -34,7 +49,7 @@
           
          <div style="float: left;">
          
-            <ion-button *ngIf="item != null" (click)="delete()" size="default" class=" sfs-button secondary" fill="clear">
+            <ion-button *ngIf="guidItem != null" (click)="delete()" size="default" class=" sfs-button secondary" fill="clear">
               <ion-icon slot="icon-only" name="trash"></ion-icon>
                         </ion-button>
 
@@ -59,5 +74,12 @@
 
     </ion-grid>
   </form>
+
+  <!-- </div> -->
+
+  <!-- <div *ngSwitchCase="'relations'">
+    relations
+  </div> -->
+<!-- </div> -->
   
 </ion-content>

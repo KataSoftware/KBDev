@@ -3,6 +3,7 @@
 import { KstActivityModel } from './KstActivity.model';
 import { KstProjectModel } from './KstProject.model';
 import { KstActivityTypeModel } from './KstActivityType.model';
+import { ChildRelation } from '../common/page.model';
 	
 
 
@@ -83,6 +84,21 @@ import { KstActivityTypeModel } from './KstActivityType.model';
 
 //test
 export  class KstWorkTimeModel{
+	public static GetChildren(){
+		let results:Array<ChildRelation> = [];
+		results.push({
+			Name: "KstActivities",
+			Label: "KstActivity",
+			EntityName: "KstActivity"
+		 });
+		 results.push({
+			Name: "KstWorkTimes",
+			Label: "KstWorkTime",
+			EntityName: "KstWorkTime"
+		 });
+		return results;
+	}
+	
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {
@@ -141,8 +157,8 @@ return [
 {
     key: KstWorkTimeModel.PropertyNames.GuidActivity,
     type: 'select',
-
     templateOptions: {
+		  "parents": "GuidProject:KstProject.GuidProject;GuidActivityType:KstActivityType.GuidActivityType",
 		  "relation": {
 			PropertyRelationName: "KstActivity",
 			EntityModel: KstActivityModel,  

@@ -32,7 +32,15 @@ export class GenericFormPage extends GenericFormBasePage implements OnInit {
 
 
 
-
+    console.log("route form", this.route, this.route.url);
     this.guidItem = this.route.snapshot.paramMap.get("id");
+     if (this.router.url.indexOf("form-tabs") != -1){
+       this.isFormTabs=true;
+     }
+  }
+  isFormTabs:boolean=false;
+  segment:string="principal";
+  async segmentChanged(event:any){
+    console.log(event);
   }
 }

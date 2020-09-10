@@ -1,16 +1,16 @@
 import { NgModel } from '@angular/forms';
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, Input } from '@angular/core';
 import { GenericFormPage } from '../generic-form/generic-form.page';
 import { GenericFormBasePage } from '../../common/app-form-base/generic-form-base.page';
 import { ActivatedRoute } from '@angular/router';
 import { StorageService, UserService } from 'sfscommon';
 import { sfsService } from './../../services/sfs.service';
+import { PopOverMenuComponent } from '../../common/pop-over-menu/pop-over-menu.component';
 
 @Component({
   selector: 'app-generic-modal',
   templateUrl: './generic-modal.component.html',
-  styleUrls: ['./generic-modal.component.scss'],
-  providers: [NgModel]
+  styleUrls: ['./generic-modal.component.scss']
 })
 // @Component({
 //   selector: 'app-generic-modal',
@@ -18,6 +18,7 @@ import { sfsService } from './../../services/sfs.service';
 //   styleUrls: ['./../generic-form/generic-form.page.scss'],
 // })
  export class GenericModalComponent extends GenericFormBasePage  implements OnInit {
+  @Input() existentFilter:boolean=false;
   constructor(
     public injector: Injector,
     public activatedRoute: ActivatedRoute,
@@ -26,7 +27,7 @@ import { sfsService } from './../../services/sfs.service';
     public sfsService: sfsService
 
   ) {
-    
+
     super(injector, activatedRoute, storage, userService, sfsService);
 
 
@@ -40,11 +41,19 @@ import { sfsService } from './../../services/sfs.service';
     this.guidItem = this.route.snapshot.paramMap.get("id");
     
 
-
-
-
-   // this.guidItem = this.route.snapshot.paramMap.get("id");
   }
 
+  async openMenu(event){
+    console.log(event);
 
+    const popover = await this.popoverCtrl.create({
+      component: PopOverMenuComponent,
+      cssClass: 'my-custom-class',
+      event: event,
+      translucent: true
+    });
+    return await popover.present();
+    
+  }
+  
 }

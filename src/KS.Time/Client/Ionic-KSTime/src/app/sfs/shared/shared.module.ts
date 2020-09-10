@@ -1,3 +1,4 @@
+import { PopOverMenuComponent } from './../common/pop-over-menu/pop-over-menu.component';
 import { GenericModalComponent } from './../generic/generic-modal/generic-modal.component';
 import { UserMenuComponent } from './../components/business/user-menu/user-menu.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -33,7 +34,6 @@ import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
     RatingWrapperComponent,
     DatepickerTypeComponent,
     ModalPage,
-    
     HideHeaderDirective
   ],
   entryComponents: [ModalPage],

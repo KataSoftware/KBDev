@@ -1,0 +1,9 @@
+ion-tabs  div  ion-button {
+    --padding-start:0px;
+    --padding-end:0px;
+    
+}
+ion-tab-bar, ion-tab-button:not(.tab-selected){
+    background-color: lavender;
+    border-bottom-width: 0px;
+} 

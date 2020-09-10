@@ -10,12 +10,13 @@ import { Observable } from 'rxjs';
 import { bizAppService } from '../../services/business.service';
 import { Button } from 'protractor';
 import { PageService } from '../../services/page.service';
-import { DialogSettings, DialogButton, SeparatorSettings, FieldSettings } from '../../models/common/page.model';
+import { DialogSettings, DialogButton, SeparatorSettings, FieldSettings, ChildRelation } from '../../models/common/page.model';
 import { confirmSettings } from '../app-list-base/app-list-base.page';
  
 export class AppFormBasePage extends BasePage implements OnInit {
-
+  @Input() fk:string=null;
   @Input() public isFilter:boolean=false;
+  @Input() public isModal:boolean=false;
   public isFilterRange:boolean=false;
 
   private _bizAppService: bizAppService;
@@ -191,7 +192,7 @@ export class AppFormBasePage extends BasePage implements OnInit {
     this.pageService.setSeparator(settings, this.fields);
   }
   private async addRelatedData(settings: FieldSettings, field: FormlyFieldConfig) {
-    this.pageService.addRelatedData(settings, field);
+    this.pageService.addRelatedData(settings, field, this);
   }
 
   private setOrderForRange(settings: FieldSettings, fieldName:string){
@@ -216,18 +217,21 @@ export class AppFormBasePage extends BasePage implements OnInit {
     // settings.Name = "__start" + settings.Name;
   }
   setOrder(settings: FieldSettings) {
+
     // settings.IsFilter = this.isFilter;
     
    
     // if (settings.IsFilterRange == true ){
 
     // }else{
-      this.pageService.setOrder(settings, this.fields);
+      this.pageService.setOrder(settings, this.fields, null, this);
 
     //}
   }
   public showForm() {
-    this.fields = this.pageService.showForm(this.fields);
+    this.fields = this.pageService.showForm(this.fields, this);
+    console.log("showForm", this.fk, this.fields);
+    
   }
 
   public resetFieldsForm() {
@@ -242,7 +246,9 @@ export class AppFormBasePage extends BasePage implements OnInit {
     this.pageService.setOrderFields(fieldNames, this.fields);
   }
 
-
+  public setOrderRelation(setting:ChildRelation){
+     
+  }
 
   
 

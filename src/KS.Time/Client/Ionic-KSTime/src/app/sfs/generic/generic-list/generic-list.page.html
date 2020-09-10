@@ -1,22 +1,28 @@
-﻿<ion-header #header>
+﻿<ion-header  #header >
   <ion-grid class="ion-no-padding">
     <ion-row class="ion-no-padding">
       <ion-col size-md="12" class="ion-no-padding">
 
         <ion-toolbar [ngStyle]="{ 'display': showSearchBar ? 'none' : '' }">
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
+          <ion-buttons slot="start" >
+            <ion-menu-button *ngIf="isFormTabs == false"></ion-menu-button>
            
             <!-- <ion-back-button></ion-back-button> -->
+            <ion-button size="small" fill="clear" (click)="openMenu($event)">
+              <ion-icon slot="icon-only" name="chevron-down">
+      
+              </ion-icon>
+            </ion-button>
           </ion-buttons>
           <ion-title class="ion-text-left ion-no-padding" *ngIf="this.uiSettings.titlePlace == 1">
             {{title}}
+    
           </ion-title>
           <ion-buttons slot="end">
             <ion-button size="small" (click)="showSearchBar = !showSearchBar">
               <ion-icon name="search-outline" slot="icon-only"></ion-icon>
             </ion-button>
-            <ion-button size="small">
+            <ion-button size="small" *ngIf="isFormTabs == false">
               <ion-icon name="notifications-outline" slot="icon-only"></ion-icon>
             </ion-button>
             <ion-button size="small" (click)="showFilter()">
@@ -38,6 +44,7 @@
   </ion-grid>
   <ion-progress-bar type="indeterminate" *ngIf="loadingData == true"></ion-progress-bar>
 </ion-header>
+
 <div class="filter-enabled" *ngIf="itemFilter != null">
   <ion-item class="ion-padding-start">
     <ion-label> Existe un filtro aplicado</ion-label>
@@ -277,7 +284,7 @@
 
         <!-- Acciones -->
         <div style="text-align: end;">
-          <ion-button size="small" fill="clear"  (tap)="openMassiveActions(item)">
+          <ion-button size="small" fill="clear"  (click)="openMassiveActions(item)">
             <ion-icon name="ellipsis-horizontal-circle" slot="icon-only"></ion-icon>
           </ion-button>
           <ion-button  size="small" (tap)="selectItem($event, item)">
