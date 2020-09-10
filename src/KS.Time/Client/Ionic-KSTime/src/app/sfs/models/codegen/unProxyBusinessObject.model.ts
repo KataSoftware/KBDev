@@ -27,6 +27,11 @@
 
 //test
 export  class unProxyBusinessObjectModel{
+
+    public static GetChildren(){
+		let results:Array<ChildRelation> = [];
+		return results;
+	}
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {

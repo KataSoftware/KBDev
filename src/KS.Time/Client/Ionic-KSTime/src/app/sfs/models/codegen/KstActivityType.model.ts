@@ -47,6 +47,23 @@
 
 //test
 export  class KstActivityTypeModel{
+
+    public static GetChildren(){
+		let results:Array<ChildRelation> = [];
+        results.push({
+            Name: "KstActivities",
+            FkPropertyName: "GuidActivityType",
+            Label: "KstActivities",
+            EntityName: "KstActivity"
+        });
+        results.push({
+            Name: "KstWorkTimes",
+            FkPropertyName: "GuidActivityType",
+            Label: "KstWorkTimes",
+            EntityName: "KstWorkTime"
+        });
+		return results;
+	}
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {

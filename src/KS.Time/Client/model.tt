@@ -56,6 +56,28 @@ import { <#= entityRel.Name #>Model } from './<#=entityRel.Name #>.model';
 
 //test
 export  class <#= entity.Name #>Model{
+
+    public static GetChildren(){
+		let results:Array<ChildRelation> = [];
+<#+ foreach (var property in entity.Properties.Where(p=> p.IsNavigationPropertyMany == true  ) ){ 
+						var navprop = entity.NavigationProperties.FirstOrDefault(p=>p.PropertyName== property.Name);
+						var entityRelName = navprop.EntityType.Split(char.Parse("."))[navprop.EntityType.Split(char.Parse(".")).Length -1];
+						var entityRel = entity.Model.Entities.Find(p=>p.Name == entityRelName);
+						
+						// 
+						var relNav = entityRel.NavigationProperties.Where(p=>p.RelationshipName == property.NavigationProperty.RelationshipName && p.ToRole != property.NavigationProperty.ToRole).FirstOrDefault();
+						var relPropertyName = relNav.PropertyRefName;
+
+#>
+        results.push({
+            Name: "<#=property.Name#>",
+            FkPropertyName: "<#=relPropertyName#>",
+            Label: "<#=property.Name#>",
+            EntityName: "<#=entityRelName#>"
+        });
+<#+ } #>
+		return results;
+	}
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 <#+ foreach (var property in entity.Properties.Where(p=> p.IsNavigationProperty == false && p.IsPrimaryKey == false ) ){ 

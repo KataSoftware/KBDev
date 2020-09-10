@@ -3,7 +3,6 @@
 import { KstActivityModel } from './KstActivity.model';
 import { KstProjectModel } from './KstProject.model';
 import { KstActivityTypeModel } from './KstActivityType.model';
-import { ChildRelation } from '../common/page.model';
 	
 
 
@@ -84,21 +83,17 @@ import { ChildRelation } from '../common/page.model';
 
 //test
 export  class KstWorkTimeModel{
-	public static GetChildren(){
+
+    public static GetChildren(){
 		let results:Array<ChildRelation> = [];
-		results.push({
-			Name: "KstActivities",
-			Label: "KstActivity",
-			EntityName: "KstActivity"
-		 });
-		 results.push({
-			Name: "KstWorkTimes",
-			Label: "KstWorkTime",
-			EntityName: "KstWorkTime"
-		 });
+        results.push({
+            Name: "KstWorkTimeFiles",
+            FkPropertyName: "GuidWorkTime",
+            Label: "KstWorkTimeFiles",
+            EntityName: "KstWorkTimeFile"
+        });
 		return results;
 	}
-	
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {
@@ -157,8 +152,8 @@ return [
 {
     key: KstWorkTimeModel.PropertyNames.GuidActivity,
     type: 'select',
+
     templateOptions: {
-		  "parents": "GuidProject:KstProject.GuidProject;GuidActivityType:KstActivityType.GuidActivityType",
 		  "relation": {
 			PropertyRelationName: "KstActivity",
 			EntityModel: KstActivityModel,  
@@ -174,11 +169,11 @@ return [
 {
     key: KstWorkTimeModel.PropertyNames.DueDate,
     type: 'datepicker',
-	defaultValue: "",
+
     templateOptions: {
 	        label: KstWorkTimeModel.PropertyNames.DueDate,
         placeholder: '',
-		required: false
+        required: false,
 		
     }
 },
@@ -242,7 +237,7 @@ return [
 	UpdatedDate?:string;	
 
 		 
-	DueDate?:Date = null;	
+	DueDate?:string;	
 
 		 
 	GuidActivityType?:string;	

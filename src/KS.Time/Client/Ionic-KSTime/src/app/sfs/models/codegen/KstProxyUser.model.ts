@@ -63,6 +63,23 @@ import { KstProxyRoleModel } from './KstProxyRole.model';
 
 //test
 export  class KstProxyUserModel{
+
+    public static GetChildren(){
+		let results:Array<ChildRelation> = [];
+        results.push({
+            Name: "KstProjectUsers",
+            FkPropertyName: "GuidUser",
+            Label: "KstProjectUsers",
+            EntityName: "KstProjectUser"
+        });
+        results.push({
+            Name: "KstUserFiles",
+            FkPropertyName: "GuidUser",
+            Label: "KstUserFiles",
+            EntityName: "KstUserFile"
+        });
+		return results;
+	}
 public static GetFields():Array<FormlyFieldConfig>{
 return [
 {
