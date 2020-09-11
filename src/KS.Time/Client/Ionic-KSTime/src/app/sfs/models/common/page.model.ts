@@ -40,6 +40,7 @@ export enum FieldTypes {
     public Content?: string = null;
     public ClassName?: string = null;
     public HideExpression?: any = null;
+    public Disabled?:boolean=null;
     public ClassNameGroup?: string = null;
     public TemplateOptions?: any = null;
     public ReadOnly?: boolean = null;

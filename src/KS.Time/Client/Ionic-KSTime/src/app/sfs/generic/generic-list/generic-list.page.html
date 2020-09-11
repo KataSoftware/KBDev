@@ -8,7 +8,7 @@
             <ion-menu-button *ngIf="isFormTabs == false"></ion-menu-button>
            
             <!-- <ion-back-button></ion-back-button> -->
-            <ion-button size="small" fill="clear" (click)="openMenu($event)">
+            <ion-button *ngIf="isFormTabs" size="small" fill="clear" (click)="openMenu($event)">
               <ion-icon slot="icon-only" name="chevron-down">
       
               </ion-icon>

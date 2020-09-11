@@ -1,6 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>generic-tabs</ion-title>
+    <ion-buttons slot="start">
+
+      
+      <ion-back-button  [defaultHref]="defaultHref" (click)="goBack()">
+      </ion-back-button>
+  
+      <ion-button (click)="close()"  *ngIf="isModal == true">Close</ion-button>
+
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 

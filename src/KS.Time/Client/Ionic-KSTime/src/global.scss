@@ -66,3 +66,19 @@
 [class*="flex-"]:nth-last-child(2) {
   padding-right: 0;
 }
+
+
+.readonly .mat-form-field-underline{
+  background-color: white;
+}
+.readonly .mat-form-field.ng-untouched .mat-form-field-underline {
+background-color:  white;
+}
+
+.mat-input-element:disabled, .mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after,
+.mat-form-field-disabled span.mat-select-value-text,
+.mat-form-field-disabled span.mat-checkbox-label
+{
+  color: rgb(62, 62, 62);
+}
+

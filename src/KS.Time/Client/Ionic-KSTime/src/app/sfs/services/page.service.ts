@@ -183,12 +183,17 @@ export class PageService {
     endSettings.Columns = 6;
     this.setOrder(endSettings, fields, true);
   }
-  setOrderRelation(){
-    
+  setOrderRelation() {
+
   }
   setOrder(settings: FieldSettings, fields: Array<FormlyFieldConfig>, preventFilterSettings?: boolean, page?: any) {
-    if (page != null && page.fk != null && page.fk == settings.Name){
-      return ;
+
+    if (page != null && page.fk != null && page.fk == settings.Name) {
+      return;
+    }
+    if (page["formMode"] == "read") {
+      settings.ReadOnly = true;
+      settings.Disabled = true;
     }
     let addField: boolean = true;
     if (preventFilterSettings != true) {
@@ -291,6 +296,17 @@ export class PageService {
       }
     }
   }
+  public getFieldsMode(fields: Array<FormlyFieldConfig>, page: any) {
+
+    if (page.formMode == "edit") {
+      fields = fields.filter(p => p.templateOptions != null && p.templateOptions.isComputed != true);
+    } else {
+
+    }
+
+    return fields;
+
+  }
 
   public showForm(fields: Array<FormlyFieldConfig>, page?: any): Array<any> {
     //this.propertiesForUpdate. = this.visibleFields;
@@ -299,9 +315,12 @@ export class PageService {
       //this.temp = this.fieldsBack;
 
       if (this.fieldsBack != null) {
+        this.fieldsBack = this.getFieldsMode(this.fieldsBack, page);
         this.fieldsBack.forEach(element => {
-          this.setOrder({  Name: element.key, Columns: 12 }, fields, null, page);
+          this.setOrder({ Name: element.key, Columns: 12 }, fields, null, page);
         });
+
+
       }
       //page.childrenRelations
       //this.setOrderRelation()
@@ -348,6 +367,9 @@ export class PageService {
     }
     if (settings.ClassName != null) {
       field.className = field.className + " " + settings.ClassName;
+    }
+    if (settings.ReadOnly == true) {
+      field.className = field.className + " readonly";
     }
 
     if (settings.ControlType == ControlTypes.Custom) {
@@ -415,6 +437,8 @@ export class PageService {
         }
         if (settings.ReadOnly != null)
           field["templateOptions"]["readonly"] = settings.ReadOnly;
+        if (settings.Disabled != null)
+          field["templateOptions"]["disabled"] = settings.Disabled;
 
         if (settings.MinLength != null) {
           field["templateOptions"]["minLength"] = settings.MinLength;
@@ -533,68 +557,70 @@ export class PageService {
         (!prop.startsWith("__start") && !prop.startsWith("__end"))
       ) {
         let fieldFinded: FormlyFieldConfig = fields.find(p => p.key == prop);
-        let fieldType: string = "";
-        if (fieldFinded.type.indexOf("date") != -1) {
-          fieldType = "date";
-        } else if (fieldFinded.templateOptions != null && fieldFinded.templateOptions.type == "number") {
-          fieldType = "number";
-        } else if (fieldFinded.templateOptions != null && fieldFinded.templateOptions.relation != null) {
-          fieldType = "guid";
-        }
+        if (fieldFinded != null) {
+          let fieldType: string = "";
+          if (fieldFinded.type.indexOf("date") != -1) {
+            fieldType = "date";
+          } else if (fieldFinded.templateOptions != null && fieldFinded.templateOptions.type == "number") {
+            fieldType = "number";
+          } else if (fieldFinded.templateOptions != null && fieldFinded.templateOptions.relation != null) {
+            fieldType = "guid";
+          }
 
-        if (withRange == true) {
+          if (withRange == true) {
 
-          let queryRange: Array<string> = [];
-          //queryBuilder.push("(");
-          let existStart: boolean = false;
-          // verificamos tipo
+            let queryRange: Array<string> = [];
+            //queryBuilder.push("(");
+            let existStart: boolean = false;
+            // verificamos tipo
 
-          if (itemFilter["__start" + prop] != null && itemFilter["__start" + prop] != "") {
-            // start si tiene
-            existStart = true;
-            if (fieldType == "number") {
-              queryRange.push(`${prop} >=  ${itemFilter["__start" + prop]}`);
-            } else if (fieldType == "date") {
-              queryRange.push(`${prop} >= ${this.getDateValue(itemFilter["__start" + prop], 'start')}`);
-            } else if (fieldType == "guid" && itemFilter[prop] != null && itemFilter[prop] != "") {
-              queryBuilder.push(`${prop} = "${itemFilter[prop]}"`);
-            } else if (itemFilter[prop] != null && itemFilter[prop] != "") {
-              queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
+            if (itemFilter["__start" + prop] != null && itemFilter["__start" + prop] != "") {
+              // start si tiene
+              existStart = true;
+              if (fieldType == "number") {
+                queryRange.push(`${prop} >=  ${itemFilter["__start" + prop]}`);
+              } else if (fieldType == "date") {
+                queryRange.push(`${prop} >= ${this.getDateValue(itemFilter["__start" + prop], 'start')}`);
+              } else if (fieldType == "guid" && itemFilter[prop] != null && itemFilter[prop] != "") {
+                queryBuilder.push(`${prop} = "${itemFilter[prop]}"`);
+              } else if (itemFilter[prop] != null && itemFilter[prop] != "") {
+                queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
+              }
+            } else {
+
+              if (fieldType == "guid" && itemFilter[prop] != null && itemFilter[prop] != "") {
+                queryBuilder.push(`${prop} = "${itemFilter[prop]}"`);
+              } else if (itemFilter[prop] != null && itemFilter[prop] != "") {
+                queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
+              }
+
             }
+
+
+            if (itemFilter["__end" + prop] != null && itemFilter["__end" + prop] != "") {
+              // start si tiene
+              if (fieldType == "number") {
+                queryRange.push(`${prop} <=  ${itemFilter["__end" + prop]}`);
+              } else if (fieldType == "date") {
+                queryRange.push(`${prop} <= ${this.getDateValue(itemFilter["__end" + prop], 'end')}`);
+              }
+            }
+            if (queryRange.length > 0) {
+              queryBuilder.push("(" + queryRange.join(" AND ") + ")");
+            }
+            // queryBuilder.push(")");
           } else {
-
-            if (fieldType == "guid" && itemFilter[prop] != null && itemFilter[prop] != "") {
-              queryBuilder.push(`${prop} = "${itemFilter[prop]}"`);
-            } else if (itemFilter[prop] != null && itemFilter[prop] != "") {
-              queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
-            }
-
-          }
-
-
-          if (itemFilter["__end" + prop] != null && itemFilter["__end" + prop] != "") {
-            // start si tiene
-            if (fieldType == "number") {
-              queryRange.push(`${prop} <=  ${itemFilter["__end" + prop]}`);
-            } else if (fieldType == "date") {
-              queryRange.push(`${prop} <= ${this.getDateValue(itemFilter["__end" + prop], 'end')}`);
-            }
-          }
-          if (queryRange.length > 0) {
-            queryBuilder.push("(" + queryRange.join(" AND ") + ")");
-          }
-          // queryBuilder.push(")");
-        } else {
-          if (itemFilter[prop] != null && itemFilter[prop] != "") {
-            if (fieldType == "number") {
-              queryBuilder.push(`${prop} =  ${itemFilter[prop]}`);
-            } else if (fieldType == "date") {
-              queryBuilder.push(`${prop} =  ${this.getDateValue(itemFilter[prop], 'start')}`);
-            } if (fieldType == "guid") {
-              queryBuilder.push(`${prop} = "${itemFilter[prop]}"`);
-            }
-            else {
-              queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
+            if (itemFilter[prop] != null && itemFilter[prop] != "") {
+              if (fieldType == "number") {
+                queryBuilder.push(`${prop} =  ${itemFilter[prop]}`);
+              } else if (fieldType == "date") {
+                queryBuilder.push(`${prop} =  ${this.getDateValue(itemFilter[prop], 'start')}`);
+              } if (fieldType == "guid") {
+                queryBuilder.push(`${prop} = "${itemFilter[prop]}"`);
+              }
+              else {
+                queryBuilder.push(`${prop}.Contains("${itemFilter[prop]}")`);
+              }
             }
           }
         }

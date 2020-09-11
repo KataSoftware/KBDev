@@ -217,7 +217,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     }
 
     if (this.isFormTabs == true) {
-      console.log(this.sfsService.GetNavigationData());
+      console.log(this.sfsService.GetNavigationData("relations"));
     }
     console.log("route list", this.route);
 
@@ -238,7 +238,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       this.initList();
       this.firstLoaded = false;
     } else {
-      let navData = this.sfsService.GetNavigationData();
+      let navData = this.sfsService.GetNavigationData("relations");
       console.log("ionViewWillEnter navData", navData);
       if (navData != null) {
         if (navData.RefreshData == true) {
@@ -349,7 +349,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   }
   relationLists: Array<ChildRelation> = null;
   async initRelationLists() {
-    const navData = this.sfsService.GetNavigationData();
+    const navData = this.sfsService.GetNavigationData("relations");
     //let relations:Array<ChildRelation> = [];
     console.log("navData", navData);
     if (navData != null && navData.children != null && navData.children.length > 0) {
@@ -381,7 +381,14 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       /* webpackPreload: true */
       `../../models/codegen/${this.entityName}.model`).then((_model) => {
         this.entityModel = _model[this.entityName + "Model"]
-
+        const relations = this.entityModel.GetChildren();
+        if (relations.length > 0){
+          this.routeEdit = "/catalog/" + this.entityName + "/form-tabs";
+    
+        }else{
+          this.routeEdit = "/catalog/" + this.entityName + "/form";
+    
+        }
         //this.itemFilter = new this.entityModel();
         //this.title = "KstEmailTemplates";
         // this.serviceData = {
@@ -468,14 +475,17 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
         console.log("error ", error);
       });
   }
+  routeEdit:string=null;
   async ngOnInit() {
-
+    
     if (this.isFormTabs == false) {
       this.firstLoaded = true;
       await this.initList();
-
+    
 
     }
+
+   
   }
   bindDisplayColumns() {
     this.displayedColumns = [];
@@ -669,7 +679,8 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
   async edit(row: GenericModel) {
 
-    let route = `${this.routeAdd}/${row.Id}`;
+    let route = `${this.routeEdit}/${row.Id}`;
+
     if (this.routeForm != null) {
       route = this.routeForm;
     }
@@ -687,6 +698,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
           isFilter: false,
           isModal: true,
           item: row,
+          formMode: "edit",
           guidItem: row.Id,
           fk: this.fkPropertyName,
           //fkValue: this.idFormTab
@@ -707,6 +719,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
     } else {
      
+
       this.navCtrl.navigateForward(route, { animated: true });
     }
   }

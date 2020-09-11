@@ -7,6 +7,7 @@ import { StorageService, UserService, ApiResponse } from 'sfscommon';
 import { AppFormBasePage } from '../../common/app-form-base/app-form-base.page';
 import { BackToListSettings } from '../../models/common/page.model';
 import { GenericFormBasePage } from '../../common/app-form-base/generic-form-base.page';
+import { GenericModalComponent } from '../generic-modal/generic-modal.component';
 
 @Component({
   selector: 'app-generic-form',
@@ -42,5 +43,35 @@ export class GenericFormPage extends GenericFormBasePage implements OnInit {
   segment:string="principal";
   async segmentChanged(event:any){
     console.log(event);
+  }
+
+  async edit(item:any){
+    const modal = await this.modalCtrl.create({
+      component: GenericModalComponent,
+
+      componentProps: {
+        entityName: this.entityName,
+        isFilter: false,
+        isModal: true,
+        item: item,
+        formMode: "edit",
+        guidItem: item.Id,
+        
+      }
+
+    });
+
+    modal.onDidDismiss()
+      .then((data: any) => {
+        console.log("edit modal data", data);
+        if (data != null && data.data != null && data.data.ItemUpdated != null) {
+          this.item = data.data.ItemUpdated;
+          this.events.publish('item:updated', { itemUpdated: data.data.ItemUpdated, defaultProperty: this.entityModel._DefaultProperty });
+          
+          //this.ionViewWillEnter();
+          
+        }
+      });
+    await modal.present();
   }
 }
