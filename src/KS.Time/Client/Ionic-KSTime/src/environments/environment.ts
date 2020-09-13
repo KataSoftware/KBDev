@@ -9,6 +9,7 @@ export const environment = {
   production: false,
   sfscommon: {
     AppNameKey: 'KSTime',
+   // AppName: '',
     GuidCompanyId: 'F8A6AAE5-624F-4D42-AF85-C1E71F6D769A',
     GeneralUrl: 'https://kstime.azurewebsites.net',
     LocalUrl: '/Shell',
