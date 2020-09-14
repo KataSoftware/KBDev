@@ -76,12 +76,16 @@ return [
     type: 'select',
 
     templateOptions: {
-		  "relation": {
+		"parents": "GuidRole:KstProxyRole.GuidRole",	
+	  //"parents": "GuidProject:KstProject.GuidProject;GuidActivityType:KstActivityType.GuidActivityType",
+	
+	  "relation": {
 			PropertyRelationName: "KstProxyUser",
 			EntityModel: KstProxyUserModel,  
 			DataValue: KstProxyUserModel.PropertyNames.GuidUser,
             DataText: KstProxyUserModel.PropertyNames.DisplayName 
 			},
+
         label: KstUserFileModel.PropertyNames.GuidUser,
         placeholder: '',
         required: false,
@@ -93,12 +97,14 @@ return [
     type: 'select',
 
     templateOptions: {
-		  "relation": {
+		
+	  "relation": {
 			PropertyRelationName: "KstFile",
 			EntityModel: KstFileModel,  
 			DataValue: KstFileModel.PropertyNames.GuidFile,
             DataText: KstFileModel.PropertyNames.FileName 
 			},
+
         label: KstUserFileModel.PropertyNames.GuidFile,
         placeholder: '',
         required: false,
@@ -112,6 +118,7 @@ return [
     templateOptions: {
 	 
 	indeterminate: false,
+
         label: KstUserFileModel.PropertyNames.IsProfileDefault,
         placeholder: '',
         required: false,

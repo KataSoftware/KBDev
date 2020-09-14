@@ -72,12 +72,16 @@ return [
     type: 'select',
 
     templateOptions: {
-		  "relation": {
+		"parents": "GuidActivity:KstActivity.GuidActivity;GuidProject:KstProject.GuidProject;GuidActivityType:KstActivityType.GuidActivityType",	
+	  //"parents": "GuidProject:KstProject.GuidProject;GuidActivityType:KstActivityType.GuidActivityType",
+	
+	  "relation": {
 			PropertyRelationName: "KstWorkTime",
 			EntityModel: KstWorkTimeModel,  
 			DataValue: KstWorkTimeModel.PropertyNames.GuidWorkTime,
             DataText: KstWorkTimeModel.PropertyNames.Title 
 			},
+
         label: KstWorkTimeFileModel.PropertyNames.GuidWorkTime,
         placeholder: '',
         required: false,
@@ -89,12 +93,14 @@ return [
     type: 'select',
 
     templateOptions: {
-		  "relation": {
+		
+	  "relation": {
 			PropertyRelationName: "KstFile",
 			EntityModel: KstFileModel,  
 			DataValue: KstFileModel.PropertyNames.GuidFile,
             DataText: KstFileModel.PropertyNames.FileName 
 			},
+
         label: KstWorkTimeFileModel.PropertyNames.GuidFile,
         placeholder: '',
         required: false,

@@ -102,7 +102,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstWorkTimeModel.PropertyNames.Title,
+	
+        label: KstWorkTimeModel.PropertyNames.Title,
         placeholder: '',
         required: false,
 		
@@ -114,7 +115,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstWorkTimeModel.PropertyNames.Comments,
+	
+        label: KstWorkTimeModel.PropertyNames.Comments,
         placeholder: '',
         required: false,
 		
@@ -126,7 +128,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstWorkTimeModel.PropertyNames.Hours,
+	
+        label: KstWorkTimeModel.PropertyNames.Hours,
         placeholder: '',
         required: false,
 		
@@ -138,12 +141,14 @@ return [
     type: 'select',
 
     templateOptions: {
-		  "relation": {
+		
+	  "relation": {
 			PropertyRelationName: "KstProject",
 			EntityModel: KstProjectModel,  
 			DataValue: KstProjectModel.PropertyNames.GuidProject,
             DataText: KstProjectModel.PropertyNames.Name 
 			},
+
         label: KstWorkTimeModel.PropertyNames.GuidProject,
         placeholder: '',
         required: false,
@@ -155,12 +160,16 @@ return [
     type: 'select',
 
     templateOptions: {
-		  "relation": {
+		"parents": "GuidProject:KstProject.GuidProject;GuidActivityType:KstActivityType.GuidActivityType",	
+	  //"parents": "GuidProject:KstProject.GuidProject;GuidActivityType:KstActivityType.GuidActivityType",
+	
+	  "relation": {
 			PropertyRelationName: "KstActivity",
 			EntityModel: KstActivityModel,  
 			DataValue: KstActivityModel.PropertyNames.GuidActivity,
             DataText: KstActivityModel.PropertyNames.Name 
 			},
+
         label: KstWorkTimeModel.PropertyNames.GuidActivity,
         placeholder: '',
         required: false,
@@ -172,7 +181,8 @@ return [
     type: 'datepicker',
 
     templateOptions: {
-	        label: KstWorkTimeModel.PropertyNames.DueDate,
+	
+        label: KstWorkTimeModel.PropertyNames.DueDate,
         placeholder: '',
         required: false,
 		
@@ -183,12 +193,14 @@ return [
     type: 'select',
 
     templateOptions: {
-		  "relation": {
+		
+	  "relation": {
 			PropertyRelationName: "KstActivityType",
 			EntityModel: KstActivityTypeModel,  
 			DataValue: KstActivityTypeModel.PropertyNames.GuidActivityType,
             DataText: KstActivityTypeModel.PropertyNames.Name 
 			},
+
         label: KstWorkTimeModel.PropertyNames.GuidActivityType,
         placeholder: '',
         required: false,

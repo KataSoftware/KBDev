@@ -72,12 +72,14 @@ return [
     type: 'select',
 
     templateOptions: {
-		  "relation": {
+		
+	  "relation": {
 			PropertyRelationName: "KstProject",
 			EntityModel: KstProjectModel,  
 			DataValue: KstProjectModel.PropertyNames.GuidProject,
             DataText: KstProjectModel.PropertyNames.Name 
 			},
+
         label: KstProjectFileModel.PropertyNames.GuidProject,
         placeholder: '',
         required: false,
@@ -89,12 +91,14 @@ return [
     type: 'select',
 
     templateOptions: {
-		  "relation": {
+		
+	  "relation": {
 			PropertyRelationName: "KstFile",
 			EntityModel: KstFileModel,  
 			DataValue: KstFileModel.PropertyNames.GuidFile,
             DataText: KstFileModel.PropertyNames.FileName 
 			},
+
         label: KstProjectFileModel.PropertyNames.GuidFile,
         placeholder: '',
         required: false,

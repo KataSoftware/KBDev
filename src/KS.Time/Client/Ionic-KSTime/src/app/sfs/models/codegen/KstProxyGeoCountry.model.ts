@@ -42,7 +42,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstProxyGeoCountryModel.PropertyNames.Name,
+	
+        label: KstProxyGeoCountryModel.PropertyNames.Name,
         placeholder: '',
         required: true,
 		

@@ -102,7 +102,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstFileModel.PropertyNames.FileName,
+	
+        label: KstFileModel.PropertyNames.FileName,
         placeholder: '',
         required: true,
 		
@@ -114,7 +115,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstFileModel.PropertyNames.FileType,
+	
+        label: KstFileModel.PropertyNames.FileType,
         placeholder: '',
         required: false,
 		
@@ -126,7 +128,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstFileModel.PropertyNames.FileData,
+	
+        label: KstFileModel.PropertyNames.FileData,
         placeholder: '',
         required: false,
 		
@@ -137,7 +140,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstFileModel.PropertyNames.FileStorage,
+	
+        label: KstFileModel.PropertyNames.FileStorage,
         placeholder: '',
         required: false,
 		
@@ -149,7 +153,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstFileModel.PropertyNames.ContainerStorage,
+	
+        label: KstFileModel.PropertyNames.ContainerStorage,
         placeholder: '',
         required: false,
 		
@@ -161,7 +166,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstFileModel.PropertyNames.FileThumbSizes,
+	
+        label: KstFileModel.PropertyNames.FileThumbSizes,
         placeholder: '',
         required: false,
 		
@@ -173,7 +179,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstFileModel.PropertyNames.FileSize,
+	
+        label: KstFileModel.PropertyNames.FileSize,
         placeholder: '',
         required: false,
 		

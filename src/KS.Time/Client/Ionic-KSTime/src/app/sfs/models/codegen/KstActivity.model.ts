@@ -86,7 +86,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstActivityModel.PropertyNames.Name,
+	
+        label: KstActivityModel.PropertyNames.Name,
         placeholder: '',
         required: false,
 		
@@ -98,12 +99,14 @@ return [
     type: 'select',
 
     templateOptions: {
-		  "relation": {
+		
+	  "relation": {
 			PropertyRelationName: "KstProject",
 			EntityModel: KstProjectModel,  
 			DataValue: KstProjectModel.PropertyNames.GuidProject,
             DataText: KstProjectModel.PropertyNames.Name 
 			},
+
         label: KstActivityModel.PropertyNames.GuidProject,
         placeholder: '',
         required: false,
@@ -117,6 +120,7 @@ return [
     templateOptions: {
 	 
 	indeterminate: false,
+
         label: KstActivityModel.PropertyNames.IsCustomByUser,
         placeholder: '',
         required: false,
@@ -128,12 +132,14 @@ return [
     type: 'select',
 
     templateOptions: {
-		  "relation": {
+		
+	  "relation": {
 			PropertyRelationName: "KstActivityType",
 			EntityModel: KstActivityTypeModel,  
 			DataValue: KstActivityTypeModel.PropertyNames.GuidActivityType,
             DataText: KstActivityTypeModel.PropertyNames.Name 
 			},
+
         label: KstActivityModel.PropertyNames.GuidActivityType,
         placeholder: '',
         required: false,

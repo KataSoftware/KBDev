@@ -29,11 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="model.ts">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
     <Compile Include="pages-routing.ts">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -50,11 +45,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>All.Client.tt</DependentUpon>
-    </None>
-    <None Update="model.ts">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>model.tt</DependentUpon>
     </None>
     <None Update="model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

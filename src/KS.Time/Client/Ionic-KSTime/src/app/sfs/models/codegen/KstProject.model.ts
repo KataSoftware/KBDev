@@ -92,7 +92,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstProjectModel.PropertyNames.Name,
+	
+        label: KstProjectModel.PropertyNames.Name,
         placeholder: '',
         required: true,
 		
@@ -104,7 +105,10 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstProjectModel.PropertyNames.NumActivities,
+		  isComputed: true,
+	  isManuallySetted: false,
+
+        label: KstProjectModel.PropertyNames.NumActivities,
         placeholder: '',
         required: false,
 		
@@ -116,7 +120,10 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstProjectModel.PropertyNames.NumUsers,
+		  isComputed: true,
+	  isManuallySetted: false,
+
+        label: KstProjectModel.PropertyNames.NumUsers,
         placeholder: '',
         required: false,
 		

@@ -99,9 +99,10 @@ return [
 	PropertyInfo navDefaultProperty = null;
 	PropertyInfo navProp = null;
 	EntityInfo entityRel = null;
+	string entityRelName = null;
 	if (navigationProp != null ){
 		typeControl = "select";
-		var entityRelName = navigationProp.EntityType.Split(char.Parse("."))[navigationProp.EntityType.Split(char.Parse(".")).Length -1];
+		entityRelName = navigationProp.EntityType.Split(char.Parse("."))[navigationProp.EntityType.Split(char.Parse(".")).Length -1];
 		entityRel = entity.Model.Entities.Find(p=>p.Name == entityRelName);
 		navPropertyKey = entityRel.Properties.FirstOrDefault(p=>p.IsPrimaryKey == true);
 		navDefaultProperty = entityRel.Properties.FirstOrDefault(p=>p.Name == entityRel.DefaultProperty);
@@ -132,7 +133,33 @@ return [
 	<#+ if (property.Type.ToLower().Contains("bool")){ #> 
 	indeterminate: false,
 <#+ } #>
+
+<#+
+if (entityRel != null ){
+System.Text.StringBuilder sbParents = new System.Text.StringBuilder();
+
+ foreach( var rel in entityRel.Properties.Where(p=> p.IsNavigationProperty == true && p.IsNavigationPropertyMany == false)){
+	if (sbParents.Length > 0){
+		sbParents.Append(";");
+	}
+	var navRel = entityRel.NavigationProperties.FirstOrDefault(p=> p.PropertyName == rel.Name);
+	if (navRel != null){
+		var entityRelRelName = navRel.EntityType.Split(char.Parse("."))[navRel.EntityType.Split(char.Parse(".")).Length -1];
+		var relRel = entity.Model.Entities.FirstOrDefault(p=> p.Name == entityRelRelName);
+		var navRelKey = relRel.Properties.FirstOrDefault(p=>p.IsPrimaryKey == true);
+
+		sbParents.Append(navRel.PropertyRefName + ":" + entityRelRelName + "." + navRelKey.Name);
+	}	
+ }
+
+if (sbParents.Length > 0 ){ #>
+	"parents": "<#=sbParents.ToString()#>",	
+	  //"parents": "GuidProject:KstProject.GuidProject;GuidActivityType:KstActivityType.GuidActivityType",
+<#+ } 
+
+}#>
 <#+ if (navigationProp != null ){ #>
+	
 	  "relation": {
 			PropertyRelationName: "<#= navigationProp.PropertyName #>",
 			EntityModel: <#= entityRel.Name #>Model,  
@@ -140,6 +167,11 @@ return [
             DataText: <#= entityRel.Name #>Model.PropertyNames.<#= navDefaultProperty.Name #> 
 			},
 <#+ } #>
+<#+ if (!string.IsNullOrEmpty((string)GetCustomProperty(property, "ComputedLinq", "String")) ){ #>
+	  isComputed: true,
+	  isManuallySetted: false,
+<#+ } #>
+
         label: <#= entity.Name #>Model.PropertyNames.<#= property.Name #>,
         placeholder: '',
         required: <#= required #>,

@@ -50,7 +50,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstProxyGeoStateModel.PropertyNames.Name,
+	
+        label: KstProxyGeoStateModel.PropertyNames.Name,
         placeholder: '',
         required: true,
 		
@@ -62,12 +63,14 @@ return [
     type: 'select',
 
     templateOptions: {
-		  "relation": {
+		
+	  "relation": {
 			PropertyRelationName: "KstProxyGeoCountry",
 			EntityModel: KstProxyGeoCountryModel,  
 			DataValue: KstProxyGeoCountryModel.PropertyNames.GuidCountry,
             DataText: KstProxyGeoCountryModel.PropertyNames.Name 
 			},
+
         label: KstProxyGeoStateModel.PropertyNames.GuidCountry,
         placeholder: '',
         required: false,

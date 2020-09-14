@@ -57,7 +57,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstProxyGeoCityModel.PropertyNames.Name,
+	
+        label: KstProxyGeoCityModel.PropertyNames.Name,
         placeholder: '',
         required: true,
 		
@@ -69,12 +70,16 @@ return [
     type: 'select',
 
     templateOptions: {
-		  "relation": {
+		"parents": "GuidCountry:KstProxyGeoCountry.GuidCountry",	
+	  //"parents": "GuidProject:KstProject.GuidProject;GuidActivityType:KstActivityType.GuidActivityType",
+	
+	  "relation": {
 			PropertyRelationName: "KstProxyGeoState",
 			EntityModel: KstProxyGeoStateModel,  
 			DataValue: KstProxyGeoStateModel.PropertyNames.GuidState,
             DataText: KstProxyGeoStateModel.PropertyNames.Name 
 			},
+
         label: KstProxyGeoCityModel.PropertyNames.GuidState,
         placeholder: '',
         required: false,
@@ -86,12 +91,16 @@ return [
     type: 'select',
 
     templateOptions: {
-		  "relation": {
+		"parents": "GuidParent:KstProxyGeoCity.GuidCity;GuidState:KstProxyGeoState.GuidState",	
+	  //"parents": "GuidProject:KstProject.GuidProject;GuidActivityType:KstActivityType.GuidActivityType",
+	
+	  "relation": {
 			PropertyRelationName: "KstProxyGeoCity2",
 			EntityModel: KstProxyGeoCityModel,  
 			DataValue: KstProxyGeoCityModel.PropertyNames.GuidCity,
             DataText: KstProxyGeoCityModel.PropertyNames.Name 
 			},
+
         label: KstProxyGeoCityModel.PropertyNames.GuidParent,
         placeholder: '',
         required: false,

@@ -72,7 +72,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: KstActivityTypeModel.PropertyNames.Name,
+	
+        label: KstActivityTypeModel.PropertyNames.Name,
         placeholder: '',
         required: false,
 		

@@ -40,7 +40,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: unProxyBusinessObjectModel.PropertyNames.Name,
+	
+        label: unProxyBusinessObjectModel.PropertyNames.Name,
         placeholder: '',
         required: false,
 		
@@ -52,7 +53,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: unProxyBusinessObjectModel.PropertyNames.BusinessObjectKey,
+	
+        label: unProxyBusinessObjectModel.PropertyNames.BusinessObjectKey,
         placeholder: '',
         required: false,
 		
@@ -64,7 +66,8 @@ return [
     type: 'input',
 
     templateOptions: {
-	        label: unProxyBusinessObjectModel.PropertyNames.EntitySetName,
+	
+        label: unProxyBusinessObjectModel.PropertyNames.EntitySetName,
         placeholder: '',
         required: false,
 		
