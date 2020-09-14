@@ -5,7 +5,7 @@
           <ion-back-button  [defaultHref]="defaultHref" (click)="goBack()">
           </ion-back-button>
       
-          <ion-button (click)="close()"  *ngIf="isFilter == true">Close</ion-button>
+          <ion-button (click)="close()"  *ngIf="isFilter == true || isModal == true">Close</ion-button>
 
         </ion-buttons>
 
@@ -59,10 +59,15 @@
                <ion-button (click)="goBack()" size="default" class=" sfs-button secondary" fill="clear">
             Cancelar
           </ion-button>
-          <ion-button [disabled]="this.form.invalid == true || disabledButton == true"
+          <ion-button  *ngIf="formMode == 'edit'" [disabled]="this.form.invalid == true || disabledButton == true"
             (click)="saveData()" size="default"  color="primary">
             {{textSave}}
           </ion-button>
+          <ion-button *ngIf="formMode == 'read'"
+          (click)="edit(item)" size="default"  color="primary">
+          Modificar
+        </ion-button>
+
         </div>
     
         </ion-col>

@@ -2,10 +2,10 @@
   <ion-toolbar>
     <ion-buttons slot="start">
 
-      <ion-back-button *ngIf="isFilter == false" icon="arrow-round-back" [defaultHref]="defaultHref" (click)="goBack()">
+      <ion-back-button *ngIf="isFilter == false && isModal == false" icon="arrow-round-back" [defaultHref]="defaultHref" (click)="goBack()">
       </ion-back-button>
 
-      <ion-button (click)="close()" *ngIf="isFilter == true">Close</ion-button>
+      <ion-button (click)="close()" *ngIf="isFilter == true || isModal == true">Close</ion-button>
 
     </ion-buttons>
 
@@ -13,7 +13,7 @@
     <ion-buttons slot="end">
 
       <!-- <ion-checkbox (ionChange)="switchFilterRange($event)" [(ngModel)]="isFilterRange"></ion-checkbox> -->
-    <ion-toggle   [(ngModel)]="isFilterRange" (ionChange)="switchFilterRange($event)" ></ion-toggle>
+    <ion-toggle *ngIf="isFilter == true"  [(ngModel)]="isFilterRange" (ionChange)="switchFilterRange($event)" ></ion-toggle>
 
 
 

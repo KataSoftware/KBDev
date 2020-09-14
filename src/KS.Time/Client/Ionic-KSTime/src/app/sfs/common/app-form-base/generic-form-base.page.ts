@@ -13,8 +13,9 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
   @Input() item: any = null;
  
   @Input() fkValue:string=null;
-  guidItem: string = null;
+  @Input() guidItem: string = null;
   fields: Array<FormlyFieldConfig> = [];
+  @Input() formMode:string="read";
   childrenRelations: Array<any> = []; // relaciones muchos
   KstEmailTemplateFormCustom: any = null;
   customClass = 'KstEmailTemplate-form.custom';
@@ -39,8 +40,10 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
 
 
 
+    if (this.route.snapshot.paramMap.get("id") != null ){
+      this.guidItem = this.route.snapshot.paramMap.get("id");
+    }
 
-    this.guidItem = this.route.snapshot.paramMap.get("id");
   }
 
 
@@ -63,6 +66,7 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
 
 
   }
+
   async ngOnInit() {
     this.pageService.isFilter = this.isFilter;
     this.title = this.entityName;
@@ -90,10 +94,12 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
       `../../models/codegen/${this.entityName}.model`).then((_model) => {
         this.entityModel = _model[this.entityName + "Model"]
         this.pageService.fieldsBack = this.entityModel.GetFields();
+        
         //TODO
         //try{
         if (this.isModal == false) {
-          this.sfsService.SetNavigationData({ children: this.entityModel.GetChildren() });
+          this.sfsService.SetNavigationData(true, "first-principal-form");
+          this.sfsService.SetNavigationData({ children: this.entityModel.GetChildren() }, "relations");
         }
         //}catch(ex){
         //  console.log("ex", ex);
@@ -105,6 +111,9 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
           //console.log("new item", this.item);
           //if (this.isFilter == true ){
           if (this.guidItem == null) {
+
+            this.formMode = "edit";
+          
             this.item = new this.entityModel();
             console.log("fk", this.fk, this.fkValue);
             this.item[this.fk]= this.fkValue; 
@@ -150,6 +159,7 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
       let result = await this.bizAppService.GetItem(this.guidItem, this.entityModel._EntitySetName, Object.getOwnPropertyNames(this.entityModel.PropertyNames).filter(p => !p.startsWith("Fk")).join(","));
       if (result.status == "success") {
         this.item = result.data;
+        this.events.publish('item:updated', { itemUpdated: result.data, defaultProperty: this.entityModel._DefaultProperty } );
         this.guidItem = this.item.Id;
 
 

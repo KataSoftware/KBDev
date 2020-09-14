@@ -50,13 +50,13 @@ export class AppComponent  extends BasePage implements OnInit, AfterViewInit  {
       //   active: false
       // },
       
-      // {
-      //   title: 'Cerrar sesión',
-      //   url: '/logoff',
-      //   icon: 'close',
-      //   visible: true,
-      //   active: false
-      // },
+      {
+        title: 'Cerrar sesión',
+        url: '/logoff',
+        icon: 'close',
+        visible: true,
+        active: false
+       },
     ];
 
   //public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];

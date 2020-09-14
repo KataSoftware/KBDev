@@ -8,7 +8,7 @@
             <ion-menu-button *ngIf="isFormTabs == false"></ion-menu-button>
            
             <!-- <ion-back-button></ion-back-button> -->
-            <ion-button size="small" fill="clear" (click)="openMenu($event)">
+            <ion-button *ngIf="isFormTabs" size="small" fill="clear" (click)="openMenu($event)">
               <ion-icon slot="icon-only" name="chevron-down">
       
               </ion-icon>
@@ -248,7 +248,7 @@
                   *ngIf="this.selection.isEmpty() == false" [(ngModel)]="item.__isChecked"></ion-checkbox>
               
                  
-                      <ion-label  class="ion-margin-start " (tap)="selectItem($event, item)"
+                      <ion-label  class="ion-margin-start " (click)="selectItem($event, item)"
                         (press)="longPress($event, item, 2)">
                         {{getItemPrimaryColumn(item)}}
                       </ion-label>

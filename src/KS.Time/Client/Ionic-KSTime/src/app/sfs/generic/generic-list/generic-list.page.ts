@@ -26,9 +26,9 @@ import { PopOverMenuComponent } from '../../common/pop-over-menu/pop-over-menu.c
 })
 export class GenericListPage extends AppListBaseTypedPage<GenericModel> implements OnInit, AfterViewInit {
   isFormTabs: boolean = false;
-  idFormTab:string=null;
+  idFormTab: string = null;
   fields: Array<FormlyFieldConfig> = null;
-  fkPropertyName?:string=null;
+  fkPropertyName?: string = null;
   bindedData: boolean = false;
   formFilter: FormGroup = new FormGroup({});
   async doRefresh(event) {
@@ -56,8 +56,8 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
   async openMenu(event) {
     console.log(event);
-    let options:Array<any> = [];
-    this.relationLists.forEach(elem=> {
+    let options: Array<any> = [];
+    this.relationLists.forEach(elem => {
       options.push({ text: elem.Label, value: elem.Name });
     });
 
@@ -68,28 +68,28 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       translucent: true,
       componentProps: {
         options: options
-        
+
       }
 
     });
 
     popover.onDidDismiss()
-    .then((data: any) => {
-      console.log("modal data", data);
-      if (data != null && data.data != null) {
-        let relFinded = this.relationLists.find(p=> p.EntityName == data.data.selected.value );
+      .then((data: any) => {
+        console.log("modal data", data);
+        if (data != null && data.data != null) {
+          let relFinded = this.relationLists.find(p => p.EntityName == data.data.selected.value);
 
-        if (relFinded != null ){
-          this.fkPropertyName = relFinded.FkPropertyName;
-          this.title = data.data.selected.text;
-          this.entityName = data.data.selected.value;
-          this.GenericListCustom = null;
-          this.initList();
+          if (relFinded != null) {
+            this.fkPropertyName = relFinded.FkPropertyName;
+            this.title = data.data.selected.text;
+            this.entityName = data.data.selected.value;
+            this.GenericListCustom = null;
+            this.initList();
+          }
+
         }
-        
-      }
-      //this.bindData({ RestartPaging: navData.RestartPaging });
-    });
+        //this.bindData({ RestartPaging: navData.RestartPaging });
+      });
 
     return await popover.present();
 
@@ -217,23 +217,28 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     }
 
     if (this.isFormTabs == true) {
-      console.log(this.sfsService.GetNavigationData());
+      console.log(this.sfsService.GetNavigationData("relations"));
     }
     console.log("route list", this.route);
 
   }
   firstLoaded: boolean = true;
   async ionViewWillEnter() {
-    console.log("ionViewWillEnter");
+
+    let firstForm = this.sfsService.GetNavigationData("first-principal-form")
+    if (firstForm != true){
+      return;
+    }
+    //console.log("xx ionViewWillEnter" , this.sfsService.GetNavigationData("test-relations"));
     if (this.firstLoaded == true && this.isFormTabs == true) {
-      
+
       this.initRelationLists();
       //this.events.publish("menu:minimized", true);
 
       this.initList();
       this.firstLoaded = false;
     } else {
-      let navData = this.sfsService.GetNavigationData();
+      let navData = this.sfsService.GetNavigationData("relations");
       console.log("ionViewWillEnter navData", navData);
       if (navData != null) {
         if (navData.RefreshData == true) {
@@ -342,21 +347,21 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       });
     }
   }
-  relationLists:Array<ChildRelation>=null;
-  async initRelationLists(){
-    const navData = this.sfsService.GetNavigationData();
+  relationLists: Array<ChildRelation> = null;
+  async initRelationLists() {
+    const navData = this.sfsService.GetNavigationData("relations");
     //let relations:Array<ChildRelation> = [];
     console.log("navData", navData);
-    if (navData != null && navData.children != null && navData.children.length > 0){
-       this.relationLists  = navData.children;
-       this.title = this.relationLists[0].Label;
-       this.entityName = this.relationLists[0].EntityName;
-       this.fkPropertyName = this.relationLists[0].FkPropertyName;
+    if (navData != null && navData.children != null && navData.children.length > 0) {
+      this.relationLists = navData.children;
+      this.title = this.relationLists[0].Label;
+      this.entityName = this.relationLists[0].EntityName;
+      this.fkPropertyName = this.relationLists[0].FkPropertyName;
 
-       console.log("relation selected" , this.relationLists[0]);
-    }else{
-      if (navData == null){
-       // this.events.publish("menu:minimized", true);
+      console.log("relation selected", this.relationLists[0]);
+    } else {
+      if (navData == null) {
+        // this.events.publish("menu:minimized", true);
 
       }
     }
@@ -376,7 +381,14 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       /* webpackPreload: true */
       `../../models/codegen/${this.entityName}.model`).then((_model) => {
         this.entityModel = _model[this.entityName + "Model"]
-
+        const relations = this.entityModel.GetChildren();
+        if (relations.length > 0){
+          this.routeEdit = "/catalog/" + this.entityName + "/form-tabs";
+    
+        }else{
+          this.routeEdit = "/catalog/" + this.entityName + "/form";
+    
+        }
         //this.itemFilter = new this.entityModel();
         //this.title = "KstEmailTemplates";
         // this.serviceData = {
@@ -463,14 +475,17 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
         console.log("error ", error);
       });
   }
+  routeEdit:string=null;
   async ngOnInit() {
     
     if (this.isFormTabs == false) {
       this.firstLoaded = true;
       await this.initList();
-
+    
 
     }
+
+   
   }
   bindDisplayColumns() {
     this.displayedColumns = [];
@@ -480,7 +495,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   routeAdd: string = "/catalog/" + this.entityName + "/form";
 
   async addItem() {
-    if (this.isFormTabs == true){
+    if (this.isFormTabs == true) {
       console.log("addITem", this.fkPropertyName);
       const modal = await this.modalCtrl.create({
         component: GenericModalComponent,
@@ -501,21 +516,12 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
           if (data != null && data.data != null) {
 
             this.ionViewWillEnter();
-            // if (data.data.query != null && data.data.itemFilter != null) {
-            //   this.serviceData.Query = data.data.query;
-            //   this.itemFilter = data.data.itemFilter;
-            //   this.refreshList(null);
-            // } else if (data.data.delete == true) {
-            //   this.serviceData.Query = null;
-            //   this.itemFilter = null;
-            //   this.refreshList(null);
-            // }
+
           }
-          //this.bindData({ RestartPaging: navData.RestartPaging });
         });
       await modal.present();
 
-    }else{
+    } else {
       this.navCtrl.navigateForward(this.routeAdd, { animated: true });
     }
   }
@@ -671,15 +677,51 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
   }
 
 
-  edit(row: GenericModel) {
-    let route = `${this.routeAdd}/${row.Id}`;
+  async edit(row: GenericModel) {
+
+    let route = `${this.routeEdit}/${row.Id}`;
+
     if (this.routeForm != null) {
       route = this.routeForm;
     }
     if (this.GenericListCustom != null && this.GenericListCustom["OnForm"] != null) {
       this.GenericListCustom["OnForm"](this, row);
     }
-    this.navCtrl.navigateForward(route, { animated: true });
+
+    if (this.isFormTabs == true) {
+      console.log("editr row",row);
+      const modal = await this.modalCtrl.create({
+        component: GenericModalComponent,
+
+        componentProps: {
+          entityName: this.entityName,
+          isFilter: false,
+          isModal: true,
+          item: row,
+          formMode: "edit",
+          guidItem: row.Id,
+          fk: this.fkPropertyName,
+          //fkValue: this.idFormTab
+        }
+
+      });
+
+      modal.onDidDismiss()
+        .then((data: any) => {
+          console.log("modal data", data);
+          if (data != null && data.data != null) {
+
+            this.ionViewWillEnter();
+
+          }
+        });
+      await modal.present();
+
+    } else {
+     
+
+      this.navCtrl.navigateForward(route, { animated: true });
+    }
   }
 
 
