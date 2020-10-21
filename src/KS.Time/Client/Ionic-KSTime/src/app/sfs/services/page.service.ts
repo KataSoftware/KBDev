@@ -138,7 +138,7 @@ export class PageService {
   propertyChanges: Array<string> = [];
   propertiesForUpdate: Array<string> = [];
 
-  private setOrderForRange(settings: FieldSettings, fieldName: string, fields: Array<FormlyFieldConfig>) {
+  private setOrderForRange(settings: FieldSettings, fieldName: string, fields: Array<FormlyFieldConfig>, page:any) {
     //this.setOrder(settings, fields, true);
 
     // agregar dos nuevos campos
@@ -151,7 +151,7 @@ export class PageService {
     }
     this.setOrder({
       Content: settings.Label, Columns: 12
-    }, fields, true);
+    }, fields, true, page);
 
     let startField = JSON.parse(JSON.stringify(field));  //Object.assign({}, field);
     let startSettings: FieldSettings = JSON.parse(JSON.stringify(settings));//Object.assign({}, settings);
@@ -165,7 +165,7 @@ export class PageService {
     startSettings.Columns = 6;
     startSettings.Name = startField.key;
     startSettings.Label = "Desde";
-    this.setOrder(startSettings, fields, true);
+    this.setOrder(startSettings, fields, true, page);
 
     // end
     let endField = JSON.parse(JSON.stringify(field));
@@ -181,7 +181,7 @@ export class PageService {
     // endSettings.ExpressionProperties = { 'templateOptions.datepickerOptions.min': 'model.__startDueDate', };
     endSettings.Label = "Hasta";
     endSettings.Columns = 6;
-    this.setOrder(endSettings, fields, true);
+    this.setOrder(endSettings, fields, true, page);
   }
   setOrderRelation() {
 
@@ -191,7 +191,7 @@ export class PageService {
     if (page != null && page.fk != null && page.fk == settings.Name) {
       return;
     }
-    if (page["formMode"] == "read") {
+    if (page != null && page["formMode"] == "read") {
       settings.ReadOnly = true;
       settings.Disabled = true;
     }
@@ -212,7 +212,7 @@ export class PageService {
 
         ) {
           addField = false;
-          this.setOrderForRange(settings, fieldFinded.key, this.fieldsBack);
+          this.setOrderForRange(settings, fieldFinded.key, this.fieldsBack, page);
 
         }
 

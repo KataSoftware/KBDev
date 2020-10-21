@@ -110,7 +110,9 @@ export class AppListBasePage extends ListPage {
     if (this.localActions == null ){
       this.localActions = [];
       this.actions.forEach(item=> {
-        this.localActions.push(item);
+        if (item.ActionKey != "add"){
+          this.localActions.push(item);
+        }
       });
     }
     //let localActions: Array<ActionModel> = [];

@@ -53,6 +53,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
     }
   }
+	@ViewChild('actionsTmpl') public actionsTmpl: TemplateRef<any>;
 
   async openMenu(event) {
     console.log(event);
@@ -296,6 +297,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
         componentProps: {
           entityName: this.entityName,
           isFilter: true,
+          formMode: "edit",
           item: this.itemFilter,
           existentFilter: this.itemFilter != null
         }
@@ -606,6 +608,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     },
 
     {
+      cellTemplate: this.actionsTmpl,
       name: '',
       prop: "actions",
       sortable: false,

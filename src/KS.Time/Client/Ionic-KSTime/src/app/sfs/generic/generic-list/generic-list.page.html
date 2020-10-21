@@ -222,8 +222,10 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <button mat-menu-item *ngFor="let act of row['_actions']" (click)="action(row,act.ActionKey)">
-        <mat-icon>{{act.Icon}}</mat-icon> {{act.Text}}
+      <button mat-menu-item *ngFor="let act of row['__actions']" (click)="action(row,act.ActionKey)">
+        <!-- <mat-icon>{{act.Icon}}</mat-icon> --> <ion-icon class="mat-icon" name="{{act.Icon}}"></ion-icon> {{act.Text}}
+       
+        
       </button>
 
     </mat-menu>

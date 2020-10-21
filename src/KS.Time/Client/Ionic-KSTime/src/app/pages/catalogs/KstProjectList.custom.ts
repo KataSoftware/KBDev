@@ -15,7 +15,7 @@ export class KstProjectListCustom {
             if (item.NumActivities > 0){
                 page.setComponentVisibility(item, true);
             }
-            page.setActions(item, []);
+            //page.setActions(item, []);
             
 
         });
