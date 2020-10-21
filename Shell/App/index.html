@@ -2,26 +2,35 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8"/>
   <title>Ionic App</title>
-  <base href="./" />
+  <base href="./"/>
 
-  <meta name="color-scheme" content="light dark" />
-  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="msapplication-tap-highlight" content="no"/>
 
-  <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/icon/favicon.png"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- add to homescreen for ios -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1976d2">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.log('Error', err));
+    }
+  </script>
 <link rel="stylesheet" href="styles.a36824aeaa092a361deb.css"></head>
 
 <body>
   <app-root></app-root>
-<script src="runtime-es2015.27cff5810cbf1c5bb00d.js" type="module"></script><script src="runtime-es5.27cff5810cbf1c5bb00d.js" nomodule defer></script><script src="polyfills-es5.dfca29aec2cf94f51325.js" nomodule defer></script><script src="polyfills-es2015.86c709a20c16e915599b.js" type="module"></script><script src="main-es2015.637db8b0c0ed6ab07b9d.js" type="module"></script><script src="main-es5.637db8b0c0ed6ab07b9d.js" nomodule defer></script></body>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+<script src="runtime-es2015.506a003fd95e125791d5.js" type="module"></script><script src="runtime-es5.506a003fd95e125791d5.js" nomodule defer></script><script src="polyfills-es5.dfca29aec2cf94f51325.js" nomodule defer></script><script src="polyfills-es2015.86c709a20c16e915599b.js" type="module"></script><script src="main-es2015.1dfedf056d396557c084.js" type="module"></script><script src="main-es5.1dfedf056d396557c084.js" nomodule defer></script></body>
 
 </html>

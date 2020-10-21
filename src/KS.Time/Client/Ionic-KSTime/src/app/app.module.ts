@@ -22,6 +22,7 @@ import { FormlyWrapperAddons } from './sfs/components/business/components/addons
 import { AppRoutingModule } from './app-routing.module';
 import { IonicGestureConfig } from './sfs/utils/IonicGestureConfig';
 import { PopOverMenuComponent } from './sfs/common/pop-over-menu/pop-over-menu.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { PopOverMenuComponent } from './sfs/common/pop-over-menu/pop-over-menu.c
     FormsModule,
     FormlyBootstrapModule,
     FormlyModule.forRoot(),
-    FormlyMaterialModule
+    FormlyMaterialModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,
