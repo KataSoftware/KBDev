@@ -182,7 +182,7 @@ export class GenericFormBasePage extends AppFormBasePage implements OnInit {
         settings.RestartPaging = false;
         settings.Route = this.defaultHref;
       }
-      this.sfsService.SetNavigationData(settings);
+      this.sfsService.SetNavigationData(settings, "back-after-add");
       if (this.isModal == true ){
         this.modalCtrl.dismiss( settings );
       }else{

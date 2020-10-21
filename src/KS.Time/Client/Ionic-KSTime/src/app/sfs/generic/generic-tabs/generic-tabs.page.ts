@@ -89,7 +89,9 @@ export class GenericTabsPage extends BasePage implements OnInit {
   }
 
   ionViewWillLeave() {
-    this.currentTab.tabsWillLeave();
+    if (this.currentTab != null ){
+      this.currentTab.tabsWillLeave();
+    }
   }
   async tabsChange1(tabs: IonTabs){
     // ddd

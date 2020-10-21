@@ -239,7 +239,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
       this.initList();
       this.firstLoaded = false;
     } else {
-      let navData = this.sfsService.GetNavigationData("relations");
+      let navData = this.sfsService.GetNavigationData("back-after-add");
       console.log("ionViewWillEnter navData", navData);
       if (navData != null) {
         if (navData.RefreshData == true) {
