@@ -43,6 +43,17 @@ export class AppFormBasePage extends BasePage implements OnInit {
 
   public set bizAppService(value: bizAppService) { this._bizAppService = value; }
 
+  public get sfsService(): sfsService {
+    if (!this._sfsService) {
+
+      this._sfsService = this.injector.get(sfsService);
+    }
+
+    return this._sfsService;
+  }
+  private _sfsService: sfsService;
+  public set sfsService(value: sfsService) { this._sfsService = value; }
+
   constructor(public injector: Injector) {
     super(injector);
 
@@ -247,7 +258,13 @@ export class AppFormBasePage extends BasePage implements OnInit {
   }
 
   public setOrderRelation(setting:ChildRelation){
-     
+
+      let relations = this.sfsService.GetNavigationData("relations");
+      let elem = relations.children.find(p=> p.EntityName == setting.Name);
+      if (elem != null){
+        elem.Label = setting.Label;
+      }
+      this.sfsService.SetNavigationData(relations, "relations");
   }
 
   

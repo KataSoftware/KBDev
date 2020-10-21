@@ -59,7 +59,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
     console.log(event);
     let options: Array<any> = [];
     this.relationLists.forEach(elem => {
-      options.push({ text: elem.Label, value: elem.Name });
+      options.push({ text: elem.Label, value: elem.EntityName });
     });
 
     const popover = await this.popoverCtrl.create({
@@ -76,7 +76,7 @@ export class GenericListPage extends AppListBaseTypedPage<GenericModel> implemen
 
     popover.onDidDismiss()
       .then((data: any) => {
-        console.log("modal data", data);
+        console.log("modal data", data, this.relationLists);
         if (data != null && data.data != null) {
           let relFinded = this.relationLists.find(p => p.EntityName == data.data.selected.value);
 
